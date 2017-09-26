@@ -1,0 +1,82 @@
+package com.art2cat.dev;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.*;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toSet;
+
+public class LambdaTest {
+	private List<String> strings;
+	private List<User> users;
+
+	private List<String> generateList() {
+		List<String> strings = new ArrayList<>();
+		Random random = new Random(10);
+		for (int i = 0; i < 5; i++) {
+			strings.add("String" + random.nextInt());
+		}
+		return strings;
+	}
+
+	private List<User> generateUserList() {
+		List<User> strings = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			User user = new User();
+			user.setUsername("user" + i);
+			user.setPassword("password" + i);
+			user.setAge(i * 2);
+			strings.add(user);
+		}
+		return strings;
+	}
+
+	@Before
+	public void init() {
+		strings = generateList();
+		users = generateUserList();
+	}
+
+	@Test
+	public void testList() {
+		strings.forEach(System.out::println);
+
+		strings.sort((s1, s2) -> {
+			int result = s1.compareTo(s2);
+			System.out.println(result);
+			return result;
+		});
+	}
+
+	@Test
+	public void testStream() {
+		long startTime = System.currentTimeMillis();
+		users.sort(Comparator.comparing(User::getAge));
+		Map<String, List<User>> nusers = users.stream()
+				.filter(user -> user.getAge() < 15)
+				.collect(groupingBy(User::getUsername));
+
+		nusers.forEach((key, values) -> values.forEach((user) -> System.out.println(user.getUsername())));
+		System.out.println(System.currentTimeMillis() - startTime);
+	}
+
+	@Test
+	public void testStream1() {
+		long startTime = System.currentTimeMillis();
+		users.sort(Comparator.comparing(User::getAge));
+		Set<User> nusers = users.parallelStream()
+				.filter(user -> user.getAge() < 15)
+				.collect(toSet());
+		nusers.forEach((user) -> System.out.println(user.getUsername()));
+		System.out.println(System.currentTimeMillis() - startTime);
+	}
+
+	@After
+	public void clear() {
+		strings.clear();
+		users.clear();
+	}
+}

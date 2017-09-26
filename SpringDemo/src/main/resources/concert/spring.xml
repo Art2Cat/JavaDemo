@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <bean id="audienceXML" class="com.art2cat.dev.concert.xmlconfig.AudienceXML"/>
+
+    <aop:config>
+
+        <aop:pointcut id="performance"
+                      expression="execution(* com.art2cat.dev.concert.IPerformance.perform(..))"/>
+
+        <aop:aspect ref="audienceXML">
+            <aop:before
+                    pointcut-ref="performance"
+                    method="silenceCellPhones"/>
+
+            <aop:before
+                    pointcut-ref="performance"
+                    method="takeSeats"/>
+
+            <aop:after-returning
+                    pointcut-ref="performance"
+                    method="applause"/>
+
+            <aop:after-throwing
+                    pointcut-ref="performance"
+                    method="demandRefund"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="aroundAudienceXML" class="com.art2cat.dev.concert.xmlconfig.AroundAudienceXML"/>
+
+    <aop:config>
+        <aop:aspect ref="aroundAudienceXML">
+
+            <aop:pointcut id="performance"
+                          expression="execution(* com.art2cat.dev.concert.IPerformance.perform(..))"/>
+
+            <aop:around
+                    pointcut-ref="performance"
+                    method="watchPerformance"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="performanceXML" class="com.art2cat.dev.concert.xmlconfig.ActorXML"/>
+
+
+</beans>
+
