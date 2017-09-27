@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -102,6 +103,22 @@ public class TransactionsTest {
 	public void testFileStream1() {
 		try (Stream<String> lines = Files.lines(Paths.get("text.txt"), Charset.defaultCharset())) {
 			lines.forEach(System.out::println);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testListJavaContent() {
+		try (Stream<Path> files = Files.walk(Paths.get("."))
+				.filter((path -> path.toString().endsWith(".java")))) {
+			files.forEach(path -> {
+				try {
+					Files.lines(path, Charset.defaultCharset()).forEach(System.out::println);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
