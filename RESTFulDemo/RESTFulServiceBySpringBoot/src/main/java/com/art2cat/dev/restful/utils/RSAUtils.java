@@ -16,7 +16,7 @@ import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 /**
- * Created by art2c on 7/7/2016.
+ * Created by art2cat on 7/7/2016.
  */
 public class RSAUtils {
     private final static String KEY_PAIR = "RSA";

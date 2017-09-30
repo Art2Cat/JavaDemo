@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service("companyService")
 public class CompanyService implements ICompanyService {
@@ -27,31 +28,31 @@ public class CompanyService implements ICompanyService {
 	private String updateCompanyNameTemplate;
 
 	@Override
-	public Company findById(long id) {
+	public Optional<Company> findById(long id) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("id", id);
-		return jdbcTemplate.queryForObject(getCompanyByIdTemplate, params, (rs, rowNum) -> new Company(
+		return Optional.ofNullable(jdbcTemplate.queryForObject(getCompanyByIdTemplate, params, (rs, rowNum) -> new Company(
 				rs.getLong("id"),
 				rs.getString("name"),
 				rs.getString("address"),
 				rs.getString("city"),
 				rs.getString("state"),
 				rs.getInt("zipcode"),
-				rs.getString("country")));
+				rs.getString("country"))));
 	}
 
 	@Override
-	public Company findByName(String name) {
+	public Optional<Company> findByName(String name) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("name", name);
-		return jdbcTemplate.queryForObject(getCompanyByNameTemplate, params, (rs, rowNum) -> new Company(
+		return Optional.ofNullable(jdbcTemplate.queryForObject(getCompanyByNameTemplate, params, (rs, rowNum) -> new Company(
 				rs.getLong("id"),
 				rs.getString("name"),
 				rs.getString("address"),
 				rs.getString("city"),
 				rs.getString("state"),
 				rs.getInt("zipcode"),
-				rs.getString("country")));
+				rs.getString("country"))));
 	}
 
 	@Override
@@ -114,6 +115,6 @@ public class CompanyService implements ICompanyService {
 
 	@Override
 	public boolean isCompanyExist(Company company) {
-		return company.equals(findById(company.getId()));
+		return findById(company.getId()).filter(company::equals).isPresent();
 	}
 }

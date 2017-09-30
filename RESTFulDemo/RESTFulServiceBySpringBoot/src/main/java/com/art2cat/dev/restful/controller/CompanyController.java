@@ -1,8 +1,8 @@
 package com.art2cat.dev.restful.controller;
 
-import com.art2cat.dev.restful.utils.CompanyNotFoundException;
 import com.art2cat.dev.restful.model.Company;
 import com.art2cat.dev.restful.service.CompanyService;
+import com.art2cat.dev.restful.utils.CompanyNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 @RestController
@@ -26,22 +28,20 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "/CompanyService/{idOrName}", method = RequestMethod.GET)
-	public Company getCompany(@PathVariable("idOrName") String idOrName) {
-		Company company = null;
-		if (idOrName != null) {
+	public Company getCompany(@NotNull @PathVariable("idOrName") String idOrName) {
+		Optional<Company> company;
 
 			if (isNumeric(idOrName)) {
 				company = companyService.findById(Long.valueOf(idOrName));
 			} else {
 				company = companyService.findByName(idOrName);
 			}
-		}
 
-		if (company == null) {
+		if (!company.isPresent()) {
 			throw new CompanyNotFoundException(idOrName);
 		}
 
-		return company;
+		return company.get();
 	}
 
 	//http://localhost:8080/Api/CompanyService/save?id=11111&name=test&address=test%20street&city=shanghai&state=shanghai&zipcode=199&country=cn
@@ -89,16 +89,16 @@ public class CompanyController {
 	@RequestMapping(value = "/CompanyService/update/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateCompany(@PathVariable("id") long id, @RequestBody Company company) {
 
-		Company currentCompany = companyService.findById(id);
+		Optional<Company> currentCompany = companyService.findById(id);
 
-		if (currentCompany == null) {
+		if (!currentCompany.isPresent()) {
 			return new ResponseEntity<>(new CompanyNotFoundException("Unable to upate. User with id " + id + " not found."),
 					HttpStatus.NOT_FOUND);
 		}
-
-		currentCompany.setName(company.getName());
-		companyService.updateCompany(currentCompany);
-		return new ResponseEntity<Company>(currentCompany, HttpStatus.OK);
+		Company company1 = currentCompany.get();
+		company1.setName(company.getName());
+		companyService.updateCompany(company1);
+		return new ResponseEntity<>(company1, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(CompanyNotFoundException.class)
@@ -109,7 +109,7 @@ public class CompanyController {
 		return new Error(String.format(message, name));
 	}
 
-	public static boolean isNumeric(String str) {
+	private static boolean isNumeric(String str) {
 		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
 		return pattern.matcher(str).matches();
 	}

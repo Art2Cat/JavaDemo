@@ -61,7 +61,27 @@ public class Stream6Test {
 				}));
 
 		System.out.println(dishesByCaloricLevel);
+
+		Map<Dish.Type, Long> typesCount = menu.stream().collect(
+				groupingBy(Dish::getType, counting()));
+
+		System.out.println(typesCount);
+
+		Map<Dish.Type, Dish> mostCaloricByType =
+				menu.stream()
+						.collect(groupingBy(Dish::getType,
+								collectingAndThen(
+										maxBy(Comparator.comparingInt(Dish::getCalories)),
+										Optional::get)));
+
+		System.out.println(mostCaloricByType);
 	}
 
+	@Test
+	public void testPartitionBy() {
+		Map<Boolean, List<Dish>> partitionedMenu =
+				menu.stream().collect(partitioningBy(Dish::isVegetarian));
 
+		System.out.println(partitionedMenu);
+	}
 }
