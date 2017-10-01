@@ -13,10 +13,9 @@ public class ClassLoaderTest {
             public Class<?> loadClass(String name) throws ClassNotFoundException {
                 try {
                     String fileName = name.substring(name.lastIndexOf(".") + 1);
-
+                    fileName = fileName + ".class";
                     InputStream is = getClass().getResourceAsStream(fileName);
                     if (is == null) {
-                        System.out.println("parent");
                         return super.loadClass(name);
                     }
 
@@ -33,7 +32,6 @@ public class ClassLoaderTest {
 
         System.out.println(object.getClass());
 
-        // why result is true on jdk 8?
         System.out.println(object instanceof com.art2cat.dev.ch7.ClassLoaderTest);
     }
 }
