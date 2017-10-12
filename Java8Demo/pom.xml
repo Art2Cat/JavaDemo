@@ -18,6 +18,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.art2cat.dev</groupId>
+            <artifactId>RESTFulServiceBySpringBoot</artifactId>
+            <version>0.1.1</version>
+        </dependency>
     </dependencies>
 
 </project>
