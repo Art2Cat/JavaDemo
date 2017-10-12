@@ -28,7 +28,6 @@
         <module>CoreJavaDemo</module>
         <module>RESTFulDemo</module>
         <module>Java8Demo</module>
-        <module>SpringBootDemo</module>
     </modules>
     <properties>
         <guava.version>23.0</guava.version>

@@ -55,16 +55,19 @@ public class BestPriceFinder {
 		return shops.stream()
 				.map(shop -> CompletableFuture.supplyAsync(() -> shop.getPrice(product), executor))
 				.map(future -> future.thenApply(Quote::parse))
-				.map(future -> future.thenCompose(quote -> CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)));
+				.map(future -> future.thenCompose(quote -> CompletableFuture
+						.supplyAsync(() -> Discount.applyDiscount(quote), executor)));
 	}
 
 	public void printPricesStream(String product) {
 		long start = System.nanoTime();
 		CompletableFuture[] futures = findPricesStream(product)
-				.map(f -> f.thenAccept(s -> System.out.println(s + " (done in " + ((System.nanoTime() - start) / 1_000_000) + " msecs)")))
+				.map(f -> f.thenAccept(s -> System.out.println(s
+						+ " (done in " + ((System.nanoTime() - start) / 1_000_000) + " msecs)")))
 				.toArray(size -> new CompletableFuture[size]);
 		CompletableFuture.allOf(futures).join();
-		System.out.println("All shops have now responded in " + ((System.nanoTime() - start) / 1_000_000) + " msecs");
+		System.out.println("All shops have now responded in "
+				+ ((System.nanoTime() - start) / 1_000_000) + " msecs");
 	}
 
 }
