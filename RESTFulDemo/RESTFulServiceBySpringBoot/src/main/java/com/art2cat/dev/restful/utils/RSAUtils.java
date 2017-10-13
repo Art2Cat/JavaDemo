@@ -4,6 +4,7 @@ package com.art2cat.dev.restful.utils;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 import javax.crypto.Cipher;
+import javax.validation.constraints.NotNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,7 +65,7 @@ public class RSAUtils {
      *            公钥
      * @return 加密后的byte型数据
      */
-    public static byte[] encryptData(PublicKey publicKey, byte[] data)
+    public static byte[] encryptData(PublicKey publicKey,@NotNull byte[] data)
     {
         try
         {

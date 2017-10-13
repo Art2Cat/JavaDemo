@@ -2,6 +2,7 @@ package com.art2cat.dev.restful;
 
 import com.art2cat.dev.restful.model.TestObject;
 import com.art2cat.dev.restful.utils.AESUtils;
+import com.art2cat.dev.restful.utils.MD5Utils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,15 +34,18 @@ public class AsyncTest {
 
 		CompletableFuture.supplyAsync(() -> testObject.get(), executor)
 				.thenApplyAsync(s1 -> {
-					System.out.println(s1.size());
+					System.out.println(Thread.currentThread().getName() + s1.size());
 					List<Optional<String>> optionals = new ArrayList<>();
 					s1.forEach(s ->
 							optionals.add(Optional.ofNullable(
-									AESUtils.encrypt(key,
-									s.orElse("null")))));
+									MD5Utils.getMD5(
+											s.orElse("null")))));
 					System.out.println(optionals.size());
 					return optionals;
 
-				}).thenAccept(optionals -> optionals.forEach(s -> System.out.println(s.get())));
+				}).thenAccept(optionals ->
+				optionals.forEach(s -> s.ifPresent(s1 ->
+						System.out.println(Thread.currentThread().getName()
+								+ s1))));
 	}
 }
