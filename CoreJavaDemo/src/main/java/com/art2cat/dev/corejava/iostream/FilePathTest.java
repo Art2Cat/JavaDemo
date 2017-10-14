@@ -2,7 +2,6 @@ package com.art2cat.dev.corejava.iostream;
 
 import java.io.File;
 import java.net.URISyntaxException;
-import java.util.Properties;
 
 public class FilePathTest {
 
@@ -31,10 +30,6 @@ public class FilePathTest {
 
 		File file = new File(classloader.getResource("application.properties").getFile());
 		System.out.println(file.getAbsolutePath());
-		if (classloader == null) {
-			Properties impieties = new Properties();
-			classloader = impieties.getClass().getClassLoader();
-		}
 		System.out.println(classloader);
 	}
 }
