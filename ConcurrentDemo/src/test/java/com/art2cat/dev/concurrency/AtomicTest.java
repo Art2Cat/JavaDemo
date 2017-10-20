@@ -1,4 +1,4 @@
-package com.art2cat.dev.concurrent;
+package com.art2cat.dev.concurrency;
 
 import org.junit.Assert;
 import org.junit.Test;

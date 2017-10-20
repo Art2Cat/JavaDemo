@@ -1,5 +1,6 @@
 package com.art2cat.dev.ch7;
 
+import com.art2cat.dev.ClassLoaderA;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -33,5 +34,16 @@ public class ClassLoaderTest {
         System.out.println(object.getClass());
 
         System.out.println(object instanceof com.art2cat.dev.ch7.ClassLoaderTest);
+    }
+
+    @Test
+	public void test1() {
+	    System.setProperty("art2cat.classloader", "class");
+	    System.out.println(ClassLoaderA.getClassLoader().getResource("."));
+	    System.out.println(ClassLoaderA.getClassLoader().toString());
+
+	    System.setProperty("art2cat.classloader", "thread");
+	    System.out.println(ClassLoaderA.getClassLoader().getResource("."));
+	    System.out.println(ClassLoaderA.getClassLoader().toString());
     }
 }
