@@ -1,4 +1,4 @@
-package com.art2cat.dev.cache.db;
+package com.art2cat.dev.database.db;
 
 import java.util.List;
 

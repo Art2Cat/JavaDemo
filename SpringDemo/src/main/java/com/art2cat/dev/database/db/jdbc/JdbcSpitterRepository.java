@@ -1,11 +1,6 @@
-package com.art2cat.dev.cache.db.jdbc;
+package com.art2cat.dev.database.db.jdbc;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.art2cat.dev.database.db.SpitterRepository;
 import com.art2cat.dev.database.jpaspringdata.domain.Spitter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,7 +8,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import com.art2cat.dev.cache.db.SpitterRepository;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class JdbcSpitterRepository implements SpitterRepository {
@@ -25,10 +24,12 @@ public class JdbcSpitterRepository implements SpitterRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
     public long count() {
         return jdbcTemplate.queryForObject("select count(id) from Spitter", Long.class);
     }
 
+    @Override
     public Spitter save(Spitter spitter) {
         Long id = spitter.getId();
         if (id == null) {
@@ -82,20 +83,24 @@ public class JdbcSpitterRepository implements SpitterRepository {
                 spitter.isUpdateByEmail());
     }
 
+    @Override
     public Spitter findOne(long id) {
         return jdbcTemplate.queryForObject(
                 SELECT_SPITTER + " where id=?", new SpitterRowMapper(), id);
     }
 
+    @Override
     public Spitter findByUsername(String username) {
         return jdbcTemplate.queryForObject("select id, username, password, fullname, email, updateByEmail from Spitter where username=?", new SpitterRowMapper(), username);
     }
 
+    @Override
     public List<Spitter> findAll() {
         return jdbcTemplate.query("select id, username, password, fullname, email, updateByEmail from Spitter order by id", new SpitterRowMapper());
     }
 
     private static final class SpitterRowMapper implements RowMapper<Spitter> {
+        @Override
         public Spitter mapRow(ResultSet rs, int rowNum) throws SQLException {
             long id = rs.getLong("id");
             String username = rs.getString("username");

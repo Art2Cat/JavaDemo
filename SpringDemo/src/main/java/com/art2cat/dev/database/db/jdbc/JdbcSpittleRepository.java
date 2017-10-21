@@ -1,4 +1,4 @@
-package com.art2cat.dev.cache.db.jdbc;
+package com.art2cat.dev.database.db.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 
-import com.art2cat.dev.cache.db.SpittleRepository;
+import com.art2cat.dev.database.db.SpittleRepository;
 
 @Component
 public class JdbcSpittleRepository implements SpittleRepository {
@@ -33,18 +33,22 @@ public class JdbcSpittleRepository implements SpittleRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	@Override
 	public long count() {
 		return jdbcTemplate.queryForObject("select count(id) from Spittle", Long.class);
 	}
 
+	@Override
 	public List<Spittle> findRecent() {
 		return findRecent(10);
 	}
 
+	@Override
 	public List<Spittle> findRecent(int count) {
 		return jdbcTemplate.query(SELECT_RECENT_SPITTLES, new SpittleRowMapper(), count);
 	}
 
+	@Override
 	public Spittle findOne(long id) {
 		try {
 			return jdbcTemplate.queryForObject(SELECT_SPITTLE_BY_ID, new SpittleRowMapper(), id);
@@ -53,10 +57,12 @@ public class JdbcSpittleRepository implements SpittleRepository {
 		}
 	}
 
+	@Override
 	public List<Spittle> findBySpitterId(long spitterId) {
 		return jdbcTemplate.query(SELECT_SPITTLES_BY_SPITTER_ID, new SpittleRowMapper(), spitterId);
 	}
 
+	@Override
 	public Spittle save(Spittle spittle) {
 		long spittleId = insertSpittleAndReturnId(spittle);
 		return new Spittle(spittleId, spittle.getSpitter(), spittle.getMessage(), spittle.getPostedTime());
@@ -73,11 +79,13 @@ public class JdbcSpittleRepository implements SpittleRepository {
 			return spittleId;
 	}
 
+	@Override
 	public void delete(long id) {
 		jdbcTemplate.update("delete from Spittle where id=?", id);
 	}
 	
 	private static final class SpittleRowMapper implements RowMapper<Spittle> {
+		@Override
 		public Spittle mapRow(ResultSet rs, int rowNum) throws SQLException {
 			long id = rs.getLong("id");
 			String message = rs.getString("message");

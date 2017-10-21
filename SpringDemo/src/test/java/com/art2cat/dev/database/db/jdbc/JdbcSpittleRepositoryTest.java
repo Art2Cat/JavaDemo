@@ -1,4 +1,4 @@
-package com.art2cat.dev.cache.db.jdbc;
+package com.art2cat.dev.database.db.jdbc;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.art2cat.dev.cache.config.RootConfig;
-import com.art2cat.dev.cache.db.SpittleRepository;
+import com.art2cat.dev.database.db.SpittleRepository;
 import com.art2cat.dev.database.jpaspringdata.domain.Spitter;
 import com.art2cat.dev.database.jpaspringdata.domain.Spittle;
 import org.junit.Test;

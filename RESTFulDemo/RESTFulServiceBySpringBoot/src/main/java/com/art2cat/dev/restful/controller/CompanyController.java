@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 @RestController
 @RequestMapping("/api")
 public class CompanyController {
-
+	private static Pattern NUMERIC_PATTERN = Pattern.compile("^[-+]?[\\d]*$");
 	@Autowired
 	CompanyService companyService;
 
@@ -110,7 +110,6 @@ public class CompanyController {
 	}
 
 	private static boolean isNumeric(String str) {
-		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
-		return pattern.matcher(str).matches();
+		return NUMERIC_PATTERN.matcher(str).matches();
 	}
 }

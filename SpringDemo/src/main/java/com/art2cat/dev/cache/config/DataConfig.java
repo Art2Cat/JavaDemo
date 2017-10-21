@@ -1,7 +1,5 @@
 package com.art2cat.dev.cache.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,6 +9,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
@@ -30,6 +30,7 @@ public class DataConfig implements TransactionManagementConfigurer {
         return new JdbcTemplate(dataSource);
     }
 
+    @Override
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
