@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
@@ -16,7 +15,6 @@ public class AtomicTest {
 	@Test
 	public void testAtomicLong() {
 		final AtomicLong atomicLong = new AtomicLong(0);
-		Random random = new Random();
 		ExecutorService executor = Executors.newFixedThreadPool(5);
 		for (int i = 0; i < 10; i++) {
 			executor.execute(() -> {
