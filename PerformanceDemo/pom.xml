@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>JVMDemo</artifactId>
+    <artifactId>PerformanceDemo</artifactId>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/cglib/cglib -->

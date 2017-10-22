@@ -1,7 +1,5 @@
 package com.art2cat.dev.database.jpaspringdata.db;
 
-import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -10,6 +8,8 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories("com.art2cat.dev.database.jpaspringdata.db")
@@ -25,7 +25,8 @@ public class SpringDataJpaConfig {
 
     @Bean
     public JpaTransactionManager transactionManager() {
-        return new JpaTransactionManager(); // does this need an emf???
+        // does this need an emf???
+        return new JpaTransactionManager();
     }
 
     @Bean

@@ -24,7 +24,7 @@
     <modules>
         <module>ConcurrentDemo</module>
         <module>SpringDemo</module>
-        <module>JVMDemo</module>
+        <module>PerformanceDemo</module>
         <module>CoreJavaDemo</module>
         <module>RESTFulDemo</module>
         <module>Java8Demo</module>
