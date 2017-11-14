@@ -1,7 +1,12 @@
 package com.art2cat.dev.corejava.iostream;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FilePathTest {
 
@@ -31,5 +36,11 @@ public class FilePathTest {
 		File file = new File(classloader.getResource("application.properties").getFile());
 		System.out.println(file.getAbsolutePath());
 		System.out.println(classloader);
+		Path dir = Paths.get("C:\\Users\\huang.yiming\\Downloads\\JavaDemo");
+		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(dir, "*.java")) {
+			directoryStream.forEach(System.out::println);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
