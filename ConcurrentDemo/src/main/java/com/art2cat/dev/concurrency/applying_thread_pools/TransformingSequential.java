@@ -18,12 +18,9 @@ public abstract class TransformingSequential {
     }
 
     void processInParallel(Executor exec, List<Element> elements) {
-        for (final Element e : elements)
-            exec.execute(new Runnable() {
-                public void run() {
-                    process(e);
-                }
-            });
+        for (final Element e : elements) {
+            exec.execute(() -> process(e));
+        }
     }
 
     public abstract void process(Element e);
@@ -41,11 +38,7 @@ public abstract class TransformingSequential {
                                       List<Node<T>> nodes,
                                       final Collection<T> results) {
         for (final Node<T> n : nodes) {
-            exec.execute(new Runnable() {
-                public void run() {
-                    results.add(n.compute());
-                }
-            });
+            exec.execute(() -> results.add(n.compute()));
             parallelRecursive(exec, n.getChildren(), results);
         }
     }
