@@ -15,12 +15,14 @@ public class TimingThreadPool extends ThreadPoolExecutor {
     private final AtomicLong numTasks = new AtomicLong();
     private final AtomicLong totalTime = new AtomicLong();
 
+    @Override
     protected void beforeExecute(Thread t, Runnable r) {
         super.beforeExecute(t, r);
         log.fine(String.format("Thread %s: start %s", t, r));
         startTime.set(System.nanoTime());
     }
 
+    @Override
     protected void afterExecute(Runnable r, Throwable t) {
         try {
             long endTime = System.nanoTime();
@@ -34,6 +36,7 @@ public class TimingThreadPool extends ThreadPoolExecutor {
         }
     }
 
+    @Override
     protected void terminated() {
         try {
             log.info(String.format("Terminated: avg time=%dns",

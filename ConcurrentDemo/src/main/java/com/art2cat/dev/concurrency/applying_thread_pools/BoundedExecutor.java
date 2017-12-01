@@ -20,13 +20,11 @@ public class BoundedExecutor {
             throws InterruptedException {
         semaphore.acquire();
         try {
-            exec.execute(new Runnable() {
-                public void run() {
-                    try {
-                        command.run();
-                    } finally {
-                        semaphore.release();
-                    }
+            exec.execute(() -> {
+                try {
+                    command.run();
+                } finally {
+                    semaphore.release();
                 }
             });
         } catch (RejectedExecutionException e) {
