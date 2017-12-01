@@ -132,28 +132,6 @@
             </snapshots>
         </repository>
         <repository>
-            <id>Nuxeo Releases</id>
-            <name>Nuxeo Releases</name>
-            <url>https://maven-eu.nuxeo.org/nexus/content/repositories/public-releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>XWiki Releases</id>
-            <name>XWiki Releases</name>
-            <url>http://maven.xwiki.org/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>Apache Releases</id>
             <name>Apache Releases</name>
             <url>https://repository.apache.org/content/repositories/releases/</url>
@@ -165,86 +143,9 @@
             </snapshots>
         </repository>
         <repository>
-            <id>Clojars</id>
-            <name>Clojars></name>
-            <url>http://clojars.org/repo/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>Hortonworks</id>
-            <name>Hortonworks</name>
-            <url>http://repo.hortonworks.com/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>Cloudera</id>
-            <name>Cloudera</name>
-            <url>https://repository.cloudera.com/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>WSO2</id>
-            <name>WSO2</name>
-            <url>http://dist.wso2.org/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>Java.net Releases</id>
-            <name>Java.net Releases</name>
-            <url>https://maven.java.net/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>Alfresco Public</id>
             <name>Alfresco Public</name>
             <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>Boundless</id>
-            <name>Boundless</name>
-            <url>http://repo.boundlessgeo.com/main/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>OpenNMS</id>
-            <name>OpenNMSe></name>
-            <url>http://repo.opennms.org/maven2/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
