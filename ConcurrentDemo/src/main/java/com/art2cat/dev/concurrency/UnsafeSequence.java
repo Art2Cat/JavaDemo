@@ -1,15 +1,15 @@
 package com.art2cat.dev.concurrency;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.NotThreadSafe;
 
 @NotThreadSafe
 public class UnsafeSequence {
-	private Integer value = 0;
-
-	/**
-	 * Returns a unique value.
-	 */
-	public Integer getNext() {
-		return value++;
-	}
+    private Integer value = 0;
+    
+    /**
+     * Returns a unique value.
+     */
+    public Integer getNext() {
+        return value++;
+    }
 }
