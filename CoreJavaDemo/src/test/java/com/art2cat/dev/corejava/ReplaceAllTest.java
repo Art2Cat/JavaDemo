@@ -1,3 +1,5 @@
+package com.art2cat.dev.corejava;
+
 import org.junit.Test;
 
 public class ReplaceAllTest {
