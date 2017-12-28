@@ -23,27 +23,7 @@ public class VarArgsTest {
 	}
 	
 	private void threeDots(Object... objects) {
-		Stream.of(quickSort(objects)).forEach(System.out::println);
-	}
-	
-	private Object[] quickSort(Object[] objects) {
-		Object[] less;
-		Object[] great;
-		Object pivot;
-		if (objects.length < 2) {
-			return objects;
-		} else {
-			
-			Comparator<Object> comparator = Comparator.comparingInt(Object::hashCode);
-			pivot = objects[0];
-			less = Stream.of(objects).filter(o -> comparator.compare(pivot, o) >= 0).toArray();
-			great = Stream.of(objects).filter(o -> comparator.compare(pivot, o) < 0).toArray();
-			
-		}
-		List<Object> objectList = new ArrayList<>(Arrays.asList(less));
-		objectList.add(pivot);
-		objectList.addAll(Arrays.asList(great));
-		return objectList.toArray();
+		Stream.of(objects).forEach(System.out::println);
 	}
 	
 	private void threeDots(Boolean flag, Object... objects) {
