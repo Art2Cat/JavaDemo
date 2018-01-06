@@ -1,5 +1,6 @@
 package com.art2cat.dev.cache.config;
 
+import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,12 +11,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableTransactionManagement
 public class DataConfig implements TransactionManagementConfigurer {
-
+    
     @Bean
     public DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
@@ -24,15 +23,15 @@ public class DataConfig implements TransactionManagementConfigurer {
         builder.addScript("classpath:cache/db/jdbc/test-data.sql");
         return builder.build();
     }
-
+    
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
-
+    
     @Override
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
-
+    
 }

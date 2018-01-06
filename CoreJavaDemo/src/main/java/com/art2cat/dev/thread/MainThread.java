@@ -1,10 +1,10 @@
 package com.art2cat.dev.thread;
 
 /**
- * Created by Rorschach
- * on 4/1/2017.
+ * Created by Rorschach on 4/1/2017.
  */
 public class MainThread {
+
     public static void main(String[] args) {
         Thread aA = new CustomThread("Coumpter 1");
         Thread aB = new CustomThread("Coumpter 2");
@@ -24,7 +24,7 @@ public class MainThread {
 //        aD.start();
 //        aE.start();
 
-        new Thread(()-> {
+        new Thread(() -> {
             System.out.println("fuck your wife!");
         }).start();
 

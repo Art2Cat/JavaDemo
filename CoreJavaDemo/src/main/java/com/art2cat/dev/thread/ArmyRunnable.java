@@ -1,6 +1,7 @@
 package com.art2cat.dev.thread;
 
 public class ArmyRunnable implements Runnable {
+
     volatile boolean keepRunning = true;
 
     @Override

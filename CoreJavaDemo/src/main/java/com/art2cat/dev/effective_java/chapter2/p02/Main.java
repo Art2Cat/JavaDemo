@@ -1,8 +1,7 @@
 package com.art2cat.dev.effective_java.chapter2.p02;
 
 /**
- * Created by Rorschach
- * on 2017/2/9.
+ * Created by Rorschach on 2017/2/9.
  */
 public class Main {
 

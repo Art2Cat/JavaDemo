@@ -1,9 +1,11 @@
 package com.art2cat.dev.cache;
 
 public class ErrorEntity {
+
     private int code;
     private String msg;
     private String name;
+
     public ErrorEntity(int code, String msg) {
         this.code = code;
         this.msg = msg;

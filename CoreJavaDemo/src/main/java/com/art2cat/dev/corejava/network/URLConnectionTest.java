@@ -5,7 +5,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class URLConnectionTest {
-    public static final String HOST = "https://www.art2cat.com";
+    
+    private static final String HOST = "https://www.art2cat.com";
     
     public static void main(String[] args) {
         try {

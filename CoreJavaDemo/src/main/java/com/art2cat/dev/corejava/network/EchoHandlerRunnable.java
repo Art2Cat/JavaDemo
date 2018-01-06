@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class EchoHandlerRunnable implements Runnable {
+    
     private Socket socket;
     
     public EchoHandlerRunnable(Socket socket) {

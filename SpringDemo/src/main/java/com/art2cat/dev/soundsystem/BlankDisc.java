@@ -3,8 +3,20 @@ package com.art2cat.dev.soundsystem;
 import java.util.List;
 
 public class BlankDisc implements CompactDisc {
+
     String title;
     String artist;
+    List<String> tracks;
+
+    public BlankDisc() {
+
+    }
+
+    public BlankDisc(String title, String artist, List<String> tracks) {
+        this.title = title;
+        this.artist = artist;
+        this.tracks = tracks;
+    }
 
     public String getTitle() {
         return title;
@@ -27,18 +39,6 @@ public class BlankDisc implements CompactDisc {
     }
 
     public void setTracks(List<String> tracks) {
-        this.tracks = tracks;
-    }
-
-    List<String> tracks;
-
-    public BlankDisc() {
-
-    }
-
-    public BlankDisc(String title, String artist, List<String> tracks) {
-        this.title = title;
-        this.artist = artist;
         this.tracks = tracks;
     }
 

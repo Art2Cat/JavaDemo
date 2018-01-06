@@ -1,9 +1,7 @@
 package com.art2cat.dev.mongo.orders.db;
 
-import java.util.List;
-
-
 import com.art2cat.dev.mongo.orders.Order;
+import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

@@ -1,10 +1,10 @@
 package com.art2cat.dev.corejava;
 
 /**
- * Created by Rorschach
- * on 2017/3/30.
+ * Created by Rorschach on 2017/3/30.
  */
 public class Person implements Cloneable {
+
     // final域表示构造方法之后，域的值不能再被改变了
     private final String name;
     private int age;
@@ -52,7 +52,9 @@ public class Person implements Cloneable {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) return true;
+        if (obj == this) {
+            return true;
+        }
         return ((Person) obj).getAge() == this.getAge();
     }
 

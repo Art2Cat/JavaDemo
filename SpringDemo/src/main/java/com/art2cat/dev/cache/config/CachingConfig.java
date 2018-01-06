@@ -21,9 +21,9 @@ public class CachingConfig {
     @Bean
     public EhCacheManagerFactoryBean ehcache() {
         EhCacheManagerFactoryBean ehCacheFactoryBean =
-                new EhCacheManagerFactoryBean();
+            new EhCacheManagerFactoryBean();
         ehCacheFactoryBean.setConfigLocation(
-                new ClassPathResource("/ehcache.xml")
+            new ClassPathResource("/ehcache.xml")
         );
         return ehCacheFactoryBean;
     }

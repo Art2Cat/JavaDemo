@@ -2,21 +2,22 @@ package com.art2cat.dev.database.db.jdbc;
 
 import com.art2cat.dev.database.db.SpitterRepository;
 import com.art2cat.dev.database.jpaspringdata.domain.Spitter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Repository
 public class JdbcSpitterRepository implements SpitterRepository {
 
+    private static final String INSERT_SPITTER = "insert into Spitter (username, password, fullname, email, updateByEmail) values (?, ?, ?, ?, ?)";
+    private static final String SELECT_SPITTER = "select id, username, password, fullname, email, updateByEmail from Spitter";
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -34,9 +35,11 @@ public class JdbcSpitterRepository implements SpitterRepository {
         Long id = spitter.getId();
         if (id == null) {
             long spitterId = insertSpitterAndReturnId(spitter);
-            return new Spitter(spitterId, spitter.getUsername(), spitter.getPassword(), spitter.getFullName(), spitter.getEmail(), spitter.isUpdateByEmail());
+            return new Spitter(spitterId, spitter.getUsername(), spitter.getPassword(), spitter.getFullName(),
+                spitter.getEmail(), spitter.isUpdateByEmail());
         } else {
-            jdbcTemplate.update("update Spitter set username=?, password=?, fullname=?, email=?, updateByEmail=? where id=?",
+            jdbcTemplate
+                .update("update Spitter set username=?, password=?, fullname=?, email=?, updateByEmail=? where id=?",
                     spitter.getUsername(),
                     spitter.getPassword(),
                     spitter.getFullName(),
@@ -48,8 +51,8 @@ public class JdbcSpitterRepository implements SpitterRepository {
     }
 
     /**
-     * Inserts a spitter using SimpleJdbcInsert.
-     * Involves no direct SQL and is able to return the ID of the newly created Spitter.
+     * Inserts a spitter using SimpleJdbcInsert. Involves no direct SQL and is able to return the ID of the newly
+     * created Spitter.
      *
      * @param spitter a Spitter to insert into the databse
      * @return the ID of the newly inserted Spitter
@@ -68,38 +71,43 @@ public class JdbcSpitterRepository implements SpitterRepository {
     }
 
     /**
-     * Inserts a spitter using a simple JdbcTemplate update() call.
-     * Does not return the ID of the newly created Spitter.
+     * Inserts a spitter using a simple JdbcTemplate update() call. Does not return the ID of the newly created
+     * Spitter.
      *
      * @param spitter a Spitter to insert into the database
      */
     @SuppressWarnings("unused")
     private void insertSpitter(Spitter spitter) {
         jdbcTemplate.update(INSERT_SPITTER,
-                spitter.getUsername(),
-                spitter.getPassword(),
-                spitter.getFullName(),
-                spitter.getEmail(),
-                spitter.isUpdateByEmail());
+            spitter.getUsername(),
+            spitter.getPassword(),
+            spitter.getFullName(),
+            spitter.getEmail(),
+            spitter.isUpdateByEmail());
     }
 
     @Override
     public Spitter findOne(long id) {
         return jdbcTemplate.queryForObject(
-                SELECT_SPITTER + " where id=?", new SpitterRowMapper(), id);
+            SELECT_SPITTER + " where id=?", new SpitterRowMapper(), id);
     }
 
     @Override
     public Spitter findByUsername(String username) {
-        return jdbcTemplate.queryForObject("select id, username, password, fullname, email, updateByEmail from Spitter where username=?", new SpitterRowMapper(), username);
+        return jdbcTemplate.queryForObject(
+            "select id, username, password, fullname, email, updateByEmail from Spitter where username=?",
+            new SpitterRowMapper(), username);
     }
 
     @Override
     public List<Spitter> findAll() {
-        return jdbcTemplate.query("select id, username, password, fullname, email, updateByEmail from Spitter order by id", new SpitterRowMapper());
+        return jdbcTemplate
+            .query("select id, username, password, fullname, email, updateByEmail from Spitter order by id",
+                new SpitterRowMapper());
     }
 
     private static final class SpitterRowMapper implements RowMapper<Spitter> {
+
         @Override
         public Spitter mapRow(ResultSet rs, int rowNum) throws SQLException {
             long id = rs.getLong("id");
@@ -111,9 +119,5 @@ public class JdbcSpitterRepository implements SpitterRepository {
             return new Spitter(id, username, password, fullName, email, updateByEmail);
         }
     }
-
-    private static final String INSERT_SPITTER = "insert into Spitter (username, password, fullname, email, updateByEmail) values (?, ?, ?, ?, ?)";
-
-    private static final String SELECT_SPITTER = "select id, username, password, fullname, email, updateByEmail from Spitter";
 
 }

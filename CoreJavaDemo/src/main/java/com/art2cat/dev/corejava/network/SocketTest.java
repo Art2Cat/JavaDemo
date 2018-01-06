@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class SocketTest {
+    
     public static final String HOST = "time-A.timefreq.bldrdoc.gov";
     
     public static void main(String[] args) {

@@ -1,15 +1,6 @@
 package com.art2cat.dev.corejava;
 
 import com.sun.istack.internal.NotNull;
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,6 +9,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 /**
  * com.art2cat.dev.corejava
@@ -29,14 +33,9 @@ public class EmailUtil {
     
     /**
      * Utility method to send simple HTML email
-     *
-     * @param session
-     * @param toEmail
-     * @param subject
-     * @param body
      */
     public static void sendEmail(@NotNull Session session, String toEmail, String subject, String body)
-            throws MessagingException {
+        throws MessagingException {
         
         MimeMessage msg = new MimeMessage(session);
         //set message headers
@@ -64,14 +63,9 @@ public class EmailUtil {
     
     /**
      * Utility method to send email with attachment
-     *
-     * @param session
-     * @param toEmail
-     * @param subject
-     * @param body
      */
     public static void sendAttachmentEmail(@NotNull Session session, String toEmail, String subject, String body,
-                                           @NotNull List<String> files) throws MessagingException {
+        @NotNull List<String> files) throws MessagingException {
         MimeMessage msg = new MimeMessage(session);
         msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
         msg.addHeader("format", "flowed");
@@ -113,10 +107,6 @@ public class EmailUtil {
     
     /**
      * Attach file to mail
-     *
-     * @param multipart
-     * @param filePath
-     * @throws MessagingException
      */
     private static void attachFile(Multipart multipart, Path filePath) throws MessagingException {
         BodyPart messageBodyPart = new MimeBodyPart();
@@ -132,9 +122,6 @@ public class EmailUtil {
     
     /**
      * Verify the file is an image.
-     *
-     * @param fileName
-     * @return
      */
     private static boolean isImageFormat(String fileName) {
         return Stream.of(".jpg", ".jpeg", ".png", ".gif").anyMatch(fileName::contains);
@@ -142,10 +129,6 @@ public class EmailUtil {
     
     /**
      * Attach image file.
-     *
-     * @param multipart
-     * @param filePath
-     * @throws MessagingException
      */
     private static void attachImageFile(Multipart multipart, Path filePath) throws MessagingException {
         attachFile(multipart, filePath);
@@ -153,21 +136,16 @@ public class EmailUtil {
         
         //third part for displaying image in the email body
         messageBodyPart.setContent(
-                String.format("<h1>Attached Image</h1>" + "<img src='cid:%s'>", filePath.getFileName().toString()),
-                "text/html");
+            String.format("<h1>Attached Image</h1>" + "<img src='cid:%s'>", filePath.getFileName().toString()),
+            "text/html");
         multipart.addBodyPart(messageBodyPart);
     }
     
     /**
      * Utility method to send image in email body
-     *
-     * @param session
-     * @param toEmail
-     * @param subject
-     * @param body
      */
     public static void sendImageEmail(@NotNull Session session, String toEmail, String subject, String body,
-                                      @NotNull Map<String, String> filePaths) throws MessagingException {
+        @NotNull Map<String, String> filePaths) throws MessagingException {
         MimeMessage msg = new MimeMessage(session);
         msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
         msg.addHeader("format", "flowed");

@@ -3,8 +3,9 @@ package com.art2cat.dev.database;
 import org.junit.Before;
 
 public abstract class ADatabaseTest {
+    
     public Vendor vendor;
-
+    
     @Before
     public void _init() {
         vendor = new Vendor();

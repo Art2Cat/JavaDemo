@@ -1,7 +1,6 @@
 package com.art2cat.dev.database.jpaspringdata.db;
 
 import com.art2cat.dev.database.jpaspringdata.domain.Spittle;
-
 import java.util.List;
 
 

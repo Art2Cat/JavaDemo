@@ -5,8 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * Created by Rorschach
- * on 06/03/2017.
+ * Created by Rorschach on 06/03/2017.
  */
 public class ForTest {
 
@@ -47,7 +46,7 @@ public class ForTest {
 
         Collection stringList = Arrays.asList(strings);
         /* 开始遍历 */
-        for (Iterator itr = stringList.iterator(); itr.hasNext();) {
+        for (Iterator itr = stringList.iterator(); itr.hasNext(); ) {
             Object str = itr.next();
             System.out.println(str);
         }
@@ -67,6 +66,7 @@ public class ForTest {
     }
 
     static class MyThread extends Thread {
+
         @Override
         public void run() {
             super.run();

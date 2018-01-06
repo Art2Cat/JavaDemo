@@ -1,10 +1,10 @@
 package com.art2cat.dev.effective_java;
 
 /**
- * Created by Rorschach
- * on 2017/2/8.
+ * Created by Rorschach on 2017/2/8.
  */
 public abstract class Mammalian {
+
     private String name;
     private String color;
     private int age;

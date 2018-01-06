@@ -7,4 +7,5 @@ import org.springframework.context.annotation.Import;
 @Import({CDPlayerConfig.class, CDConfig.class})
 //@ImportResource("classpath:/Volumes/Navis.A&C/SpingDemo/src/main/resources/spring.xml")
 public class SoundSystemConfig {
+
 }

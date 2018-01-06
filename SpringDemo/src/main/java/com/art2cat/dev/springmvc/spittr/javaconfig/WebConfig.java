@@ -7,14 +7,13 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.art2cat.dev.springmvc.spittr.spitter.web")
-public class WebConfig extends WebMvcConfigurerAdapter{
-
+public class WebConfig extends WebMvcConfigurerAdapter {
+    
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -23,7 +22,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         resolver.setExposeContextBeansAsAttributes(true);
         return resolver;
     }
-
+    
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         super.configureDefaultServletHandling(configurer);

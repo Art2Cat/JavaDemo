@@ -1,8 +1,7 @@
 package com.art2cat.dev.corejava;
 
 /**
- * Created by Rorschach
- * on 4/1/2017.
+ * Created by Rorschach on 4/1/2017.
  */
 public class Pair<T> {
 

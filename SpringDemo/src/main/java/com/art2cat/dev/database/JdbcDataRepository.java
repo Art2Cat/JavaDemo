@@ -1,15 +1,12 @@
 package com.art2cat.dev.database;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.Types;
+import java.util.logging.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
-import java.sql.Types;
-import java.util.logging.Logger;
 
 @Component
 public class JdbcDataRepository {
@@ -41,13 +38,13 @@ public class JdbcDataRepository {
         SqlParameterValue id = new SqlParameterValue(Types.INTEGER, vend_id);
         logger.info("parameter :" + vend_id);
         return jdbcTemplate.queryForObject(findVendorTemplate, (rs, rowNum) -> new Vendor(
-                rs.getLong("VEND_ID"),
-                rs.getString("VEND_NAME"),
-                rs.getString("VEND_ADDRESS"),
-                rs.getString("VEND_CITY"),
-                rs.getString("VEND_STATE"),
-                rs.getString("VEND_ZIP"),
-                rs.getString("VEND_COUNTRY")), id);
+            rs.getLong("VEND_ID"),
+            rs.getString("VEND_NAME"),
+            rs.getString("VEND_ADDRESS"),
+            rs.getString("VEND_CITY"),
+            rs.getString("VEND_STATE"),
+            rs.getString("VEND_ZIP"),
+            rs.getString("VEND_COUNTRY")), id);
     }
 
     public void deleteOne(Long vend_id) {

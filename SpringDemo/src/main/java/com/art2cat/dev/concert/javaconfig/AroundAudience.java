@@ -9,7 +9,8 @@ import org.aspectj.lang.annotation.Pointcut;
 public class AroundAudience {
 
     @Pointcut("execution(* com.art2cat.dev.concert.IPerformance.perform(..))")
-    public void performance() {}
+    public void performance() {
+    }
 
     @Around("performance()")
     public void watchPerformance(ProceedingJoinPoint joinPoint) {

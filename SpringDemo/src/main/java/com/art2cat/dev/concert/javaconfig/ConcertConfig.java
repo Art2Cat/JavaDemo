@@ -17,11 +17,13 @@ public class ConcertConfig {
         return new Audience();
     }
 
-    @Bean AroundAudience aroundAudience() {
+    @Bean
+    AroundAudience aroundAudience() {
         return new AroundAudience();
     }
 
     @Bean
-    public IPerformance performance() { return new Actor();
+    public IPerformance performance() {
+        return new Actor();
     }
 }

@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 
 public class InternetAddressTest {
+
     public static void main(String[] args) {
         InetAddress[] addresses = new InetAddress[0];
         

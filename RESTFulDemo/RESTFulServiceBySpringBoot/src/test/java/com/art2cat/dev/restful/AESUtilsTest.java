@@ -4,6 +4,7 @@ import com.art2cat.dev.restful.utils.AESUtils;
 import org.junit.Test;
 
 public class AESUtilsTest {
+
     @Test
     public void testDecrypt() {
         String key = AESUtils.generateKey();

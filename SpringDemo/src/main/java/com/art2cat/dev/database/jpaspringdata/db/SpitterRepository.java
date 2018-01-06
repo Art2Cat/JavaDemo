@@ -1,8 +1,7 @@
 package com.art2cat.dev.database.jpaspringdata.db;
 
-import java.util.List;
-
 import com.art2cat.dev.database.jpaspringdata.domain.Spitter;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

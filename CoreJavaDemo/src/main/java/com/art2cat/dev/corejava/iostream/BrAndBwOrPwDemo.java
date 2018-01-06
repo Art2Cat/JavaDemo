@@ -1,9 +1,15 @@
 package com.art2cat.dev.corejava.iostream;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 
 public class BrAndBwOrPwDemo {
+
     public static void main(String[] args) throws IOException {
         String current = System.getProperty("user.dir");
         String inputPath;
@@ -22,8 +28,8 @@ public class BrAndBwOrPwDemo {
     public static void writeToFile(String inputFilePath, String outputFilePath) throws IOException {
         //对文件进行读写操作
         BufferedReader br = new BufferedReader(
-                new InputStreamReader(
-                        new FileInputStream(inputFilePath)));
+            new InputStreamReader(
+                new FileInputStream(inputFilePath)));
         /*BufferedWriter bw = new BufferedWriter(
                 new OutputStreamWriter(
 						new FileOutputStream("outputFilePath")));*/

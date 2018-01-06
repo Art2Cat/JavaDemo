@@ -1,10 +1,10 @@
 package com.art2cat.dev.thread;
 
 /**
- * Created by Rorschach
- * on 2017/3/29.
+ * Created by Rorschach on 2017/3/29.
  */
 public class CustomThread extends Thread {
+
     private int count = 10;
 
     public CustomThread(String name) {
@@ -22,8 +22,8 @@ public class CustomThread extends Thread {
         super.run();
 
 //        while (count > 0) {
-            count--;
-            System.out.println(Thread.currentThread().getName() +  ": " + count);
+        count--;
+        System.out.println(Thread.currentThread().getName() + ": " + count);
 //        }
     }
 }

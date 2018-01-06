@@ -4,8 +4,7 @@ import java.io.Console;
 import java.util.Scanner;
 
 /**
- * Created by Rorschach
- * on 2017/3/30.
+ * Created by Rorschach on 2017/3/30.
  */
 public class InputTest {
 
@@ -18,7 +17,7 @@ public class InputTest {
         System.out.print("How old are you?");
         int age = in.nextInt();
 
-        System.out.println("Hello, " + name +". Next year you will be " + (age+1));
+        System.out.println("Hello, " + name + ". Next year you will be " + (age + 1));
 
     }
 

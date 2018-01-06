@@ -2,20 +2,20 @@ package com.art2cat.dev;
 
 public class Trader {
 
-	private final String name;
-	private final String city;
+    private final String name;
+    private final String city;
 
-	public String getName() {
-		return name;
-	}
+    public Trader(String name, String city) {
 
-	public String getCity() {
-		return city;
-	}
+        this.name = name;
+        this.city = city;
+    }
 
-	public Trader(String name, String city) {
+    public String getName() {
+        return name;
+    }
 
-		this.name = name;
-		this.city = city;
-	}
+    public String getCity() {
+        return city;
+    }
 }

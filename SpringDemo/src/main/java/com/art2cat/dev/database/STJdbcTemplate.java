@@ -1,9 +1,8 @@
 package com.art2cat.dev.database;
 
+import javax.sql.DataSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import javax.sql.DataSource;
 
 @Component
 public class STJdbcTemplate extends NamedParameterJdbcTemplate {

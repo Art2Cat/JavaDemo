@@ -1,12 +1,9 @@
 package com.art2cat.dev.database;
 
-import org.apache.commons.dbcp.BasicDataSource;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-
 import java.sql.Connection;
 import java.sql.SQLException;
-
+import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.stereotype.Component;
 
 
 @Component
@@ -14,6 +11,7 @@ public class BaseDao {
 
     private static BaseDao baseDao;
     private Connection connection;
+
     public BaseDao() {
 
     }

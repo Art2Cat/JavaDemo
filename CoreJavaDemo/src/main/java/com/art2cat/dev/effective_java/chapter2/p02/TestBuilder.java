@@ -1,10 +1,10 @@
 package com.art2cat.dev.effective_java.chapter2.p02;
 
 /**
- * Created by Rorschach
- * on 2017/2/9.
+ * Created by Rorschach on 2017/2/9.
  */
 public class TestBuilder {
+
     private final int servingSize;
     private final int servings;
     private final int calories;
@@ -12,7 +12,27 @@ public class TestBuilder {
     private final int sodium;
     private final int carbohydrate;
 
+    private TestBuilder(Builder builder) {
+        servingSize = builder.servingSize;
+        servings = builder.servings;
+        calories = builder.calories;
+        fat = builder.fat;
+        sodium = builder.sodium;
+        carbohydrate = builder.carbohydrate;
+    }
+
+    public void print() {
+        System.out.println(servings);
+        System.out.println(servingSize);
+        System.out.println(calories);
+        System.out.println(carbohydrate);
+        System.out.println(fat);
+        System.out.println(sodium);
+
+    }
+
     public static class Builder {
+
         private final int servingSize;
         private final int servings;
         private int calories = 0;
@@ -48,24 +68,5 @@ public class TestBuilder {
         public TestBuilder build() {
             return new TestBuilder(this);
         }
-    }
-
-    private TestBuilder(Builder builder) {
-        servingSize = builder.servingSize;
-        servings = builder.servings;
-        calories = builder.calories;
-        fat = builder.fat;
-        sodium = builder.sodium;
-        carbohydrate = builder.carbohydrate;
-    }
-
-    public void print() {
-        System.out.println(servings);
-        System.out.println(servingSize);
-        System.out.println(calories);
-        System.out.println(carbohydrate);
-        System.out.println(fat);
-        System.out.println(sodium);
-
     }
 }

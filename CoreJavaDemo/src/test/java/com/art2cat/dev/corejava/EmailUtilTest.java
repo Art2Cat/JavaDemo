@@ -1,13 +1,16 @@
 package com.art2cat.dev.corejava;
 
-import org.junit.Assert;
-import org.junit.Test;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import java.util.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * PACKAGE_NAME
@@ -162,7 +165,7 @@ public class EmailUtilTest {
         files.add(this.getClass().getClassLoader().getResource("text.txt").toString());
         try {
             EmailUtil.sendAttachmentEmail(session, toEmail, "SSLEmail Testing Subject with Attachment",
-                                          "SSLEmail Testing Body with Attachment", files);
+                "SSLEmail Testing Body with Attachment", files);
         } catch (MessagingException e) {
             e.printStackTrace();
             Assert.fail();
@@ -206,7 +209,7 @@ public class EmailUtilTest {
         files.put("image", this.getClass().getClassLoader().getResource("google.jpg").toString());
         try {
             EmailUtil.sendImageEmail(session, toEmail, "SSLEmail Testing Subject with Image",
-                                     "SSLEmail Testing Body with Image", files);
+                "SSLEmail Testing Body with Image", files);
         } catch (MessagingException e) {
             e.printStackTrace();
             Assert.fail();

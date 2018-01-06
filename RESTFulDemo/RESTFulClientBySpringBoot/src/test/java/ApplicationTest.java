@@ -26,13 +26,13 @@ import org.springframework.web.client.RestTemplate;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationTest {
-	
-	@Autowired
-	private RestTemplate restTemplate;
-
-	@Test
-	public void contextLoads() {
-		assertThat(restTemplate).isNotNull();
-	}
-
+    
+    @Autowired
+    private RestTemplate restTemplate;
+    
+    @Test
+    public void contextLoads() {
+        assertThat(restTemplate).isNotNull();
+    }
+    
 }

@@ -12,23 +12,23 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class Application {
 
-	private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
-	public static void main(String args[]) {
-		SpringApplication.run(Application.class);
-	}
-	
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
+    public static void main(String args[]) {
+        SpringApplication.run(Application.class);
+    }
 
-	@Bean
-	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
-		return args -> {
-			User user = restTemplate.getForObject(
-					"http://localhost:8080/user/find?id=15", User.class);
-			log.info(user.toString());
-		};
-	}
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
+
+    @Bean
+    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+        return args -> {
+            User user = restTemplate.getForObject(
+                "http://localhost:8080/user/find?id=15", User.class);
+            log.info(user.toString());
+        };
+    }
 }

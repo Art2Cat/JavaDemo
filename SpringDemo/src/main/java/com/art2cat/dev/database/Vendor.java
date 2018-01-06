@@ -10,7 +10,8 @@ public class Vendor {
     private String zip;
     private String country;
 
-    public Vendor() {}
+    public Vendor() {
+    }
 
     public Vendor(Long id, String name, String address, String city, String state, String zip, String country) {
         this.id = id;

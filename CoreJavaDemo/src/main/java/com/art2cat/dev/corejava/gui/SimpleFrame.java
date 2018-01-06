@@ -1,13 +1,15 @@
 package com.art2cat.dev.corejava.gui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 /**
- * Created by Rorschach
- * on 2017/3/31.
+ * Created by Rorschach on 2017/3/31.
  */
 public class SimpleFrame extends JFrame {
+
     private static final int DEFAULT_WIDTH = 300;
     private static final int DEFAULT_HEIGHT = 300;
 
@@ -20,10 +22,11 @@ public class SimpleFrame extends JFrame {
 }
 
 class NotHelloWorldComponent extends JComponent {
-    private static final int DEFAULT_WIDTH = 300;
-    private static final int DEFAULT_HEIGHT = 300;
+
     public static final int MESSAGE_X = 75;
     public static final int MESSAGE_Y = 100;
+    private static final int DEFAULT_WIDTH = 300;
+    private static final int DEFAULT_HEIGHT = 300;
 
     public void paintComponent(Graphics graphics) {
         graphics.drawString("Not a hello, this is Fuck message.", 200, 200);

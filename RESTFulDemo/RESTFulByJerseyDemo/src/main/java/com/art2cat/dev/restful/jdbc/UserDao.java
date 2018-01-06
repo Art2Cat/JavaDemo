@@ -1,13 +1,18 @@
 package com.art2cat.dev.restful.jdbc;
 
 import com.art2cat.dev.restful.model.User;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
+    
     public List<User> getAllUsers() {
         
         List<User> userList = null;

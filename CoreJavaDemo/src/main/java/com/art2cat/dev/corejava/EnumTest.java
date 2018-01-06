@@ -3,8 +3,7 @@ package com.art2cat.dev.corejava;
 import java.util.Scanner;
 
 /**
- * Created by Rorschach
- * on 2017/3/30.
+ * Created by Rorschach on 2017/3/30.
  */
 public class EnumTest {
 
@@ -24,6 +23,8 @@ public class EnumTest {
     enum Size {
         SMALL("S"), MEDIUM("M"), LARGE("L"), EXTRA_LARGE("XL");
 
+        private String abbreviation;
+
         Size(String abbreviation) {
             this.abbreviation = abbreviation;
         }
@@ -31,7 +32,5 @@ public class EnumTest {
         public String getAbbreviation() {
             return abbreviation;
         }
-
-        private String abbreviation;
     }
 }

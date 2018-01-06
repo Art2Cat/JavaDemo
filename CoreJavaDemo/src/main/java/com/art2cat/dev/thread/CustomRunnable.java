@@ -1,10 +1,10 @@
 package com.art2cat.dev.thread;
 
 /**
- * Created by Rorschach
- * on 2017/3/29.
+ * Created by Rorschach on 2017/3/29.
  */
 public class CustomRunnable implements Runnable {
+
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName() + ": " + Thread.currentThread().getId());

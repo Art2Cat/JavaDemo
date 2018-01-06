@@ -1,10 +1,10 @@
 package com.art2cat.dev.thread;
 
 /**
- * Created by Rorschach
- * on 6/12/2017.
+ * Created by Rorschach on 6/12/2017.
  */
 public class Main {
+
     public static void main(String[] args) {
         testThread();
     }
@@ -14,7 +14,6 @@ public class Main {
         Thread two = new CustomThread("thread two");
         Thread three = new CustomThread("thread three");
         Thread four = new CustomThread("thread four");
-
 
         one.start();
         two.start();

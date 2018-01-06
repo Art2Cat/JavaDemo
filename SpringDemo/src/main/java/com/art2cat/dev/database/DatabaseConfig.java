@@ -1,6 +1,8 @@
 package com.art2cat.dev.database;
 
 import com.art2cat.dev.database.hibernate.HibernateRepository;
+import java.util.Properties;
+import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,9 +16,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-import javax.sql.DataSource;
-import java.util.Properties;
-
 @Configuration
 @ComponentScan("com.art2cat.dev.database")
 public class DatabaseConfig {
@@ -28,7 +27,7 @@ public class DatabaseConfig {
 //        jndiObjectFactoryBean.setProxyInterface(javax.sql.DataSource.class);
 //        return jndiObjectFactoryBean;
 //    }
-
+    
     @Bean
     public DataSource jdbcDataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
@@ -59,23 +58,23 @@ public class DatabaseConfig {
 //        ds.setMaxActive(10);
 //        return ds;
 //    }
-
-
+    
+    
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource jdbcDataSource) {
         return new JdbcTemplate(jdbcDataSource);
     }
-
+    
     @Bean
     public JdbcDataRepository jdbcDataRepository(JdbcTemplate jdbcTemplate) {
         return new JdbcDataRepository(jdbcTemplate);
     }
-
+    
     @Bean
     public STJdbcTemplate stJdbcTemplate(DataSource jdbcDataSource) {
         return new STJdbcTemplate(jdbcDataSource);
     }
-
+    
     @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean lfb = new LocalSessionFactoryBean();
@@ -86,12 +85,12 @@ public class DatabaseConfig {
         lfb.setHibernateProperties(properties);
         return lfb;
     }
-
+    
     @Bean
     public HibernateRepository hibernateRepository(SessionFactory sessionFactory) {
         return new HibernateRepository(sessionFactory);
     }
-
+    
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
@@ -101,17 +100,17 @@ public class DatabaseConfig {
         adapter.setDatabasePlatform("org.hibernate.dialect.ORACLEDialect");
         return adapter;
     }
-
+    
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource
-    , JpaVendorAdapter jpaVendorAdapter) {
+        , JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean lcef = new LocalContainerEntityManagerFactoryBean();
         lcef.setDataSource(dataSource);
         lcef.setJpaVendorAdapter(jpaVendorAdapter);
         lcef.setPackagesToScan("com.art2cat.dev.database");
         return lcef;
     }
-
+    
     @Bean
     public JndiObjectFactoryBean entityManagerFactory() {
         JndiObjectFactoryBean jndiObjectFactoryBean = new JndiObjectFactoryBean();

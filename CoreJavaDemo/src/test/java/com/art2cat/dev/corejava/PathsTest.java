@@ -1,14 +1,12 @@
 package com.art2cat.dev.corejava;
 
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class PathsTest {
     
@@ -40,7 +38,7 @@ public class PathsTest {
         if (image == null) {
             Assert.fail();
         }
-
+        
         try {
             Path path1 = Paths.get(image.toURI());
             System.out.println(path1.toString());
@@ -48,7 +46,6 @@ public class PathsTest {
         } catch (URISyntaxException e) {
             Assert.fail(e.getMessage());
         }
-
         
         Long number = 18658710313L;
         

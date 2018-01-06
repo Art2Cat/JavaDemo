@@ -5,10 +5,10 @@ import java.math.BigInteger;
 import java.util.Scanner;
 
 /**
- * Created by Rorschach
- * on 2017/3/30.
+ * Created by Rorschach on 2017/3/30.
  */
 public class BigIntegerTest {
+
     private static PrintStream ss = System.out;
 
     public static void main(String[] args) {

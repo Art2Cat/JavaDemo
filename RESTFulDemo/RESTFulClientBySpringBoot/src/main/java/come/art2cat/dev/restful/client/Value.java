@@ -15,12 +15,12 @@ public class Value {
         return this.id;
     }
 
-    public String getQuote() {
-        return this.quote;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getQuote() {
+        return this.quote;
     }
 
     public void setQuote(String quote) {
@@ -30,8 +30,8 @@ public class Value {
     @Override
     public String toString() {
         return "Value{" +
-                "id=" + id +
-                ", quote='" + quote + '\'' +
-                '}';
+            "id=" + id +
+            ", quote='" + quote + '\'' +
+            '}';
     }
 }

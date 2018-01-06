@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class EchoServer {
+    
     public static void main(String[] args) {
         // telnet localhost 8964
         // establish server socket

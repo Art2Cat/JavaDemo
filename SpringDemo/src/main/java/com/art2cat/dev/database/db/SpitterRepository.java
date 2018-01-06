@@ -2,7 +2,6 @@ package com.art2cat.dev.database.db;
 
 
 import com.art2cat.dev.database.jpaspringdata.domain.Spitter;
-
 import java.util.List;
 
 public interface SpitterRepository {

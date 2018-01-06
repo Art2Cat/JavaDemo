@@ -1,13 +1,13 @@
 package com.art2cat.dev.restful.jdbc;
 
 import com.art2cat.dev.restful.model.User;
+import java.util.List;
+import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.logging.Logger;
-
 public class UserDaoTest {
+
     private Logger logger = Logger.getLogger(UserDaoTest.class.getName());
 
     @Test

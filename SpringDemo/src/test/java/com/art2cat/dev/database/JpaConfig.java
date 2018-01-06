@@ -3,11 +3,9 @@ package com.art2cat.dev.database;
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -21,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableJpaRepositories(basePackages = "com.art2cat.dev.database")
 public class JpaConfig {
-
+    
     @Bean
     public DataSource dataSource() {
         EmbeddedDatabaseBuilder edb = new EmbeddedDatabaseBuilder();
@@ -30,9 +28,10 @@ public class JpaConfig {
         edb.addScript("spittr/db/jpa/test-data.sql");
         return edb.build();
     }
-
+    
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
+        JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
         emf.setPersistenceUnitName("spittr");
@@ -40,7 +39,7 @@ public class JpaConfig {
         emf.setPackagesToScan("spittr.domain");
         return emf;
     }
-
+    
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
@@ -50,15 +49,15 @@ public class JpaConfig {
         adapter.setDatabasePlatform("org.hibernate.dialect.H2Dialect");
         return adapter;
     }
-
-
+    
+    
     @Configuration
     @EnableTransactionManagement
     public static class TransactionConfig {
-
+        
         @Inject
         private EntityManagerFactory emf;
-
+        
         @Bean
         public PlatformTransactionManager transactionManager() {
             JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -66,5 +65,5 @@ public class JpaConfig {
             return transactionManager;
         }
     }
-
+    
 }

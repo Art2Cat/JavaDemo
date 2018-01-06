@@ -1,11 +1,11 @@
 package com.art2cat.dev.springmvc.spittr.spitter.data;
 
+import java.util.Date;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import java.util.Date;
-
 public class Spittle {
+
     private final Long id = 0L;
     private final String message;
     private final Date time;

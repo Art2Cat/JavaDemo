@@ -5,7 +5,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 public class AroundAudienceXML {
 
-    public void performance() {}
+    public void performance() {
+    }
 
 
     public void watchPerformance(ProceedingJoinPoint joinPoint) {

@@ -1,14 +1,15 @@
 package com.art2cat.dev.database.db.jdbc;
 
-import static org.junit.Assert.*;
-
-import java.util.Date;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.art2cat.dev.cache.config.RootConfig;
 import com.art2cat.dev.database.db.SpittleRepository;
 import com.art2cat.dev.database.jpaspringdata.domain.Spitter;
 import com.art2cat.dev.database.jpaspringdata.domain.Spittle;
+import java.util.Date;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,15 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = RootConfig.class)
 public class JdbcSpittleRepositoryTest {
-
+    
     @Autowired
     SpittleRepository spittleRepository;
-
+    
     @Test
     public void count() {
         assertEquals(15, spittleRepository.count());
     }
-
+    
     @Test
     public void findRecent() {
         // default case
@@ -36,14 +37,14 @@ public class JdbcSpittleRepositoryTest {
             List<Spittle> recent = spittleRepository.findRecent();
             assertRecent(recent, 10);
         }
-
+        
         // specific count case
         {
             List<Spittle> recent = spittleRepository.findRecent(5);
             assertRecent(recent, 5);
         }
     }
-
+    
     @Test
     public void findOne() {
         Spittle thirteen = spittleRepository.findOne(13);
@@ -57,7 +58,7 @@ public class JdbcSpittleRepositoryTest {
         assertEquals("art@habuma.com", thirteen.getSpitter().getEmail());
         assertTrue(thirteen.getSpitter().isUpdateByEmail());
     }
-
+    
     @Test
     public void findBySpitter() {
         List<Spittle> spittles = spittleRepository.findBySpitterId(4L);
@@ -66,7 +67,7 @@ public class JdbcSpittleRepositoryTest {
             assertEquals(15 - i, spittles.get(i).getId().longValue());
         }
     }
-
+    
     @Test
     @Transactional
     public void save() {
@@ -78,7 +79,7 @@ public class JdbcSpittleRepositoryTest {
         assertNewSpittle(saved);
         assertNewSpittle(spittleRepository.findOne(16L));
     }
-
+    
     @Test
     @Transactional
     public void delete() {
@@ -88,7 +89,7 @@ public class JdbcSpittleRepositoryTest {
         assertEquals(14, spittleRepository.count());
 //		assertNull(spittleRepository.findOne(13));
     }
-
+    
     private void assertRecent(List<Spittle> recent, int count) {
         long[] recentIds = new long[]{3, 2, 1, 15, 14, 13, 12, 11, 10, 9};
         assertEquals(count, recent.size());
@@ -96,9 +97,9 @@ public class JdbcSpittleRepositoryTest {
             assertEquals(recentIds[i], recent.get(i).getId().longValue());
         }
     }
-
+    
     private void assertNewSpittle(Spittle spittle) {
         assertEquals(16, spittle.getId().longValue());
     }
-
+    
 }

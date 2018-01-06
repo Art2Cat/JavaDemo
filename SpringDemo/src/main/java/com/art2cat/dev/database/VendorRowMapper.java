@@ -1,11 +1,11 @@
 package com.art2cat.dev.database;
 
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.springframework.jdbc.core.RowMapper;
 
 public class VendorRowMapper implements RowMapper<Vendor> {
+
     @Override
     public Vendor mapRow(ResultSet rs, int i) throws SQLException {
         Vendor vendor = new Vendor();

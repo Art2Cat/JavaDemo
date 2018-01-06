@@ -30,8 +30,8 @@ public class Quote {
     @Override
     public String toString() {
         return "Quote{" +
-                "type='" + type + '\'' +
-                ", value=" + value +
-                '}';
+            "type='" + type + '\'' +
+            ", value=" + value +
+            '}';
     }
 }

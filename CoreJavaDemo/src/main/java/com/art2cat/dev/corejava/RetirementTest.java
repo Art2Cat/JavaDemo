@@ -3,10 +3,10 @@ package com.art2cat.dev.corejava;
 import java.util.Scanner;
 
 /**
- * Created by Rorschach
- * on 2017/3/30.
+ * Created by Rorschach on 2017/3/30.
  */
 public class RetirementTest {
+
     public static void main(String[] args) {
         retirement1();
     }
@@ -59,7 +59,7 @@ public class RetirementTest {
 
             System.out.printf("After year %d, your balance is %,.2f%n", years, balance);
 
-            System.out.println("Ready to retire?(Y/N)" );
+            System.out.println("Ready to retire?(Y/N)");
             input = in.next();
             input = input.toUpperCase();
         } while (input.equals("N"));

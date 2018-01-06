@@ -2,15 +2,15 @@ package com.art2cat.dev.restful.utils;
 
 
 public class CustomErrorType {
-
+    
     private String errorMessage;
-
-    public CustomErrorType(String errorMessage){
+    
+    public CustomErrorType(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-
+    
     public String getErrorMessage() {
         return errorMessage;
     }
-
+    
 }

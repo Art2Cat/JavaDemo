@@ -3,14 +3,14 @@ package com.art2cat.dev.effective_java;
 import java.util.HashSet;
 
 /**
- * Created by Rorschach
- * on 2017/2/8.
+ * Created by Rorschach on 2017/2/8.
  */
 public class MammalianUtils {
-    private Mammalian mammalian;
+
     private static int hash;
     private static MammalianUtils mammalianUtils;
     private static HashSet<MammalianUtils> hashSet;
+    private Mammalian mammalian;
 
     private MammalianUtils() {
         hashSet = new HashSet<>();
@@ -38,7 +38,7 @@ public class MammalianUtils {
 
     static MammalianUtils builder() {
         
-        if (MammalianUtils.getHash() !=0) {
+        if (MammalianUtils.getHash() != 0) {
             return getMammalianUtils();
         } else {
             MammalianUtils mammalianUtils = new MammalianUtils();
@@ -55,7 +55,7 @@ public class MammalianUtils {
     }
 
     void yell(String yell) {
-        if (yell==null) {
+        if (yell == null) {
             System.out.println(mammalian.getYell());
         } else {
             System.out.println(yell);
