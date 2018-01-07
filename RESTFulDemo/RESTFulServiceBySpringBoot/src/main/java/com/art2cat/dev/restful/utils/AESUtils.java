@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
  */
 
 public class AESUtils {
-
+    
     private static final String HEX = "0123456789ABCDEF";
     private static final String CBC_PKCS5_PADDING = "AES/CBC/PKCS5Padding";
     private static final String AES = "AES";
@@ -25,7 +25,7 @@ public class AESUtils {
     private static final int SALT_LENGTH = 32;
     private static final int KEY_LENGTH = 128;
     private static final int ITERATION_COUNT = 500;
-
+    
     /**
      * 生成AES密钥
      *
@@ -37,7 +37,7 @@ public class AESUtils {
         localSecureRandom.nextBytes(bytesKey);
         return byteArrayToHexString(bytesKey);
     }
-
+    
     /**
      * 针对随机生成的密钥进行处理
      *
@@ -53,7 +53,7 @@ public class AESUtils {
         byte[] keyBytes = keyFactory.generateSecret(keySpec).getEncoded();
         return new SecretKeySpec(keyBytes, AES);
     }
-
+    
     /**
      * AES加密外部函数
      *
@@ -75,7 +75,7 @@ public class AESUtils {
         }
         return null;
     }
-
+    
     /**
      * AES加密内部处理函数
      *
@@ -89,7 +89,7 @@ public class AESUtils {
         cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, new IvParameterSpec(new byte[cipher.getBlockSize()]));
         return cipher.doFinal(bytes);
     }
-
+    
     /**
      * AES解密外部函数
      *
@@ -110,7 +110,7 @@ public class AESUtils {
         }
         return null;
     }
-
+    
     /**
      * AES解密内部处理函数
      *
@@ -124,8 +124,8 @@ public class AESUtils {
         cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, new IvParameterSpec(new byte[cipher.getBlockSize()]));
         return cipher.doFinal(bytes);
     }
-
-
+    
+    
     public static String byteArrayToHexString(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
         for (int j = 0; j < bytes.length; j++) {
@@ -136,7 +136,7 @@ public class AESUtils {
         String key = new String(hexChars);
         return key;
     }
-
+    
     public static byte[] hexStringToByteArray(String s) {
         int len = s.length();
         byte[] data = new byte[len / 2];

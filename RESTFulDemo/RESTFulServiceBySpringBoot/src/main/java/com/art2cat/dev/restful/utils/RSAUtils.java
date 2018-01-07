@@ -24,17 +24,17 @@ import javax.validation.constraints.NotNull;
  * Created by art2cat on 7/7/2016.
  */
 public class RSAUtils {
-
+    
     private final static String KEY_PAIR = "RSA";
     private final static String CIPHER = "RSA/ECB/PKCS1Padding";
-
+    
     /**
      * 随机生成RSA密钥对(默认密钥长度为1024)
      */
     public static KeyPair generateRSAKeyPair() {
         return generateRSAKeyPair(1024);
     }
-
+    
     /**
      * 随机生成RSA密钥对
      *
@@ -50,7 +50,7 @@ public class RSAUtils {
             return null;
         }
     }
-
+    
     /**
      * 用公钥加密 <br> 每次加密的字节数，不能超过密钥的长度值减去11
      *
@@ -70,7 +70,7 @@ public class RSAUtils {
             return null;
         }
     }
-
+    
     /**
      * 用私钥解密
      *
@@ -86,7 +86,7 @@ public class RSAUtils {
             return null;
         }
     }
-
+    
     /**
      * 通过公钥byte[](publicKey.getEncoded())将公钥还原，适用于RSA算法
      */
@@ -97,7 +97,7 @@ public class RSAUtils {
         PublicKey publicKey = keyFactory.generatePublic(keySpec);
         return publicKey;
     }
-
+    
     /**
      * 通过私钥byte[]将公钥还原，适用于RSA算法
      */
@@ -108,7 +108,7 @@ public class RSAUtils {
         PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
         return privateKey;
     }
-
+    
     /**
      * 使用N、e值还原公钥
      */
@@ -121,7 +121,7 @@ public class RSAUtils {
         PublicKey publicKey = keyFactory.generatePublic(keySpec);
         return publicKey;
     }
-
+    
     /**
      * 使用N、d值还原私钥
      */
@@ -134,7 +134,7 @@ public class RSAUtils {
         PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
         return privateKey;
     }
-
+    
     /**
      * 从字符串中加载公钥
      *
@@ -155,7 +155,7 @@ public class RSAUtils {
             throw new Exception("公钥数据为空");
         }
     }
-
+    
     /**
      * 从字符串中加载私钥<br> 加载时使用的是PKCS8EncodedKeySpec（PKCS#8编码的Key指令）。
      */
@@ -173,7 +173,7 @@ public class RSAUtils {
             throw new Exception("私钥数据为空");
         }
     }
-
+    
     /**
      * 从文件中输入流中加载公钥
      *
@@ -189,8 +189,8 @@ public class RSAUtils {
             throw new Exception("公钥输入流为空");
         }
     }
-
-
+    
+    
     /**
      * 读取密钥信息 -------------------- CONTENT --------------------
      */
@@ -206,8 +206,8 @@ public class RSAUtils {
                 sb.append('\r');
             }
         }
-
+        
         return sb.toString();
     }
-
+    
 }

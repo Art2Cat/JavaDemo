@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service("companyService")
 public class CompanyService implements ICompanyService {
-
+    
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
@@ -26,7 +26,7 @@ public class CompanyService implements ICompanyService {
     private String deleteCompanyTemplate;
     @Autowired
     private String updateCompanyNameTemplate;
-
+    
     @Override
     public Optional<Company> findById(long id) {
         Map<String, Object> params = new HashMap<>();
@@ -41,7 +41,7 @@ public class CompanyService implements ICompanyService {
                 rs.getInt("zipcode"),
                 rs.getString("country"))));
     }
-
+    
     @Override
     public Optional<Company> findByName(String name) {
         Map<String, Object> params = new HashMap<>();
@@ -56,7 +56,7 @@ public class CompanyService implements ICompanyService {
                 rs.getInt("zipcode"),
                 rs.getString("country"))));
     }
-
+    
     @Override
     public int saveCompany(long id, String name, String address, String city, String state, int zipcode,
         String country) {
@@ -70,7 +70,7 @@ public class CompanyService implements ICompanyService {
         params.put("country", country);
         return jdbcTemplate.update(addCompanyTemplate, params);
     }
-
+    
     @Override
     public void saveCompany2(Company company) {
         Map<String, Object> params = new HashMap<>();
@@ -83,7 +83,7 @@ public class CompanyService implements ICompanyService {
         params.put("country", company.getCountry());
         jdbcTemplate.update(addCompanyTemplate, params);
     }
-
+    
     @Override
     public void updateCompany(Company company) {
         Map<String, Object> params = new HashMap<>();
@@ -91,14 +91,14 @@ public class CompanyService implements ICompanyService {
         params.put("name", company.getName());
         int result = jdbcTemplate.update(updateCompanyNameTemplate, params);
     }
-
+    
     @Override
     public void deleteCompanyById(long id) {
         Map<String, Object> params = new HashMap<>();
         params.put("id", id);
         jdbcTemplate.update(deleteCompanyTemplate, params);
     }
-
+    
     @Override
     public List<Company> findAllCompanies() {
         return jdbcTemplate.query(getAllCompanyTemplate, (rs, rowNum) -> new Company(
@@ -110,12 +110,12 @@ public class CompanyService implements ICompanyService {
             rs.getInt("zipcode"),
             rs.getString("country")));
     }
-
+    
     @Override
     public void deleteAllCompanies() {
-
+    
     }
-
+    
     @Override
     public boolean isCompanyExist(Company company) {
         return findById(company.getId()).filter(company::equals).isPresent();

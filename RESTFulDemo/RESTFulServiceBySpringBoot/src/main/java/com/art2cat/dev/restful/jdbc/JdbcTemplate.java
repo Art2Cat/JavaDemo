@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JdbcTemplate extends NamedParameterJdbcTemplate {
-
+    
     public JdbcTemplate(DataSource jdbcDataSource) {
         super(jdbcDataSource);
     }

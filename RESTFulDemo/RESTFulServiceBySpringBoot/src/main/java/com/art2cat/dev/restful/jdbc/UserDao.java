@@ -14,12 +14,12 @@ import java.util.List;
 
 
 public class UserDao {
-
+    
     private static UserDao userDao;
-
+    
     public UserDao() {
     }
-
+    
     public static UserDao newInstance() {
         if (userDao != null) {
             // empty
@@ -30,12 +30,12 @@ public class UserDao {
                 }
             }
         }
-
+        
         return userDao;
     }
-
+    
     public List<User> getAllUsers() {
-
+        
         List<User> userList = null;
         try {
             File file = null;
@@ -46,7 +46,7 @@ public class UserDao {
             } else {
                 file = new File("src/main/resources/Users.data");
             }
-
+            
             if (!file.exists()) {
                 userList = new ArrayList<>();
                 for (int i = 0; i < 3; i++) {
@@ -65,7 +65,7 @@ public class UserDao {
         }
         return userList;
     }
-
+    
     private void saveUserList(File file, List<User> userList) {
         try {
             FileOutputStream fos;

@@ -21,12 +21,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequestMapping("/api")
 public class UserController {
-
+    
     public static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
+    
     @Autowired
     IUserService IUserService;
-
+    
     @RequestMapping(value = "/user/", method = RequestMethod.GET)
     public ResponseEntity<List<User>> listAllUsers() {
         List<User> users = IUserService.findAllUsers();
@@ -36,7 +36,7 @@ public class UserController {
         }
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
-
+    
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getUser(@PathVariable("id") long id) {
         logger.info("Fetching User with id {}", id);
@@ -48,47 +48,47 @@ public class UserController {
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
-
+    
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
         logger.info("Creating User : {}", user);
-
+        
         if (IUserService.isUserExist(user)) {
             logger.error("Unable to create. A User with name {} already exist", user.getUsername());
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A User with name " +
                 user.getUsername() + " already exist."), HttpStatus.CONFLICT);
         }
         IUserService.saveUser(user);
-
+        
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(user.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
-
+    
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody User user) {
         logger.info("Updating User with id {}", id);
-
+        
         User currentUser = IUserService.findById(id);
-
+        
         if (currentUser == null) {
             logger.error("Unable to update. User with id {} not found.", id);
             return new ResponseEntity<>(new CustomErrorType("Unable to upate. User with id " + id + " not found."),
                 HttpStatus.NOT_FOUND);
         }
-
+        
         currentUser.setUsername(user.getUsername());
         currentUser.setFirstname(user.getFirstname());
         currentUser.setLastname(user.getLastname());
-
+        
         IUserService.updateUser(currentUser);
         return new ResponseEntity<User>(currentUser, HttpStatus.OK);
     }
-
+    
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteUser(@PathVariable("id") long id) {
         logger.info("Fetching & Deleting User with id {}", id);
-
+        
         User user = IUserService.findById(id);
         if (user == null) {
             logger.error("Unable to delete. User with id {} not found.", id);
@@ -98,13 +98,13 @@ public class UserController {
         IUserService.deleteUserById(id);
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
     }
-
+    
     @RequestMapping(value = "/user/", method = RequestMethod.DELETE)
     public ResponseEntity<User> deleteAllUsers() {
         logger.info("Deleting All Users");
-
+        
         IUserService.deleteAllUsers();
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
     }
-
+    
 }

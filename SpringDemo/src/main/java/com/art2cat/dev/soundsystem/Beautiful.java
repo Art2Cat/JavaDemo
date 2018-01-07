@@ -15,6 +15,6 @@ public class Beautiful implements CompactDisc {
     }
     
     public void playTrack(int trackNumber) {
-    
+
     }
 }
