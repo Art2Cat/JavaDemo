@@ -15,7 +15,7 @@ public class JdbcConfig {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
         ds.setUrl("jdbc:oracle:thin:@192.168.0.46:1521:db11g");
-        ds.setUsername("mc_47_tll");
+        ds.setUsername("mc_48_test");
         ds.setPassword("slm123");
         return ds;
     }

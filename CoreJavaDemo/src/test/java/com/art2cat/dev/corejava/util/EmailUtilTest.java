@@ -1,4 +1,4 @@
-package com.art2cat.dev.corejava;
+package com.art2cat.dev.corejava.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;

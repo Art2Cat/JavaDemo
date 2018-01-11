@@ -1,4 +1,4 @@
-package com.art2cat.dev.corejava;
+package com.art2cat.dev.corejava.util;
 
 import com.sun.istack.internal.NotNull;
 import java.io.File;
