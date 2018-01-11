@@ -32,14 +32,15 @@ public class CompanyService implements ICompanyService {
         Map<String, Object> params = new HashMap<>();
         params.put("id", id);
         return Optional
-            .ofNullable(jdbcTemplate.queryForObject(getCompanyByIdTemplate, params, (rs, rowNum) -> new Company(
-                rs.getLong("id"),
-                rs.getString("name"),
-                rs.getString("address"),
-                rs.getString("city"),
-                rs.getString("state"),
-                rs.getInt("zipcode"),
-                rs.getString("country"))));
+            .ofNullable(jdbcTemplate
+                .queryForObject(getCompanyByIdTemplate, params, (rs, rowNum) -> new Company(
+                    rs.getLong("id"),
+                    rs.getString("name"),
+                    rs.getString("address"),
+                    rs.getString("city"),
+                    rs.getString("state"),
+                    rs.getInt("zipcode"),
+                    rs.getString("country"))));
     }
     
     @Override
@@ -47,18 +48,20 @@ public class CompanyService implements ICompanyService {
         Map<String, Object> params = new HashMap<>();
         params.put("name", name);
         return Optional
-            .ofNullable(jdbcTemplate.queryForObject(getCompanyByNameTemplate, params, (rs, rowNum) -> new Company(
-                rs.getLong("id"),
-                rs.getString("name"),
-                rs.getString("address"),
-                rs.getString("city"),
-                rs.getString("state"),
-                rs.getInt("zipcode"),
-                rs.getString("country"))));
+            .ofNullable(jdbcTemplate
+                .queryForObject(getCompanyByNameTemplate, params, (rs, rowNum) -> new Company(
+                    rs.getLong("id"),
+                    rs.getString("name"),
+                    rs.getString("address"),
+                    rs.getString("city"),
+                    rs.getString("state"),
+                    rs.getInt("zipcode"),
+                    rs.getString("country"))));
     }
     
     @Override
-    public int saveCompany(long id, String name, String address, String city, String state, int zipcode,
+    public int saveCompany(long id, String name, String address, String city, String state,
+        int zipcode,
         String country) {
         Map<String, Object> params = new HashMap<>();
         params.put("id", id);

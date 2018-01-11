@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.stop_thread.stop;
 
 /**
- * Created by Rorschach
- * on 6/28/2017.
+ * Created by Rorschach on 6/28/2017.
  */
 public class Main {
+
     public static void main(String[] args) {
         SynchronizedObject object = new SynchronizedObject();
         TestThread testThread = new TestThread(object);
@@ -17,11 +17,12 @@ public class Main {
         //deprecated
         testThread.stop();
         System.out.println(object.getUsername() + ": " +
-                object.getPassword());
+            object.getPassword());
     }
 }
 
 class TestThread extends Thread {
+
     private SynchronizedObject object;
 
     TestThread(SynchronizedObject object) {

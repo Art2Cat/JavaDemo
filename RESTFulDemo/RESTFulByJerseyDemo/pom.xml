@@ -9,9 +9,9 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
-  <version>0.1.0</version>
+  <version>${project.version}</version>
   <artifactId>RESTFulByJerseyDemo</artifactId>
-
+  <name>RESTFulByJerseyDemo</name>
   <dependencies>
     <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
     <dependency>

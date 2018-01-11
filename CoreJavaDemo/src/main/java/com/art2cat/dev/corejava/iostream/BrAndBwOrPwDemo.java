@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 
 public class BrAndBwOrPwDemo {
-
+    
     public static void main(String[] args) throws IOException {
         String current = System.getProperty("user.dir");
         String inputPath;
@@ -21,10 +21,10 @@ public class BrAndBwOrPwDemo {
             inputPath = current + "/text.txt";
             outputPath = current + "/outtext.txt";
         }
-
+        
         writeToFile(inputPath, outputPath);
     }
-
+    
     public static void writeToFile(String inputFilePath, String outputFilePath) throws IOException {
         //对文件进行读写操作
         BufferedReader br = new BufferedReader(

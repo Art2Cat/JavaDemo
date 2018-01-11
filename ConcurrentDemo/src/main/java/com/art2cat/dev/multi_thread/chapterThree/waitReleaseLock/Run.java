@@ -4,10 +4,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by huang.yiming
- * on 7/10/2017.
+ * Created by huang.yiming on 7/10/2017.
  */
 public class Run {
+
     public static void main(String[] args) throws InterruptedException {
         Object lock = new Object();
         Service service = new Service();

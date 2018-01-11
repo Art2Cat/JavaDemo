@@ -5,10 +5,10 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Created by huang.yiming
- * on 7/12/2017.
+ * Created by huang.yiming on 7/12/2017.
  */
 class Service {
+
     Lock lock = new ReentrantLock();
     Condition condition = lock.newCondition();
 

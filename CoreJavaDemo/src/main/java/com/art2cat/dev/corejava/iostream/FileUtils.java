@@ -10,7 +10,7 @@ public class FileUtils {
     public static FileUtils instance;
     
     private FileUtils() {
-    
+
     }
     
     synchronized public static FileUtils getInstance() {
@@ -32,7 +32,7 @@ public class FileUtils {
     
     public static FileUtils get() {
         if (instance != null) {
-        
+
         } else {
             synchronized (FileUtils.class) {
                 if (instance == null) {

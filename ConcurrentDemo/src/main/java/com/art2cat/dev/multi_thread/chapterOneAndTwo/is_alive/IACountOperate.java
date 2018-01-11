@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.is_alive;
 
 /**
- * Created by Rorschach
- * on 6/28/2017.
+ * Created by Rorschach on 6/28/2017.
  */
 public class IACountOperate extends Thread {
+
     public IACountOperate() {
 
         System.out.println("CountOperate---begin");

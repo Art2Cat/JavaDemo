@@ -1,13 +1,12 @@
 package com.art2cat.dev.concurrency;
 
 import com.art2cat.dev.Testing_Concurrent_Programs.SemaphoreBoundedBuffer;
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Producer-consumer test program for BoundedBuffer
@@ -16,30 +15,37 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 22/10/2017
  */
 public class PutTakeTest {
+    
     static final ExecutorService pool = Executors.newCachedThreadPool();
-    CyclicBarrier barrier;
-    private final SemaphoreBoundedBuffer<Integer> bb;
     final int nTrials, nPairs;
     final AtomicInteger putSum = new AtomicInteger(0);
     final AtomicInteger takeSum = new AtomicInteger(0);
-
-    public static void main(String[] args) throws Exception {
-
-    }
-
-
+    private final SemaphoreBoundedBuffer<Integer> bb;
+    CyclicBarrier barrier;
+    
     PutTakeTest(int capacity, int npairs, int ntrials) {
         this.bb = new SemaphoreBoundedBuffer<Integer>(capacity);
         this.nTrials = ntrials;
         this.nPairs = npairs;
         this.barrier = new CyclicBarrier(npairs * 2 + 1);
     }
+    
+    public static void main(String[] args) throws Exception {
 
+    }
+    
+    private static int xorShift(int y) {
+        y ^= (y << 6);
+        y ^= (y >>> 21);
+        y ^= (y << 7);
+        return y;
+    }
+    
     @Test
     public void test() {
-
-	    new PutTakeTest(10, 10, 100000).test(); // sample parameters
-
+        
+        new PutTakeTest(10, 10, 100000).test(); // sample parameters
+        
         try {
             for (int i = 0; i < nPairs; i++) {
                 pool.execute(new Producer());
@@ -51,18 +57,12 @@ public class PutTakeTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-	    pool.shutdown();
+        
+        pool.shutdown();
     }
-
-    private static int xorShift(int y) {
-        y ^= (y << 6);
-        y ^= (y >>> 21);
-        y ^= (y << 7);
-        return y;
-    }
-
+    
     class Producer implements Runnable {
+        
         public void run() {
             try {
                 int seed = (this.hashCode() ^ (int) System.nanoTime());
@@ -80,8 +80,9 @@ public class PutTakeTest {
             }
         }
     }
-
+    
     class Consumer implements Runnable {
+        
         public void run() {
             try {
                 barrier.await();

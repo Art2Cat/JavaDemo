@@ -7,7 +7,8 @@ public class CustomRunnable implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName() + ": " + Thread.currentThread().getId());
+        System.out
+            .println(Thread.currentThread().getName() + ": " + Thread.currentThread().getId());
         for (int i = 0; i <= 30; i++) {
             System.out.println(Thread.currentThread().getName() + ": i equals " + i);
             if (i == 10) {

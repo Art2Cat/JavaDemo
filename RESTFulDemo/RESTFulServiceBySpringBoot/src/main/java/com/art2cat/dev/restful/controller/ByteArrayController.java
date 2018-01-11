@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ByteArrayController {
+    
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     
     @RequestMapping(value = "/byteArray/", method = RequestMethod.POST)

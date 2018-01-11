@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.synchronizedMethodLockObject;
 
 /**
- * Created by Rorschach
- * on 7/6/2017.
+ * Created by Rorschach on 7/6/2017.
  */
 public class Run {
+
     public static void main(String[] args) {
         MyObject object = new MyObject();
         Thread a = new Thread(() -> {

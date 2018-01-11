@@ -6,17 +6,20 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by huang.yiming
- * on 7/13/2017.
+ * Created by huang.yiming on 7/13/2017.
  */
 public class Main {
+
     public static void main(String[] args) throws ParseException {
         Date setDate = new Date(System.currentTimeMillis() + 10000);
         Date setDate1 = new Date(System.currentTimeMillis() + 20000);
         Date setDate2 = new Date(System.currentTimeMillis() + 25000);
-        System.out.println("set running time: " + setDate + " current time: " + new Date(System.currentTimeMillis()));
-        System.out.println("set running time: " + setDate1 + " current time: " + new Date(System.currentTimeMillis()));
-        System.out.println("set running time: " + setDate2 + " current time: " + new Date(System.currentTimeMillis()));
+        System.out.println("set running time: " + setDate + " current time: " + new Date(
+            System.currentTimeMillis()));
+        System.out.println("set running time: " + setDate1 + " current time: " + new Date(
+            System.currentTimeMillis()));
+        System.out.println("set running time: " + setDate2 + " current time: " + new Date(
+            System.currentTimeMillis()));
         // set Daemon Thread put parameter true
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {

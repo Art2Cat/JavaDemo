@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class RandomAccessFileSeriaDemo {
-
+    
     /**
      * @param args
      */
@@ -29,8 +29,8 @@ public class RandomAccessFileSeriaDemo {
         raf.write(i >>> 8);
         raf.write(i);
         System.out.println(raf.getFilePointer());
-
-
+        
+        
         /*反序列化*/
         raf.seek(0);
         int b = raf.read();
@@ -44,5 +44,5 @@ public class RandomAccessFileSeriaDemo {
         System.out.println(Integer.toHexString(i));
         raf.close();
     }
-
+    
 }

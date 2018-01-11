@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterFour.readWriteLockTest;
 
 /**
- * Created by huang.yiming
- * on 7/12/2017.
+ * Created by huang.yiming on 7/12/2017.
  */
 public class Main {
+
     public static void main(String[] args) throws InterruptedException {
         Service service = new Service();
         // there are not mutually exclusive between two readLocks

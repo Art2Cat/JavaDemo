@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.synchronizedOneThreadIn;
 
 /**
- * Created by Rorschach
- * on 7/7/2017.
+ * Created by Rorschach on 7/7/2017.
  */
 public class ObjectService {
+
     void serviceMethod() {
         try {
             // synchronized 代码块

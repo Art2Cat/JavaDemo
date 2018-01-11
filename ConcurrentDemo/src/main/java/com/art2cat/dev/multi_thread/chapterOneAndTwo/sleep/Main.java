@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.sleep;
 
 /**
- * Created by Rorschach
- * on 6/28/2017.
+ * Created by Rorschach on 6/28/2017.
  */
 public class Main {
+    
     public static void main(String[] args) {
         SleepR sleepR = new SleepR();
         SleepT sleepT = new SleepT();

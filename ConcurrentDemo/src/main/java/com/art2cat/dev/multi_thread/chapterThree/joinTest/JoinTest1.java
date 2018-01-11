@@ -1,12 +1,12 @@
 package com.art2cat.dev.multi_thread.chapterThree.joinTest;
 
 /**
- * Created by Rorschach
- * on 11/07/2017.
+ * Created by Rorschach on 11/07/2017.
  */
 public class JoinTest1 {
+
     public static void main(String[] args) throws InterruptedException {
-        Thread test = new Thread(()-> {
+        Thread test = new Thread(() -> {
             try {
                 int second = (int) (Math.random() * 10000);
                 System.out.println(second);

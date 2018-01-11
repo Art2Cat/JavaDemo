@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by huang.yiming
- * on 7/10/2017.
+ * Created by huang.yiming on 7/10/2017.
  */
 public class Run {
+
     public static void main(String[] args) throws InterruptedException {
         List<String> product = new ArrayList<>();
         Producer producer = new Producer(product);

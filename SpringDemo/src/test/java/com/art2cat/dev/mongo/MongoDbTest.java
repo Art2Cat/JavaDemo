@@ -63,7 +63,8 @@ public class MongoDbTest {
         assertEquals("Chuck Wagon", chucksWebOrders.get(0).getCustomer());
         assertEquals(2, chucksWebOrders.get(0).getItems().size());
         
-        List<Order> chucksPhoneOrders = orderRepository.findByCustomerAndType("Chuck Wagon", "PHONE");
+        List<Order> chucksPhoneOrders = orderRepository
+            .findByCustomerAndType("Chuck Wagon", "PHONE");
         assertEquals(0, chucksPhoneOrders.size());
         
         // Finding an order by a custom query method

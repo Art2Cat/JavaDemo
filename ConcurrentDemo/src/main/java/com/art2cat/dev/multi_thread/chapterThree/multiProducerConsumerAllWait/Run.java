@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterThree.multiProducerConsumerAllWait;
 
 /**
- * Created by Rorschach
- * on 10/07/2017.
+ * Created by Rorschach on 10/07/2017.
  */
 public class Run {
+
     public static void main(String[] args) throws InterruptedException {
         String lock = "lock";
         Producer producer = new Producer(lock);
@@ -24,7 +24,7 @@ public class Run {
         Thread.currentThread().getThreadGroup().enumerate(threads);
         for (Thread thread : threads) {
             System.out.println(thread.getName() + " " +
-                    thread.getState());
+                thread.getState());
         }
     }
 }

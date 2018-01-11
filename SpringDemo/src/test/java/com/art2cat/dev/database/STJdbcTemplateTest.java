@@ -23,7 +23,8 @@ public class STJdbcTemplateTest extends ADatabaseTest {
     @Autowired
     STJdbcTemplate stJdbcTemplate;
     private Logger logger = Logger.getLogger(STJdbcTemplateTest.class);
-    private ApplicationContext context = new ClassPathXmlApplicationContext("database/named_sql_template.xml");
+    private ApplicationContext context = new ClassPathXmlApplicationContext(
+        "database/named_sql_template.xml");
     
     @Before
     public void _init() {

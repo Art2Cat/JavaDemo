@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.synLockIn_2;
 
 /**
- * Created by Rorschach
- * on 7/6/2017.
+ * Created by Rorschach on 7/6/2017.
  */
 public class Sub extends Main {
+
     void operateISubMethod() {
         try {
             while (i > 0) {

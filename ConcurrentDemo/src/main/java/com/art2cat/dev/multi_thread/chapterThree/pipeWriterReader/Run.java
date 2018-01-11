@@ -1,12 +1,14 @@
 package com.art2cat.dev.multi_thread.chapterThree.pipeWriterReader;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PipedReader;
+import java.io.PipedWriter;
 
 /**
- * Created by Rorschach
- * on 10/07/2017.
+ * Created by Rorschach on 10/07/2017.
  */
 public class Run {
+
     public static void main(String[] args) {
         try {
             WriteData writeData = new WriteData();

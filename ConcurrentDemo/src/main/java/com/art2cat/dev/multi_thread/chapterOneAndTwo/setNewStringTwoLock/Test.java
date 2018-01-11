@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Rorschach
- * on 7/7/2017.
+ * Created by Rorschach on 7/7/2017.
  */
 public class Test {
+
     public static void main(String[] args) throws InterruptedException {
         Service service = new Service();
 

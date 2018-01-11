@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterThree.stack_three;
 
 /**
- * Created by Rorschach
- * on 10/07/2017.
+ * Created by Rorschach on 10/07/2017.
  */
 class Consumer implements Runnable {
+
     PopService popService;
 
     Consumer(PopService popService) {

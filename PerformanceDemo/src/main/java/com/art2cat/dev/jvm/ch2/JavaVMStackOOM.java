@@ -5,6 +5,11 @@ package com.art2cat.dev.jvm.ch2;
  */
 public class JavaVMStackOOM {
 
+    public static void main(String[] args) {
+        JavaVMStackOOM oom = new JavaVMStackOOM();
+        oom.stackLeakByThread();
+    }
+
     private void dontStop() {
         while (true) {
 
@@ -15,10 +20,5 @@ public class JavaVMStackOOM {
         while (true) {
             new Thread(this::dontStop).start();
         }
-    }
-
-    public static void main(String[] args) {
-        JavaVMStackOOM oom = new JavaVMStackOOM();
-        oom.stackLeakByThread();
     }
 }

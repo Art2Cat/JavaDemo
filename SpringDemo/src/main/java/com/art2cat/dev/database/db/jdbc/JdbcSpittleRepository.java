@@ -23,7 +23,8 @@ public class JdbcSpittleRepository implements SpittleRepository {
     private static final String SELECT_SPITTLE_BY_ID = SELECT_SPITTLE + " and sp.id=?";
     private static final String SELECT_SPITTLES_BY_SPITTER_ID =
         SELECT_SPITTLE + " and s.id=? order by sp.postedTime desc";
-    private static final String SELECT_RECENT_SPITTLES = SELECT_SPITTLE + " order by sp.postedTime desc limit ?";
+    private static final String SELECT_RECENT_SPITTLES =
+        SELECT_SPITTLE + " order by sp.postedTime desc limit ?";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -64,7 +65,8 @@ public class JdbcSpittleRepository implements SpittleRepository {
     @Override
     public Spittle save(Spittle spittle) {
         long spittleId = insertSpittleAndReturnId(spittle);
-        return new Spittle(spittleId, spittle.getSpitter(), spittle.getMessage(), spittle.getPostedTime());
+        return new Spittle(spittleId, spittle.getSpitter(), spittle.getMessage(),
+            spittle.getPostedTime());
     }
 
     private long insertSpittleAndReturnId(Spittle spittle) {
@@ -96,7 +98,8 @@ public class JdbcSpittleRepository implements SpittleRepository {
             String fullName = rs.getString("fullname");
             String email = rs.getString("email");
             boolean updateByEmail = rs.getBoolean("updateByEmail");
-            Spitter spitter = new Spitter(spitterId, username, password, fullName, email, updateByEmail);
+            Spitter spitter = new Spitter(spitterId, username, password, fullName, email,
+                updateByEmail);
             return new Spittle(id, spitter, message, postedTime);
         }
     }

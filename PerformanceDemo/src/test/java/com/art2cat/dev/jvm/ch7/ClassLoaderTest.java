@@ -1,14 +1,15 @@
 package com.art2cat.dev.jvm.ch7;
 
 import com.art2cat.dev.ClassLoaderA;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.io.InputStream;
+import org.junit.Test;
 
 public class ClassLoaderTest {
+
     @Test
-    public void test() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public void test()
+        throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         ClassLoader classLoader = new ClassLoader() {
             @Override
             public Class<?> loadClass(String name) throws ClassNotFoundException {
@@ -29,7 +30,8 @@ public class ClassLoaderTest {
                 }
             }
         };
-        Object object = classLoader.loadClass("com.art2cat.dev.jvm.ch7.ClassLoaderTest").newInstance();
+        Object object = classLoader.loadClass("com.art2cat.dev.jvm.ch7.ClassLoaderTest")
+            .newInstance();
 
         System.out.println(object.getClass());
 
@@ -37,13 +39,13 @@ public class ClassLoaderTest {
     }
 
     @Test
-	public void test1() {
-	    System.setProperty("art2cat.classloader", "class");
-	    System.out.println(ClassLoaderA.getClassLoader().getResource("."));
-	    System.out.println(ClassLoaderA.getClassLoader().toString());
+    public void test1() {
+        System.setProperty("art2cat.classloader", "class");
+        System.out.println(ClassLoaderA.getClassLoader().getResource("."));
+        System.out.println(ClassLoaderA.getClassLoader().toString());
 
-	    System.setProperty("art2cat.classloader", "thread");
-	    System.out.println(ClassLoaderA.getClassLoader().getResource("."));
-	    System.out.println(ClassLoaderA.getClassLoader().toString());
+        System.setProperty("art2cat.classloader", "thread");
+        System.out.println(ClassLoaderA.getClassLoader().getResource("."));
+        System.out.println(ClassLoaderA.getClassLoader().toString());
     }
 }

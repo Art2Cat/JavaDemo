@@ -14,7 +14,8 @@ public class JdbcDataRepository {
     private Logger logger = Logger.getLogger("JdbcDataRepository");
     private JdbcTemplate jdbcTemplate;
 
-    private ApplicationContext context = new ClassPathXmlApplicationContext("database/sql_template.xml");
+    private ApplicationContext context = new ClassPathXmlApplicationContext(
+        "database/sql_template.xml");
 
     public JdbcDataRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -29,7 +30,8 @@ public class JdbcDataRepository {
         SqlParameterValue zip = new SqlParameterValue(Types.VARCHAR, vendor.getZip());
         SqlParameterValue country = new SqlParameterValue(Types.VARCHAR, vendor.getCountry());
         String addVendorTemplate = (String) context.getBean("addVendorTemplate");
-        int result = jdbcTemplate.update(addVendorTemplate, id, name, address, city, state, zip, country);
+        int result = jdbcTemplate
+            .update(addVendorTemplate, id, name, address, city, state, zip, country);
         logger.info("result :" + result);
     }
 

@@ -1,14 +1,12 @@
 package com.art2cat.dev.multi_thread.chapterThree.producer_consumer_test;
 
-import com.sun.beans.decoder.ValueObject;
-
 import java.util.List;
 
 /**
- * Created by huang.yiming
- * on 7/10/2017.
+ * Created by huang.yiming on 7/10/2017.
  */
 class Producer {
+
     private List<String> lock;
 
     Producer(List<String> lock) {
@@ -25,7 +23,7 @@ class Producer {
                         lock.wait();
                     }
                     String value = System.currentTimeMillis() + "_"
-                            + System.nanoTime();
+                        + System.nanoTime();
                     System.out.println("set的值是: " + value);
                     lock.add(value);
                     lock.notify();

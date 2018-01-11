@@ -1,20 +1,20 @@
 <ehcache>
 
-    <cache name="ehcacheTest"
-        maxBytesLocalHeap="32m"
-        timeToLiverSeconds="100">
+  <cache maxBytesLocalHeap="32m"
+    name="ehcacheTest"
+    timeToLiverSeconds="100">
 
-    </cache>
-    <diskStore path="java.io.tmpdir"/>
-    <defaultCache
-        maxElementsInMemory="10000"
-        eternal="false"
-        timeToIdleSeconds="120"
-        timeToLiveSeconds="120"
-        overflowToDisk="true"
-        diskPersistent="false"
-        diskExpiryThreadIntervalSeconds="120"
-        memoryStoreEvictionPolicy="LRU"
-        />
-        
+  </cache>
+  <diskStore path="java.io.tmpdir"/>
+  <defaultCache
+    diskExpiryThreadIntervalSeconds="120"
+    diskPersistent="false"
+    eternal="false"
+    maxElementsInMemory="10000"
+    memoryStoreEvictionPolicy="LRU"
+    overflowToDisk="true"
+    timeToIdleSeconds="120"
+    timeToLiveSeconds="120"
+  />
+
 </ehcache>

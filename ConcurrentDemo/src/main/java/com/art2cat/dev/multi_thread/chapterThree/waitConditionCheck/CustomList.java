@@ -1,15 +1,13 @@
 package com.art2cat.dev.multi_thread.chapterThree.waitConditionCheck;
 
-import com.sun.beans.decoder.ValueObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by huang.yiming
- * on 7/10/2017.
+ * Created by huang.yiming on 7/10/2017.
  */
 public class CustomList {
+
     List<String> customList = new ArrayList<>();
     Object lock;
 

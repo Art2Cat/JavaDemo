@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.stringAndSyn;
 
 /**
- * Created by Rorschach
- * on 7/7/2017.
+ * Created by Rorschach on 7/7/2017.
  */
 public class Run {
+
     public static void main(String[] args) {
         Service service = new Service();
         Thread a = new Thread(() -> {

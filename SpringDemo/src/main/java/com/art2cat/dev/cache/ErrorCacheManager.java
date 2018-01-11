@@ -3,7 +3,7 @@ package com.art2cat.dev.cache;
 import org.springframework.cache.annotation.Cacheable;
 
 public class ErrorCacheManager {
-
+    
     @Cacheable(value = "errorCacheManager")
     public ErrorEntity get(String name) {
         //省略读取过程，直接返回结果

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Rorschach
- * on 10/07/2017.
+ * Created by Rorschach on 10/07/2017.
  */
 class Stack {
+
     private List<String> list = new ArrayList<>();
 
     synchronized void push() {

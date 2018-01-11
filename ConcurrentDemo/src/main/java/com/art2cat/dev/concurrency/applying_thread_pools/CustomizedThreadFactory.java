@@ -1,9 +1,10 @@
 package com.art2cat.dev.concurrency.applying_thread_pools;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ThreadFactory;
 
 
 public class CustomizedThreadFactory implements ThreadFactory {
+
     private final String poolName;
 
     public CustomizedThreadFactory(String poolName) {

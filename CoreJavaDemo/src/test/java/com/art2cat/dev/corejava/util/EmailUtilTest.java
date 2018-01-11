@@ -46,7 +46,8 @@ public class EmailUtilTest {
         Session session = Session.getInstance(createEmailProperties(), null);
         
         try {
-            EmailUtil.sendEmail(session, emailID, "SimpleEmail Testing Subject", "SimpleEmail Testing Body");
+            EmailUtil.sendEmail(session, emailID, "SimpleEmail Testing Subject",
+                "SimpleEmail Testing Body");
         } catch (MessagingException e) {
             e.printStackTrace();
             Assert.fail();
@@ -82,7 +83,8 @@ public class EmailUtilTest {
         Session session = Session.getInstance(mailProp, auth);
         
         try {
-            EmailUtil.sendEmail(session, toEmail, "TLSEmail Testing Subject", "TLSEmail Testing Body");
+            EmailUtil
+                .sendEmail(session, toEmail, "TLSEmail Testing Subject", "TLSEmail Testing Body");
         } catch (MessagingException e) {
             e.printStackTrace();
             Assert.fail();
@@ -122,7 +124,8 @@ public class EmailUtilTest {
         Session session = Session.getDefaultInstance(mailProp, auth);
         System.out.println("Session created");
         try {
-            EmailUtil.sendEmail(session, toEmail, "SSLEmail Testing Subject", "SSLEmail Testing Body");
+            EmailUtil
+                .sendEmail(session, toEmail, "SSLEmail Testing Subject", "SSLEmail Testing Body");
         } catch (MessagingException e) {
             e.printStackTrace();
             Assert.fail();
@@ -164,8 +167,9 @@ public class EmailUtilTest {
         List<String> files = new ArrayList<>();
         files.add(this.getClass().getClassLoader().getResource("text.txt").toString());
         try {
-            EmailUtil.sendAttachmentEmail(session, toEmail, "SSLEmail Testing Subject with Attachment",
-                "SSLEmail Testing Body with Attachment", files);
+            EmailUtil
+                .sendAttachmentEmail(session, toEmail, "SSLEmail Testing Subject with Attachment",
+                    "SSLEmail Testing Body with Attachment", files);
         } catch (MessagingException e) {
             e.printStackTrace();
             Assert.fail();

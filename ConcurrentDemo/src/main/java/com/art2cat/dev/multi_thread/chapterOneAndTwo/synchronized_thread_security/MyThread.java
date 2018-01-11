@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.synchronized_thread_security;
 
 /**
- * Created by Rorschach
- * on 6/28/2017.
+ * Created by Rorschach on 6/28/2017.
  */
 public class MyThread extends Thread {
+
     private int count = 10;
 
     @Override
@@ -13,7 +13,7 @@ public class MyThread extends Thread {
 
         count--;
         System.out.println("by " + currentThread().getName()
-                + " calculate, count equals " + count);
+            + " calculate, count equals " + count);
 
     }
 }

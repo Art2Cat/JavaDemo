@@ -2,24 +2,25 @@ package com.art2cat.dev.jvm.ch8;
 
 public class DynamicDispatch {
 
-	static abstract class Human {
-		protected abstract void sayHello();
-	}
+    static abstract class Human {
 
-	static class Man extends Human {
+        protected abstract void sayHello();
+    }
 
-		@Override
-		protected void sayHello() {
-			System.out.println("gentleman say hello!");
-		}
-	}
+    static class Man extends Human {
 
-	static class Woman extends Human {
+        @Override
+        protected void sayHello() {
+            System.out.println("gentleman say hello!");
+        }
+    }
 
-		@Override
-		protected void sayHello() {
-			System.out.println("lady say hello!");
-		}
-	}
+    static class Woman extends Human {
+
+        @Override
+        protected void sayHello() {
+            System.out.println("lady say hello!");
+        }
+    }
 
 }

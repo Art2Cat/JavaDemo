@@ -1,7 +1,13 @@
 package com.art2cat.dev.concurrency.applying_thread_pools;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * TransformingSequential
@@ -13,8 +19,9 @@ import java.util.concurrent.*;
 public abstract class TransformingSequential {
 
     void processSequentially(List<Element> elements) {
-        for (Element e : elements)
+        for (Element e : elements) {
             process(e);
+        }
     }
 
     void processInParallel(Executor exec, List<Element> elements) {
@@ -27,7 +34,7 @@ public abstract class TransformingSequential {
 
 
     public <T> void sequentialRecursive(List<Node<T>> nodes,
-                                        Collection<T> results) {
+        Collection<T> results) {
         for (Node<T> n : nodes) {
             results.add(n.compute());
             sequentialRecursive(n.getChildren(), results);
@@ -35,8 +42,8 @@ public abstract class TransformingSequential {
     }
 
     public <T> void parallelRecursive(final Executor exec,
-                                      List<Node<T>> nodes,
-                                      final Collection<T> results) {
+        List<Node<T>> nodes,
+        final Collection<T> results) {
         for (final Node<T> n : nodes) {
             exec.execute(() -> results.add(n.compute()));
             parallelRecursive(exec, n.getChildren(), results);
@@ -44,7 +51,7 @@ public abstract class TransformingSequential {
     }
 
     public <T> Collection<T> getParallelResults(List<Node<T>> nodes)
-            throws InterruptedException {
+        throws InterruptedException {
         ExecutorService exec = Executors.newCachedThreadPool();
         Queue<T> resultQueue = new ConcurrentLinkedQueue<T>();
         parallelRecursive(exec, nodes, resultQueue);
@@ -54,9 +61,11 @@ public abstract class TransformingSequential {
     }
 
     interface Element {
+
     }
 
-    interface Node <T> {
+    interface Node<T> {
+
         T compute();
 
         List<Node<T>> getChildren();

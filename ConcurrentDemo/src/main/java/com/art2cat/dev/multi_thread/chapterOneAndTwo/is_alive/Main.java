@@ -3,10 +3,10 @@ package com.art2cat.dev.multi_thread.chapterOneAndTwo.is_alive;
 import com.art2cat.dev.multi_thread.chapterOneAndTwo.current_thread.MThread;
 
 /**
- * Created by Rorschach
- * on 6/28/2017.
+ * Created by Rorschach on 6/28/2017.
  */
 public class Main {
+
     public static void main(String[] args) {
         MThread mThread = new MThread();
         System.out.println("begin == " + mThread.isAlive());

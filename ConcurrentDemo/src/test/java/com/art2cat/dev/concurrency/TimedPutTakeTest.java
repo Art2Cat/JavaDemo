@@ -1,9 +1,8 @@
 package com.art2cat.dev.concurrency;
 
 import com.art2cat.dev.Testing_Concurrent_Programs.BarrierTimer;
+import java.util.concurrent.CyclicBarrier;
 import org.junit.Assert;
-
-import java.util.concurrent.*;
 
 /**
  * Testing with a barrier-based timer
@@ -12,28 +11,12 @@ import java.util.concurrent.*;
  * @date 22/10/2017
  */
 public class TimedPutTakeTest extends PutTakeTest {
+
     private BarrierTimer timer = new BarrierTimer();
 
     private TimedPutTakeTest(int cap, int pairs, int trials) {
         super(cap, pairs, trials);
         barrier = new CyclicBarrier(nPairs * 2 + 1, timer);
-    }
-
-    public void test() {
-        try {
-            timer.clear();
-            for (int i = 0; i < nPairs; i++) {
-                pool.execute(new PutTakeTest.Producer());
-                pool.execute(new PutTakeTest.Consumer());
-            }
-            barrier.await();
-            barrier.await();
-            long nsPerItem = timer.getTime() / (nPairs * (long) nTrials);
-            System.out.print("Throughput: " + nsPerItem + " ns/item");
-            Assert.assertEquals(putSum.get(), takeSum.get());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -52,5 +35,22 @@ public class TimedPutTakeTest extends PutTakeTest {
             }
         }
         pool.shutdown();
+    }
+
+    public void test() {
+        try {
+            timer.clear();
+            for (int i = 0; i < nPairs; i++) {
+                pool.execute(new PutTakeTest.Producer());
+                pool.execute(new PutTakeTest.Consumer());
+            }
+            barrier.await();
+            barrier.await();
+            long nsPerItem = timer.getTime() / (nPairs * (long) nTrials);
+            System.out.print("Throughput: " + nsPerItem + " ns/item");
+            Assert.assertEquals(putSum.get(), takeSum.get());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

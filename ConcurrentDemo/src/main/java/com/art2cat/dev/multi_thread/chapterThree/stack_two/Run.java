@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterThree.stack_two;
 
 /**
- * Created by Rorschach
- * on 10/07/2017.
+ * Created by Rorschach on 10/07/2017.
  */
 public class Run {
+
     public static void main(String[] args) {
         Stack stack = new Stack();
         PushService pushService = new PushService(stack);

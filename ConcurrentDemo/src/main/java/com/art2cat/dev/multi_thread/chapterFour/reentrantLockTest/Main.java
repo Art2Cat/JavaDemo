@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterFour.reentrantLockTest;
 
 /**
- * Created by huang.yiming
- * on 7/12/2017.
+ * Created by huang.yiming on 7/12/2017.
  */
 public class Main {
+
     public static void main(String[] args) {
         Service service = new Service();
         Thread a = new Thread(service::testMethod);

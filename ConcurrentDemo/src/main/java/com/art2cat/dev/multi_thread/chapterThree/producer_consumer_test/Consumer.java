@@ -1,15 +1,14 @@
 package com.art2cat.dev.multi_thread.chapterThree.producer_consumer_test;
 
-import com.sun.beans.decoder.ValueObject;
-
 import java.util.List;
 
 /**
- * Created by huang.yiming
- * on 7/10/2017.
+ * Created by huang.yiming on 7/10/2017.
  */
 class Consumer {
+
     private List<String> lock;
+
     Consumer(List<String> lock) {
         super();
         this.lock = lock;

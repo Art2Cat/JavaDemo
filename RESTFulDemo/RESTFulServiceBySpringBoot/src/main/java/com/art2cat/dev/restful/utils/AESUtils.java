@@ -86,7 +86,8 @@ public class AESUtils {
     private synchronized static byte[] encrypt(String key, byte[] bytes) throws Exception {
         SecretKeySpec secretKeySpec = getRawKey(key.toCharArray());
         Cipher cipher = Cipher.getInstance(CBC_PKCS5_PADDING);
-        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, new IvParameterSpec(new byte[cipher.getBlockSize()]));
+        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec,
+            new IvParameterSpec(new byte[cipher.getBlockSize()]));
         return cipher.doFinal(bytes);
     }
     
@@ -121,7 +122,8 @@ public class AESUtils {
     private synchronized static byte[] decrypt(String key, byte[] bytes) throws Exception {
         SecretKeySpec secretKeySpec = getRawKey(key.toCharArray());
         Cipher cipher = Cipher.getInstance(CBC_PKCS5_PADDING);
-        cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, new IvParameterSpec(new byte[cipher.getBlockSize()]));
+        cipher.init(Cipher.DECRYPT_MODE, secretKeySpec,
+            new IvParameterSpec(new byte[cipher.getBlockSize()]));
         return cipher.doFinal(bytes);
     }
     

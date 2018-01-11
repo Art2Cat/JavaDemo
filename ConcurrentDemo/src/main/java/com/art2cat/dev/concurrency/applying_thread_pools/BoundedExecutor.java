@@ -1,13 +1,13 @@
 package com.art2cat.dev.concurrency.applying_thread_pools;
 
-import net.jcip.annotations.ThreadSafe;
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.Semaphore;
+import net.jcip.annotations.ThreadSafe;
 
 @ThreadSafe
 public class BoundedExecutor {
+
     private final Executor exec;
     private final Semaphore semaphore;
 
@@ -17,7 +17,7 @@ public class BoundedExecutor {
     }
 
     public void submitTask(final Runnable command)
-            throws InterruptedException {
+        throws InterruptedException {
         semaphore.acquire();
         try {
             exec.execute(() -> {

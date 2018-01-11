@@ -1,8 +1,9 @@
 package com.art2cat.dev.concurrency.applying_thread_pools;
 
-import java.util.*;
+import java.util.Set;
 
-public interface Puzzle <P, M> {
+public interface Puzzle<P, M> {
+
     P initialPosition();
 
     boolean isGoal(P position);

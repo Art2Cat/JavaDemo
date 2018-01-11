@@ -1,25 +1,28 @@
 package com.art2cat.dev.jvm.ch8;
 
 public class StaticDispatch {
-	static abstract class Human {
 
-	}
+    public void sayHello(Human human) {
+        System.out.println("hello, guy!");
+    }
 
-	static class Man extends Human {
-	}
+    public void sayHello(Man man) {
+        System.out.println("hello, gentleman!");
+    }
 
-	static class Woman extends Human {
-	}
+    public void sayHello(Woman woman) {
+        System.out.println("hello, lady!");
+    }
 
-	public void sayHello(Human human) {
-		System.out.println("hello, guy!");
-	}
+    static abstract class Human {
 
-	public void sayHello(Man man) {
-		System.out.println("hello, gentleman!");
-	}
+    }
 
-	public void sayHello(Woman woman) {
-		System.out.println("hello, lady!");
-	}
+    static class Man extends Human {
+
+    }
+
+    static class Woman extends Human {
+
+    }
 }

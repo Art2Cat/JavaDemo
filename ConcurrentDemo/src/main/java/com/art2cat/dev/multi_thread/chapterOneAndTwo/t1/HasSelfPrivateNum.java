@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.t1;
 
 /**
- * Created by Rorschach
- * on 7/6/2017.
+ * Created by Rorschach on 7/6/2017.
  */
 class HasSelfPrivateNum {
+    
     void addI(String username) {
         try {
             // 方法内变量是线程安全的

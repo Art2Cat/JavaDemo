@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterThree.waitReleaseLock;
 
 /**
- * Created by huang.yiming
- * on 7/10/2017.
+ * Created by huang.yiming on 7/10/2017.
  */
 class Service {
+
     void testMethod(Object lock) {
         try {
             synchronized (lock) {

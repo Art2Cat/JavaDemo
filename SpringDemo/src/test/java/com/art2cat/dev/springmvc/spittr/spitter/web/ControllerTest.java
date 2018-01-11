@@ -52,7 +52,7 @@ public class ControllerTest {
             .andExpect(view().name("spittles"))
             .andExpect(model().attributeExists("spittleList"));
 //                .andExpect(model().attributeExists("spittleList", hasItems((T) expectedSpittles.toArray())));
-    
+
     }
     
     @Test

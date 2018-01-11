@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileOutDemo1 {
-
+    
     /**
      * @param args
      */
@@ -22,10 +22,10 @@ public class FileOutDemo1 {
         byte[] gbk = "中国".getBytes("gbk");
         out.write(gbk);
         out.close();
-
+        
         IOUtil.printHex("demo/out.dat");
-
-
+        
+        
     }
-
+    
 }

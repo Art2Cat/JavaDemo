@@ -42,14 +42,15 @@ public class CompanyControllerTest {
 
         Map<String, Object> params = new HashMap<>();
         params.put("name", "tes");
-        Company company = jdbcTemplate.queryForObject(getCompanyByNameTemplate, params, (rs, rowNum) -> new Company(
-            rs.getLong("id"),
-            rs.getString("name"),
-            rs.getString("address"),
-            rs.getString("city"),
-            rs.getString("state"),
-            rs.getInt("zipcode"),
-            rs.getString("country")));
+        Company company = jdbcTemplate
+            .queryForObject(getCompanyByNameTemplate, params, (rs, rowNum) -> new Company(
+                rs.getLong("id"),
+                rs.getString("name"),
+                rs.getString("address"),
+                rs.getString("city"),
+                rs.getString("state"),
+                rs.getInt("zipcode"),
+                rs.getString("country")));
         Assert.assertNotNull(company);
     }
 }

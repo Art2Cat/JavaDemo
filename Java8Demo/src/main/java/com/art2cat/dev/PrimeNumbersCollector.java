@@ -30,8 +30,9 @@ public class PrimeNumbersCollector implements Collector<Integer,
     
     @Override
     public BiConsumer<Map<Boolean, List<Integer>>, Integer> accumulator() {
-        return (Map<Boolean, List<Integer>> acc, Integer candidate) -> acc.get(isPrime(acc.get(true),
-            candidate))
+        return (Map<Boolean, List<Integer>> acc, Integer candidate) -> acc
+            .get(isPrime(acc.get(true),
+                candidate))
             .add(candidate);
     }
     

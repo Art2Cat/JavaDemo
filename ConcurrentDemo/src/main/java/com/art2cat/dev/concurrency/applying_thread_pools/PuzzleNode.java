@@ -1,13 +1,13 @@
 package com.art2cat.dev.concurrency.applying_thread_pools;
 
-import net.jcip.annotations.Immutable;
-
 import java.util.LinkedList;
 import java.util.List;
+import net.jcip.annotations.Immutable;
 
 
 @Immutable
-public class PuzzleNode <P, M> {
+public class PuzzleNode<P, M> {
+
     final P pos;
     final M move;
     final PuzzleNode<P, M> prev;

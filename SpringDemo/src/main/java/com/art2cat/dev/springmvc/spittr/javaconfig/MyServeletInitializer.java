@@ -9,7 +9,8 @@ public class MyServeletInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        ServletRegistration.Dynamic myServlet = servletContext.addServlet("myServlet", MyServlet.class);
+        ServletRegistration.Dynamic myServlet = servletContext
+            .addServlet("myServlet", MyServlet.class);
         myServlet.addMapping("/custom/**");
     }
 

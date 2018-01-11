@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterThree.joinTest;
 
 /**
- * Created by Rorschach
- * on 11/07/2017.
+ * Created by Rorschach on 11/07/2017.
  */
-class ThreadB extends Thread{
+class ThreadB extends Thread {
+
     @Override
     public void run() {
         super.run();

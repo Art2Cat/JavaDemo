@@ -4,6 +4,7 @@ import net.jcip.annotations.NotThreadSafe;
 
 @NotThreadSafe
 public class UnsafeSequence {
+    
     private Integer value = 0;
     
     /**

@@ -24,16 +24,19 @@ public class TransactionsTest {
     
     @Test
     public void testDeal() {
-        List<Transaction> tr2011 = transactions.stream().filter(transaction -> transaction.getYear() == 2011)
+        List<Transaction> tr2011 = transactions.stream()
+            .filter(transaction -> transaction.getYear() == 2011)
             .sorted(Comparator.comparing(Transaction::getValue))
             .collect(Collectors.toList());
         
         tr2011.forEach(transaction -> System.out.println(transaction.getTrader().getName()));
         
-        List<String> cites = transactions.stream().map(transaction -> transaction.getTrader().getCity())
+        List<String> cites = transactions.stream()
+            .map(transaction -> transaction.getTrader().getCity())
             .distinct()
             .collect(Collectors.toList());
-        Set<String> cites1 = transactions.stream().map(transaction -> transaction.getTrader().getCity())
+        Set<String> cites1 = transactions.stream()
+            .map(transaction -> transaction.getTrader().getCity())
             .collect(Collectors.toSet());
         
         cites.forEach(s -> cites1.forEach(s1 -> System.out.println(s + " : " + s1)));

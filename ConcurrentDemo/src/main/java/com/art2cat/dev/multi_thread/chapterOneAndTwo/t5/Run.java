@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.t5;
 
 /**
- * Created by Rorschach
- * on 7/6/2017.
+ * Created by Rorschach on 7/6/2017.
  */
 public class Run {
+
     public static void main(String[] args) {
         Task task = new Task();
         Thread thread1 = new Thread(() -> {

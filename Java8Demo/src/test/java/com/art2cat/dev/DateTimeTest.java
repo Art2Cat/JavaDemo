@@ -127,7 +127,8 @@ public class DateTimeTest {
     public void useDateFormatter() {
         LocalDate date = LocalDate.of(2014, 3, 18);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter italianFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.ITALIAN);
+        DateTimeFormatter italianFormatter = DateTimeFormatter
+            .ofPattern("d. MMMM yyyy", Locale.ITALIAN);
         
         System.out.println(date.format(DateTimeFormatter.ISO_LOCAL_DATE));
         System.out.println(date.format(formatter));

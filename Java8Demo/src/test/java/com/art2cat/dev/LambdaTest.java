@@ -64,7 +64,8 @@ public class LambdaTest {
             .filter(user -> user.getAge() < 15)
             .collect(groupingBy(User::getUsername));
         
-        nusers.forEach((key, values) -> values.forEach((user) -> System.out.println(user.getUsername())));
+        nusers.forEach(
+            (key, values) -> values.forEach((user) -> System.out.println(user.getUsername())));
         System.out.println(System.currentTimeMillis() - startTime);
     }
     

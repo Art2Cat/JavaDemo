@@ -15,10 +15,11 @@ import org.junit.Test;
  * @date 11/01/2018
  */
 public class HttpClientUtilTest {
+
     @Test
     public void testPost() {
         String url = "http://localhost:8080/api/byteArray/";
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("fileHolder.fileName", "test.txt");
         map.put("fileHolder.fileContent", "10211799107121111117");
         String result = HttpClientUtil.doPostRequest(url, map);
@@ -30,7 +31,7 @@ public class HttpClientUtilTest {
         StringJoiner stringJoiner = new StringJoiner("");
         byte[] bytes = "helloworld".getBytes(StandardCharsets.UTF_8);
 
-        Stream.of(Arrays.toString(bytes).replace(", ","")).forEach(stringJoiner::add);
+        Stream.of(Arrays.toString(bytes).replace(", ", "")).forEach(stringJoiner::add);
         System.out.println(stringJoiner);
     }
 }

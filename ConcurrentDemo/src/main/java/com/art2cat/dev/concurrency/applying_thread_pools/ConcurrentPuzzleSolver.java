@@ -1,60 +1,67 @@
 package com.art2cat.dev.concurrency.applying_thread_pools;
 
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class ConcurrentPuzzleSolver<P, M> {
-	protected final ValueLatch<PuzzleNode<P, M>> solution = new ValueLatch<PuzzleNode<P, M>>();
-	private final Puzzle<P, M> puzzle;
-	private final ExecutorService exec;
-	private final ConcurrentMap<P, Boolean> seen;
 
-	public ConcurrentPuzzleSolver(Puzzle<P, M> puzzle) {
-		this.puzzle = puzzle;
-		this.exec = initThreadPool();
-		this.seen = new ConcurrentHashMap<>();
-		if (exec instanceof ThreadPoolExecutor) {
-			ThreadPoolExecutor tpe = (ThreadPoolExecutor) exec;
-			tpe.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy());
-		}
-	}
+    protected final ValueLatch<PuzzleNode<P, M>> solution = new ValueLatch<PuzzleNode<P, M>>();
+    private final Puzzle<P, M> puzzle;
+    private final ExecutorService exec;
+    private final ConcurrentMap<P, Boolean> seen;
 
-	private ExecutorService initThreadPool() {
-		return Executors.newCachedThreadPool();
-	}
+    public ConcurrentPuzzleSolver(Puzzle<P, M> puzzle) {
+        this.puzzle = puzzle;
+        this.exec = initThreadPool();
+        this.seen = new ConcurrentHashMap<>();
+        if (exec instanceof ThreadPoolExecutor) {
+            ThreadPoolExecutor tpe = (ThreadPoolExecutor) exec;
+            tpe.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy());
+        }
+    }
 
-	public List<M> solve() throws InterruptedException {
-		try {
-			P p = puzzle.initialPosition();
-			exec.execute(newTask(p, null, null));
-			// block until solution found
-			PuzzleNode<P, M> solnPuzzleNode = solution.getValue();
-			return (solnPuzzleNode == null) ? null : solnPuzzleNode.asMoveList();
-		} finally {
-			exec.shutdown();
-		}
-	}
+    private ExecutorService initThreadPool() {
+        return Executors.newCachedThreadPool();
+    }
 
-	protected Runnable newTask(P p, M m, PuzzleNode<P, M> n) {
-		return new SolverTask(p, m, n);
-	}
+    public List<M> solve() throws InterruptedException {
+        try {
+            P p = puzzle.initialPosition();
+            exec.execute(newTask(p, null, null));
+            // block until solution found
+            PuzzleNode<P, M> solnPuzzleNode = solution.getValue();
+            return (solnPuzzleNode == null) ? null : solnPuzzleNode.asMoveList();
+        } finally {
+            exec.shutdown();
+        }
+    }
 
-	protected class SolverTask extends PuzzleNode<P, M> implements Runnable {
-		SolverTask(P pos, M move, PuzzleNode<P, M> prev) {
-			super(pos, move, prev);
-		}
+    protected Runnable newTask(P p, M m, PuzzleNode<P, M> n) {
+        return new SolverTask(p, m, n);
+    }
 
-		@Override
-		public void run() {
-			if (solution.isSet()
-					|| seen.putIfAbsent(pos, true) != null) {
-				return; // already solved or seen this position
-			}
-			if (puzzle.isGoal(pos)) {
-				solution.setValue(this);
-			} else {
-				puzzle.legalMoves(pos).forEach(m -> exec.execute(newTask(puzzle.move(pos, m), m, this)));
-			}
-		}
-	}
+    protected class SolverTask extends PuzzleNode<P, M> implements Runnable {
+
+        SolverTask(P pos, M move, PuzzleNode<P, M> prev) {
+            super(pos, move, prev);
+        }
+
+        @Override
+        public void run() {
+            if (solution.isSet()
+                || seen.putIfAbsent(pos, true) != null) {
+                return; // already solved or seen this position
+            }
+            if (puzzle.isGoal(pos)) {
+                solution.setValue(this);
+            } else {
+                puzzle.legalMoves(pos)
+                    .forEach(m -> exec.execute(newTask(puzzle.move(pos, m), m, this)));
+            }
+        }
+    }
 }

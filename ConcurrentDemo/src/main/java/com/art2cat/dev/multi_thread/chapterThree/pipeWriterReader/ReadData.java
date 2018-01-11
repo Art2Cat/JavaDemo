@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.io.PipedReader;
 
 /**
- * Created by Rorschach
- * on 10/07/2017.
+ * Created by Rorschach on 10/07/2017.
  */
 class ReadData {
+
     void read(PipedReader reader) {
         try {
             System.out.println("Read: ");

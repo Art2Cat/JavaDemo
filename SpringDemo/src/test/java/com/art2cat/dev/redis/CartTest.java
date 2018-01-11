@@ -212,7 +212,8 @@ public class CartTest {
         
         StringRedisTemplate stringRedis = new StringRedisTemplate(cf);
         String json = stringRedis.opsForValue().get(product.getSku());
-        assertEquals("{\"sku\":\"9781617291203\",\"name\":\"Spring in Action\",\"price\":39.99}", json);
+        assertEquals("{\"sku\":\"9781617291203\",\"name\":\"Spring in Action\",\"price\":39.99}",
+            json);
     }
     
 }

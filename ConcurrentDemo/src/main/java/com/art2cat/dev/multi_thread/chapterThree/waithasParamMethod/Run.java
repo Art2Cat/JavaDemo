@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterThree.waithasParamMethod;
 
 /**
- * Created by huang.yiming
- * on 7/10/2017.
+ * Created by huang.yiming on 7/10/2017.
  */
 public class Run {
+
     public static void main(String[] args) throws InterruptedException {
         Object lock = new Object();
         Thread thread1 = new Thread(() -> {

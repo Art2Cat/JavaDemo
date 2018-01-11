@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.io.PipedWriter;
 
 /**
- * Created by Rorschach
- * on 10/07/2017.
+ * Created by Rorschach on 10/07/2017.
  */
 class WriteData {
+
     void write(PipedWriter writer) {
         try {
             System.out.println("Write: ");

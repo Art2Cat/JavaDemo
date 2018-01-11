@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * VM args: -XX:PermSize=10M -XX:MaxPermSize=10M
- * Java 8 JVM args: -XX:MetaspaceSize=10M -XX:MaxMetaspaceSize=10m
+ * VM args: -XX:PermSize=10M -XX:MaxPermSize=10M Java 8 JVM args: -XX:MetaspaceSize=10M
+ * -XX:MaxMetaspaceSize=10m
  */
 public class RuntimeConstantPoolOOM {
 

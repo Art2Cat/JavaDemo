@@ -10,7 +10,8 @@ public class Company {
     int zipcode;
     String country;
     
-    public Company(long id, String name, String address, String city, String state, int zipcode, String country) {
+    public Company(long id, String name, String address, String city, String state, int zipcode,
+        String country) {
         this.id = id;
         this.name = name;
         this.address = address;

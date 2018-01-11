@@ -1,12 +1,17 @@
 package com.art2cat.dev.concurrency.applying_thread_pools;
 
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
 public class ThreadDeadlock {
+
     ExecutorService exec = Executors.newSingleThreadExecutor();
 
     public class LoadFileTask implements Callable<String> {
+
         private final String fileName;
 
         public LoadFileTask(String fileName) {
@@ -21,6 +26,7 @@ public class ThreadDeadlock {
     }
 
     public class RenderPageTask implements Callable<String> {
+
         @Override
         public String call() throws Exception {
             Future<String> header, footer;

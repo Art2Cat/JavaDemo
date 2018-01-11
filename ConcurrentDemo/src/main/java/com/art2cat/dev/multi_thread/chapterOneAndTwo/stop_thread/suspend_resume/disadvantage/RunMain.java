@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.stop_thread.suspend_resume.disadvantage;
 
 /**
- * Created by Rorschach
- * on 6/29/2017.
+ * Created by Rorschach on 6/29/2017.
  */
 public class RunMain {
+
     public static void main(String[] args) {
         try {
             SynchronizedObject object = new SynchronizedObject();

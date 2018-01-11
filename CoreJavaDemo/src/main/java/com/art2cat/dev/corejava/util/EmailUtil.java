@@ -34,7 +34,8 @@ public class EmailUtil {
     /**
      * Utility method to send simple HTML email
      */
-    public static void sendEmail(@NotNull Session session, String toEmail, String subject, String body)
+    public static void sendEmail(@NotNull Session session, String toEmail, String subject,
+        String body)
         throws MessagingException {
         
         MimeMessage msg = new MimeMessage(session);
@@ -64,7 +65,8 @@ public class EmailUtil {
     /**
      * Utility method to send email with attachment
      */
-    public static void sendAttachmentEmail(@NotNull Session session, String toEmail, String subject, String body,
+    public static void sendAttachmentEmail(@NotNull Session session, String toEmail, String subject,
+        String body,
         @NotNull List<String> files) throws MessagingException {
         MimeMessage msg = new MimeMessage(session);
         msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
@@ -115,7 +117,8 @@ public class EmailUtil {
         messageBodyPart.setFileName(filePath.getFileName().toString());
         //Trick is to add the content-id header here
         if (isImageFormat(filePath.getFileName().toString().toLowerCase())) {
-            messageBodyPart.setHeader("Content-ID", String.format("%s", filePath.getFileName().toString()));
+            messageBodyPart
+                .setHeader("Content-ID", String.format("%s", filePath.getFileName().toString()));
         }
         multipart.addBodyPart(messageBodyPart);
     }
@@ -130,13 +133,15 @@ public class EmailUtil {
     /**
      * Attach image file.
      */
-    private static void attachImageFile(Multipart multipart, Path filePath) throws MessagingException {
+    private static void attachImageFile(Multipart multipart, Path filePath)
+        throws MessagingException {
         attachFile(multipart, filePath);
         BodyPart messageBodyPart = new MimeBodyPart();
         
         //third part for displaying image in the email body
         messageBodyPart.setContent(
-            String.format("<h1>Attached Image</h1>" + "<img src='cid:%s'>", filePath.getFileName().toString()),
+            String.format("<h1>Attached Image</h1>" + "<img src='cid:%s'>",
+                filePath.getFileName().toString()),
             "text/html");
         multipart.addBodyPart(messageBodyPart);
     }
@@ -144,7 +149,8 @@ public class EmailUtil {
     /**
      * Utility method to send image in email body
      */
-    public static void sendImageEmail(@NotNull Session session, String toEmail, String subject, String body,
+    public static void sendImageEmail(@NotNull Session session, String toEmail, String subject,
+        String body,
         @NotNull Map<String, String> filePaths) throws MessagingException {
         MimeMessage msg = new MimeMessage(session);
         msg.addHeader("Content-type", "text/HTML; charset=UTF-8");

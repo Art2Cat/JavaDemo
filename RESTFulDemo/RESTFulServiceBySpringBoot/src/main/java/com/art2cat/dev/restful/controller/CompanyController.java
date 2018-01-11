@@ -75,7 +75,8 @@ public class CompanyController {
     }
     
     @RequestMapping(value = "/CompanyService/save2", method = RequestMethod.POST)
-    public ResponseEntity<?> saveCompany2(@RequestBody Company company, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<?> saveCompany2(@RequestBody Company company,
+        UriComponentsBuilder ucBuilder) {
         
         if (companyService.isCompanyExist(company)) {
             return new ResponseEntity<>("Unable to create. A User with name " +
@@ -84,7 +85,8 @@ public class CompanyController {
         companyService.saveCompany2(company);
         
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/Api/CompanyService/{id}").buildAndExpand(company.getId()).toUri());
+        headers.setLocation(
+            ucBuilder.path("/Api/CompanyService/{id}").buildAndExpand(company.getId()).toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
     
@@ -97,7 +99,8 @@ public class CompanyController {
     }
     
     @RequestMapping(value = "/CompanyService/update/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateCompany(@PathVariable("id") long id, @RequestBody Company company) {
+    public ResponseEntity<?> updateCompany(@PathVariable("id") long id,
+        @RequestBody Company company) {
         
         Optional<Company> currentCompany = companyService.findById(id);
         

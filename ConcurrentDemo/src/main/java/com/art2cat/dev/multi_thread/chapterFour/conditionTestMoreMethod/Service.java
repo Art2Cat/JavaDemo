@@ -4,20 +4,20 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Created by huang.yiming
- * on 7/12/2017.
+ * Created by huang.yiming on 7/12/2017.
  */
 class Service {
+
     Lock lock = new ReentrantLock();
 
     void methodA() {
         try {
             lock.lock();
             System.out.println("methodA begin ThreadName: " + Thread.currentThread().getName()
-                    + " time: " + System.currentTimeMillis());
+                + " time: " + System.currentTimeMillis());
             Thread.sleep(5000);
             System.out.println("methodA end ThreadName: " + Thread.currentThread().getName()
-                    + " time: " + System.currentTimeMillis());
+                + " time: " + System.currentTimeMillis());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -29,10 +29,10 @@ class Service {
         try {
             lock.lock();
             System.out.println("methodB begin ThreadName: " + Thread.currentThread().getName()
-                    + " time: " + System.currentTimeMillis());
+                + " time: " + System.currentTimeMillis());
             Thread.sleep(5000);
             System.out.println("methodB end ThreadName: " + Thread.currentThread().getName()
-                    + " time: " + System.currentTimeMillis());
+                + " time: " + System.currentTimeMillis());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

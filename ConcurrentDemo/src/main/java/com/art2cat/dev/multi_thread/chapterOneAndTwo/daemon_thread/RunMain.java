@@ -1,10 +1,10 @@
 package com.art2cat.dev.multi_thread.chapterOneAndTwo.daemon_thread;
 
 /**
- * Created by Rorschach
- * on 6/29/2017.
+ * Created by Rorschach on 6/29/2017.
  */
 public class RunMain {
+
     public static void main(String[] args) {
         try {
             MThread mThread = new MThread();
