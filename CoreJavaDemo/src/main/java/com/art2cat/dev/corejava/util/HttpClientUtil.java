@@ -5,6 +5,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.net.ssl.SSLContext;
 import org.apache.http.Consts;
@@ -14,12 +15,12 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.SSLContexts;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 
 /**
@@ -35,7 +36,7 @@ public class HttpClientUtil {
      * @param url
      * @return
      */
-    public static String doGetRequest(String url) {
+    public static String doGet(String url) {
         
         String result = null;
         HttpGet httpget = new HttpGet(url);
@@ -61,7 +62,7 @@ public class HttpClientUtil {
      * @param params
      * @return
      */
-    public static String doPostRequest(String url, Map<String, String> params) {
+    public static String doPost(String url, Map<String, String> params) {
         String result = null;
         HttpPost httpPost = new HttpPost(url);
         List<NameValuePair> formParams = new ArrayList<>();
@@ -90,11 +91,11 @@ public class HttpClientUtil {
         throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         String result = null;
         HttpPost httpPost = new HttpPost(url);
-        SSLContext sslcontext = SSLContexts.custom().loadTrustMaterial(null,
-            new TrustSelfSignedStrategy()).build();
+        SSLContext sslContext = new SSLContextBuilder()
+            .loadTrustMaterial(null, (arg0, arg1) -> true).build();
         
         // Allow TLSv1 protocol only, use NoopHostnameVerifier to trust self-singed cert
-        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext,
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext,
             new String[]{"TLSv1"}, null, new NoopHostnameVerifier());
         
         List<NameValuePair> formParams = new ArrayList<>();
@@ -112,7 +113,7 @@ public class HttpClientUtil {
                 if (response != null) {
                     HttpEntity resEntity = response.getEntity();
                     if (resEntity != null) {
-                        result = EntityUtils.toString(resEntity, charset);
+                        result = EntityUtils.toString(resEntity, Consts.UTF_8);
                     }
                 }
             } catch (IOException e) {
@@ -131,7 +132,7 @@ public class HttpClientUtil {
      * @param url
      * @return
      */
-    public static String doPostRequest(String url) {
+    public static String doPost(String url) {
         HttpPost httpPost = new HttpPost(url);
         
         String result = null;

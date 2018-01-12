@@ -22,7 +22,7 @@ public class HttpClientUtilTest {
         Map<String, String> map = new HashMap<>();
         map.put("fileHolder.fileName", "test.txt");
         map.put("fileHolder.fileContent", "10211799107121111117");
-        String result = HttpClientUtil.doPostRequest(url, map);
+        String result = HttpClientUtil.doPost(url, map);
         System.out.println(result);
     }
     

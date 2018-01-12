@@ -11,7 +11,7 @@
   <artifactId>ConcurrentDemo</artifactId>
   <name>ConcurrentDemo</name>
   <packaging>pom</packaging>
-  <version>${project.version}</version>
+  <version>1.0-SNAPSHOT</version>
   <build>
     <plugins>
       <plugin>
