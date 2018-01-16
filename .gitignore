@@ -1,6 +1,11 @@
 # ignore all .iml file
 *.iml
+*/*.iml
 
 # ignore .idea/ directory
 .idea/
+
+# ignore target directory
+*/target/
+*/*/target/
 
