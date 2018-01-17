@@ -1,6 +1,6 @@
 package com.art2cat.dev.concurrency;
 
-import com.art2cat.dev.Testing_Concurrent_Programs.BarrierTimer;
+import com.art2cat.dev.concurrency.concurrency_in_practice.testing_concurrent_programs.BarrierTimer;
 import java.util.concurrent.CyclicBarrier;
 import org.junit.Assert;
 

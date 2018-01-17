@@ -1,6 +1,6 @@
 package com.art2cat.dev.concurrency;
 
-import com.art2cat.dev.Testing_Concurrent_Programs.SemaphoreBoundedBuffer;
+import com.art2cat.dev.concurrency.concurrency_in_practice.testing_concurrent_programs.SemaphoreBoundedBuffer;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

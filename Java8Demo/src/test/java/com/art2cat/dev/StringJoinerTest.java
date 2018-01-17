@@ -28,7 +28,9 @@ public class StringJoinerTest {
         System.out.println(sj1);
         
         // add() method
-        sj1.add(al.get(0)).add(al.get(1));
+        for (String s : al) {
+            sj1.add(s);
+        }
         System.out.println(sj1);
         
         // length() method

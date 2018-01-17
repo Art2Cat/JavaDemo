@@ -2,7 +2,7 @@ package com.art2cat.dev.concurrency;
 
 import static org.junit.Assert.*;
 
-import com.art2cat.dev.Testing_Concurrent_Programs.SemaphoreBoundedBuffer;
+import com.art2cat.dev.concurrency.concurrency_in_practice.testing_concurrent_programs.SemaphoreBoundedBuffer;
 import org.junit.Test;
 
 /**

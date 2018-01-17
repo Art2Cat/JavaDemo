@@ -1,5 +1,7 @@
 package com.art2cat.dev.concurrency;
 
+import com.art2cat.dev.concurrency.concurrency_in_practice.Sequence;
+import com.art2cat.dev.concurrency.concurrency_in_practice.UnsafeSequence;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.junit.Test;

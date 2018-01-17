@@ -7,8 +7,8 @@ public class Run {
 
     public static void main(String[] args) throws InterruptedException {
         String lock = "lock";
-        Producer producer = new Producer(lock);
-        Consumer consumer = new Consumer(lock);
+        ProducerAllWaitFix producer = new ProducerAllWaitFix(lock);
+        ConsumerAllWaitFix consumer = new ConsumerAllWaitFix(lock);
         Thread[] producers = new Thread[2];
         Thread[] consumers = new Thread[2];
         for (int i = 0; i < 2; i++) {
