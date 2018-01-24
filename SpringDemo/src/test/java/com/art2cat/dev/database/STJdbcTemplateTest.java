@@ -5,10 +5,11 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,7 +23,7 @@ public class STJdbcTemplateTest extends ADatabaseTest {
     
     @Autowired
     STJdbcTemplate stJdbcTemplate;
-    private Logger logger = Logger.getLogger(STJdbcTemplateTest.class);
+    private Logger logger = LoggerFactory.getLogger(STJdbcTemplateTest.class);
     private ApplicationContext context = new ClassPathXmlApplicationContext(
         "database/named_sql_template.xml");
     
