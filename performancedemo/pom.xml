@@ -3,28 +3,29 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>JavaDemo</artifactId>
-    <groupId>com.art2cat.dev</groupId>
+    <artifactId>javademo</artifactId>
+    <groupId>com.art2cat.dev.javademo</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-
+  <groupId>com.art2cat.dev.performancedemo</groupId>
+  <artifactId>performancedemo</artifactId>
+  <name>performancedemo</name>
   <version>1.0-SNAPSHOT</version>
-  <artifactId>Java8Demo</artifactId>
-  <name>Java8Demo</name>
   <packaging>pom</packaging>
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>${cglib.version}</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-    <!--<dependency>-->
-      <!--<groupId>com.art2cat.dev</groupId>-->
-      <!--<artifactId>RESTFulServiceBySpringBoot</artifactId>-->
-      <!--<version>1.0-SNAPSHOT</version>-->
-    <!--</dependency>-->
   </dependencies>
 
 </project>

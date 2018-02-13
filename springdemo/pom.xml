@@ -4,12 +4,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>JavaDemo</artifactId>
-    <groupId>com.art2cat.dev</groupId>
+    <artifactId>javademo</artifactId>
+    <groupId>com.art2cat.dev.javademo</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>SpringDemo</artifactId>
-  <name>SpringDemo</name>
+  <artifactId>springdemo</artifactId>
+  <groupId>com.art2cat.dev.springdemo</groupId>
+  <name>springdemo</name>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <build>

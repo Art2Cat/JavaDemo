@@ -3,20 +3,21 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>JavaDemo</artifactId>
-    <groupId>com.art2cat.dev</groupId>
+    <artifactId>javademo</artifactId>
+    <groupId>com.art2cat.dev.javademo</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>RESTFulDemo</artifactId>
-  <name>RESTFulDemo</name>
+  <artifactId>restfuldemo</artifactId>
+  <groupId>com.art2cat.dev.restfuldemo</groupId>
+  <name>restfuldemo</name>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>RESTFulByJerseyDemo</module>
-    <module>RESTFulServiceBySpringBoot</module>
-    <module>RESTFulClientBySpringBoot</module>
+    <module>restfulbyjerseydemo</module>
+    <module>restfulservicebyspringboot</module>
+    <module>restfulclientbyspringboot</module>
   </modules>
 
 </project>
