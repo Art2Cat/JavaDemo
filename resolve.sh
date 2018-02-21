@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mvn dependency:resolve -Dsilent=true
+mvn dependency:resolve -e -Dsilent=true

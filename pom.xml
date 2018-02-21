@@ -72,17 +72,17 @@
   </properties>
 
   <repositories>
-    <!--<repository>-->
-      <!--<id>aliyun</id>-->
-      <!--<name>ali nexus</name>-->
-      <!--<url>http://maven.aliyun.com/nexus/content/groups/public</url>-->
-      <!--<releases>-->
-        <!--<enabled>true</enabled>-->
-      <!--</releases>-->
-      <!--<snapshots>-->
-        <!--<enabled>false</enabled>-->
-      <!--</snapshots>-->
-    <!--</repository>-->
+    <repository>
+      <id>aliyun</id>
+      <name>ali nexus</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
     <repository>
       <id>Central</id>
       <name>Centrale</name>

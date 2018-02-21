@@ -9,3 +9,13 @@
 */target/
 */*/target/
 
+# ignore .project/ ./settings ./classpath directory
+.project
+*/.project
+*/*/.project
+./classpath
+*/.classpath
+*/*/.classpath
+.settings/
+*/.settings/
+*/*/.settings/
