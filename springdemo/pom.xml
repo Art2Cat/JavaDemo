@@ -182,7 +182,7 @@
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
       <version>7.0</version>
-      <!--<scope>provided</scope>-->
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>commons-dbcp</groupId>
@@ -270,7 +270,15 @@
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>4.0.0</version>
+      <scope>compile</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-core</artifactId>
+      <version>8.5.28</version>
+    </dependency>
+
 
 
   </dependencies>
