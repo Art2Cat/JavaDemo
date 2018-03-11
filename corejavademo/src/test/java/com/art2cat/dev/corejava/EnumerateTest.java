@@ -38,4 +38,12 @@ public class EnumerateTest {
             .forEach((zodiac, string) -> System.out
                 .println(String.format("%s : %s", zodiac.name(), string)));
     }
+    
+    @Test
+    public void testPluginEnumToMap() {
+        Map<String, String> pluginMap = Stream.of(PluginEnum.values())
+            .collect(Collectors.toMap(Enum::name, PluginEnum::getTypeKey));
+        
+        pluginMap.forEach((k, v) -> System.out.println(k + " : " + v));
+    }
 }

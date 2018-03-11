@@ -1,4 +1,4 @@
-package com.art2cat.dev.corejava;
+package com.art2cat.dev.corejava.reflect;
 
 /**
  * com.art2cat.dev.corejava
@@ -6,13 +6,14 @@ package com.art2cat.dev.corejava;
  * @author rorschach
  * @date 3/3/18
  */
-public class Car {
+public class Car implements IVehicle {
     
     private String brand;
     private String color = "Green";
     private int maxSpeed;
     
-    public Car() {}
+    public Car() {
+    }
     
     public Car(String brand, String color, int maxSpeed) {
         this.brand = brand;
@@ -20,6 +21,7 @@ public class Car {
         this.maxSpeed = maxSpeed;
     }
     
+    @Override
     public void introduce() {
         System.out.println(String.format("Brand: %s, Color: %s, MaxSpeed: %d.", brand, color, maxSpeed));
     }
