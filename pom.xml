@@ -46,6 +46,7 @@
     <module>corejavademo</module>
     <module>restfuldemo</module>
     <module>java8demo</module>
+    <module>jnidemo</module>
   </modules>
   <properties>
     <guava.version>23.0</guava.version>
