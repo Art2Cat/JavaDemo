@@ -10,11 +10,7 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.sharing_objects;
 public class ThisEscape {
     
     public ThisEscape(EventSource source) {
-        source.registerListener(new EventListener() {
-            public void onEvent(Event e) {
-                doSomething(e);
-            }
-        });
+        source.registerListener(e -> doSomething(e));
     }
     
     void doSomething(Event e) {
@@ -32,7 +28,7 @@ public class ThisEscape {
     }
     
     interface Event {
-    
+
     }
 }
 

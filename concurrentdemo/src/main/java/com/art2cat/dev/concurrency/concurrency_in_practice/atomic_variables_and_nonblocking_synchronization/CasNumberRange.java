@@ -1,8 +1,6 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.atomic_variables_and_nonblocking_synchronization;
 
 import java.util.concurrent.atomic.AtomicReference;
-import net.jcip.annotations.Immutable;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * CasNumberRange
@@ -11,7 +9,7 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class CasNumberRange {
     
     private final AtomicReference<IntPair> values =
@@ -51,7 +49,7 @@ public class CasNumberRange {
         }
     }
     
-    @Immutable
+
     private static class IntPair {
         
         // INVARIANT: lower <= upper

@@ -1,6 +1,5 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.gui_applications;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -21,11 +20,7 @@ public abstract class BackgroundTask<V> implements Runnable, Future<V> {
     private final FutureTask<V> computation = new Computation();
     
     protected void setProgress(final int current, final int max) {
-        GuiExecutor.instance().execute(new Runnable() {
-            public void run() {
-                onProgress(current, max);
-            }
-        });
+        GuiExecutor.instance().execute(() -> onProgress(current, max));
     }
     
     // Called in the background thread
@@ -40,14 +35,17 @@ public abstract class BackgroundTask<V> implements Runnable, Future<V> {
     }
     
     // Other Future methods just forwarded to computation
+    @Override
     public boolean cancel(boolean mayInterruptIfRunning) {
         return computation.cancel(mayInterruptIfRunning);
     }
     
+    @Override
     public V get() throws InterruptedException, ExecutionException {
         return computation.get();
     }
     
+    @Override
     public V get(long timeout, TimeUnit unit)
         throws InterruptedException,
         ExecutionException,
@@ -55,14 +53,17 @@ public abstract class BackgroundTask<V> implements Runnable, Future<V> {
         return computation.get(timeout, unit);
     }
     
+    @Override
     public boolean isCancelled() {
         return computation.isCancelled();
     }
     
+    @Override
     public boolean isDone() {
         return computation.isDone();
     }
     
+    @Override
     public void run() {
         computation.run();
     }
@@ -70,32 +71,25 @@ public abstract class BackgroundTask<V> implements Runnable, Future<V> {
     private class Computation extends FutureTask<V> {
         
         public Computation() {
-            super(new Callable<V>() {
-                public V call() throws Exception {
-                    return BackgroundTask.this.compute();
-                }
-            });
+            super(BackgroundTask.this::compute);
         }
         
+        @Override
         protected final void done() {
-            GuiExecutor.instance().execute(new Runnable() {
-                public void run() {
-                    V value = null;
-                    Throwable thrown = null;
-                    boolean cancelled = false;
-                    try {
-                        value = get();
-                    } catch (ExecutionException e) {
-                        thrown = e.getCause();
-                    } catch (CancellationException e) {
-                        cancelled = true;
-                    } catch (InterruptedException consumed) {
-                    } finally {
-                        onCompletion(value, thrown, cancelled);
-                    }
+            GuiExecutor.instance().execute(() -> {
+                V value = null;
+                Throwable thrown = null;
+                boolean cancelled = false;
+                try {
+                    value = get();
+                } catch (ExecutionException e) {
+                    thrown = e.getCause();
+                } catch (CancellationException e) {
+                    cancelled = true;
+                } catch (InterruptedException ignored) {
+                } finally {
+                    onCompletion(value, thrown, cancelled);
                 }
-                
-                ;
             });
         }
     }

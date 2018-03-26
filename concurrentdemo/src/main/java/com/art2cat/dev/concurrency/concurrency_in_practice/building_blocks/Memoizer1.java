@@ -3,7 +3,6 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.building_blocks;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
-import net.jcip.annotations.GuardedBy;
 
 interface Computable<A, V> {
     
@@ -19,7 +18,7 @@ interface Computable<A, V> {
  */
 public class Memoizer1<A, V> implements Computable<A, V> {
     
-    @GuardedBy("this")
+
     private final Map<A, V> cache = new HashMap<A, V>();
     private final Computable<A, V> c;
     
@@ -27,6 +26,7 @@ public class Memoizer1<A, V> implements Computable<A, V> {
         this.c = c;
     }
     
+    @Override
     public synchronized V compute(A arg) throws InterruptedException {
         V result = cache.get(arg);
         if (result == null) {
@@ -40,6 +40,7 @@ public class Memoizer1<A, V> implements Computable<A, V> {
 class ExpensiveFunction
     implements Computable<String, BigInteger> {
     
+    @Override
     public BigInteger compute(String arg) {
         // after deep thought...
         return new BigInteger(arg);

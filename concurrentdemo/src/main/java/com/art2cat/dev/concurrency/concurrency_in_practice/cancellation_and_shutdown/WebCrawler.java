@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import net.jcip.annotations.GuardedBy;
 
 /**
  * WebCrawler
@@ -23,8 +22,8 @@ public abstract class WebCrawler {
     
     private static final long TIMEOUT = 500;
     private static final TimeUnit UNIT = MILLISECONDS;
-    @GuardedBy("this")
-    private final Set<URL> urlsToCrawl = new HashSet<URL>();
+
+    private final Set<URL> urlsToCrawl = new HashSet<>();
     private final ConcurrentMap<URL, Boolean> seen = new ConcurrentHashMap<URL, Boolean>();
     private volatile TrackingExecutor exec;
     
@@ -81,6 +80,7 @@ public abstract class WebCrawler {
             System.out.printf("marking %s uncrawled%n", url);
         }
         
+        @Override
         public void run() {
             for (URL link : processPage(url)) {
                 if (Thread.currentThread().isInterrupted()) {

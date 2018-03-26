@@ -20,11 +20,7 @@ public class CellularAutomata {
         this.mainBoard = board;
         int count = Runtime.getRuntime().availableProcessors();
         this.barrier = new CyclicBarrier(count,
-            new Runnable() {
-                public void run() {
-                    mainBoard.commitNewValues();
-                }
-            });
+            () -> mainBoard.commitNewValues());
         this.workers = new Worker[count];
         for (int i = 0; i < count; i++) {
             workers[i] = new Worker(mainBoard.getSubBoard(count, i));
@@ -65,6 +61,7 @@ public class CellularAutomata {
             this.board = board;
         }
         
+        @Override
         public void run() {
             while (!board.hasConverged()) {
                 for (int x = 0; x < board.getMaxX(); x++) {

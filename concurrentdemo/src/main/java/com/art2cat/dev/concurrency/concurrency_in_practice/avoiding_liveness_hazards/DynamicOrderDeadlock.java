@@ -42,6 +42,7 @@ public class DynamicOrderDeadlock {
             return null;
         }
         
+        @Override
         public int compareTo(DollarAmount dollarAmount) {
             return 0;
         }

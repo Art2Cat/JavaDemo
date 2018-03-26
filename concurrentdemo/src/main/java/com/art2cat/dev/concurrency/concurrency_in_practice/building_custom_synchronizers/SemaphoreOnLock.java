@@ -3,8 +3,6 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.building_custom_sync
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * SemaphoreOnLock
@@ -13,13 +11,13 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class SemaphoreOnLock {
     
     private final Lock lock = new ReentrantLock();
     // CONDITION PREDICATE: permitsAvailable (permits > 0)
     private final Condition permitsAvailable = lock.newCondition();
-    @GuardedBy("lock")
+
     private int permits;
     
     SemaphoreOnLock(int initialPermits) {

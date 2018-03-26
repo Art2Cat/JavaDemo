@@ -61,7 +61,7 @@ public abstract class TransformingSequential {
     }
     
     interface Element {
-    
+
     }
     
     interface Node<T> {

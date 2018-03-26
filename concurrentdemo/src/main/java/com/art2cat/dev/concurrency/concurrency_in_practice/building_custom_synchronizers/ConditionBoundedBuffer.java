@@ -3,8 +3,6 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.building_custom_sync
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * ConditionBoundedBuffer
@@ -14,7 +12,7 @@ import net.jcip.annotations.ThreadSafe;
  * @author Brian Goetz and Tim Peierls
  */
 
-@ThreadSafe
+
 public class ConditionBoundedBuffer<T> {
     
     private static final int BUFFER_SIZE = 100;
@@ -23,9 +21,9 @@ public class ConditionBoundedBuffer<T> {
     private final Condition notFull = lock.newCondition();
     // CONDITION PREDICATE: notEmpty (count > 0)
     private final Condition notEmpty = lock.newCondition();
-    @GuardedBy("lock")
+
     private final T[] items = (T[]) new Object[BUFFER_SIZE];
-    @GuardedBy("lock")
+
     private int tail, head, count;
     
     // BLOCKS-UNTIL: notFull

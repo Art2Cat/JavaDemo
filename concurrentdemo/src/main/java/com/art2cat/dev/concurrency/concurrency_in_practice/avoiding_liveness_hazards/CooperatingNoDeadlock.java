@@ -3,8 +3,6 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.avoiding_liveness_ha
 import java.awt.Point;
 import java.util.HashSet;
 import java.util.Set;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * CooperatingNoDeadlock
@@ -15,11 +13,11 @@ import net.jcip.annotations.ThreadSafe;
  */
 class CooperatingNoDeadlock {
     
-    @ThreadSafe
+
     class Taxi {
         
         private final Dispatcher dispatcher;
-        @GuardedBy("this")
+
         private Point location, destination;
         
         public Taxi(Dispatcher dispatcher) {
@@ -50,12 +48,12 @@ class CooperatingNoDeadlock {
         }
     }
     
-    @ThreadSafe
+
     class Dispatcher {
         
-        @GuardedBy("this")
+
         private final Set<Taxi> taxis;
-        @GuardedBy("this")
+
         private final Set<Taxi> availableTaxis;
         
         public Dispatcher() {

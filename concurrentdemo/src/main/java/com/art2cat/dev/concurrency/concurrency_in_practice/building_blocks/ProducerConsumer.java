@@ -19,16 +19,12 @@ public class ProducerConsumer {
     
     public static void startIndexing(File[] roots) {
         BlockingQueue<File> queue = new LinkedBlockingQueue<File>(BOUND);
-        FileFilter filter = new FileFilter() {
-            public boolean accept(File file) {
-                return true;
-            }
-        };
-    
+        FileFilter filter = file -> true;
+
         for (File root : roots) {
             new Thread(new FileCrawler(queue, filter, root)).start();
         }
-    
+
         for (int i = 0; i < N_CONSUMERS; i++) {
             new Thread(new Indexer(queue)).start();
         }
@@ -45,17 +41,14 @@ public class ProducerConsumer {
             File root) {
             this.fileQueue = fileQueue;
             this.root = root;
-            this.fileFilter = new FileFilter() {
-                public boolean accept(File f) {
-                    return f.isDirectory() || fileFilter.accept(f);
-                }
-            };
+            this.fileFilter = f -> f.isDirectory() || fileFilter.accept(f);
         }
         
         private boolean alreadyIndexed(File f) {
             return false;
         }
         
+        @Override
         public void run() {
             try {
                 crawl(root);
@@ -86,6 +79,7 @@ public class ProducerConsumer {
             this.queue = queue;
         }
         
+        @Override
         public void run() {
             try {
                 while (true) {

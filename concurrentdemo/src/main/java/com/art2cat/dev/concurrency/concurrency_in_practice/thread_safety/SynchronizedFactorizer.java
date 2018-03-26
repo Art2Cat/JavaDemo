@@ -5,8 +5,6 @@ import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * SynchronizedFactorizer
@@ -16,14 +14,15 @@ import net.jcip.annotations.ThreadSafe;
  * @author Brian Goetz and Tim Peierls
  */
 
-@ThreadSafe
+
 public class SynchronizedFactorizer extends GenericServlet implements Servlet {
     
-    @GuardedBy("this")
+
     private BigInteger lastNumber;
-    @GuardedBy("this")
+
     private BigInteger[] lastFactors;
     
+    @Override
     public synchronized void service(ServletRequest req,
         ServletResponse resp) {
         BigInteger i = extractFromRequest(req);

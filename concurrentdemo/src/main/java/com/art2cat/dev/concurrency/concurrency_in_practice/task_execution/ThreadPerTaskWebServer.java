@@ -17,11 +17,7 @@ public class ThreadPerTaskWebServer {
         ServerSocket socket = new ServerSocket(80);
         while (true) {
             final Socket connection = socket.accept();
-            Runnable task = new Runnable() {
-                public void run() {
-                    handleRequest(connection);
-                }
-            };
+            Runnable task = () -> handleRequest(connection);
             new Thread(task).start();
         }
     }

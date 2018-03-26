@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
-import net.jcip.annotations.Immutable;
 
 /**
  * ThreeStooges
@@ -13,7 +12,7 @@ import net.jcip.annotations.Immutable;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@Immutable
+
 public final class ThreeStooges {
     
     private final Set<String> stooges = new HashSet<String>();

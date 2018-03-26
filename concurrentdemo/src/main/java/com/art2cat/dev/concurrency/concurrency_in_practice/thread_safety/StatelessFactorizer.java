@@ -5,7 +5,6 @@ import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * StatelessFactorizer
@@ -14,9 +13,10 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class StatelessFactorizer extends GenericServlet implements Servlet {
     
+    @Override
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);
         BigInteger[] factors = factor(i);

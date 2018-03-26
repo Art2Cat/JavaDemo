@@ -1,8 +1,5 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice;
 
-import net.jcip.annotations.NotThreadSafe;
-
-@NotThreadSafe
 public class UnsafeSequence {
     
     private Integer value = 0;

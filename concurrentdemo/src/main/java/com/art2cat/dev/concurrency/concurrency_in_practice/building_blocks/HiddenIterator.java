@@ -3,7 +3,6 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.building_blocks;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import net.jcip.annotations.GuardedBy;
 
 /**
  * HiddenIterator
@@ -14,7 +13,7 @@ import net.jcip.annotations.GuardedBy;
  */
 public class HiddenIterator {
     
-    @GuardedBy("this")
+
     private final Set<Integer> set = new HashSet<Integer>();
     
     public synchronized void add(Integer i) {

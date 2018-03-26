@@ -13,6 +13,7 @@ public class TaskRunnable implements Runnable {
     
     BlockingQueue<Task> queue;
     
+    @Override
     public void run() {
         try {
             processTask(queue.take());
@@ -27,6 +28,6 @@ public class TaskRunnable implements Runnable {
     }
     
     interface Task {
-    
+
     }
 }

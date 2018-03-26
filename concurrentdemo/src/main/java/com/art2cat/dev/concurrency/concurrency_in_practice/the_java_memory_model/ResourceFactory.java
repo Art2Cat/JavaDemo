@@ -1,7 +1,5 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.the_java_memory_model;
 
-import net.jcip.annotations.ThreadSafe;
-
 /**
  * ResourceFactory
  * <p/>
@@ -9,7 +7,6 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
 public class ResourceFactory {
     
     public static Resource getResource() {
@@ -22,6 +19,6 @@ public class ResourceFactory {
     }
     
     static class Resource {
-    
+
     }
 }

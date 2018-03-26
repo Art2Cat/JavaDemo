@@ -6,7 +6,6 @@ import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * UnsafeCachingFactorizer
@@ -16,7 +15,7 @@ import net.jcip.annotations.NotThreadSafe;
  * @author Brian Goetz and Tim Peierls
  */
 
-@NotThreadSafe
+
 public class UnsafeCachingFactorizer extends GenericServlet implements Servlet {
     
     private final AtomicReference<BigInteger> lastNumber
@@ -24,6 +23,7 @@ public class UnsafeCachingFactorizer extends GenericServlet implements Servlet {
     private final AtomicReference<BigInteger[]> lastFactors
         = new AtomicReference<BigInteger[]>();
     
+    @Override
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);
         if (i.equals(lastNumber.get())) {

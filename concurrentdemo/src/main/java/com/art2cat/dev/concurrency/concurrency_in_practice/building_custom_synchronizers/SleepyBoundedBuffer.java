@@ -1,7 +1,5 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.building_custom_synchronizers;
 
-import net.jcip.annotations.ThreadSafe;
-
 /**
  * SleepyBoundedBuffer
  * <p/>
@@ -9,7 +7,7 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class SleepyBoundedBuffer<V> extends BaseBoundedBuffer<V> {
 
     int SLEEP_GRANULARITY = 60;

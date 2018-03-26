@@ -10,6 +10,7 @@ public class SpitterRepositoryImpl implements SpitterSweeper {
     @PersistenceContext
     private EntityManager em;
 
+    @Override
     public int eliteSweep() {
         String update =
             "UPDATE Spitter spitter " +

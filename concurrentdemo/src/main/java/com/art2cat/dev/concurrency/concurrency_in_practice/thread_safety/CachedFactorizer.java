@@ -5,8 +5,7 @@ import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
+
 
 /**
  * CachedFactorizer
@@ -15,16 +14,11 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
 public class CachedFactorizer extends GenericServlet implements Servlet {
     
-    @GuardedBy("this")
     private BigInteger lastNumber;
-    @GuardedBy("this")
     private BigInteger[] lastFactors;
-    @GuardedBy("this")
     private long hits;
-    @GuardedBy("this")
     private long cacheHits;
     
     public synchronized long getHits() {
@@ -35,6 +29,7 @@ public class CachedFactorizer extends GenericServlet implements Servlet {
         return (double) cacheHits / (double) hits;
     }
     
+    @Override
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);
         BigInteger[] factors = null;

@@ -12,6 +12,7 @@ public class BarrierTimer implements Runnable {
     private boolean started;
     private long startTime, endTime;
 
+    @Override
     public synchronized void run() {
         long t = System.nanoTime();
         if (!started) {

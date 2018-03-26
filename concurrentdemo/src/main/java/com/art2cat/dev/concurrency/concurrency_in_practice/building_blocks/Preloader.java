@@ -1,6 +1,5 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.building_blocks;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
@@ -15,11 +14,7 @@ import java.util.concurrent.FutureTask;
 public class Preloader {
     
     private final FutureTask<ProductInfo> future =
-        new FutureTask<ProductInfo>(new Callable<ProductInfo>() {
-            public ProductInfo call() throws DataLoadException {
-                return loadProductInfo();
-            }
-        });
+        new FutureTask<>(() -> loadProductInfo());
     private final Thread thread = new Thread(future);
 
     ProductInfo loadProductInfo() throws DataLoadException {
@@ -45,7 +40,7 @@ public class Preloader {
     }
     
     interface ProductInfo {
-    
+
     }
 }
 

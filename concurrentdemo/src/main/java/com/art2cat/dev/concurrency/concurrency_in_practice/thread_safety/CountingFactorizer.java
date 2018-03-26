@@ -6,7 +6,6 @@ import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * CountingFactorizer
@@ -15,7 +14,6 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
 public class CountingFactorizer extends GenericServlet implements Servlet {
     
     private final AtomicLong count = new AtomicLong(0);
@@ -24,6 +22,7 @@ public class CountingFactorizer extends GenericServlet implements Servlet {
         return count.get();
     }
     
+    @Override
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);
         BigInteger[] factors = factor(i);

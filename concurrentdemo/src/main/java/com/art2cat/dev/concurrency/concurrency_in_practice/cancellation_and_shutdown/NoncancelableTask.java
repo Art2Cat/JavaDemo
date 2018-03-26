@@ -30,6 +30,6 @@ public class NoncancelableTask {
     }
     
     interface Task {
-    
+
     }
 }

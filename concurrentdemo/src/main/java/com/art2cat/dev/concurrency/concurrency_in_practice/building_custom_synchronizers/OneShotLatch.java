@@ -1,7 +1,6 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.building_custom_synchronizers;
 
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * OneShotLatch
@@ -10,8 +9,9 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
-public class OneShotLatch {
+
+
+class OneShotLatch {
     
     private final Sync sync = new Sync();
     
@@ -25,11 +25,13 @@ public class OneShotLatch {
     
     private class Sync extends AbstractQueuedSynchronizer {
         
+        @Override
         protected int tryAcquireShared(int ignored) {
             // Succeed if latch is open (state == 1), else fail
             return (getState() == 1) ? 1 : -1;
         }
         
+        @Override
         protected boolean tryReleaseShared(int ignored) {
             setState(1); // Latch is now open
             return true; // Other threads may now be able to acquire

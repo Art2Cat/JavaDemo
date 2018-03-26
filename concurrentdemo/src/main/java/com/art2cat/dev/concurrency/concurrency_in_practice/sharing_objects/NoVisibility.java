@@ -21,6 +21,7 @@ public class NoVisibility {
     
     private static class ReaderThread extends Thread {
         
+        @Override
         public void run() {
             while (!ready) {
                 Thread.yield();

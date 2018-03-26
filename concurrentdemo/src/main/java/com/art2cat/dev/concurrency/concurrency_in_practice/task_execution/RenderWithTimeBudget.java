@@ -48,7 +48,7 @@ public class RenderWithTimeBudget {
     
     
     static class Ad {
-    
+
     }
     
     static class Page {

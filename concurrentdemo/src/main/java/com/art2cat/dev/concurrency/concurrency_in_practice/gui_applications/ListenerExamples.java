@@ -29,126 +29,107 @@ public class ListenerExamples {
     private Future<?> runningTask = null; // thread-confined
     
     private void backgroundRandom() {
-        colorButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                colorButton.setBackground(new Color(random.nextInt()));
-            }
-        });
+        colorButton.addActionListener(e -> colorButton.setBackground(new Color(random.nextInt())));
     }
 
     private void longRunningTask() {
-        computeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                exec.execute(new Runnable() {
-                    public void run() {
-                        /* Do big computation */
-                    }
-                });
-            }
-        });
+        computeButton.addActionListener(e -> exec.execute(() -> {
+            /* Do big computation */
+        }));
     }
 
     private void longRunningTaskWithFeedback() {
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                button.setEnabled(false);
-                label.setText("busy");
-                exec.execute(new Runnable() {
-                    public void run() {
-                        try {
-                            /* Do big computation */
-                        } finally {
-                            GuiExecutor.instance().execute(new Runnable() {
-                                public void run() {
-                                    button.setEnabled(true);
-                                    label.setText("idle");
-                                }
-                            });
-                        }
-                    }
-                });
-            }
+        button.addActionListener(e -> {
+            button.setEnabled(false);
+            label.setText("busy");
+            exec.execute(() -> {
+                try {
+                    /* Do big computation */
+                } finally {
+                    GuiExecutor.instance().execute(() -> {
+                        button.setEnabled(true);
+                        label.setText("idle");
+                    });
+                }
+            });
         });
     }
     
     private void taskWithCancellation() {
-        startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (runningTask != null) {
-                    runningTask = exec.submit(new Runnable() {
-                        public void run() {
-                            while (moreWork()) {
-                                if (Thread.currentThread().isInterrupted()) {
-                                    cleanUpPartialWork();
-                                    break;
-                                }
-                                doSomeWork();
+        startButton.addActionListener((ActionEvent e) -> {
+            if (runningTask != null) {
+                runningTask = exec.submit(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (moreWork()) {
+                            if (Thread.currentThread().isInterrupted()) {
+                                cleanUpPartialWork();
+                                break;
                             }
+                            doSomeWork();
                         }
-                        
-                        private boolean moreWork() {
-                            return false;
-                        }
-                        
-                        private void cleanUpPartialWork() {
-                        }
-                        
-                        private void doSomeWork() {
-                        }
-                        
-                    });
-                }
-                ;
+                    }
+
+                    private boolean moreWork() {
+                        return false;
+                    }
+
+                    private void cleanUpPartialWork() {
+                    }
+
+                    private void doSomeWork() {
+                    }
+
+                });
             }
+            ;
         });
         
-        cancelButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                if (runningTask != null) {
-                    runningTask.cancel(true);
-                }
+        cancelButton.addActionListener(event -> {
+            if (runningTask != null) {
+                runningTask.cancel(true);
             }
         });
     }
     
     
     private void runInBackground(final Runnable task) {
-        startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                class CancelListener implements ActionListener {
-                    
-                    BackgroundTask<?> task;
-                    
-                    public void actionPerformed(ActionEvent event) {
-                        if (task != null) {
-                            task.cancel(true);
-                        }
+        startButton.addActionListener(e -> {
+            class CancelListener implements ActionListener {
+
+                BackgroundTask<?> task;
+
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    if (task != null) {
+                        task.cancel(true);
                     }
                 }
-                final CancelListener listener = new CancelListener();
-                listener.task = new BackgroundTask<Void>() {
-                    public Void compute() {
-                        while (moreWork() && !isCancelled()) {
-                            doSomeWork();
-                        }
-                        return null;
-                    }
-                    
-                    private boolean moreWork() {
-                        return false;
-                    }
-                    
-                    private void doSomeWork() {
-                    }
-                    
-                    public void onCompletion(boolean cancelled, String s, Throwable exception) {
-                        cancelButton.removeActionListener(listener);
-                        label.setText("done");
-                    }
-                };
-                cancelButton.addActionListener(listener);
-                exec.execute(task);
             }
+            final CancelListener listener = new CancelListener();
+            listener.task = new BackgroundTask<Void>() {
+                @Override
+                public Void compute() {
+                    while (moreWork() && !isCancelled()) {
+                        doSomeWork();
+                    }
+                    return null;
+                }
+
+                private boolean moreWork() {
+                    return false;
+                }
+
+                private void doSomeWork() {
+                }
+
+                public void onCompletion(boolean cancelled, String s, Throwable exception) {
+                    cancelButton.removeActionListener(listener);
+                    label.setText("done");
+                }
+            };
+            cancelButton.addActionListener(listener);
+            exec.execute(task);
         });
     }
 }

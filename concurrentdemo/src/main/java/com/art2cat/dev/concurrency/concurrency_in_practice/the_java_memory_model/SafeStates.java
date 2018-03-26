@@ -2,7 +2,6 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.the_java_memory_mode
 
 import java.util.HashMap;
 import java.util.Map;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * SafeStates
@@ -11,7 +10,6 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
 public class SafeStates {
     
     private final Map<String, String> states;

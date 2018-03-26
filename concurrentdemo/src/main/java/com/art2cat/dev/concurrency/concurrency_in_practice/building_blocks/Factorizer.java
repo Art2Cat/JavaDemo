@@ -5,7 +5,6 @@ import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * Factorizer
@@ -14,18 +13,15 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class Factorizer extends GenericServlet implements Servlet {
     
     private final Computable<BigInteger, BigInteger[]> c =
-        new Computable<BigInteger, BigInteger[]>() {
-            public BigInteger[] compute(BigInteger arg) {
-                return factor(arg);
-            }
-        };
+        this::factor;
     private final Computable<BigInteger, BigInteger[]> cache
-        = new Memoizer<BigInteger, BigInteger[]>(c);
+        = new Memoizer<>(c);
     
+    @Override
     public void service(ServletRequest req,
         ServletResponse resp) {
         try {

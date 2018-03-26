@@ -24,6 +24,7 @@ public class TimedRun2 {
             
             private volatile Throwable t;
             
+            @Override
             public void run() {
                 try {
                     r.run();
@@ -42,11 +43,7 @@ public class TimedRun2 {
         RethrowableTask task = new RethrowableTask();
         final Thread taskThread = new Thread(task);
         taskThread.start();
-        cancelExec.schedule(new Runnable() {
-            public void run() {
-                taskThread.interrupt();
-            }
-        }, timeout, unit);
+        cancelExec.schedule(taskThread::interrupt, timeout, unit);
         taskThread.join(unit.toMillis(timeout));
         task.rethrow();
     }

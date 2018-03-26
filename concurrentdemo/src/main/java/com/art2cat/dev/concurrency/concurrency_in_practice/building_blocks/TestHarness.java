@@ -17,19 +17,17 @@ public class TestHarness {
         final CountDownLatch endGate = new CountDownLatch(nThreads);
         
         for (int i = 0; i < nThreads; i++) {
-            Thread t = new Thread() {
-                public void run() {
+            Thread t = new Thread(() -> {
+                try {
+                    startGate.await();
                     try {
-                        startGate.await();
-                        try {
-                            task.run();
-                        } finally {
-                            endGate.countDown();
-                        }
-                    } catch (InterruptedException ignored) {
+                        task.run();
+                    } finally {
+                        endGate.countDown();
                     }
+                } catch (InterruptedException ignored) {
                 }
-            };
+            });
             t.start();
         }
         

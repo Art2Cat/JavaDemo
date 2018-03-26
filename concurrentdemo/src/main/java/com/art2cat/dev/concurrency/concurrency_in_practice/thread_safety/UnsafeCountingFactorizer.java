@@ -5,7 +5,6 @@ import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * UnsafeCountingFactorizer
@@ -14,7 +13,7 @@ import net.jcip.annotations.NotThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@NotThreadSafe
+
 public class UnsafeCountingFactorizer extends GenericServlet implements Servlet {
     
     private long count = 0;
@@ -23,6 +22,7 @@ public class UnsafeCountingFactorizer extends GenericServlet implements Servlet 
         return count;
     }
     
+    @Override
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);
         BigInteger[] factors = factor(i);

@@ -30,7 +30,7 @@ public abstract class SingleThreadRenderer {
     abstract void renderImage(ImageData i);
     
     interface ImageData {
-    
+
     }
     
     interface ImageInfo {

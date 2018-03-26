@@ -3,9 +3,8 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.applying_thread_pool
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.Semaphore;
-import net.jcip.annotations.ThreadSafe;
 
-@ThreadSafe
+
 public class BoundedExecutor {
     
     private final Executor exec;

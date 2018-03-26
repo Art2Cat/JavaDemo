@@ -1,8 +1,5 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.sharing_objects;
 
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
-
 /**
  * SynchronizedInteger
  * <p/>
@@ -10,10 +7,10 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class SynchronizedInteger {
     
-    @GuardedBy("this")
+
     private int value;
     
     public synchronized int get() {

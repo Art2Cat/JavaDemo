@@ -1,7 +1,5 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.the_java_memory_model;
 
-import net.jcip.annotations.NotThreadSafe;
-
 /**
  * DoubleCheckedLocking
  * <p/>
@@ -9,7 +7,6 @@ import net.jcip.annotations.NotThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@NotThreadSafe
 public class DoubleCheckedLocking {
     
     private static Resource resource;
@@ -26,6 +23,6 @@ public class DoubleCheckedLocking {
     }
     
     static class Resource {
-    
+
     }
 }

@@ -18,6 +18,7 @@ public class PrimeProducer extends Thread {
         this.queue = queue;
     }
     
+    @Override
     public void run() {
         try {
             BigInteger p = BigInteger.ONE;

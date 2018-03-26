@@ -53,7 +53,7 @@ public class InduceLockOrder {
     }
     
     interface DollarAmount extends Comparable<DollarAmount> {
-    
+
     }
     
     interface Account {
@@ -68,6 +68,6 @@ public class InduceLockOrder {
     }
     
     class InsufficientFundsException extends Exception {
-    
+
     }
 }

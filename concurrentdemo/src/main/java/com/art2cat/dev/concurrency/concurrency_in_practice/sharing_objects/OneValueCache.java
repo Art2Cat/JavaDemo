@@ -2,7 +2,6 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.sharing_objects;
 
 import java.math.BigInteger;
 import java.util.Arrays;
-import net.jcip.annotations.Immutable;
 
 /**
  * OneValueCache
@@ -11,7 +10,7 @@ import net.jcip.annotations.Immutable;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@Immutable
+
 public class OneValueCache {
     
     private final BigInteger lastNumber;

@@ -1,8 +1,5 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.building_custom_synchronizers;
 
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
-
 /**
  * ThreadGate
  * <p/>
@@ -10,13 +7,13 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class ThreadGate {
     
     // CONDITION-PREDICATE: opened-since(n) (isOpen || generation>n)
-    @GuardedBy("this")
+
     private boolean isOpen;
-    @GuardedBy("this")
+
     private int generation;
     
     public synchronized void close() {

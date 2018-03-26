@@ -5,7 +5,6 @@ import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * VolatileCachedFactorizer
@@ -14,11 +13,12 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class VolatileCachedFactorizer extends GenericServlet implements Servlet {
     
     private volatile OneValueCache cache = new OneValueCache(null, null);
     
+    @Override
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);
         BigInteger[] factors = cache.getFactors(i);

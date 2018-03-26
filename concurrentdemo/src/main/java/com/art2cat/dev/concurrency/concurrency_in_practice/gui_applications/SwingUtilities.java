@@ -40,6 +40,7 @@ public class SwingUtilities {
     
     private static class SwingThreadFactory implements ThreadFactory {
         
+        @Override
         public Thread newThread(Runnable r) {
             swingThread = new Thread(r);
             return swingThread;

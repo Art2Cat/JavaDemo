@@ -25,11 +25,7 @@ public class IndexingService {
     public IndexingService(File root, final FileFilter fileFilter) {
         this.root = root;
         this.queue = new LinkedBlockingQueue<File>(CAPACITY);
-        this.fileFilter = new FileFilter() {
-            public boolean accept(File f) {
-                return f.isDirectory() || fileFilter.accept(f);
-            }
-        };
+        this.fileFilter = f -> f.isDirectory() || fileFilter.accept(f);
     }
     
     private boolean alreadyIndexed(File f) {
@@ -51,6 +47,7 @@ public class IndexingService {
     
     class CrawlerThread extends Thread {
         
+        @Override
         public void run() {
             try {
                 crawl(root);
@@ -82,6 +79,7 @@ public class IndexingService {
     
     class IndexerThread extends Thread {
         
+        @Override
         public void run() {
             try {
                 while (true) {

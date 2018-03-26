@@ -39,6 +39,7 @@ public class LogWriter {
             this.writer = new PrintWriter(writer, true); // autoflush
         }
         
+        @Override
         public void run() {
             try {
                 while (true) {

@@ -60,7 +60,7 @@ public abstract class FutureRenderer {
     abstract void renderImage(ImageData i);
     
     interface ImageData {
-    
+
     }
     
     interface ImageInfo {

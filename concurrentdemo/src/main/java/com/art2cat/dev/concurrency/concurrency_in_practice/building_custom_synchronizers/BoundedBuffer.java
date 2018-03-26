@@ -1,7 +1,5 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.building_custom_synchronizers;
 
-import net.jcip.annotations.ThreadSafe;
-
 /**
  * BoundedBuffer
  * <p/>
@@ -9,7 +7,7 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class BoundedBuffer<V> extends BaseBoundedBuffer<V> {
 
     // CONDITION PREDICATE: not-full (!isFull())

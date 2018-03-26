@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * PrimeGenerator
@@ -17,12 +15,12 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class PrimeGenerator implements Runnable {
     
     private static ExecutorService exec = Executors.newCachedThreadPool();
     
-    @GuardedBy("this")
+
     private final List<BigInteger> primes
         = new ArrayList<BigInteger>();
     private volatile boolean cancelled;
@@ -38,6 +36,7 @@ public class PrimeGenerator implements Runnable {
         return generator.get();
     }
     
+    @Override
     public void run() {
         BigInteger p = BigInteger.ONE;
         while (!cancelled) {
@@ -53,6 +52,6 @@ public class PrimeGenerator implements Runnable {
     }
     
     public synchronized List<BigInteger> get() {
-        return new ArrayList<BigInteger>(primes);
+        return new ArrayList<>(primes);
     }
 }

@@ -2,10 +2,8 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.applying_thread_pool
 
 import java.util.LinkedList;
 import java.util.List;
-import net.jcip.annotations.Immutable;
 
 
-@Immutable
 public class PuzzleNode<P, M> {
     
     final P pos;

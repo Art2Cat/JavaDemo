@@ -1,8 +1,6 @@
 package com.art2cat.dev.concurrency.concurrency_in_practice.atomic_variables_and_nonblocking_synchronization;
 
 
-import net.jcip.annotations.ThreadSafe;
-
 /**
  * CasCounter
  * <p/>
@@ -10,7 +8,7 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author Brian Goetz and Tim Peierls
  */
-@ThreadSafe
+
 public class CasCounter {
     
     private SimulatedCAS value;

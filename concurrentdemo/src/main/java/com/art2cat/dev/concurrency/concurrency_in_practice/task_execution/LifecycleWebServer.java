@@ -25,11 +25,7 @@ public class LifecycleWebServer {
         while (!exec.isShutdown()) {
             try {
                 final Socket conn = socket.accept();
-                exec.execute(new Runnable() {
-                    public void run() {
-                        handleRequest(conn);
-                    }
-                });
+                exec.execute(() -> handleRequest(conn));
             } catch (RejectedExecutionException e) {
                 if (!exec.isShutdown()) {
                     log("task submission rejected", e);
@@ -67,6 +63,6 @@ public class LifecycleWebServer {
     }
     
     interface Request {
-    
+
     }
 }

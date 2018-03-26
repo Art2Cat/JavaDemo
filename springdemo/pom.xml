@@ -3,16 +3,37 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>javademo</artifactId>
-    <groupId>com.art2cat.dev.javademo</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+
   <artifactId>springdemo</artifactId>
   <groupId>com.art2cat.dev.springdemo</groupId>
   <name>springdemo</name>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <guava.version>23.0</guava.version>
+
+    <spring.version>4.3.9.RELEASE</spring.version>
+    <spring-data-jpa.version>1.11.4.RELEASE</spring-data-jpa.version>
+    <spring-data-mongodb.version>1.10.4.RELEASE</spring-data-mongodb.version>
+    <spring-data-redis.version>1.8.4.RELEASE</spring-data-redis.version>
+
+    <log4j.version>1.7.25</log4j.version>
+    <common-io.version>2.5</common-io.version>
+    <commons-lang3.version>3.6</commons-lang3.version>
+    <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
+
+    <junit.version>4.12</junit.version>
+    <junit-theories.version>4.12</junit-theories.version>
+    <mockito.version>2.8.47</mockito.version>
+
+    <aspectj.version>1.8.10</aspectj.version>
+    <ehcahe.version>2.10.4</ehcahe.version>
+    <cglib.version>3.2.5</cglib.version>
+    <jersey.version>2.26</jersey.version>
+    <spirng-boot.version>1.5.6.RELEASE</spirng-boot.version>
+  </properties>
+
   <build>
 
     <plugins>
@@ -115,12 +136,13 @@
       <artifactId>aspectjrt</artifactId>
       <version>${aspectj.version}</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+    <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/javax.persistence -->
     <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-commons</artifactId>
-      <version>2.0.2.RELEASE</version>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>javax.persistence</artifactId>
+      <version>2.2.0</version>
     </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
     <dependency>
@@ -218,14 +240,22 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.2.10.Final</version>
+      <version>5.2.11.Final</version>
     </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-jpa</artifactId>
       <version>${spring-data-jpa.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-commons</artifactId>
+      <version>1.13.4.RELEASE</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
     <dependency>
       <groupId>org.springframework.data</groupId>
@@ -242,19 +272,33 @@
     <dependency>
       <groupId>org.mongodb</groupId>
       <artifactId>mongo-java-driver</artifactId>
-      <version>3.5.0</version>
+      <version>3.4.3</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache -->
     <dependency>
       <groupId>net.sf.ehcache</groupId>
-      <artifactId>ehcache-core</artifactId>
+      <artifactId>ehcache</artifactId>
       <version>${ehcahe.version}</version>
     </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-core-asl</artifactId>
+      <version>1.9.13</version>
+      <scope>compile</scope> <!-- CHANGE HERE -->
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.13</version>
+      <scope>compile</scope> <!-- CHANGE HERE -->
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
@@ -265,21 +309,25 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.0</version>
-      <scope>compile</scope>
-    </dependency>
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>javax.servlet</groupId>-->
+      <!--<artifactId>javax.servlet-api</artifactId>-->
+      <!--<version>4.0.0</version>-->
+      <!--<scope>provided</scope>-->
+    <!--</dependency>-->
     <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
     <dependency>
       <groupId>org.apache.tomcat.embed</groupId>
       <artifactId>tomcat-embed-core</artifactId>
       <version>8.5.28</version>
     </dependency>
-
-
+    <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>1.1.0.Final</version>
+    </dependency>
 
   </dependencies>
 
