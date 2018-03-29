@@ -57,12 +57,18 @@ public class SimpleXStreamSerializer {
     public void objectToXML(Object object, String xmlPath) throws Exception {
         try (FileOutputStream outputStream = new FileOutputStream(xmlPath)) {
             xStream.toXML(object, outputStream);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            throw new Exception(e);
         }
     }
     
     public Object xmlToObject(String xmlPath) throws Exception {
         try (FileInputStream inputStream = new FileInputStream(xmlPath)) {
             return xStream.fromXML(inputStream);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            throw new Exception(e);
         }
     }
 }

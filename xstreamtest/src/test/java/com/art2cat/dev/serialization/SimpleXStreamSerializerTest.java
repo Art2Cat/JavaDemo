@@ -1,11 +1,10 @@
 package com.art2cat.dev.serialization;
 
-import com.art2cat.dev.model.impl.TimeZoneEnum;
 import com.art2cat.dev.model.impl.CountryTimeZone;
+import com.art2cat.dev.model.impl.TimeZoneEnum;
 import com.art2cat.dev.model.intf.ICountryTimeZone;
 import com.art2cat.dev.serialization.simple.SimpleConverter;
 import com.art2cat.dev.serialization.simple.SimpleXStreamSerializer;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,7 +23,7 @@ import org.junit.Test;
 public class SimpleXStreamSerializerTest {
     
     private SimpleXStreamSerializer simpleXStreamSerializer = new SimpleXStreamSerializer();
-    private static File path = Paths.get("src", "test", "resources", "objects.xml").toFile();
+    private Path xmlPath = Paths.get("src", "test", "resources", "objects.xml");
     
     
     private ICountryTimeZone initData() {
@@ -39,6 +38,20 @@ public class SimpleXStreamSerializerTest {
         countryTimeZone.setTimeZoneEnumList(timeZoneEnums);
         return countryTimeZone;
     }
+
+//    @Before
+//    public void prepare() {
+//        Set<OpenOption> options = new HashSet<OpenOption>();
+//        options.add(APPEND);
+//        options.add(CREATE);
+//        if (Files.notExists(xmlPath)) {
+//            try {
+//                Files.createFile(xmlPath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
     
     @Test
     public void testSimpleXStreamSerializer() {
@@ -46,16 +59,16 @@ public class SimpleXStreamSerializerTest {
         try {
             ICountryTimeZone origin = initData();
             simpleXStreamSerializer
-                .objectToXML(origin, path.getAbsolutePath());
+                .objectToXML(origin, xmlPath.toString());
             ICountryTimeZone result = (ICountryTimeZone) simpleXStreamSerializer
-                .xmlToObject(path.getAbsolutePath());
+                .xmlToObject(xmlPath.toString());
             result.getTimeZoneEnumList().forEach(timeZoneEnum -> System.out.println(timeZoneEnum.name()));
             Assert.assertEquals(origin.getCountryName(), result.getCountryName());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                Files.delete(Paths.get(path.getAbsolutePath()));
+                Files.deleteIfExists(xmlPath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -72,10 +85,10 @@ public class SimpleXStreamSerializerTest {
             simpleXStreamSerializer.setFieldAlias("timeZoneList", List.class, "timeZoneEnumList");
             simpleXStreamSerializer.setAttributeAlias(CountryTimeZone.class, "countryName", "name");
             simpleXStreamSerializer
-                .objectToXML(origin, path.getAbsolutePath());
+                .objectToXML(origin, xmlPath.toString());
             
             ICountryTimeZone result = (ICountryTimeZone) simpleXStreamSerializer
-                .xmlToObject(path.getAbsolutePath());
+                .xmlToObject(xmlPath.toString());
             result.getTimeZoneEnumList().forEach(timeZoneEnum -> System.out.println(timeZoneEnum.name()));
             
             Assert.assertEquals(origin.getCountryName(), result.getCountryName());
@@ -83,7 +96,7 @@ public class SimpleXStreamSerializerTest {
             e.printStackTrace();
         } finally {
             try {
-                Files.delete(Paths.get(path.getAbsolutePath()));
+                Files.deleteIfExists(xmlPath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,10 +112,10 @@ public class SimpleXStreamSerializerTest {
             serializer.setFieldAlias("timeZoneList", List.class, "timeZoneEnumList");
             serializer.setAttributeAlias(CountryTimeZone.class, "countryName", "name");
             serializer
-                .objectToXML(origin, path.getAbsolutePath());
+                .objectToXML(origin, xmlPath.toString());
             
             ICountryTimeZone result = (ICountryTimeZone) serializer
-                .xmlToObject(path.getAbsolutePath());
+                .xmlToObject(xmlPath.toString());
             result.getTimeZoneEnumList().forEach(timeZoneEnum -> System.out.println(timeZoneEnum.getValue()));
             
             Assert.assertEquals(origin.getCountryName(), result.getCountryName());
@@ -110,7 +123,7 @@ public class SimpleXStreamSerializerTest {
             e.printStackTrace();
         } finally {
             try {
-                Files.delete(Paths.get(path.getAbsolutePath()));
+                Files.deleteIfExists(xmlPath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
