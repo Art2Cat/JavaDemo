@@ -30,7 +30,7 @@ public class ResourceTest {
     @Test
     public void FileSourceTest() {
         try {
-            Path filePath = Paths.get("/Users/rorschach/JavaDemo/corejavademo/src/test/resources/text.txt");
+            Path filePath = Paths.get("src", "test", "resources", "text.txt");
             Resource res1 = new FileSystemResource(filePath.toString());
             
             Resource res2 = new ClassPathResource("text.txt");
