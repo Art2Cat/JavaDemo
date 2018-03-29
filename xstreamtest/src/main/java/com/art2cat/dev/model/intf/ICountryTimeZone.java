@@ -1,5 +1,6 @@
 package com.art2cat.dev.model.intf;
 
+import com.art2cat.dev.model.CountryEnum;
 import com.art2cat.dev.model.impl.TimeZoneEnum;
 import java.util.List;
 
@@ -18,5 +19,9 @@ public interface ICountryTimeZone {
     String getCountryName();
     
     void setCountryName(String countryName);
+    
+    CountryEnum getCountry();
+    
+    void setCountry(CountryEnum countryEnum);
     
 }

@@ -2,6 +2,7 @@ package com.art2cat.dev.serialization.simple;
 
 import com.art2cat.dev.model.impl.TimeZoneEnum;
 import com.art2cat.dev.model.intf.ICustomEnum;
+import com.art2cat.dev.serialization.impl.EnumConverter;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
@@ -15,7 +16,7 @@ import java.lang.reflect.Method;
  * @author art2c
  * @date 3/29/2018
  */
-public class SimpleConverter implements Converter {
+public class SimpleConverter extends EnumConverter implements Converter {
     
     /**
      * Convert an object to textual data.
@@ -26,9 +27,10 @@ public class SimpleConverter implements Converter {
      */
     @Override
     public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
-        
         if (source instanceof ICustomEnum) {
             writer.setValue((String) ((ICustomEnum) source).getValue());
+        } else {
+            super.marshal(source, writer, context);
         }
     }
     
@@ -49,7 +51,7 @@ public class SimpleConverter implements Converter {
                 throw new RuntimeException("Error processing custom plugin type", e);
             }
         }
-        return null;
+        return super.unmarshal(reader, context);
     }
     
     /**

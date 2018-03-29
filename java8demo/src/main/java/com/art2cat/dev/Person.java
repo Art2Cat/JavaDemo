@@ -6,6 +6,8 @@ public class Person {
     
     private Optional<Car> car;
     
+    private boolean isMale;
+    
     public Person() {
     }
     
@@ -19,5 +21,13 @@ public class Person {
     
     public void setCar(Optional<Car> car) {
         this.car = car;
+    }
+    
+    public boolean isMale() {
+        return isMale;
+    }
+    
+    public void setMale(boolean male) {
+        isMale = male;
     }
 }

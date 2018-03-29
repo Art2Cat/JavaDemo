@@ -20,8 +20,8 @@ public class AsyncShopClientTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        long retrivalTime = ((System.nanoTime() - start) / 1_000_000);
-        System.out.println("Price returned after " + retrivalTime + " msecs");
+        long retrievalTime = ((System.nanoTime() - start) / 1_000_000);
+        System.out.println("Price returned after " + retrievalTime + " msecs");
     }
     
     @Test

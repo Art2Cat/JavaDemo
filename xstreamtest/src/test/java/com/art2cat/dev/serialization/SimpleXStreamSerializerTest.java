@@ -1,5 +1,6 @@
 package com.art2cat.dev.serialization;
 
+import com.art2cat.dev.model.CountryEnum;
 import com.art2cat.dev.model.impl.CountryTimeZone;
 import com.art2cat.dev.model.impl.TimeZoneEnum;
 import com.art2cat.dev.model.intf.ICountryTimeZone;
@@ -12,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -30,28 +32,29 @@ public class SimpleXStreamSerializerTest {
         
         ICountryTimeZone countryTimeZone = new CountryTimeZone();
         countryTimeZone.setCountryName("US");
+        countryTimeZone.setCountry(CountryEnum.US);
         List<TimeZoneEnum> timeZoneEnums = new ArrayList<>();
-        timeZoneEnums.add(TimeZoneEnum.UTC_5E);
-        timeZoneEnums.add(TimeZoneEnum.UTC_0Z);
-        timeZoneEnums.add(TimeZoneEnum.UTC_2O);
-        timeZoneEnums.add(TimeZoneEnum.UTC_3CH);
+        timeZoneEnums.add(TimeZoneEnum.UTC_10W);
+        timeZoneEnums.add(TimeZoneEnum.UTC_9V);
+        timeZoneEnums.add(TimeZoneEnum.UTC_8U);
+        timeZoneEnums.add(TimeZoneEnum.UTC_7T);
+        timeZoneEnums.add(TimeZoneEnum.UTC_6S);
+        timeZoneEnums.add(TimeZoneEnum.UTC_5R);
         countryTimeZone.setTimeZoneEnumList(timeZoneEnums);
         return countryTimeZone;
     }
-
-//    @Before
-//    public void prepare() {
-//        Set<OpenOption> options = new HashSet<OpenOption>();
-//        options.add(APPEND);
-//        options.add(CREATE);
-//        if (Files.notExists(xmlPath)) {
-//            try {
-//                Files.createFile(xmlPath);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    
+    @Before
+    public void prepare() {
+        Path resources = Paths.get("src", "test", "resources");
+        if (Files.notExists(resources)) {
+            try {
+                Files.createDirectory(resources);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     
     @Test
     public void testSimpleXStreamSerializer() {
@@ -122,11 +125,11 @@ public class SimpleXStreamSerializerTest {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                Files.deleteIfExists(xmlPath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Files.deleteIfExists(xmlPath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
     }
     

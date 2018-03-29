@@ -1,6 +1,9 @@
 package com.art2cat.dev;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +20,7 @@ public class OptionalTest {
         insurance.setName("insurance: " + insurance.hashCode());
         Car car = new Car(Optional.of(insurance));
         Person p = new Person(Optional.of(car));
+        p.setMale(true);
         return p;
     }
     
@@ -28,5 +32,23 @@ public class OptionalTest {
             .orElse("Unknown");
         
         System.out.println(name);
+    }
+    
+    @Test
+    public void test() {
+        List<Object> personList = new ArrayList<>();
+        personList.add(new Insurance());
+        personList.add(new Insurance());
+        personList.add(generatePerson());
+        
+        Optional<Person> person = personList.stream().filter(o -> o instanceof Person).map(o -> ((Person) o))
+            .findFirst();
+        
+        if (person.map(Person::isMale).orElse(false)) {
+            System.out.println(person.get().getCar().map(Car::getInsurance).orElse(null));
+        } else {
+            Assert.fail();
+        }
+        
     }
 }

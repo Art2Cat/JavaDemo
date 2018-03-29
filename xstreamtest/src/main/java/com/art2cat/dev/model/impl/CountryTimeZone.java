@@ -1,5 +1,6 @@
 package com.art2cat.dev.model.impl;
 
+import com.art2cat.dev.model.CountryEnum;
 import com.art2cat.dev.model.intf.ICountryTimeZone;
 import java.util.List;
 import lombok.Getter;
@@ -24,4 +25,6 @@ public class CountryTimeZone implements ICountryTimeZone {
     public CountryTimeZone(String countryName) {
         this.countryName = countryName;
     }
+    
+    private CountryEnum country;
 }

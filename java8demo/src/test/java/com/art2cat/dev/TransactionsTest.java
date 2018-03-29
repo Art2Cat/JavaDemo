@@ -93,21 +93,25 @@ public class TransactionsTest {
     @Test
     public void testFileStream() {
         long uniqueWords;
-        try (Stream<String> lines = Files.lines(Paths.get("text.txt"), Charset.defaultCharset())) {
+        try (Stream<String> lines = Files
+            .lines(Paths.get("src", "test", "resource", "text.txt"), Charset.defaultCharset())) {
             uniqueWords = lines.flatMap(line -> Arrays.stream(line.split(" ")))
                 .distinct()
                 .count();
             System.out.println(uniqueWords);
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
     
     @Test
     public void testFileStream1() {
-        try (Stream<String> lines = Files.lines(Paths.get("text.txt"), Charset.defaultCharset())) {
+        try (Stream<String> lines = Files
+            .lines(Paths.get("src", "test", "resource", "text.txt"), Charset.defaultCharset())) {
             lines.forEach(System.out::println);
         } catch (IOException e) {
+            Assert.fail();
             e.printStackTrace();
         }
     }
@@ -125,6 +129,7 @@ public class TransactionsTest {
             });
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
     
