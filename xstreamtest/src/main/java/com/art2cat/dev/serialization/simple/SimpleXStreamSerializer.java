@@ -1,13 +1,11 @@
 package com.art2cat.dev.serialization.simple;
 
-import com.art2cat.dev.serialization.impl.RorXStreamSerializer;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,5 +68,9 @@ public class SimpleXStreamSerializer {
             LOGGER.error(e.getMessage(), e);
             throw new Exception(e);
         }
+    }
+    
+    public XStream getXStream() {
+        return xStream;
     }
 }

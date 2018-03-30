@@ -8,5 +8,9 @@ package com.art2cat.dev.serialization.intf;
  */
 public interface IRorXStreamSerializer {
     
+    Object serialize(Object obj) throws Exception;
+    
     Object serialize(Object obj, Object writer) throws Exception;
+    
+    Object deserialize(Object obj) throws Exception;
 }

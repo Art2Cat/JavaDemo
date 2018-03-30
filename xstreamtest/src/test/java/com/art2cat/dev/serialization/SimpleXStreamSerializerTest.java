@@ -58,9 +58,33 @@ public class SimpleXStreamSerializerTest {
     
     @Test
     public void testSimpleXStreamSerializer() {
+    
+        try {
+            ICountryTimeZone origin = initData();
+            simpleXStreamSerializer
+                .objectToXML(origin, xmlPath.toString());
+            ICountryTimeZone result = (ICountryTimeZone) simpleXStreamSerializer
+                .xmlToObject(xmlPath.toString());
+            result.getTimeZoneEnumList().forEach(timeZoneEnum -> System.out.println(timeZoneEnum.name()));
+            Assert.assertEquals(origin.getCountryName(), result.getCountryName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                Files.deleteIfExists(xmlPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    @Test
+    public void testSimpleXStreamSerializerWithAnnotation() {
         
         try {
             ICountryTimeZone origin = initData();
+//            simpleXStreamSerializer.getXStream().processAnnotations(CountryTimeZone.class);
+            simpleXStreamSerializer.getXStream().autodetectAnnotations(true);
             simpleXStreamSerializer
                 .objectToXML(origin, xmlPath.toString());
             ICountryTimeZone result = (ICountryTimeZone) simpleXStreamSerializer
@@ -125,11 +149,31 @@ public class SimpleXStreamSerializerTest {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-//            try {
-//                Files.deleteIfExists(xmlPath);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                Files.deleteIfExists(xmlPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    
+    @Test
+    public void testSimpleXStreamSerializerIncompatibleOldData() {
+        SimpleXStreamSerializer serializer = new SimpleXStreamSerializer(false, new SimpleConverter());
+        serializer.setClassAlias("timeZone", TimeZoneEnum.class);
+        serializer.setFieldAlias("timeZoneList", List.class, "timeZoneEnumList");
+        serializer.setAttributeAlias(CountryTimeZone.class, "countryName", "name");
+        try {
+            Path filePath = Paths.get("src", "test", "resources", "olddata.xml");
+            ICountryTimeZone result = (ICountryTimeZone) serializer
+                .xmlToObject(filePath.toString());
+            result.getTimeZoneEnumList().forEach(timeZoneEnum -> System.out.println(timeZoneEnum.getValue()));
+            
+            Assert.assertEquals(CountryEnum.US.name(), result.getCountryName());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail();
         }
     }
     

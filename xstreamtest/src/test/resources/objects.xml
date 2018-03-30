@@ -1,11 +1,11 @@
-<com.art2cat.dev.model.impl.CountryTimeZone name="US">
+<CountryTimeZone countryName="US">
   <timeZoneEnumList>
-    <timeZone>UTC−10:00, W</timeZone>
-    <timeZone>UTC−09:00, V</timeZone>
-    <timeZone>UTC−08:00, U</timeZone>
-    <timeZone>UTC−07:00, T</timeZone>
-    <timeZone>UTC−06:00, S</timeZone>
-    <timeZone>UTC−05:00, R</timeZone>
+    <com.art2cat.dev.model.impl.TimeZoneEnum>UTC_10W</com.art2cat.dev.model.impl.TimeZoneEnum>
+    <com.art2cat.dev.model.impl.TimeZoneEnum>UTC_9V</com.art2cat.dev.model.impl.TimeZoneEnum>
+    <com.art2cat.dev.model.impl.TimeZoneEnum>UTC_8U</com.art2cat.dev.model.impl.TimeZoneEnum>
+    <com.art2cat.dev.model.impl.TimeZoneEnum>UTC_7T</com.art2cat.dev.model.impl.TimeZoneEnum>
+    <com.art2cat.dev.model.impl.TimeZoneEnum>UTC_6S</com.art2cat.dev.model.impl.TimeZoneEnum>
+    <com.art2cat.dev.model.impl.TimeZoneEnum>UTC_5R</com.art2cat.dev.model.impl.TimeZoneEnum>
   </timeZoneEnumList>
-  <country>US</country>
-</com.art2cat.dev.model.impl.CountryTimeZone>
+  <Country>US</Country>
+</CountryTimeZone>
