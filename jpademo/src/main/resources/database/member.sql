@@ -1,6 +1,6 @@
 CREATE TABLE member(
-member_id INT PRIMARY KEY ,
-name VARCHAR(255) NOT NULL ,
+member_id INT PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
 salary INT,
 birthday DATE NOT NULL
 );

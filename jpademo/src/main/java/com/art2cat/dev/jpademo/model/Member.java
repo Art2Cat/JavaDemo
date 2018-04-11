@@ -1,4 +1,4 @@
-package com.art2cat.dev.jpademo;
+package com.art2cat.dev.jpademo.model;
 
 import java.util.Date;
 
