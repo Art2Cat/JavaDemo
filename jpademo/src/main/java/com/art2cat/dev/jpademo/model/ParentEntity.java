@@ -1,9 +1,13 @@
 package com.art2cat.dev.jpademo.model;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,17 +21,23 @@ import javax.persistence.Table;
 @Table(name = "parent_entity")
 public class ParentEntity {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "entity_id")
-    private int id;
+    private Integer id;
     
     @Column(name = "entity_name")
     private String name;
     
-    @OneToMany(targetEntity = Subsidiary.class, fetch = FetchType.EAGER, mappedBy = "subsidiary")
+    @OneToMany(cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER, targetEntity = Subsidiary.class)
     private List<Subsidiary> subsidiaries;
     
     @Column(name = "stock")
     private String stock;
+    
+    public ParentEntity() {
+    }
     
     public ParentEntity(int id, String name, String stock) {
         this.id = id;
@@ -35,11 +45,18 @@ public class ParentEntity {
         this.stock = stock;
     }
     
-    public int getId() {
+    public ParentEntity(Integer id, String name, List<Subsidiary> subsidiaries, String stock) {
+        this.id = id;
+        this.name = name;
+        this.subsidiaries = subsidiaries;
+        this.stock = stock;
+    }
+    
+    public Integer getId() {
         return id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     
@@ -65,5 +82,15 @@ public class ParentEntity {
     
     public void setStock(String stock) {
         this.stock = stock;
+    }
+    
+    @Override
+    public String toString() {
+        return "ParentEntity{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", subsidiaries=" + subsidiaries +
+            ", stock='" + stock + '\'' +
+            '}';
     }
 }

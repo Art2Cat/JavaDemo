@@ -1,6 +1,6 @@
 package com.art2cat.dev.jpademo.jdbc;
 
-import com.art2cat.dev.jpademo.configuration.DatabaseConfig;
+import com.art2cat.dev.jpademo.configuration.AppConfig;
 import com.art2cat.dev.jpademo.model.Member;
 import java.util.List;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @date 4/11/18
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = DatabaseConfig.class)
+@ContextConfiguration(classes = AppConfig.class)
 public class JdbcTest {
     
     @Autowired
