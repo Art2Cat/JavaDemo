@@ -20,8 +20,10 @@ public class Subsidiary {
     
     @Id
     @GeneratedValue
-    @Column(name = "sub_id")
     private Integer id;
+    
+    @Column(name = "sub_id")
+    private Integer subId;
     
     @Column(name = "subsidiary_name")
     private String name;
@@ -45,6 +47,14 @@ public class Subsidiary {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public Integer getSubId() {
+        return subId;
+    }
+    
+    public void setSubId(Integer subId) {
+        this.subId = subId;
     }
     
     public String getName() {

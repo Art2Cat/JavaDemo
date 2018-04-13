@@ -23,14 +23,16 @@ public class ParentEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "entity_id")
     private Integer id;
+    
+    @Column(name = "entity_id")
+    private Integer entityId;
     
     @Column(name = "entity_name")
     private String name;
     
     @OneToMany(cascade = CascadeType.ALL,
-        fetch = FetchType.EAGER, targetEntity = Subsidiary.class)
+        fetch = FetchType.EAGER, targetEntity = Subsidiary.class, mappedBy = "parentEntity")
     private List<Subsidiary> subsidiaries;
     
     @Column(name = "stock")
@@ -58,6 +60,14 @@ public class ParentEntity {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public Integer getEntityId() {
+        return entityId;
+    }
+    
+    public void setEntityId(Integer entityId) {
+        this.entityId = entityId;
     }
     
     public String getName() {

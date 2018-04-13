@@ -14,4 +14,6 @@ public interface ParentEntityRepository extends CrudRepository<ParentEntity, Int
     
     ParentEntity findEntityByName(String name);
     
+    ParentEntity findEntityByEntityId(Integer entityId);
+    
 }

@@ -31,7 +31,7 @@ public class EntityAndSubTest {
     
     @Test
     public void getParentEntity() {
-        ParentEntity entity = parentEntityRepository.findOne(1001);
+        ParentEntity entity = parentEntityRepository.findEntityByEntityId(1003);
         if (entity == null) {
             Assert.fail();
         }
@@ -39,17 +39,17 @@ public class EntityAndSubTest {
         if (entity.getSubsidiaries().isEmpty()) {
             Assert.fail();
         }
-        entity.getSubsidiaries().forEach(System.out::println);
+        entity.getSubsidiaries().forEach(subsidiary -> System.out.println(subsidiary.getName()));
     }
     
     @Test
     public void addEntity() {
         ParentEntity parentEntity = new ParentEntity();
-        parentEntity.setId(1003);
+        parentEntity.setEntityId(1003);
         parentEntity.setName("test Entity1");
         parentEntity.setStock("NDQ");
         Subsidiary subsidiary = new Subsidiary();
-        subsidiary.setId(1003001);
+        subsidiary.setSubId(1003001);
         subsidiary.setName("test 1");
         subsidiary.setParentEntity(parentEntity);
         

@@ -14,4 +14,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface SubsidiaryRepository extends CrudRepository<Subsidiary, Integer> {
     
     ParentEntity findSubByName(String name);
+    
+    ParentEntity findSubBySubId(Integer subId);
 }
