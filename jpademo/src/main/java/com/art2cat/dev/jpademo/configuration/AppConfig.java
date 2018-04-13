@@ -30,7 +30,7 @@ public class AppConfig {
         ds.setUrl(
             "jdbc:mysql://104.225.238.185:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
         ds.setUsername("root");
-        ds.setPassword("fuckmysql");
+        ds.setPassword("password");
         return ds;
     }
     
