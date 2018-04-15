@@ -1,6 +1,6 @@
 package com.art2cat.dev.jpademo.jdbc;
 
-import com.art2cat.dev.jpademo.configuration.AppConfig;
+import com.art2cat.dev.jpademo.configurations.AppConfig;
 import com.art2cat.dev.jpademo.model.ParentEntity;
 import com.art2cat.dev.jpademo.model.Subsidiary;
 import com.art2cat.dev.jpademo.repositories.ParentEntityRepository;

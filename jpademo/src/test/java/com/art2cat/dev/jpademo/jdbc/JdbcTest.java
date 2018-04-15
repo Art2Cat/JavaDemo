@@ -1,6 +1,6 @@
 package com.art2cat.dev.jpademo.jdbc;
 
-import com.art2cat.dev.jpademo.configuration.AppConfig;
+import com.art2cat.dev.jpademo.configurations.AppConfig;
 import com.art2cat.dev.jpademo.model.Member;
 import java.util.List;
 import org.junit.Test;

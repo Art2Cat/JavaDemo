@@ -1,10 +1,14 @@
-package com.art2cat.dev.jpademo.configuration;
+package com.art2cat.dev.jpademo.configurations;
 
 import com.art2cat.dev.jpademo.jdbc.JdbcTemplate;
+import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -14,23 +18,45 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 /**
- * com.art2cat.dev.jpademo.configuration
+ * com.art2cat.dev.jpademo.configurations
  *
  * @author rorschach
  * @date 4/12/18
  */
 @Configuration
 @EnableJpaRepositories("com.art2cat.dev.jpademo.repositories")
+@PropertySource("classpath:datasource.properties")
 public class AppConfig {
+    
+    @Value("${mysql.driver}")
+    private String mysqlDriver;
+    
+    @Value("${datasource.url}")
+    private String url;
+    
+    @Value("${username}")
+    private String username;
+    
+    @Value("${password}")
+    private String password;
+    
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
     
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        ds.setUrl(
-            "jdbc:mysql://104.225.238.185:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
-        ds.setUsername("root");
-        ds.setPassword("password");
+        ds.setDriverClassName(mysqlDriver);
+        ds.setUrl(url);
+        ds.setUsername(username);
+        ds.setPassword(password);
+        Properties properties = new Properties();
+        properties.setProperty("maxActive", "50");
+        properties.setProperty("maxIdle", "30");
+        properties.setProperty("maxWait", "10000");
+        ds.setConnectionProperties(properties);
         return ds;
     }
     
