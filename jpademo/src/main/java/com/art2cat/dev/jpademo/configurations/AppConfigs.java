@@ -26,7 +26,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @Configuration
 @EnableJpaRepositories("com.art2cat.dev.jpademo.repositories")
 @PropertySource("classpath:datasource.properties")
-public class AppConfig {
+public class AppConfigs {
     
     @Value("${mysql.driver}")
     private String mysqlDriver;
@@ -61,8 +61,8 @@ public class AppConfig {
     }
     
     @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource());
     }
     
     @Bean
@@ -74,7 +74,7 @@ public class AppConfig {
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setDatabase(Database.MYSQL);
-        jpaVendorAdapter.setGenerateDdl(true);
+//        jpaVendorAdapter.setGenerateDdl(true);
         return jpaVendorAdapter;
     }
     

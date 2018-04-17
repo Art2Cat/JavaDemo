@@ -18,7 +18,7 @@ import org.springframework.validation.Errors;
  * @author rorschach
  * @date 4/15/18
  */
-@Service
+@Service("roleService")
 public class RoleServiceImpl implements IRoleService {
     
     @Autowired

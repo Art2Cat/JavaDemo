@@ -1,6 +1,7 @@
 package com.art2cat.dev.restful;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
+@SpringBootConfiguration
 @EnableAutoConfiguration
 @SpringBootApplication
 public class Application extends WebMvcContext {

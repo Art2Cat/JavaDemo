@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,14 +31,12 @@ public class UserServiceController {
     private UserServiceImpl userService;
     
     @RequestMapping(value = "/getUser", method = RequestMethod.GET)
-    @ResponseBody
     public User getUser(@RequestParam(value = "id") Integer id) {
         return userService.getUser(id);
     }
     
     @RequestMapping(value = "/insertUser", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
     public ResponseEntity<?> insertUser(@Valid @RequestBody User user, Errors errors) {
         String result;
         if (errors.hasErrors()) {
@@ -56,13 +53,11 @@ public class UserServiceController {
     }
     
     @RequestMapping(value = "/deleteUser", method = RequestMethod.DELETE)
-    @ResponseBody
     public int deleteUser(@RequestParam(value = "id") Integer id) {
         return userService.deleteUser(id);
     }
     
     @RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
-    @ResponseBody
     public ResponseEntity<?> updateUser(@Valid @RequestBody User user, Errors errors) {
         String result;
         if (errors.hasErrors()) {
@@ -79,7 +74,6 @@ public class UserServiceController {
     }
     
     @RequestMapping(value = "/findUsers", method = RequestMethod.GET)
-    @ResponseBody
     public List<User> findUsers(@RequestParam(value = "userName") String userName,
         @RequestParam(value = "start") int start, @RequestParam(value = "limit") int limit) {
         return userService.findUsers(userName, start, limit);

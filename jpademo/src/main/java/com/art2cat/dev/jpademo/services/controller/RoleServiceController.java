@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,7 +29,6 @@ public class RoleServiceController {
     private RoleServiceImpl roleService;
     
     @RequestMapping(value = "/insertRole", method = RequestMethod.POST)
-    @ResponseBody
     public ResponseEntity<?> insertRole(@Valid @RequestBody Role role, Errors errors) {
         String result;
         if (errors.hasErrors()) {
@@ -47,7 +45,6 @@ public class RoleServiceController {
     }
     
     @RequestMapping(value = "/updateRole", method = RequestMethod.PUT)
-    @ResponseBody
     public ResponseEntity<?> updateRole(@Valid @RequestBody Role role, Errors errors) {
         String result;
         if (errors.hasErrors()) {
@@ -64,19 +61,16 @@ public class RoleServiceController {
     }
     
     @RequestMapping(value = "/deleteRole", method = RequestMethod.DELETE)
-    @ResponseBody
     public int deleteRole(@RequestParam(value = "id") Integer id) {
         return roleService.deleteRole(id);
     }
     
     @RequestMapping(value = "/getRole", method = RequestMethod.GET)
-    @ResponseBody
     public Role getRole(@RequestParam(value = "id") Integer id) {
         return roleService.getRole(id);
     }
     
     @RequestMapping(value = "/findRoles", method = RequestMethod.GET)
-    @ResponseBody
     public List<Role> findRoles(@RequestParam(value = "roleName") String roleName,
         @RequestParam(value = "start") int start, @RequestParam(value = "limit") int limit) {
         return roleService.findRoles(roleName, start, limit);

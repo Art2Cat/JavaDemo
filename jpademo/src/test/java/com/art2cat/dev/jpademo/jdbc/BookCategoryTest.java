@@ -1,6 +1,6 @@
 package com.art2cat.dev.jpademo.jdbc;
 
-import com.art2cat.dev.jpademo.configurations.AppConfig;
+import com.art2cat.dev.jpademo.configurations.AppConfigs;
 import com.art2cat.dev.jpademo.model.Book;
 import com.art2cat.dev.jpademo.model.BookCategory;
 import com.art2cat.dev.jpademo.repositories.BookCategoryRepository;
@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @date 4/13/18
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConfig.class)
+@ContextConfiguration(classes = AppConfigs.class)
 public class BookCategoryTest {
     
     @Autowired

@@ -18,7 +18,7 @@ import org.springframework.validation.Errors;
  * @author rorschach
  * @date 4/15/18
  */
-@Service
+@Service("userService")
 public class UserServiceImpl implements IUserService {
     
     @Autowired

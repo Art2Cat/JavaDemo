@@ -1,6 +1,7 @@
 package com.art2cat.dev.jpademo.configurations;
 
 import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -9,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Repository;
 
@@ -19,14 +22,14 @@ import org.springframework.stereotype.Repository;
  * @date 4/15/18
  */
 @Configuration
-@Import(AppConfig.class)
+@Import(AppConfigs.class)
 public class MybatisConfig {
     
     private static final String MAPPER_PACKAGE_NAME = "com.art2cat.dev.jpademo.mybatis.mapper";
-    private static final String BASE_PACKAGE_NAME = "com.art2cat.dev.jpa";
+    private static final String BASE_PACKAGE_NAME = "com.art2cat.dev.jpademo.repositories";
     
     @Autowired
-    private AppConfig appConfig;
+    private AppConfigs appConfigs;
     
     @Bean
     public org.apache.ibatis.session.Configuration configuration() {
@@ -40,13 +43,23 @@ public class MybatisConfig {
         return configuration;
     }
     
+    
+    @Bean
+    public Resource[] mappers() {
+        Resource roleMapper = new ClassPathResource("mapper_role.xml");
+        Resource userMapper = new ClassPathResource("mapper_user.xml");
+        return new Resource[]{roleMapper, userMapper};
+    }
+    
+    
     @Bean
     @Scope("prototype")
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-        sqlSessionFactory.setDataSource(appConfig.dataSource());
+        sqlSessionFactory.setDataSource(appConfigs.dataSource());
+        sqlSessionFactory.setMapperLocations(mappers());
         sqlSessionFactory.setConfiguration(configuration());
-        return (SqlSessionFactory) sqlSessionFactory.getObject();
+        return sqlSessionFactory.getObject();
     }
     
     @Bean
@@ -56,7 +69,7 @@ public class MybatisConfig {
     
     @Bean
     public DataSourceTransactionManager dataSourceTransactionManager() {
-        return new DataSourceTransactionManager(appConfig.dataSource());
+        return new DataSourceTransactionManager(appConfigs.dataSource());
     }
     
     @Bean
