@@ -22,6 +22,9 @@ import org.springframework.stereotype.Repository;
 @Import(AppConfig.class)
 public class MybatisConfig {
     
+    private static final String MAPPER_PACKAGE_NAME = "com.art2cat.dev.jpademo.mybatis.mapper";
+    private static final String BASE_PACKAGE_NAME = "com.art2cat.dev.jpa";
+    
     @Autowired
     private AppConfig appConfig;
     
@@ -33,27 +36,22 @@ public class MybatisConfig {
         configuration.setDefaultExecutorType(ExecutorType.REUSE);
         configuration.setLazyLoadingEnabled(true);
         configuration.setDefaultStatementTimeout(25000);
-        configuration.addMappers("com.art2cat.dev.jpademo.mybatis.mapper");
+        configuration.addMappers(MAPPER_PACKAGE_NAME);
         return configuration;
     }
     
     @Bean
     @Scope("prototype")
-    public SqlSessionFactoryBean sqlSessionFactory() {
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(appConfig.dataSource());
         sqlSessionFactory.setConfiguration(configuration());
-        return sqlSessionFactory;
+        return (SqlSessionFactory) sqlSessionFactory.getObject();
     }
     
     @Bean
-    public SqlSessionTemplate sqlSessionTemplate() {
-        try {
-            return new SqlSessionTemplate(sqlSessionFactory().getObject());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public SqlSessionTemplate sqlSessionTemplate() throws Exception {
+        return new SqlSessionTemplate(sqlSessionFactory());
     }
     
     @Bean
@@ -64,7 +62,7 @@ public class MybatisConfig {
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer scannerConfigurer = new MapperScannerConfigurer();
-        scannerConfigurer.setBasePackage("com.art2cat.dev.jpa");
+        scannerConfigurer.setBasePackage(BASE_PACKAGE_NAME);
         scannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionTemplate");
         scannerConfigurer.setAnnotationClass(Repository.class);
         return scannerConfigurer;

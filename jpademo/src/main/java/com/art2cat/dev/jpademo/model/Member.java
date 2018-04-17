@@ -46,4 +46,14 @@ public class Member {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+    
+    @Override
+    public String toString() {
+        return "Member{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", salary=" + salary +
+            ", birthday=" + birthday +
+            '}';
+    }
 }

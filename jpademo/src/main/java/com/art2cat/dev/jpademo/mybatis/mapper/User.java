@@ -73,4 +73,17 @@ public class User {
     public void setNote(String note) {
         this.note = note;
     }
+    
+    @Override
+    public String toString() {
+        return "User{" +
+            "id=" + id +
+            ", userName='" + userName + '\'' +
+            ", birthDay=" + birthDay +
+            ", sex='" + sex + '\'' +
+            ", mobile='" + mobile + '\'' +
+            ", email='" + email + '\'' +
+            ", note='" + note + '\'' +
+            '}';
+    }
 }
