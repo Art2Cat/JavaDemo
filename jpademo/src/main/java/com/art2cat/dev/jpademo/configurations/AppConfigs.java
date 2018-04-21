@@ -1,9 +1,11 @@
 package com.art2cat.dev.jpademo.configurations;
 
 import com.art2cat.dev.jpademo.jdbc.JdbcTemplate;
+
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.util.StringUtils;
 
 /**
  * com.art2cat.dev.jpademo.configurations
@@ -27,31 +30,40 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @EnableJpaRepositories("com.art2cat.dev.jpademo.repositories")
 @PropertySource("classpath:datasource.properties")
 public class AppConfigs {
-    
+
     @Value("${mysql.driver}")
     private String mysqlDriver;
-    
+
     @Value("${datasource.url}")
     private String url;
-    
+
     @Value("${username}")
     private String username;
-    
+
     @Value("${password}")
     private String password;
-    
+
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
         return new PropertySourcesPlaceholderConfigurer();
     }
-    
+
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName(mysqlDriver);
-        ds.setUrl(url);
-        ds.setUsername(username);
-        ds.setPassword(password);
+        if (!StringUtils.isEmpty(mysqlDriver)) {
+            ds.setDriverClassName(mysqlDriver);
+        } else {
+            ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        }
+        if (!StringUtils.isEmpty(url)) {
+            ds.setUrl(url);
+        } else {
+            ds.setUrl("jdbc:mysql://104.225.238.185:3306/mysql?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull");
+
+        }
+        ds.setUsername(StringUtils.isEmpty(username) ? "root" : username);
+        ds.setPassword(StringUtils.isEmpty(password) ? "password" : password);
         Properties properties = new Properties();
         properties.setProperty("maxActive", "50");
         properties.setProperty("maxIdle", "30");
@@ -59,17 +71,17 @@ public class AppConfigs {
         ds.setConnectionProperties(properties);
         return ds;
     }
-    
+
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
-    
+
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
     }
-    
+
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
@@ -77,7 +89,7 @@ public class AppConfigs {
 //        jpaVendorAdapter.setGenerateDdl(true);
         return jpaVendorAdapter;
     }
-    
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean lemfb = new LocalContainerEntityManagerFactoryBean();
@@ -86,5 +98,5 @@ public class AppConfigs {
         lemfb.setPackagesToScan("com.art2cat.dev.jpademo");
         return lemfb;
     }
-    
+
 }

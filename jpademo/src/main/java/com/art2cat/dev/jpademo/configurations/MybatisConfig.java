@@ -15,6 +15,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
+
 /**
  * com.art2cat.dev.jpademo.configurations
  *
@@ -29,7 +31,7 @@ public class MybatisConfig {
     private static final String BASE_PACKAGE_NAME = "com.art2cat.dev.jpademo.repositories";
     
     @Autowired
-    private AppConfigs appConfigs;
+    private DataSource dataSource;
     
     @Bean
     public org.apache.ibatis.session.Configuration configuration() {
@@ -56,27 +58,35 @@ public class MybatisConfig {
     @Scope("prototype")
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-        sqlSessionFactory.setDataSource(appConfigs.dataSource());
+        sqlSessionFactory.setDataSource(dataSource);
         sqlSessionFactory.setMapperLocations(mappers());
         sqlSessionFactory.setConfiguration(configuration());
+        sqlSessionFactory.setTypeAliasesPackage(MAPPER_PACKAGE_NAME);
         return sqlSessionFactory.getObject();
     }
     
-    @Bean
+    @Bean(name = "sqlSessionTemplate")
     public SqlSessionTemplate sqlSessionTemplate() throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory());
     }
     
     @Bean
     public DataSourceTransactionManager dataSourceTransactionManager() {
-        return new DataSourceTransactionManager(appConfigs.dataSource());
+        return new DataSourceTransactionManager(dataSource);
     }
-    
+
+    /**
+     * Why this bean should be defined as static?
+     * If it is not static, then could not inject datasource bean from AppConfigs.
+     * And maybe conflict with PropertySourcesPlaceholderConfigurer.
+     * TODO: Need more research...
+     * @return
+     */
     @Bean
-    public MapperScannerConfigurer mapperScannerConfigurer() {
+    public static MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer scannerConfigurer = new MapperScannerConfigurer();
         scannerConfigurer.setBasePackage(BASE_PACKAGE_NAME);
-        scannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionTemplate");
+//        scannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionTemplate");
         scannerConfigurer.setAnnotationClass(Repository.class);
         return scannerConfigurer;
     }
