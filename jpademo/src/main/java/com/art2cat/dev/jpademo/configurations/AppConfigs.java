@@ -60,7 +60,6 @@ public class AppConfigs {
             ds.setUrl(url);
         } else {
             ds.setUrl("jdbc:mysql://104.225.238.185:3306/mysql?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull");
-
         }
         ds.setUsername(StringUtils.isEmpty(username) ? "root" : username);
         ds.setPassword(StringUtils.isEmpty(password) ? "password" : password);
@@ -86,7 +85,9 @@ public class AppConfigs {
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setDatabase(Database.MYSQL);
-//        jpaVendorAdapter.setGenerateDdl(true);
+        jpaVendorAdapter.setShowSql(true);
+        jpaVendorAdapter.setGenerateDdl(false);
+        jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.HSQLDialect");
         return jpaVendorAdapter;
     }
 

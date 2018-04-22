@@ -1,8 +1,8 @@
 package com.art2cat.dev.jpademo.jdbc;
 
 import com.art2cat.dev.jpademo.configurations.AppConfigs;
-import com.art2cat.dev.jpademo.model.Book;
-import com.art2cat.dev.jpademo.model.BookCategory;
+import com.art2cat.dev.jpademo.models.Book;
+import com.art2cat.dev.jpademo.models.BookCategory;
 import com.art2cat.dev.jpademo.repositories.BookCategoryRepository;
 import java.util.HashSet;
 import java.util.Set;

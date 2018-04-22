@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -27,8 +26,8 @@ import javax.sql.DataSource;
 @Import(AppConfigs.class)
 public class MybatisConfig {
     
-    private static final String MAPPER_PACKAGE_NAME = "com.art2cat.dev.jpademo.mybatis.mapper";
-    private static final String BASE_PACKAGE_NAME = "com.art2cat.dev.jpademo.repositories";
+    private static final String MODEL_PACKAGE_NAME = "com.art2cat.dev.jpademo.models";
+    private static final String BASE_PACKAGE_NAME = "com.art2cat.dev.jpademo";
     
     @Autowired
     private DataSource dataSource;
@@ -41,7 +40,6 @@ public class MybatisConfig {
         configuration.setDefaultExecutorType(ExecutorType.REUSE);
         configuration.setLazyLoadingEnabled(true);
         configuration.setDefaultStatementTimeout(25000);
-        configuration.addMappers(MAPPER_PACKAGE_NAME);
         return configuration;
     }
     
@@ -61,18 +59,13 @@ public class MybatisConfig {
         sqlSessionFactory.setDataSource(dataSource);
         sqlSessionFactory.setMapperLocations(mappers());
         sqlSessionFactory.setConfiguration(configuration());
-        sqlSessionFactory.setTypeAliasesPackage(MAPPER_PACKAGE_NAME);
+        sqlSessionFactory.setTypeAliasesPackage(MODEL_PACKAGE_NAME);
         return sqlSessionFactory.getObject();
     }
     
     @Bean(name = "sqlSessionTemplate")
     public SqlSessionTemplate sqlSessionTemplate() throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory());
-    }
-    
-    @Bean
-    public DataSourceTransactionManager dataSourceTransactionManager() {
-        return new DataSourceTransactionManager(dataSource);
     }
 
     /**

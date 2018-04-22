@@ -1,6 +1,6 @@
 package com.art2cat.dev.jpademo.services.controller;
 
-import com.art2cat.dev.jpademo.mybatis.mapper.Role;
+import com.art2cat.dev.jpademo.models.Role;
 import com.art2cat.dev.jpademo.services.impl.RoleServiceImpl;
 import java.util.List;
 import java.util.stream.Collectors;

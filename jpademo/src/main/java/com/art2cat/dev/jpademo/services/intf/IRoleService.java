@@ -1,6 +1,6 @@
 package com.art2cat.dev.jpademo.services.intf;
 
-import com.art2cat.dev.jpademo.mybatis.mapper.Role;
+import com.art2cat.dev.jpademo.models.Role;
 import java.util.List;
 import org.springframework.validation.Errors;
 

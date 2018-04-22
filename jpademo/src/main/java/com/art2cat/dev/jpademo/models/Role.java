@@ -1,4 +1,4 @@
-package com.art2cat.dev.jpademo.mybatis.mapper;
+package com.art2cat.dev.jpademo.models;
 
 import java.util.Date;
 

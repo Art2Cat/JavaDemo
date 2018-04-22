@@ -1,6 +1,6 @@
 package com.art2cat.dev.jpademo.services.controller;
 
-import com.art2cat.dev.jpademo.mybatis.mapper.User;
+import com.art2cat.dev.jpademo.models.User;
 import com.art2cat.dev.jpademo.services.impl.UserServiceImpl;
 import java.util.List;
 import java.util.stream.Collectors;

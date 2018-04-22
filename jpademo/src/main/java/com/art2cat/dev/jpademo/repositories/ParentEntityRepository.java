@@ -1,6 +1,6 @@
 package com.art2cat.dev.jpademo.repositories;
 
-import com.art2cat.dev.jpademo.model.ParentEntity;
+import com.art2cat.dev.jpademo.models.ParentEntity;
 import org.springframework.data.repository.CrudRepository;
 
 /**

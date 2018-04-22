@@ -1,6 +1,6 @@
 package com.art2cat.dev.jpademo.repositories;
 
-import com.art2cat.dev.jpademo.mybatis.mapper.Role;
+import com.art2cat.dev.jpademo.models.Role;
 import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;

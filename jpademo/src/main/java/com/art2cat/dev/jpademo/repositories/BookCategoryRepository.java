@@ -1,6 +1,6 @@
 package com.art2cat.dev.jpademo.repositories;
 
-import com.art2cat.dev.jpademo.model.BookCategory;
+import com.art2cat.dev.jpademo.models.BookCategory;
 import org.springframework.data.repository.CrudRepository;
 
 /**

@@ -1,4 +1,4 @@
-package com.art2cat.dev.jpademo.model;
+package com.art2cat.dev.jpademo.models;
 
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * com.art2cat.dev.jpademo.model
+ * com.art2cat.dev.jpademo.models
  *
  * @author rorschach
  * @date 4/13/18

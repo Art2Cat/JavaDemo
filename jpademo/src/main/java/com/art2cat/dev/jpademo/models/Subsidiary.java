@@ -1,4 +1,4 @@
-package com.art2cat.dev.jpademo.model;
+package com.art2cat.dev.jpademo.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * com.art2cat.dev.jpademo.model
+ * com.art2cat.dev.jpademo.models
  *
  * @author rorschach
  * @date 4/11/18
