@@ -18,23 +18,21 @@ def insert_role():
 
 
 def get_role():
-	url = 'http://localhost:7477/role/getRole?id=1003'
-    response = requests.get(url)
+    response = requests.get('http://localhost:7477/role/getRole?id=1')
     print(response.text)
 
 
 def update_role():
-	url = 'http://localhost:7477/role/updateRole'
-	role = {'id':1003, 'roleName': 'Vender', 'createDate': '2018-4-22',
-            'note': 'this is test role'}
+    url = "http://localhost:7477/role/updateRole"
+    role = {'id': 1003, 'roleName': 'Vender', 'createDate': '2018-4-22', 'note': 'this is test role'}
     headers = {'content-type': 'application/json'}
-    r = requests.put(url, data=json.dumps(role), headers=headers)
+    r = requests.put(url=url, data=json.dumps(role), headers=headers)
     print(r.headers)
     print(r.text)
 
 
 def delete_role():
-    url = 'http://localhost:7477/role/deleteRole?id=1003'
+    url = 'http://localhost:7477/role/deleteRole?id=2'
     response = requests.delete(url)
     print(response.text)
 

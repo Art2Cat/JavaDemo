@@ -1,8 +1,8 @@
 package com.art2cat.dev.jpademo.services.intf;
 
 import com.art2cat.dev.jpademo.models.Role;
+
 import java.util.List;
-import org.springframework.validation.Errors;
 
 /**
  * com.art2cat.dev.jpademo.services.intf
@@ -12,9 +12,9 @@ import org.springframework.validation.Errors;
  */
 public interface IRoleService {
     
-    int insertRole(Role role, Errors errors);
+    int insertRole(Role role);
     
-    int updateRole(Role role, Errors errors);
+    int updateRole(Role role);
     
     int deleteRole(Integer id);
     

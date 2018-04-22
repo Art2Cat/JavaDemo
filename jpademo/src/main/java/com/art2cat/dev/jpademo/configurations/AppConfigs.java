@@ -1,11 +1,7 @@
 package com.art2cat.dev.jpademo.configurations;
 
 import com.art2cat.dev.jpademo.jdbc.JdbcTemplate;
-
-import java.util.Properties;
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +14,12 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * com.art2cat.dev.jpademo.configurations
@@ -27,6 +28,7 @@ import org.springframework.util.StringUtils;
  * @date 4/12/18
  */
 @Configuration
+@EnableTransactionManagement
 @EnableJpaRepositories("com.art2cat.dev.jpademo.repositories")
 @PropertySource("classpath:datasource.properties")
 public class AppConfigs {
@@ -37,10 +39,10 @@ public class AppConfigs {
     @Value("${datasource.url}")
     private String url;
 
-    @Value("${username}")
+    @Value("${mysql.username}")
     private String username;
 
-    @Value("${password}")
+    @Value("${mysql.password}")
     private String password;
 
     @Bean
@@ -87,16 +89,17 @@ public class AppConfigs {
         jpaVendorAdapter.setDatabase(Database.MYSQL);
         jpaVendorAdapter.setShowSql(true);
         jpaVendorAdapter.setGenerateDdl(false);
-        jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.HSQLDialect");
+        jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
         return jpaVendorAdapter;
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    @Autowired
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean lemfb = new LocalContainerEntityManagerFactoryBean();
-        lemfb.setDataSource(dataSource());
-        lemfb.setJpaVendorAdapter(jpaVendorAdapter());
-        lemfb.setPackagesToScan("com.art2cat.dev.jpademo");
+        lemfb.setDataSource(dataSource);
+        lemfb.setJpaVendorAdapter(jpaVendorAdapter);
+        lemfb.setPackagesToScan("com.art2cat.dev.jpademo.models");
         return lemfb;
     }
 

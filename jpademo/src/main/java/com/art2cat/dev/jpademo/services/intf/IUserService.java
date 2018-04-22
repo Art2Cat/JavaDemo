@@ -14,11 +14,11 @@ public interface IUserService {
     
     User getUser(Integer id);
     
-    int insertUser(User user, Errors errors);
+    int insertUser(User user);
     
     int deleteUser(Integer id);
     
-    int updateUser(User user, Errors errors);
+    int updateUser(User user);
     
     List<User> findUsers(String userName, int start, int limit);
 }

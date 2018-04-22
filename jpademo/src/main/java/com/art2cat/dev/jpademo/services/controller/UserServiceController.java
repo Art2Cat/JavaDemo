@@ -1,21 +1,17 @@
 package com.art2cat.dev.jpademo.services.controller;
 
 import com.art2cat.dev.jpademo.models.User;
-import com.art2cat.dev.jpademo.services.impl.UserServiceImpl;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.validation.Valid;
+import com.art2cat.dev.jpademo.services.intf.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * com.art2cat.dev.jpademo.services.controller
@@ -28,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserServiceController {
     
     @Autowired
-    private UserServiceImpl userService;
+    private IUserService userService;
     
     @RequestMapping(value = "/getUser", method = RequestMethod.GET)
     public User getUser(@RequestParam(value = "id") Integer id) {
@@ -48,7 +44,7 @@ public class UserServiceController {
             
             return ResponseEntity.badRequest().body(result);
         }
-        int returnCode = userService.insertUser(user, errors);
+        int returnCode = userService.insertUser(user);
         return ResponseEntity.ok(returnCode);
     }
     
@@ -69,7 +65,7 @@ public class UserServiceController {
             
             return ResponseEntity.badRequest().body(result);
         }
-        int returnCode = userService.updateUser(user, errors);
+        int returnCode = userService.updateUser(user);
         return ResponseEntity.ok(returnCode);
     }
     

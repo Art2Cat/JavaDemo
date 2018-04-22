@@ -25,13 +25,13 @@ import javax.sql.DataSource;
 @Configuration
 @Import(AppConfigs.class)
 public class MybatisConfig {
-    
+
     private static final String MODEL_PACKAGE_NAME = "com.art2cat.dev.jpademo.models";
     private static final String BASE_PACKAGE_NAME = "com.art2cat.dev.jpademo";
-    
+
     @Autowired
     private DataSource dataSource;
-    
+
     @Bean
     public org.apache.ibatis.session.Configuration configuration() {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
@@ -42,16 +42,15 @@ public class MybatisConfig {
         configuration.setDefaultStatementTimeout(25000);
         return configuration;
     }
-    
-    
+
+
     @Bean
     public Resource[] mappers() {
-        Resource roleMapper = new ClassPathResource("mapper_role.xml");
         Resource userMapper = new ClassPathResource("mapper_user.xml");
-        return new Resource[]{roleMapper, userMapper};
+        return new Resource[]{userMapper};
     }
-    
-    
+
+
     @Bean
     @Scope("prototype")
     public SqlSessionFactory sqlSessionFactory() throws Exception {
@@ -62,7 +61,7 @@ public class MybatisConfig {
         sqlSessionFactory.setTypeAliasesPackage(MODEL_PACKAGE_NAME);
         return sqlSessionFactory.getObject();
     }
-    
+
     @Bean(name = "sqlSessionTemplate")
     public SqlSessionTemplate sqlSessionTemplate() throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory());
@@ -73,6 +72,7 @@ public class MybatisConfig {
      * If it is not static, then could not inject datasource bean from AppConfigs.
      * And maybe conflict with PropertySourcesPlaceholderConfigurer.
      * TODO: Need more research...
+     *
      * @return
      */
     @Bean

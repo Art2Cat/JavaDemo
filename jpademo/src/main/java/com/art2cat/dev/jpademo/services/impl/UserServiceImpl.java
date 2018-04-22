@@ -32,7 +32,7 @@ public class UserServiceImpl implements IUserService {
     
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public int insertUser(User user, Errors errors) {
+    public int insertUser(User user) {
         return userRepository.insertUser(user);
     }
     
@@ -44,7 +44,7 @@ public class UserServiceImpl implements IUserService {
     
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-    public int updateUser(User user, Errors errors) {
+    public int updateUser(User user) {
         return userRepository.updateUser(user);
     }
     
