@@ -8,6 +8,7 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

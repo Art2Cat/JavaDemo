@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
  */
 public class VehicleProxy implements InvocationHandler {
     
-    private Object vehicle;
+    private IVehicle vehicle;
     
     public VehicleProxy(IVehicle vehicle) {
         this.vehicle = vehicle;

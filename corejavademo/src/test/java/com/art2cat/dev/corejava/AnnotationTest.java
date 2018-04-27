@@ -4,6 +4,7 @@ import com.art2cat.dev.effective_java.Cat;
 import com.art2cat.dev.effective_java.LookUp;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import org.junit.Test;
 
 /**
  * com.art2cat.dev.corejava
