@@ -19,10 +19,13 @@ public class Cat extends Mammalian {
         return name;
     }
 
+    @Override
+    @LookUp
     public String getYell() {
         return yell;
     }
 
+    @Override
     public void setYell(String yell) {
         this.yell = yell;
     }
