@@ -1,6 +1,12 @@
 package com.art2cat.dev.jpademo.models;
 
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * com.art2cat.dev.jpademo.mybatis.mapper
@@ -8,14 +14,30 @@ import java.util.Date;
  * @author rorschach
  * @date 4/15/18
  */
+@Entity
+@Table(name = "users")
 public class User {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    
+    @Column(name = "user_name", nullable = false)
     private String userName;
+    
+    @Column(name = "birth_day")
     private Date birthDay;
+    
+    @Column(name = "sex")
     private String sex;
+    
+    @Column(name = "mobile")
     private String mobile;
+    
+    @Column(name = "email")
     private String email;
+    
+    @Column(name = "note")
     private String note;
     
     public Integer getId() {

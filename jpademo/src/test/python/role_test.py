@@ -24,7 +24,8 @@ def get_role():
 
 def update_role():
     url = "http://localhost:7477/role/updateRole"
-    role = {'id': 1003, 'roleName': 'Vender', 'createDate': '2018-4-22', 'note': 'this is test role'}
+    role = {'id': 1003, 'roleName': 'Vender', 'createDate': '2018-4-22',
+            'note': 'this is test role'}
     headers = {'content-type': 'application/json'}
     r = requests.put(url=url, data=json.dumps(role), headers=headers)
     print(r.headers)

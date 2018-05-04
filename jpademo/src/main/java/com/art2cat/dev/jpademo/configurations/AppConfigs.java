@@ -32,24 +32,24 @@ import java.util.Properties;
 @EnableJpaRepositories("com.art2cat.dev.jpademo.repositories")
 @PropertySource("classpath:datasource.properties")
 public class AppConfigs {
-
+    
     @Value("${mysql.driver}")
     private String mysqlDriver;
-
+    
     @Value("${datasource.url}")
     private String url;
-
+    
     @Value("${mysql.username}")
     private String username;
-
+    
     @Value("${mysql.password}")
     private String password;
-
+    
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
         return new PropertySourcesPlaceholderConfigurer();
     }
-
+    
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
@@ -61,10 +61,12 @@ public class AppConfigs {
         if (!StringUtils.isEmpty(url)) {
             ds.setUrl(url);
         } else {
-            ds.setUrl("jdbc:mysql://104.225.238.185:3306/mysql?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull");
+            ds.setUrl(
+                "jdbc:mysql://104.225.238.185:3306/mysql?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=CONVERT_TO_NULL");
         }
         ds.setUsername(StringUtils.isEmpty(username) ? "root" : username);
         ds.setPassword(StringUtils.isEmpty(password) ? "password" : password);
+        ds.setSchema("mysql");
         Properties properties = new Properties();
         properties.setProperty("maxActive", "50");
         properties.setProperty("maxIdle", "30");
@@ -72,35 +74,35 @@ public class AppConfigs {
         ds.setConnectionProperties(properties);
         return ds;
     }
-
+    
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
-
+    
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
     }
-
+    
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setDatabase(Database.MYSQL);
         jpaVendorAdapter.setShowSql(true);
-        jpaVendorAdapter.setGenerateDdl(false);
+        jpaVendorAdapter.setGenerateDdl(true);
         jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
         return jpaVendorAdapter;
     }
-
+    
     @Bean
-    @Autowired
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
+        JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean lemfb = new LocalContainerEntityManagerFactoryBean();
         lemfb.setDataSource(dataSource);
         lemfb.setJpaVendorAdapter(jpaVendorAdapter);
         lemfb.setPackagesToScan("com.art2cat.dev.jpademo.models");
         return lemfb;
     }
-
+    
 }
