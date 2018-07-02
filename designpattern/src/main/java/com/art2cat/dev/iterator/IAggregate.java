@@ -1,0 +1,12 @@
+package com.art2cat.dev.iterator;
+
+/**
+ * com.art2cat.dev.iterator
+ *
+ * @author art2c
+ * @date 5/15/2018
+ */
+public interface IAggregate {
+    
+    IIterator iterator();
+}

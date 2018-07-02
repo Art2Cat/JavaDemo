@@ -2,6 +2,7 @@ package com.art2cat.dev;
 
 import java.util.ArrayList;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 import org.junit.Test;
 
 /**
@@ -46,5 +47,18 @@ public class StringJoinerTest {
         System.out.println(sj1.toString());
         
         System.out.println("Length of new sj1 : " + sj1.length());
+    }
+    
+    @Test
+    public void test1() {
+        ArrayList<String> al = new ArrayList<>();
+    
+        al.add("Ram");
+        al.add("Shyam");
+        al.add("Alice");
+        al.add("Bob");
+    
+        String ss = al.stream().collect(Collectors.joining(","));
+        System.out.println(ss);
     }
 }
