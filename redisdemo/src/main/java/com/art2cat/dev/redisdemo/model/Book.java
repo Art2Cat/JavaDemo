@@ -1,4 +1,4 @@
-package com.art2cat.dev.dedisdemo.model;
+package com.art2cat.dev.redisdemo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * com.art2cat.dev.dedisdemo
+ * com.art2cat.dev.redisdemo
  *
  * @author art2c
  * @date 7/4/2018
