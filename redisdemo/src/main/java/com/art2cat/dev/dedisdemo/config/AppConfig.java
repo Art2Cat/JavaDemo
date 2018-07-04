@@ -1,4 +1,4 @@
-package com.art2cat.dev.dedisdemo;
+package com.art2cat.dev.dedisdemo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
