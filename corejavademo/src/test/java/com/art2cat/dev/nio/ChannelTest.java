@@ -22,20 +22,21 @@ public class ChannelTest {
     @Test
     public void basicChannel() {
         Path path = Paths.get("src", "test", "resources", "text.txt");
-        try (RandomAccessFile randomAccessFile = new RandomAccessFile(path.toString(), "rw")) {
-            try (FileChannel inChannel = randomAccessFile.getChannel()) {
-                ByteBuffer buffer = ByteBuffer.allocate(48);
-                int byteReads = inChannel.read(buffer);
-                for (; byteReads != -1; byteReads = inChannel.read(buffer)) {
-                    System.out.println("Read " + byteReads);
-                    buffer.flip();
-                    
-                    while (buffer.hasRemaining()) {
-                        System.out.println((char) buffer.get());
-                    }
-                    buffer.clear();
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile(path.toString(), "rw");
+            FileChannel inChannel = randomAccessFile.getChannel()) {
+            
+            ByteBuffer buffer = ByteBuffer.allocate(48);
+            int byteReads = inChannel.read(buffer);
+            for (; byteReads != -1; byteReads = inChannel.read(buffer)) {
+                System.out.println("Read " + byteReads);
+                buffer.flip();
+                
+                while (buffer.hasRemaining()) {
+                    System.out.println((char) buffer.get());
                 }
+                buffer.clear();
             }
+            
         } catch (java.io.IOException e) {
             e.printStackTrace();
             Assert.fail();
@@ -47,12 +48,11 @@ public class ChannelTest {
         Path fromFile = Paths.get("src", "test", "resources", "text.txt");
         Path toFile = Paths.get("src", "test", "resources", "nio.txt");
         
-        try (FileChannel fromChannel = FileChannel.open(fromFile)) {
-            try (FileChannel toChannel = FileChannel.open(toFile)) {
-                long position = 0;
-                long count = fromChannel.size();
-                toChannel.transferFrom(fromChannel, position, count);
-            }
+        try (FileChannel fromChannel = FileChannel.open(fromFile); FileChannel toChannel = FileChannel.open(toFile)) {
+            long position = 0;
+            long count = fromChannel.size();
+            toChannel.transferFrom(fromChannel, position, count);
+            
         } catch (IOException e) {
             e.printStackTrace();
             Assert.fail();
@@ -64,12 +64,11 @@ public class ChannelTest {
         Path fromFile = Paths.get("src", "test", "resources", "text.txt");
         Path toFile = Paths.get("src", "test", "resources", "nio.txt");
         
-        try (FileChannel fromChannel = FileChannel.open(fromFile)) {
-            try (FileChannel toChannel = FileChannel.open(toFile)) {
-                long position = 0;
-                long count = fromChannel.size();
-                fromChannel.transferTo(position, count, toChannel);
-            }
+        try (FileChannel fromChannel = FileChannel.open(fromFile); FileChannel toChannel = FileChannel.open(toFile)) {
+            long position = 0;
+            long count = fromChannel.size();
+            fromChannel.transferTo(position, count, toChannel);
+            
         } catch (IOException e) {
             e.printStackTrace();
             Assert.fail();
@@ -91,7 +90,7 @@ public class ChannelTest {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-    
+        
     }
     
 }

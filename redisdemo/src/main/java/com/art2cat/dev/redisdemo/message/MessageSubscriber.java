@@ -2,6 +2,7 @@ package com.art2cat.dev.redisdemo.message;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.connection.Message;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
+@Slf4j
 public class MessageSubscriber implements MessageListener {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageSubscriber.class);
@@ -28,6 +30,6 @@ public class MessageSubscriber implements MessageListener {
     @Override
     public void onMessage(final Message message, final byte[] pattern) {
         MESSAGE_LIST.add(message.toString());
-        System.out.println("Message received: " + new String(message.getBody()));
+        log.info("Message received: " + new String(message.getBody()));
     }
 }

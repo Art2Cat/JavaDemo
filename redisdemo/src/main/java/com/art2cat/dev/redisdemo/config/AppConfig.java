@@ -3,7 +3,9 @@ package com.art2cat.dev.redisdemo.config;
 import com.art2cat.dev.redisdemo.message.IMessagePublisher;
 import com.art2cat.dev.redisdemo.message.MessagePublisherImpl;
 import com.art2cat.dev.redisdemo.message.MessageSubscriber;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -19,24 +21,22 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
  * @date 7/3/18
  */
 @Configuration
+@ComponentScan("com.art2cat.dev.redisdemo")
 public class AppConfig {
     
     @Bean
-    private JedisConnectionFactory jedisConnectionFactory() {
-        return new JedisConnectionFactory();
-    }
-    
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
+    @ConditionalOnMissingBean(name = "redisTemplate")
+    public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory) {
         final RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(jedisConnectionFactory());
+        template.setConnectionFactory(jedisConnectionFactory);
         template.setValueSerializer(new GenericToStringSerializer<>(Object.class));
         return template;
     }
     
     @Bean
-    public StringRedisTemplate stringRedisTemplate() {
-        return new StringRedisTemplate(jedisConnectionFactory());
+    @ConditionalOnMissingBean(StringRedisTemplate.class)
+    public StringRedisTemplate stringRedisTemplate(JedisConnectionFactory jedisConnectionFactory) {
+        return new StringRedisTemplate(jedisConnectionFactory);
     }
     
     @Bean
@@ -45,8 +45,8 @@ public class AppConfig {
     }
     
     @Bean
-    public IMessagePublisher redisPublisher() {
-        return new MessagePublisherImpl(redisTemplate(), topic());
+    public IMessagePublisher redisPublisher(RedisTemplate<String, Object> redisTemplate) {
+        return new MessagePublisherImpl(redisTemplate, topic());
     }
     
     @Bean
