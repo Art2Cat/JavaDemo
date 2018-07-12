@@ -4,9 +4,11 @@ import com.art2cat.dev.redisdemo.message.IMessagePublisher;
 import com.art2cat.dev.redisdemo.message.MessagePublisherImpl;
 import com.art2cat.dev.redisdemo.message.MessageSubscriber;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -52,5 +54,12 @@ public class AppConfig {
     @Bean
     public MessageListenerAdapter messageListener() {
         return new MessageListenerAdapter(new MessageSubscriber());
+    }
+    
+    @SuppressWarnings("rawtypes")
+    @Bean
+    public CacheManager cacheManager(JedisConnectionFactory jedisConnectionFactory) {
+        RedisCacheManager rcm = RedisCacheManager.create(jedisConnectionFactory);
+        return rcm;
     }
 }

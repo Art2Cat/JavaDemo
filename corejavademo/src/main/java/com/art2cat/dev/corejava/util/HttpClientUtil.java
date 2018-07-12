@@ -40,19 +40,17 @@ public class HttpClientUtil {
         
         String result = null;
         HttpGet httpget = new HttpGet(url);
-        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            try (CloseableHttpResponse httpResponse = httpClient.execute(httpget)) {
-                HttpEntity entity = httpResponse.getEntity();
-                if (entity != null) {
-                    result = EntityUtils.toString(entity);
-                }
-                
-            } catch (IOException e) {
-                e.printStackTrace();
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse httpResponse = httpClient.execute(httpget)) {
+            HttpEntity entity = httpResponse.getEntity();
+            if (entity != null) {
+                result = EntityUtils.toString(entity);
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
         return result;
     }
     
@@ -71,19 +69,17 @@ public class HttpClientUtil {
             UrlEncodedFormEntity paramEntity = new UrlEncodedFormEntity(formParams, Consts.UTF_8);
             httpPost.setEntity(paramEntity);
         }
-        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            try (CloseableHttpResponse httpResponse = httpClient.execute(httpPost)) {
-                HttpEntity entity = httpResponse.getEntity();
-                if (entity != null) {
-                    result = EntityUtils.toString(entity);
-                }
-                
-            } catch (IOException e) {
-                e.printStackTrace();
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse httpResponse = httpClient.execute(httpPost)) {
+            HttpEntity entity = httpResponse.getEntity();
+            if (entity != null) {
+                result = EntityUtils.toString(entity);
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
         return result;
     }
     
@@ -106,24 +102,18 @@ public class HttpClientUtil {
             httpPost.setEntity(paramEntity);
         }
         //do not set connection manager
-        try (CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslsf)
-            .build()) {
-            
-            try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
-                if (response != null) {
-                    HttpEntity resEntity = response.getEntity();
-                    if (resEntity != null) {
-                        result = EntityUtils.toString(resEntity, Consts.UTF_8);
-                    }
+        try (CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+            CloseableHttpResponse response = httpClient.execute(httpPost)) {
+            if (response != null) {
+                HttpEntity resEntity = response.getEntity();
+                if (resEntity != null) {
+                    result = EntityUtils.toString(resEntity, Consts.UTF_8);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-            
-            
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        
         return result;
     }
     
@@ -136,16 +126,13 @@ public class HttpClientUtil {
         HttpPost httpPost = new HttpPost(url);
         
         String result = null;
-        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            try (CloseableHttpResponse httpResponse = httpClient.execute(httpPost)) {
-                HttpEntity entity = httpResponse.getEntity();
-                if (entity != null) {
-                    result = EntityUtils.toString(entity);
-                }
-                
-            } catch (IOException e) {
-                e.printStackTrace();
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse httpResponse = httpClient.execute(httpPost)) {
+            HttpEntity entity = httpResponse.getEntity();
+            if (entity != null) {
+                result = EntityUtils.toString(entity);
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

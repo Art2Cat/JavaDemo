@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+  <meta charset="UTF-8">
+  <title>User Detail</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        rel="stylesheet"/>
+  <script rel="script" th:href="@{/index.js}"></script>
+</head>
+<body>
+<h2>User Detail</h2>
+<div>
+  <p>
+    <span th:text="${user.id}">ID: </span><br>
+    <span th:text="${user.name}">Username: </span><br>
+    <span th:text="${user.email}">Email: </span><br>
+  </p>
+</div>
+<a href="@Url.Action('/user/')" class="btn btn-success"> <i
+    class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to User List</a>
+
+</body>
+</html>

@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class SocketTest {
     
-    public static final String HOST = "time-A.timefreq.bldrdoc.gov";
+    static final String HOST = "time-A.timefreq.bldrdoc.gov";
     
     public static void main(String[] args) {
         socket();
@@ -16,11 +16,9 @@ public class SocketTest {
     }
     
     private static void socket() {
-        try (Socket s = new Socket(HOST, 13)) {
+        try (Socket s = new Socket(HOST, 13); Scanner in = new Scanner(s.getInputStream())) {
             // time out after 10 seconds
             s.setSoTimeout(10000);
-            InputStream inputStream = s.getInputStream();
-            Scanner in = new Scanner(inputStream);
             while (in.hasNextLine()) {
                 String line = in.nextLine();
                 System.out.println(line);
@@ -34,13 +32,13 @@ public class SocketTest {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(HOST, 13), 10000);
             if (socket.isConnected()) {
+                Scanner in = new Scanner(socket.getInputStream());
                 System.out.println("socket is connected!");
-                InputStream inputStream = socket.getInputStream();
-                Scanner in = new Scanner(inputStream);
                 while (in.hasNextLine()) {
                     String line = in.nextLine();
                     System.out.println(line);
                 }
+                in.close();
             }
         } catch (IOException e) {
             e.printStackTrace();

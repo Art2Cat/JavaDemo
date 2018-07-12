@@ -15,20 +15,16 @@ public class EchoServer {
         // establish server socket
         try (ServerSocket serverSocket = new ServerSocket(8964)) {
             // wait for client connection
-            try (Socket incoming = serverSocket.accept()) {
-                InputStream inputStream = incoming.getInputStream();
-                OutputStream outputStream = incoming.getOutputStream();
-                try (Scanner scanner = new Scanner(inputStream)) {
-                    PrintWriter out = new PrintWriter(outputStream, true);
-                    out.println("Hello! Enter BYE to exit.");
-                    
-                    boolean done = false;
-                    while (!done && scanner.hasNextLine()) {
-                        String line = scanner.nextLine();
-                        out.println("Echo: " + line);
-                        if ("bye".equals(line.trim().toLowerCase())) {
-                            done = true;
-                        }
+            try (Socket incoming = serverSocket.accept(); Scanner scanner = new Scanner(incoming.getInputStream());
+                PrintWriter out = new PrintWriter(incoming.getOutputStream(), true)) {
+                out.println("Hello! Enter BYE to exit.");
+                
+                boolean done = false;
+                while (!done && scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    out.println("Echo: " + line);
+                    if ("bye".equals(line.trim().toLowerCase())) {
+                        done = true;
                     }
                 }
             }

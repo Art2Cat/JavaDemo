@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+  <meta charset="UTF-8">
+  <title>User List</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        rel="stylesheet"/>
+  <script rel="script" th:href="@{/index.js}"></script>
+</head>
+<body>
+<h2>User List</h2>
+<div th:unless="${#lists.isEmpty(users)}">
+  <dl th:each="user : ${users}">
+
+    <dt class="bookHeadline">
+      <a th:href="@{/user/${user.id}}">
+        <span>ID: </span>
+        <span th:text="${user.id}">ID: </span>
+        <span th:text="${user.name}">Username: </span>
+      </a>
+    </dt>
+  </dl>
+</div>
+<div th:if="${#lists.isEmpty(users)}">
+  <p>There is no user in the user list</p>
+</div>
+<hr/>
+
+<a href="/user/add" class="btn btn-success"> <i
+    class="fa fa-arrow-circle-o-left"></i>&nbsp;Add User</a>
+
+</body>
+</html>
