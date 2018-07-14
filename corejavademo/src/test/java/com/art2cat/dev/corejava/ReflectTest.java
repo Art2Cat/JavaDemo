@@ -65,7 +65,7 @@ public class ReflectTest {
             
             Method drive = clazz.getDeclaredMethod("drive", (Class[]) null);
             drive.setAccessible(true);
-            drive.invoke(privateCar, (Class[]) null);
+            drive.invoke(privateCar, (Object) null);
         } catch (Exception e) {
             e.printStackTrace();
         }
