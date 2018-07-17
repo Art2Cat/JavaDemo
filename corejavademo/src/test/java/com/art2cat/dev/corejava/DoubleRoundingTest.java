@@ -1,6 +1,7 @@
 package com.art2cat.dev.corejava;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import org.junit.Test;
 
@@ -29,9 +30,8 @@ public class DoubleRoundingTest {
     
     @Test
     public void methodFour() {
-        BigDecimal bd = new BigDecimal(origin);
-        BigDecimal bd2 = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
-        Double result = Double.parseDouble(bd2.toString());
-        System.out.println(result); // 123.37
+        var bd = new BigDecimal(origin);
+        var bd2 = bd.setScale(2, RoundingMode.HALF_DOWN);
+        System.out.println(bd2.doubleValue()); // 123.37
     }
 }
