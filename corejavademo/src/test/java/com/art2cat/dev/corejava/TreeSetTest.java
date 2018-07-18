@@ -7,7 +7,7 @@ public class TreeSetTest {
     
     @Test
     public void testTreeSet() {
-        TreeSet<String> treeSet = new TreeSet<>();
+        var treeSet = new TreeSet<String>();
         treeSet.add("A1");
         treeSet.add("Q2");
         treeSet.add("A1");

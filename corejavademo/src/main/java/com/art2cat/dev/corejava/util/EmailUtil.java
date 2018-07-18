@@ -1,6 +1,5 @@
 package com.art2cat.dev.corejava.util;
 
-import com.sun.istack.internal.NotNull;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,7 +33,7 @@ public class EmailUtil {
     /**
      * Utility method to send simple HTML email
      */
-    public static void sendEmail(@NotNull Session session, String toEmail, String subject,
+    public static void sendEmail(Session session, String toEmail, String subject,
         String body)
         throws MessagingException {
         
@@ -65,9 +64,9 @@ public class EmailUtil {
     /**
      * Utility method to send email with attachment
      */
-    public static void sendAttachmentEmail(@NotNull Session session, String toEmail, String subject,
+    public static void sendAttachmentEmail(Session session, String toEmail, String subject,
         String body,
-        @NotNull List<String> files) throws MessagingException {
+        List<String> files) throws MessagingException {
         MimeMessage msg = new MimeMessage(session);
         msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
         msg.addHeader("format", "flowed");
@@ -149,9 +148,9 @@ public class EmailUtil {
     /**
      * Utility method to send image in email body
      */
-    public static void sendImageEmail(@NotNull Session session, String toEmail, String subject,
+    public static void sendImageEmail(Session session, String toEmail, String subject,
         String body,
-        @NotNull Map<String, String> filePaths) throws MessagingException {
+        Map<String, String> filePaths) throws MessagingException {
         MimeMessage msg = new MimeMessage(session);
         msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
         msg.addHeader("format", "flowed");
