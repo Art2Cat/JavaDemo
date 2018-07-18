@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.net.ssl.SSLContext;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
@@ -63,8 +63,9 @@ public class HttpClientUtil {
     public static String doPost(String url, Map<String, String> params) {
         String result = null;
         HttpPost httpPost = new HttpPost(url);
-        List<NameValuePair> formParams = new ArrayList<>();
-        params.forEach((key, value) -> formParams.add(new BasicNameValuePair(key, value)));
+        List<NameValuePair> formParams = params.entrySet().stream()
+            .map(entry -> new BasicNameValuePair(entry.getKey(), entry.getValue()))
+            .collect(Collectors.toList());
         if (!formParams.isEmpty()) {
             UrlEncodedFormEntity paramEntity = new UrlEncodedFormEntity(formParams, Consts.UTF_8);
             httpPost.setEntity(paramEntity);
@@ -94,8 +95,9 @@ public class HttpClientUtil {
         SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext,
             new String[]{"TLSv1"}, null, new NoopHostnameVerifier());
         
-        List<NameValuePair> formParams = new ArrayList<>();
-        params.forEach((key, value) -> formParams.add(new BasicNameValuePair(key, value)));
+        List<NameValuePair> formParams = params.entrySet().stream()
+            .map(entry -> new BasicNameValuePair(entry.getKey(), entry.getValue()))
+            .collect(Collectors.toList());
         
         if (!formParams.isEmpty()) {
             UrlEncodedFormEntity paramEntity = new UrlEncodedFormEntity(formParams, Consts.UTF_8);
