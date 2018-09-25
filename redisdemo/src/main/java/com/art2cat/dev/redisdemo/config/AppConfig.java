@@ -3,11 +3,13 @@ package com.art2cat.dev.redisdemo.config;
 import com.art2cat.dev.redisdemo.message.IMessagePublisher;
 import com.art2cat.dev.redisdemo.message.MessagePublisherImpl;
 import com.art2cat.dev.redisdemo.message.MessageSubscriber;
+import java.time.Duration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -25,10 +27,11 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 @Configuration
 @ComponentScan("com.art2cat.dev.redisdemo")
 public class AppConfig {
-    
+
     @Bean
     @ConditionalOnMissingBean(name = "redisTemplate")
-    public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate(
+        JedisConnectionFactory jedisConnectionFactory) {
         final RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory);
         template.setValueSerializer(new GenericToStringSerializer<>(Object.class));
@@ -55,11 +58,20 @@ public class AppConfig {
     public MessageListenerAdapter messageListener() {
         return new MessageListenerAdapter(new MessageSubscriber());
     }
-    
+
+    @Bean
+    public RedisCacheConfiguration cacheConfiguration() {
+        RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
+            .entryTtl(Duration.ofSeconds(600))
+            .disableCachingNullValues();
+        return cacheConfig;
+    }
+
     @SuppressWarnings("rawtypes")
     @Bean
     public CacheManager cacheManager(JedisConnectionFactory jedisConnectionFactory) {
-        RedisCacheManager rcm = RedisCacheManager.create(jedisConnectionFactory);
+        RedisCacheManager rcm = RedisCacheManager.builder(jedisConnectionFactory)
+            .cacheDefaults(cacheConfiguration()).transactionAware().build();
         return rcm;
     }
 }

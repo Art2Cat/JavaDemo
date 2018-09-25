@@ -11,17 +11,20 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TweetObserverTest {
+
     private List<Tweet> tweets;
 
     @BeforeEach
     public void before() {
-        tweets = IntStream.rangeClosed(1, 5).boxed().map(i -> {
-            Tweet tweet = new Tweet();
-            tweet.setPoster("Poster #" + i);
-            tweet.setContent("Test message #" + i);
-            tweet.setPostTime(LocalDateTime.now());
-            return tweet;
-        }).collect(Collectors.toList());
+        tweets = IntStream.rangeClosed(1, 5)
+            .boxed()
+            .map(i -> {
+                Tweet tweet = new Tweet();
+                tweet.setPoster("Poster #" + i);
+                tweet.setContent("Test message #" + i);
+                tweet.setPostTime(LocalDateTime.now());
+                return tweet;
+            }).collect(Collectors.toList());
         System.out.println("init");
     }
 

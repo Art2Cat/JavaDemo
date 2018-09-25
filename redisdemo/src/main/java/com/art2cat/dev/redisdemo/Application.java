@@ -12,7 +12,6 @@ import org.springframework.cache.annotation.EnableCaching;
  * @date 7/3/2018
  */
 
-@EnableAutoConfiguration
 @SpringBootApplication
 @EnableCaching
 public class Application {

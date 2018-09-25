@@ -34,7 +34,7 @@ public class MovieController {
     public String index(Model model) {
         List<Movie> movieList = movieRepository.findAllMovies().entrySet().stream()
             .map(entry -> new Movie((String) entry.getKey(), entry.getValue().toString())).collect(Collectors.toList());
-        if (movieList != null) {
+        if (!movieList.isEmpty()) {
             log.info("movie list size: " + movieList.size());
             model.addAttribute("movieList", movieList);
         }

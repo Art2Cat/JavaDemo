@@ -1,5 +1,6 @@
 package com.art2cat.dev.redisdemo.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Entity
-public class User {
+public class User implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
