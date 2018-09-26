@@ -19,8 +19,9 @@
     <span th:text="${user.email}">Email: </span><br>
   </p>
 </div>
-<a href="@Url.Action('/user/')" class="btn btn-success"> <i
+<form th:action ="@{thindex}" th:method="post">
+<a class="btn btn-success"> <i
     class="fa fa-arrow-circle-o-left"></i>&nbsp;Back to User List</a>
-
+</form>
 </body>
 </html>
