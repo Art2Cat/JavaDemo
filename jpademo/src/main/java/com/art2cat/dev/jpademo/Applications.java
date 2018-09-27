@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * com.art2cat.dev.jpademo
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * @author rorschach
  * @date 3/25/18
  */
-@Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "com.art2cat.dev.jpademo")
 @SpringBootApplication
