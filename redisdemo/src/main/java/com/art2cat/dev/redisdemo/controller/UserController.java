@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.thymeleaf.util.NumberUtils;
 
 /**
  * com.art2cat.dev.redisdemo.controller
@@ -27,9 +28,6 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -48,11 +46,9 @@ public class UserController {
     public String saveOrUpdateUser(User user) {
         User userDb = null;
         if (Objects.nonNull(user)) {
-            if (user.getName() != null && user.getEmail() != null) {
-
-                Optional<User> userOptional = userRepository
-                    .findById(user.getId() == null ? 0 : user.getId());
-                if (userOptional.isPresent()) {
+            if (user.notEmpty()) {
+                userDb = userService.getUserById(user.getId() == null ? 0 : user.getId());
+                if (Objects.nonNull(userDb)) {
                     userDb = userService.updateUser(user);
                 } else {
                     userDb = userService.addUser(user);
@@ -60,6 +56,7 @@ public class UserController {
                 log.info("saved user: " + userDb);
             }
         }
+
         if (Objects.isNull(userDb)) {
             return "add_user";
         } else {

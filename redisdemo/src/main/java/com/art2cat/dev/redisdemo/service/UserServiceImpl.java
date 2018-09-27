@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService {
     @Cacheable(value = "userCache", key = "#id", unless = "#result == null")
     public User getUserById(@NotNull Integer id) {
         Objects.requireNonNull(id, "user id can not be null");
-        User user = userRepository.getOne(id);
+        User user = userRepository.findById(id).orElse(null);
         log.info("get user: " + user);
         return user;
     }

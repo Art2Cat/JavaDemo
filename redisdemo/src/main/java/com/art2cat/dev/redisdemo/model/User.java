@@ -1,6 +1,7 @@
 package com.art2cat.dev.redisdemo.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,5 +37,10 @@ public class User implements Serializable {
     @Setter
     @Column(name = "email", unique = true)
     private String email;
-    
+
+
+    public boolean notEmpty() {
+        return !((Objects.isNull(name) || name.isEmpty())
+            && Objects.isNull(email) || email.isEmpty());
+    }
 }
