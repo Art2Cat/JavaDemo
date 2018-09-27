@@ -1,12 +1,13 @@
 package com.art2cat.dev.redisdemo.message;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.art2cat.dev.redisdemo.model.RedisMsg;
+import com.art2cat.dev.redisdemo.repository.MessageRepository;
+import java.util.Base64;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,17 +20,30 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class MessageSubscriber implements MessageListener {
-    
-    private static final Logger LOGGER = LoggerFactory.getLogger(MessageSubscriber.class);
-    private static List<String> MESSAGE_LIST = new ArrayList<String>();
-    
-    public static List<String> getMessageList() {
-        return MESSAGE_LIST;
-    }
-    
+
+    private MessageRepository messageRepository;
+    private GenericJackson2JsonRedisSerializer jsonRedisSerializer;
+
     @Override
     public void onMessage(final Message message, final byte[] pattern) {
-        MESSAGE_LIST.add(message.toString());
-        log.info("Message received: " + new String(message.getBody()));
+
+        log.info("RedisMsg received: " + new String(message.getBody()));
+
+        RedisMsg redisMsg1 = (RedisMsg) jsonRedisSerializer
+            .deserialize(Base64.getDecoder().decode(message.getBody()));
+        messageRepository.save(redisMsg1);
+        log.info("saved message to db");
+    }
+
+    @Autowired
+    public void setMessageRepository(
+        MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
+
+    @Autowired
+    public void setJsonRedisSerializer(
+        GenericJackson2JsonRedisSerializer jsonRedisSerializer) {
+        this.jsonRedisSerializer = jsonRedisSerializer;
     }
 }

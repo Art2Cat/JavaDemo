@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService {
     @Cacheable(value = "userCache", key = "#id", unless = "#result == null")
     public User getUserById(@NotNull Integer id) {
         Objects.requireNonNull(id, "user id can not be null");
-        User user = userRepository.findById(id).orElse(null);
+        var user = userRepository.findById(id).orElse(null);
         log.info("get user: " + user);
         return user;
     }
@@ -41,7 +41,7 @@ public class UserServiceImpl implements IUserService {
     )
     public User addUser(@NotNull User user) {
         Objects.requireNonNull(user, "user can not be null!");
-        User userDb = userRepository.save(user);
+        var userDb = userRepository.save(user);
         log.info("saved user: " + userDb.getName());
         return userDb;
     }
@@ -53,7 +53,7 @@ public class UserServiceImpl implements IUserService {
     )
     public User updateUser(@NotNull User user) {
         Objects.requireNonNull(user, "user can not be null!");
-        User userDb = userRepository.save(user);
+        var userDb = userRepository.save(user);
         log.info("updated user: " + userDb.getName());
         return userDb;
     }

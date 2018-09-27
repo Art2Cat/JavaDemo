@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Send redisMsg</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        rel="stylesheet"/>
+  <script rel="script" th:href="@{/index.js}"></script>
+</head>
+<body>
+<div style="align-items: center">
+  <h2>Send Message</h2>
+  <form style="align-content: center" method="POST">
+    <label for="sender">Sender:</label>
+    <input type="text" name="sender" size="50"/><br/>
+    <label for="content">Content:</label>
+    <input type="text" name="content" size="140"/><br/>
+    <input type="submit"/>
+  </form>
+  <br>
+  <hr/>
+  <h2>Message List</h2>
+  <div th:unless="${#lists.isEmpty(messages)}">
+    <table id="info-table" align="center" border="1">
+      <tr>
+        <th>sender</th>
+        <th>message</th>
+      </tr>
+      <tr th:each="msg : ${messages}">
+        <td th:text="${msg.sender}"></td>
+        <td th:text="${msg.content}"></td>
+      </tr>
+    </table>
+  </div>
+  <div th:if="${#lists.isEmpty(messages)}">
+    <p>There is no message in the Message list</p>
+  </div>
+  <hr/>
+</div>
+</body>
+</html>
