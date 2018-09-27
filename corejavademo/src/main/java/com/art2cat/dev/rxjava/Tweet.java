@@ -1,4 +1,4 @@
-package com.art2cat.dev;
+package com.art2cat.dev.rxjava;
 
 import java.time.LocalDateTime;
 

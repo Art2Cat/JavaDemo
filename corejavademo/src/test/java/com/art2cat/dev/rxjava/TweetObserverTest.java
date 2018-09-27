@@ -1,14 +1,13 @@
-package com.art2cat.dev;
+package com.art2cat.dev.rxjava;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TweetObserverTest {
 
