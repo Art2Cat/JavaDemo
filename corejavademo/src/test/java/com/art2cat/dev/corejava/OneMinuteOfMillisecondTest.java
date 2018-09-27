@@ -1,7 +1,7 @@
 package com.art2cat.dev.corejava;
 
 import java.time.LocalTime;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * com.art2cat.dev.corejava

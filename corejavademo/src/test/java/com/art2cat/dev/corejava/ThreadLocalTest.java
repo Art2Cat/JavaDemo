@@ -3,7 +3,7 @@ package com.art2cat.dev.corejava;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * com.art2cat.dev.corejava

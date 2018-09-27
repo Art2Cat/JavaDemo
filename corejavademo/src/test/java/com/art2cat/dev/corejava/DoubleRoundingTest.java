@@ -3,7 +3,7 @@ package com.art2cat.dev.corejava;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DoubleRoundingTest {
     

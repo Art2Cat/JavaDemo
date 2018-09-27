@@ -6,6 +6,7 @@ import com.art2cat.dev.jpademo.models.BookCategory;
 import com.art2cat.dev.jpademo.repositories.BookCategoryRepository;
 import java.util.HashSet;
 import java.util.Set;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class BookCategoryTest {
     public void test() {
         // save a couple of categories
         BookCategory categoryA = new BookCategory("Category A");
-        Set<Book> bookAs = new HashSet<Book>() {{
+        Set<Book> bookAs = new HashSet<>() {{
             add(new Book("Book A1", categoryA));
             add(new Book("Book A2", categoryA));
             add(new Book("Book A3", categoryA));
@@ -37,14 +38,14 @@ public class BookCategoryTest {
         categoryA.setBooks(bookAs);
         
         BookCategory categoryB = new BookCategory("Category B");
-        Set<Book> bookBs = new HashSet<Book>() {{
+        Set<Book> bookBs = new HashSet<>() {{
             add(new Book("Book B1", categoryB));
             add(new Book("Book B2", categoryB));
             add(new Book("Book B3", categoryB));
         }};
         categoryB.setBooks(bookBs);
-        
-        bookCategoryRepository.save(new HashSet<BookCategory>() {{
+
+        bookCategoryRepository.saveAll(new HashSet<>() {{
             add(categoryA);
             add(categoryB);
         }});

@@ -1,16 +1,13 @@
 package com.art2cat.dev.corejava.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import javax.mail.Authenticator;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import org.junit.Assert;
-import org.junit.Test;
+import java.util.*;
 
 /**
  * PACKAGE_NAME
@@ -50,7 +47,7 @@ public class EmailUtilTest {
                 "SimpleEmail Testing Body");
         } catch (MessagingException e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
     }
     
@@ -87,7 +84,7 @@ public class EmailUtilTest {
                 .sendEmail(session, toEmail, "TLSEmail Testing Subject", "TLSEmail Testing Body");
         } catch (MessagingException e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
     }
     
@@ -128,7 +125,7 @@ public class EmailUtilTest {
                 .sendEmail(session, toEmail, "SSLEmail Testing Subject", "SSLEmail Testing Body");
         } catch (MessagingException e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
     }
     
@@ -172,7 +169,7 @@ public class EmailUtilTest {
                     "SSLEmail Testing Body with Attachment", files);
         } catch (MessagingException e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
     }
     
@@ -216,7 +213,7 @@ public class EmailUtilTest {
                 "SSLEmail Testing Body with Image", files);
         } catch (MessagingException e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
     }
 }

@@ -4,7 +4,7 @@ import com.art2cat.dev.effective_java.Operation;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * com.art2cat.dev.corejava

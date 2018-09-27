@@ -8,8 +8,10 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.junit.Assert;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * com.art2cat.dev.nio
@@ -39,7 +41,7 @@ public class ChannelTest {
             
         } catch (java.io.IOException e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
     }
     
@@ -55,7 +57,7 @@ public class ChannelTest {
             
         } catch (IOException e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
     }
     
@@ -71,7 +73,7 @@ public class ChannelTest {
             
         } catch (IOException e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
     }
     

@@ -1,13 +1,14 @@
 package com.art2cat.dev.nio;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * com.art2cat.dev.nio
@@ -33,7 +34,7 @@ public class BufferTest {
             byteBuffer.clear();
         } catch (IOException e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
         
     }

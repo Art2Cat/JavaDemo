@@ -30,7 +30,6 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("com.art2cat.dev.jpademo.repositories")
-@PropertySource("classpath:datasource.properties")
 public class AppConfigs {
     
     @Value("${mysql.driver}")

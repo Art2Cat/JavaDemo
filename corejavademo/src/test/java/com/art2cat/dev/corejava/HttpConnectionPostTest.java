@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * com.art2cat.dev.corejava

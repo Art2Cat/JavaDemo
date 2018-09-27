@@ -8,7 +8,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 /**
