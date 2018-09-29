@@ -15,21 +15,18 @@ import javax.persistence.Table;
  * @date 4/15/18
  */
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @Column(name = "user_name", nullable = false)
     private String userName;
     
-    @Column(name = "birth_day")
-    private Date birthDay;
-    
-    @Column(name = "sex")
-    private String sex;
+    @Column(name = "birthday", nullable = false, columnDefinition = "datetime")
+    private Date birthday;
     
     @Column(name = "mobile")
     private String mobile;
@@ -56,20 +53,12 @@ public class User {
         this.userName = userName;
     }
     
-    public Date getBirthDay() {
-        return birthDay;
+    public Date getBirthday() {
+        return birthday;
     }
     
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
-    }
-    
-    public String getSex() {
-        return sex;
-    }
-    
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
     
     public String getMobile() {
@@ -101,8 +90,7 @@ public class User {
         return "User{" +
             "id=" + id +
             ", userName='" + userName + '\'' +
-            ", birthDay=" + birthDay +
-            ", sex='" + sex + '\'' +
+            ", birthday=" + birthday +
             ", mobile='" + mobile + '\'' +
             ", email='" + email + '\'' +
             ", note='" + note + '\'' +

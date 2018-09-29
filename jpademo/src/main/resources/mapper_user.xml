@@ -4,19 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.art2cat.dev.jpademo.repositories.UserRepository">
-  <insert id="insertUser" parameterType="user">
-    insert into user (user_name, birthday, sex, mobile, email, note)
-    values(#{userName}, #{birthday}, #{sex}, #{mobile}, #{email}, #{note})
+  <insert id="insertUser" parameterType="user" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into user (user_name, birthday,  mobile, email, note)
+    values(#{userName}, #{birthday}, #{mobile}, #{email}, #{note})
   </insert>
   <delete id="deleteUser" parameterType="int">
     delete from user where id = #{id}
   </delete>
   <select id="getUser" parameterType="int" resultType="user">
-    select id, user_name as userName, birthday, sex, mobile, email, note from user
+    select id, user_name as userName, birthday , mobile, email, note from user
     where id = #{id}
   </select>
   <select id="findUsers" parameterType="string" resultType="user">
-    select id, user_name as userName, create_date as createDate, note from user
+    select id, user_name as userName, birthday, mobile, email, note from user
     <where>
       <if test="userName != null">
         user_name like concat("%", #{userName}, "%")
@@ -28,7 +28,6 @@
     <set>
       <if test="userName != null">user_name = #{userName},</if>
       <if test="birthday != null">birthday = #{birthday},</if>
-      <if test="sex != null">sex = #{sex},</if>
       <if test="mobile != null">mobile = #{mobile},</if>
       <if test="email != null">email = #{email},</if>
       <if test="note != null">note = #{note}</if>

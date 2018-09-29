@@ -18,6 +18,7 @@ public interface RoleMapper {
 
 
     @InsertProvider(type = RoleSqlProvider.class, method = "save")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int insertRole(Role role);
 
     @UpdateProvider(type = RoleSqlProvider.class, method = "update")

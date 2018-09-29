@@ -49,7 +49,7 @@ public class BookCategoryTest {
         allCategories.add(categoryA);
         allCategories.add(categoryB);
 
-        bookCategoryRepository.save(allCategories);
+        bookCategoryRepository.saveAll(allCategories);
 
         // fetch all categories
         bookCategoryRepository.findAll().forEach(i -> System.out.println(i.toString()));

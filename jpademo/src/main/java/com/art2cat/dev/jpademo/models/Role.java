@@ -1,5 +1,7 @@
 package com.art2cat.dev.jpademo.models;
 
+import com.art2cat.dev.jpademo.CustomerDateAndTimeDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,13 +16,14 @@ import java.util.Date;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "role_name", nullable = false)
     private String roleName;
 
     @Column(name = "create_date", nullable = false, columnDefinition = "datetime default current_timestamp")
+    @JsonDeserialize(using = CustomerDateAndTimeDeserializer.class)
     private Date createDate;
 
     @Column(name = "note")

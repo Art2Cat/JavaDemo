@@ -69,25 +69,18 @@ public class AppConfigs {
         return new NamedParameterJdbcTemplate(dataSource);
     }
 
-    @Bean
-    @ConditionalOnMissingBean(type = "JpaTransactionManager")
-    public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
-        return new JpaTransactionManager(emf);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(type = "jpaVendorAdapter")
+    @Bean(name = "jpaVendorAdapter")
+    @ConditionalOnMissingBean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setDatabase(Database.MYSQL);
         jpaVendorAdapter.setShowSql(true);
         jpaVendorAdapter.setGenerateDdl(true);
-        jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
+        jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5InnoDBDialect");
         return jpaVendorAdapter;
     }
 
-    @Bean
-    @ConditionalOnBean(name = "dataSource, jpaVendorAdapter")
+    @Bean(name = "entityManagerFactory")
     @ConditionalOnMissingBean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
                                                                        JpaVendorAdapter jpaVendorAdapter) {
@@ -96,6 +89,11 @@ public class AppConfigs {
         lemfb.setJpaVendorAdapter(jpaVendorAdapter);
         lemfb.setPackagesToScan("com.art2cat.dev.jpademo.models");
         return lemfb;
+    }
+    @Bean
+    @ConditionalOnMissingBean
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
     }
 
     @ConditionalOnResource(resources = "classpath:mysql.properties")

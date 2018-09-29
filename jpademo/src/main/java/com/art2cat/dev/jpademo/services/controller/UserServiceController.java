@@ -1,5 +1,6 @@
 package com.art2cat.dev.jpademo.services.controller;
 
+import com.art2cat.dev.jpademo.UserRequest;
 import com.art2cat.dev.jpademo.models.User;
 import com.art2cat.dev.jpademo.services.intf.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class UserServiceController {
     
     @RequestMapping(value = "/insertUser", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> insertUser(@Valid @RequestBody User user, Errors errors) {
+    public ResponseEntity<?> insertUser(@Valid @RequestBody UserRequest userRequest, Errors errors) {
         String result;
         if (errors.hasErrors()) {
             // get all errors
@@ -44,7 +45,7 @@ public class UserServiceController {
             
             return ResponseEntity.badRequest().body(result);
         }
-        int returnCode = userService.insertUser(user);
+        int returnCode = userService.insertUser(composeUser(userRequest));
         return ResponseEntity.ok(returnCode);
     }
     
@@ -54,7 +55,7 @@ public class UserServiceController {
     }
     
     @RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateUser(@Valid @RequestBody User user, Errors errors) {
+    public ResponseEntity<?> updateUser(@Valid @RequestBody UserRequest user, Errors errors) {
         String result;
         if (errors.hasErrors()) {
             // get all errors
@@ -65,7 +66,7 @@ public class UserServiceController {
             
             return ResponseEntity.badRequest().body(result);
         }
-        int returnCode = userService.updateUser(user);
+        int returnCode = userService.updateUser(composeUser(user));
         return ResponseEntity.ok(returnCode);
     }
     
@@ -73,5 +74,16 @@ public class UserServiceController {
     public List<User> findUsers(@RequestParam(value = "userName") String userName,
         @RequestParam(value = "start") int start, @RequestParam(value = "limit") int limit) {
         return userService.findUsers(userName, start, limit);
+    }
+
+    private User composeUser(UserRequest userRequest) {
+        var user = new User();
+        user.setId(userRequest.getId());
+        user.setBirthday(userRequest.getBirthday());
+        user.setUserName(userRequest.getUserName());
+        user.setEmail(userRequest.getEmail());
+        user.setMobile(userRequest.getMobile());
+        user.setNote(userRequest.getNote());
+        return user;
     }
 }
