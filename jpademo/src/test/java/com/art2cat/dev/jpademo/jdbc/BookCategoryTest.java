@@ -45,11 +45,12 @@ public class BookCategoryTest {
         }};
         categoryB.setBooks(bookBs);
 
-        bookCategoryRepository.saveAll(new HashSet<>() {{
-            add(categoryA);
-            add(categoryB);
-        }});
-        
+        var allCategories = new HashSet<BookCategory>();
+        allCategories.add(categoryA);
+        allCategories.add(categoryB);
+
+        bookCategoryRepository.save(allCategories);
+
         // fetch all categories
         bookCategoryRepository.findAll().forEach(i -> System.out.println(i.toString()));
         

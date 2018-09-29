@@ -11,8 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @author rorschach
  * @date 3/25/18
  */
-@EnableAutoConfiguration
-@ComponentScan(basePackages = "com.art2cat.dev.jpademo")
 @SpringBootApplication
 public class Applications extends SpringApplication {
     
