@@ -1,21 +1,24 @@
 # ignore all .iml file
 *.iml
 */*.iml
+*/*/*.iml
 
 # ignore .idea/ directory
 .idea/
+  */.idea/
 
 # ignore target directory
 */target/
 */*/target/
+  */*/*/target/
 
 # ignore .project/ ./settings ./classpath directory
 .project
-*/.project
+	  */.project
 */*/.project
-./classpath
-*/.classpath
+   ./classpath
+  */.classpath
 */*/.classpath
-.settings/
-*/.settings/
+   .settings/
+  */.settings/
 */*/.settings/

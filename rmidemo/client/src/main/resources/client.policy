@@ -1,0 +1,3 @@
+grant codeBase "file:~/JavaProjects/rmidemo/client/src/" {
+	permission java.security.AllPermission;
+};
