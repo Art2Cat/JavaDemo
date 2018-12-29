@@ -9,6 +9,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.nio.file.StandardOpenOption;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,10 +22,12 @@ import org.junit.jupiter.api.Test;
  */
 public class ChannelTest {
     
+    private Path fromFile = Paths.get("src", "test", "resources", "text.txt");
+    private Path toFile = Paths.get("src", "test", "resources", "nio.txt");
+    
     @Test
     public void basicChannel() {
-        Path path = Paths.get("src", "test", "resources", "text.txt");
-        try (RandomAccessFile randomAccessFile = new RandomAccessFile(path.toString(), "rw");
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile(fromFile.toString(), "rw");
             FileChannel inChannel = randomAccessFile.getChannel()) {
             
             ByteBuffer buffer = ByteBuffer.allocate(48);
@@ -40,40 +43,35 @@ public class ChannelTest {
             }
             
         } catch (java.io.IOException e) {
-            e.printStackTrace();
-            Assertions.fail();
+            Assertions.fail(e.getMessage());
         }
     }
     
     @Test
     public void transferFrom() {
-        Path fromFile = Paths.get("src", "test", "resources", "text.txt");
-        Path toFile = Paths.get("src", "test", "resources", "nio.txt");
         
-        try (FileChannel fromChannel = FileChannel.open(fromFile); FileChannel toChannel = FileChannel.open(toFile)) {
+        try (FileChannel fromChannel = FileChannel.open(fromFile, StandardOpenOption.READ);
+            FileChannel toChannel = FileChannel.open(toFile, StandardOpenOption.WRITE)) {
             long position = 0;
             long count = fromChannel.size();
             toChannel.transferFrom(fromChannel, position, count);
             
         } catch (IOException e) {
-            e.printStackTrace();
-            Assertions.fail();
+            Assertions.fail(e.getMessage());
         }
     }
     
     @Test
     public void transferTo() {
-        Path fromFile = Paths.get("src", "test", "resources", "text.txt");
-        Path toFile = Paths.get("src", "test", "resources", "nio.txt");
         
-        try (FileChannel fromChannel = FileChannel.open(fromFile); FileChannel toChannel = FileChannel.open(toFile)) {
+        try (FileChannel fromChannel = FileChannel.open(fromFile, StandardOpenOption.READ);
+            FileChannel toChannel = FileChannel.open(toFile, StandardOpenOption.WRITE)) {
             long position = 0;
             long count = fromChannel.size();
             fromChannel.transferTo(position, count, toChannel);
             
         } catch (IOException e) {
-            e.printStackTrace();
-            Assertions.fail();
+            Assertions.fail(e.getMessage());
         }
     }
     
@@ -82,7 +80,7 @@ public class ChannelTest {
         try (SocketChannel socketChannel = SocketChannel.open()) {
             // Enable Non-blocking Mode.
             socketChannel.configureBlocking(false);
-            socketChannel.connect(new InetSocketAddress("www.google.com", 80));
+            socketChannel.connect(new InetSocketAddress("www.bing.com", 80));
             
             while (!socketChannel.finishConnect()) {
                 if (socketChannel.isConnectionPending()) {
@@ -90,7 +88,7 @@ public class ChannelTest {
                 }
             }
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            Assertions.fail(e.getMessage());
         }
         
     }

@@ -57,7 +57,7 @@ public class ReflectTest {
             ClassLoader classLoader = this.getClass().getClassLoader();
             Class<?> clazz = classLoader.loadClass("com.art2cat.dev.corejava.reflect.PrivateCar");
             
-            PrivateCar privateCar = (PrivateCar) clazz.newInstance();
+            PrivateCar privateCar = (PrivateCar) clazz.getDeclaredConstructor().newInstance();
             
             Field color = clazz.getDeclaredField("color");
             color.setAccessible(true);

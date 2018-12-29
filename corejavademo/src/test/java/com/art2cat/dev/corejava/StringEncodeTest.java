@@ -9,7 +9,7 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -30,7 +30,7 @@ public class StringEncodeTest {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
         
         try (FileInputStream inputStream = new FileInputStream(path.toString())) {
@@ -45,7 +45,7 @@ public class StringEncodeTest {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail();
+            Assertions.fail();
         }
     }
     

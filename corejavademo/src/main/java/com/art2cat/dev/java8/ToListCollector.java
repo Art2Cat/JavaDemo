@@ -1,4 +1,4 @@
-package com.art2cat.dev;
+package com.art2cat.dev.java8;
 
 import static java.util.stream.Collector.Characteristics.CONCURRENT;
 import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;

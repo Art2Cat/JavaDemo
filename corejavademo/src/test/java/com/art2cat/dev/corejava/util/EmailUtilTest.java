@@ -1,6 +1,7 @@
 package com.art2cat.dev.corejava.util;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.mail.Authenticator;
@@ -15,6 +16,7 @@ import java.util.*;
  * @author Rorschach
  * @date 25/12/2017
  */
+@Disabled
 public class EmailUtilTest {
     
     // telnet smtp.gmail.com 587

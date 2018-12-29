@@ -1,11 +1,12 @@
-package com.art2cat.dev;
+package com.art2cat.dev.java8;
 
-import static com.art2cat.dev.Util.delay;
-import static com.art2cat.dev.Util.format;
+import static com.art2cat.dev.java8.Util.delay;
+import static com.art2cat.dev.java8.Util.format;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
+import java.util.function.Function;
 
 public class AsyncShop {
     
@@ -30,7 +31,8 @@ public class AsyncShop {
         }).start();
         return futurePrice;
 */
-        return CompletableFuture.supplyAsync(() -> calculatePrice(product));
+        return CompletableFuture.supplyAsync(() -> calculatePrice(product)).exceptionally(
+            throwable -> (double) 0);
     }
     
     private double calculatePrice(String product) {

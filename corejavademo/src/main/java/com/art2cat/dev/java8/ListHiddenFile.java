@@ -1,4 +1,4 @@
-package com.art2cat.dev;
+package com.art2cat.dev.java8;
 
 import java.io.File;
 import java.io.FileFilter;

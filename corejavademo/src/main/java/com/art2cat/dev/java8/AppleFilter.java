@@ -1,4 +1,4 @@
-package com.art2cat.dev;
+package com.art2cat.dev.java8;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ public class AppleFilter {
         return result;
     }
     
+    @SuppressWarnings("unchecked")
     public static <T> List<T> filter(List<T> list, Predicate<T> p) {
         List<Apple> result = new ArrayList<Apple>();
         list.forEach((apple) -> {

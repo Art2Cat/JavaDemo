@@ -5,7 +5,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class PathsTest {
@@ -28,7 +28,7 @@ public class PathsTest {
     public void test1() {
         URL url = this.getClass().getClassLoader().getResource("text.txt");
         if (url == null) {
-            Assert.fail();
+            Assertions.fail();
         }
         
         String path = url.getPath();
@@ -36,19 +36,15 @@ public class PathsTest {
         
         URL image = this.getClass().getClassLoader().getResource("google.jpg");
         if (image == null) {
-            Assert.fail();
+            Assertions.fail();
         }
         
         try {
             Path path1 = Paths.get(image.toURI());
             System.out.println(path1.toString());
-            Assert.assertTrue(Files.exists(path1));
+            Assertions.assertTrue(Files.exists(path1));
         } catch (URISyntaxException e) {
-            Assert.fail(e.getMessage());
+            Assertions.fail(e.getMessage());
         }
-        
-        Long number = 18658710313L;
-        
-        System.out.println(String.valueOf(number).length());
     }
 }

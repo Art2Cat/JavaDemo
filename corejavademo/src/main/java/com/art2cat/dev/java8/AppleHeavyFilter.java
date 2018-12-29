@@ -1,4 +1,4 @@
-package com.art2cat.dev;
+package com.art2cat.dev.java8;
 
 public class AppleHeavyFilter implements IAppleFilter {
 

@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Test;
  * @date 4/27/2018
  */
 public class AnnotationTest {
-   
+    
     @Test
     public void test() {
         try {
             Class<?> catClazz = Class.forName("com.art2cat.dev.effective_java.Cat");
-            Cat cat = (Cat) catClazz.newInstance();
+            Cat cat = (Cat) catClazz.getDeclaredConstructor().newInstance();
             for (Method method : catClazz.getDeclaredMethods()) {
                 if (method.isAnnotationPresent(LookUp.class)) {
                     try {
@@ -28,7 +28,8 @@ public class AnnotationTest {
                     }
                 }
             }
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+        } catch (ClassNotFoundException | IllegalAccessException |
+            InstantiationException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }

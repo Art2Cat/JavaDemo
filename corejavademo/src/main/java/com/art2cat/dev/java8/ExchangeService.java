@@ -1,6 +1,6 @@
-package com.art2cat.dev;
+package com.art2cat.dev.java8;
 
-import static com.art2cat.dev.Util.delay;
+import static com.art2cat.dev.java8.Util.delay;
 
 public class ExchangeService {
     

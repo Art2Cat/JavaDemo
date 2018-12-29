@@ -8,9 +8,10 @@ public class Male extends Person implements Comparable<Person> {
     private static final String MALE = "Male";
     
     public Male(String name, int age, int height) {
-        super(name, age, height);
+        super(name, age, height, MALE);
     }
     
+    @Override
     public String getGender() {
         return MALE;
     }

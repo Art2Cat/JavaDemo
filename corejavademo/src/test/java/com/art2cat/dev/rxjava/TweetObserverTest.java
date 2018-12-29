@@ -28,6 +28,7 @@ public class TweetObserverTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void test() {
         Tweet tweet = new Tweet();
         tweet.setContent("This is a test message.");
@@ -38,6 +39,7 @@ public class TweetObserverTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void testCase1() {
         Observer<Tweet> tweetObserver = new TweetObserver();
 

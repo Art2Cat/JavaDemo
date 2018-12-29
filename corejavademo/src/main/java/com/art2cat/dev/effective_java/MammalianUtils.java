@@ -1,6 +1,7 @@
 package com.art2cat.dev.effective_java;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * Created by Rorschach on 2017/2/8.
@@ -63,4 +64,20 @@ public class MammalianUtils {
         
     }
     
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        MammalianUtils that = (MammalianUtils) o;
+        return Objects.equals(mammalian, that.mammalian);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(mammalian);
+    }
 }

@@ -6,6 +6,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
  * @author art2c
  * @date 4/12/2018
  */
+@Disabled
 public class SelectorTest {
     
     
