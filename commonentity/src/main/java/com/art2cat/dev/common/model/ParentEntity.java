@@ -1,5 +1,4 @@
-package com.art2cat.dev.jpademo.models;
-
+package com.art2cat.dev.common.model;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

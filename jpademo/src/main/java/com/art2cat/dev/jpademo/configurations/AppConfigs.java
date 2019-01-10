@@ -87,9 +87,10 @@ public class AppConfigs {
         LocalContainerEntityManagerFactoryBean lemfb = new LocalContainerEntityManagerFactoryBean();
         lemfb.setDataSource(dataSource);
         lemfb.setJpaVendorAdapter(jpaVendorAdapter);
-        lemfb.setPackagesToScan("com.art2cat.dev.jpademo.models");
+        lemfb.setPackagesToScan("com.art2cat.dev.jpademo.models", "com.art2cat.dev.common.model");
         return lemfb;
     }
+
     @Bean
     @ConditionalOnMissingBean
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {

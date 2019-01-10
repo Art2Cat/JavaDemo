@@ -1,12 +1,13 @@
 package com.art2cat.dev.jpademo.jdbc;
 
+import com.art2cat.dev.common.model.ParentEntity;
+import com.art2cat.dev.common.model.Subsidiary;
 import com.art2cat.dev.jpademo.configurations.AppConfigs;
-import com.art2cat.dev.jpademo.models.ParentEntity;
-import com.art2cat.dev.jpademo.models.Subsidiary;
 import com.art2cat.dev.jpademo.repositories.ParentEntityRepository;
 import com.art2cat.dev.jpademo.repositories.SubsidiaryRepository;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

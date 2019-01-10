@@ -1,4 +1,4 @@
-package com.art2cat.dev.jpademo.models;
+package com.art2cat.dev.common.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -75,7 +75,7 @@ public class Subsidiary {
     
     @Override
     public String toString() {
-        return "Subsidiary{" +
+        return "com.art2cat.dev.common.model.Subsidiary{" +
             "id=" + id +
             ", name='" + name + '\'' +
             ", parentEntity=" + parentEntity +
