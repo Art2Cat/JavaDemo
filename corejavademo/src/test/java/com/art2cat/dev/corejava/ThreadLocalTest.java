@@ -12,17 +12,18 @@ import org.junit.jupiter.api.Test;
  * @date 3/26/18
  */
 public class ThreadLocalTest {
-    
+
     private ThreadLocal<Integer> seqNum = ThreadLocal.withInitial(() -> 0);
-    
+
     private Runnable runnable = () -> IntStream.range(0, 5).forEach(i -> System.out
-        .println(String.format("Thread: %s, value: %d", Thread.currentThread().getName(), getNextNum())));
-    
+        .println(String
+            .format("Thread: %s, value: %d", Thread.currentThread().getName(), getNextNum())));
+
     private int getNextNum() {
         seqNum.set(seqNum.get() + 1);
         return seqNum.get();
     }
-    
+
     @Test
     public void testThreadLocal() {
         ExecutorService executor = Executors.newFixedThreadPool(5);
@@ -34,6 +35,6 @@ public class ThreadLocalTest {
 
         executor.shutdown();
     }
-    
-    
+
+
 }

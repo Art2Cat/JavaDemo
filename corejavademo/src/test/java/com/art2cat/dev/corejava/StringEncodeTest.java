@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
  * @date 4/8/18
  */
 public class StringEncodeTest {
-    
+
     @Test
     public void test() {
         Path path = Paths.get("src", "test", "resources", "test.txt");
@@ -32,7 +32,7 @@ public class StringEncodeTest {
             e.printStackTrace();
             Assertions.fail();
         }
-        
+
         try (FileInputStream inputStream = new FileInputStream(path.toString())) {
             try (InputStreamReader reader = new InputStreamReader(inputStream, charset)) {
                 StringBuilder buffer = new StringBuilder();
@@ -48,14 +48,14 @@ public class StringEncodeTest {
             Assertions.fail();
         }
     }
-    
+
     @Test
     public void testCharset() {
         String source = "测试中文字符";
         Charset charset = Charset.forName("utf-8");
         ByteBuffer byteBuffer = charset.encode(source);
         CharBuffer charBuffer = charset.decode(byteBuffer);
-        
+
         System.out.println(charBuffer.toString());
     }
 }

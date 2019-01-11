@@ -1,20 +1,19 @@
 package com.art2cat.dev.corejava.network;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class SocketTest {
-    
+
     static final String HOST = "time-A.timefreq.bldrdoc.gov";
-    
+
     public static void main(String[] args) {
         socket();
         socketWithTimeOut();
     }
-    
+
     private static void socket() {
         try (Socket s = new Socket(HOST, 13); Scanner in = new Scanner(s.getInputStream())) {
             // time out after 10 seconds
@@ -27,7 +26,7 @@ public class SocketTest {
             e.printStackTrace();
         }
     }
-    
+
     private static void socketWithTimeOut() {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(HOST, 13), 10000);

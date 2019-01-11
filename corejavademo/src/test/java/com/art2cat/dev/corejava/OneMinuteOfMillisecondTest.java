@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * @date 08/01/2018
  */
 public class OneMinuteOfMillisecondTest {
-    
+
     @Test
     public void test() {
         System.out.println(LocalTime.now());
@@ -19,7 +19,7 @@ public class OneMinuteOfMillisecondTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
         System.out.println(LocalTime.now());
     }
 }

@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 
 public class CreateFile {
-    
+
     public static void main(String[] args) throws URISyntaxException {
         Path dir = Paths.get("test.txt");
         try {
@@ -21,6 +21,6 @@ public class CreateFile {
             // Some other sort of failure, such as permissions.
             System.err.format("createFile error: %s%n", x);
         }
-        
+
     }
 }

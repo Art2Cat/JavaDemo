@@ -1,14 +1,13 @@
 package com.art2cat.dev.nio;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * com.art2cat.dev.nio
@@ -17,7 +16,7 @@ import java.nio.file.Paths;
  * @date 4/12/2018
  */
 public class BufferTest {
-    
+
     @Test
     public void basicBuffer() {
         Path path = Paths.get("src", "test", "resources", "nio.txt");
@@ -36,6 +35,6 @@ public class BufferTest {
             e.printStackTrace();
             Assertions.fail();
         }
-        
+
     }
 }

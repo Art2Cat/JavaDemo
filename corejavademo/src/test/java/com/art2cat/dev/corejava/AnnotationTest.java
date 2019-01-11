@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
  * @date 4/27/2018
  */
 public class AnnotationTest {
-    
+
     @Test
     public void test() {
         try {

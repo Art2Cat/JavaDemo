@@ -7,7 +7,7 @@ package com.art2cat.dev.corejava.reflect;
  * @date 3/11/18
  */
 public interface IVehicle {
-    
+
     void introduce();
-    
+
 }

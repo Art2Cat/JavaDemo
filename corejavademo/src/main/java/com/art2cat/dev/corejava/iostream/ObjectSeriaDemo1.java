@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 public class ObjectSeriaDemo1 {
-    
+
     public static void main(String[] args) throws Exception {
         String file = "demo/obj.dat";
         //1.对象的序列化
@@ -19,8 +19,8 @@ public class ObjectSeriaDemo1 {
         Student stu = (Student) ois.readObject();
         System.out.println(stu);
         ois.close();
-        
+
     }
-    
-    
+
+
 }

@@ -3,9 +3,9 @@ package com.art2cat.dev.corejava.iostream;
 import java.io.IOException;
 
 public class IOUtilTest1 {
-    
+
     /**
-     * @param args
+     *
      */
     public static void main(String[] args) {
         try {
@@ -14,7 +14,7 @@ public class IOUtilTest1 {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+
     }
-    
+
 }

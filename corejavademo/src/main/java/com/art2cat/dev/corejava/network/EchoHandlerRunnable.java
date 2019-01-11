@@ -8,23 +8,23 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class EchoHandlerRunnable implements Runnable {
-    
+
     private Socket socket;
-    
+
     public EchoHandlerRunnable(Socket socket) {
         this.socket = socket;
     }
-    
+
     @Override
     public void run() {
         try {
             InputStream inputStream = socket.getInputStream();
             OutputStream outputStream = socket.getOutputStream();
-            
+
             try (Scanner scanner = new Scanner(inputStream)) {
                 PrintWriter out = new PrintWriter(outputStream, true);
                 out.println("Hello! Enter BYE to exit.");
-                
+
                 boolean done = false;
                 while (!done && scanner.hasNextLine()) {
                     String line = scanner.nextLine();

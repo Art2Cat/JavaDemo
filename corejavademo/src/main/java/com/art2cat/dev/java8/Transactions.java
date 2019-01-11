@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Transactions {
-    
+
     public static List<Transaction> getTransactions() {
         Trader raoul = new Trader("Raoul", "Cambridge");
         Trader mario = new Trader("Mario", "Milan");

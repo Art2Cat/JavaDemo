@@ -68,7 +68,7 @@ public enum Zodiac {
             return "Catch me, if you can";
         }
     };
-    
+
     @Override
     public abstract String toString();
 }

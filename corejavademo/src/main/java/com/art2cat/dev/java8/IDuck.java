@@ -7,7 +7,7 @@ package com.art2cat.dev.java8;
  * @date 3/29/18
  */
 public interface IDuck {
-    
+
     default void quack() {
         System.out.println("Quack");
     }

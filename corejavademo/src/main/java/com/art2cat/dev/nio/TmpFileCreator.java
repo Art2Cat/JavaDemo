@@ -2,9 +2,10 @@ package com.art2cat.dev.nio;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
 
 public class TmpFileCreator implements Callable<File> {
+
     private String tmpPath;
     private File createdFile;
 

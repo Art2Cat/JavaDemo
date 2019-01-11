@@ -6,7 +6,7 @@ import java.io.RandomAccessFile;
 public class RafReadDemo {
 
     /**
-     * @param args
+     *
      */
     public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub

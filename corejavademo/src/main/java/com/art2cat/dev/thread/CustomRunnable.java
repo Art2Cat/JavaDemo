@@ -13,21 +13,21 @@ public class CustomRunnable implements Runnable {
             System.out.println(Thread.currentThread().getName() + ": i equals " + i);
             if (i == 10) {
                 try {
-                    Thread.currentThread().sleep(1000);
+                    Thread.sleep(1000);
                     System.out.println(Thread.currentThread().getName() + " sleep 1 second");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else if (i == 15) {
                 try {
-                    Thread.currentThread().sleep(1000);
+                    Thread.sleep(1000);
                     System.out.println(Thread.currentThread().getName() + " sleep 1 second");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else if (i == 25) {
                 try {
-                    Thread.currentThread().sleep(1000);
+                    Thread.sleep(1000);
                     System.out.println(Thread.currentThread().getName() + " sleep 1 second");
                 } catch (InterruptedException e) {
                     e.printStackTrace();

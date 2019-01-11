@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 
 public class CollectorTest {
-    
+
     @Test
     public void test() {
         long fastest = Long.MAX_VALUE;
@@ -21,7 +21,7 @@ public class CollectorTest {
         System.out.println(
             "Fastest execution done in " + fastest + " msecs");
     }
-    
+
     private Map<Boolean, List<Integer>> partitionPrimesWithCustomCollector(int n) {
         return IntStream.rangeClosed(2, n).boxed()
             .collect(new PrimeNumbersCollector());

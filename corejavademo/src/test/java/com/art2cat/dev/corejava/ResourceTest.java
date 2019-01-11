@@ -26,17 +26,17 @@ import org.springframework.util.FileCopyUtils;
  * @date 3/3/18
  */
 public class ResourceTest {
-    
+
     @Test
     public void FileSourceTest() {
         try {
             Path filePath = Paths.get("src", "test", "resources", "text.txt");
             Resource res1 = new FileSystemResource(filePath.toString());
-            
+
             Resource res2 = new ClassPathResource("text.txt");
-            
+
             InputStream ins2 = res2.getInputStream();
-            
+
             System.out.println("res1: " + res1.getFilename());
             System.out.println("res2: " + res2.getFilename());
             System.out.println("res1 contents: ");
@@ -56,12 +56,12 @@ public class ResourceTest {
             e.printStackTrace();
         }
     }
-    
+
     @Test
     public void encodedResourceTest() {
         try {
             Resource res = new ClassPathResource("text.txt");
-            
+
             EncodedResource encodedResource = new EncodedResource(res, "UTF-8");
             String content = FileCopyUtils.copyToString(encodedResource.getReader());
             System.out.println(content);
@@ -69,7 +69,7 @@ public class ResourceTest {
             e.printStackTrace();
         }
     }
-    
+
     @Test
     public void PatternResolverTest() {
         try {

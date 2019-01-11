@@ -12,13 +12,13 @@ public enum PluginEnum {
     TimeZonePlugin("com.art2cat.dev.TimeZoneEnum"),
     MarketPlugin("com.art2cat.dev.MarketEnum"),
     LendeTypePlugin("com.art2cat.dev.LenderTypeEnum");
-    
+
     private String typeKey;
-    
+
     PluginEnum(String typeKey) {
         this.typeKey = typeKey;
     }
-    
+
     public String getTypeKey() {
         return typeKey;
     }

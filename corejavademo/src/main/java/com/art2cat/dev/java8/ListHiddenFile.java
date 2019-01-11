@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 
 public class ListHiddenFile {
-    
+
     public File[] listHiddenFileOld(File directory) {
         return directory.listFiles(new FileFilter() {
             @Override
@@ -13,7 +13,7 @@ public class ListHiddenFile {
             }
         });
     }
-    
+
     public File[] listHiddenFile(File directory) {
         return directory.listFiles(File::isHidden);
     }

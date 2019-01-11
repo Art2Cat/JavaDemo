@@ -5,15 +5,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 
 public class IsrAndOswDemo {
-    
+
     public static void main(String[] args) throws IOException {
         FileInputStream in = new FileInputStream("e:\\javaio\\imoocutf8.txt");
-        InputStreamReader isr = new InputStreamReader(in, "utf-8");//默认项目的编码,操作的时候，要写文件本身的编码格式
-        
+        InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);//默认项目的编码,操作的时候，要写文件本身的编码格式
+
         FileOutputStream out = new FileOutputStream("e:\\javaio\\imoocutf81.txt");
-        OutputStreamWriter osw = new OutputStreamWriter(out, "utf-8");
+        OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);
 		/*int c ;
 		while((c = isr.read())!=-1){
 			System.out.print((char)c);
@@ -31,7 +32,7 @@ public class IsrAndOswDemo {
         }
         isr.close();
         osw.close();
-        
+
     }
-    
+
 }

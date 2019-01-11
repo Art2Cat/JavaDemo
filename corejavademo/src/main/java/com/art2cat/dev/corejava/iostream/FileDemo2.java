@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.FileFilter;
 
 public class FileDemo2 {
-    
+
     /**
-     * @param args
+     *
      */
     public static void main(String[] args) {
         File file = new File("e:\\example");
@@ -31,15 +31,15 @@ public class FileDemo2 {
 			}
 		});*/
         File[] files = file.listFiles(new FileFilter() {
-            
+
             @Override
             public boolean accept(File pathname) {
                 System.out.println(pathname);
-                
+
                 return false;
             }
         });
-        
+
     }
-    
+
 }

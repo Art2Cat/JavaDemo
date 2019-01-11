@@ -9,12 +9,14 @@ import java.nio.CharBuffer;
  * @date 4/1/18
  */
 public class BufferFillDrain {
-    
+
     private static int index = 0;
-    private static String[] strings = {"A random string value", "The product of an infinite number of monkeys",
-        "Hey hey we're the Monkees", "Opening act for the Monkees: Jimi Hendrix", "'Scuse me while I kiss this fly",
+    private static String[] strings = {"A random string value",
+        "The product of an infinite number of monkeys",
+        "Hey hey we're the Monkees", "Opening act for the Monkees: Jimi Hendrix",
+        "'Scuse me while I kiss this fly",
         "Help Me! Help Me!",};
-    
+
     public static void main(String[] argv)
         throws Exception {
         CharBuffer buffer = CharBuffer.allocate(100);
@@ -24,14 +26,14 @@ public class BufferFillDrain {
             buffer.clear();
         }
     }
-    
+
     private static void drainBuffer(CharBuffer buffer) {
         while (buffer.hasRemaining()) {
             System.out.print(buffer.get());
         }
-        System.out.println("");
+        System.out.println();
     }
-    
+
     private static boolean fillBuffer(CharBuffer buffer) {
         if (index >= strings.length) {
             return (false);

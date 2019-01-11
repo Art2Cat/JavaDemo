@@ -30,14 +30,12 @@ import org.apache.http.util.EntityUtils;
  * @date 11/01/2018
  */
 public class HttpClientUtil {
-    
+
     /**
      *
-     * @param url
-     * @return
      */
     public static String doGet(String url) {
-        
+
         String result = null;
         HttpGet httpget = new HttpGet(url);
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -46,19 +44,16 @@ public class HttpClientUtil {
             if (entity != null) {
                 result = EntityUtils.toString(entity);
             }
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         return result;
     }
-    
+
     /**
      *
-     * @param url
-     * @param params
-     * @return
      */
     public static String doPost(String url, Map<String, String> params) {
         String result = null;
@@ -76,35 +71,36 @@ public class HttpClientUtil {
             if (entity != null) {
                 result = EntityUtils.toString(entity);
             }
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         return result;
     }
-    
+
     public static String doHttpsPost(String url, Map<String, String> params)
         throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         String result = null;
         HttpPost httpPost = new HttpPost(url);
         SSLContext sslContext = new SSLContextBuilder()
             .loadTrustMaterial(null, (arg0, arg1) -> true).build();
-        
+
         // Allow TLSv1 protocol only, use NoopHostnameVerifier to trust self-singed cert
         SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext,
             new String[]{"TLSv1"}, null, new NoopHostnameVerifier());
-        
+
         List<NameValuePair> formParams = params.entrySet().stream()
             .map(entry -> new BasicNameValuePair(entry.getKey(), entry.getValue()))
             .collect(Collectors.toList());
-        
+
         if (!formParams.isEmpty()) {
             UrlEncodedFormEntity paramEntity = new UrlEncodedFormEntity(formParams, Consts.UTF_8);
             httpPost.setEntity(paramEntity);
         }
         //do not set connection manager
-        try (CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+        try (CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslsf)
+            .build();
             CloseableHttpResponse response = httpClient.execute(httpPost)) {
             if (response != null) {
                 HttpEntity resEntity = response.getEntity();
@@ -115,18 +111,16 @@ public class HttpClientUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         return result;
     }
-    
+
     /**
      *
-     * @param url
-     * @return
      */
     public static String doPost(String url) {
         HttpPost httpPost = new HttpPost(url);
-        
+
         String result = null;
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
             CloseableHttpResponse httpResponse = httpClient.execute(httpPost)) {
@@ -134,11 +128,11 @@ public class HttpClientUtil {
             if (entity != null) {
                 result = EntityUtils.toString(entity);
             }
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         return result;
     }
-    
+
 }

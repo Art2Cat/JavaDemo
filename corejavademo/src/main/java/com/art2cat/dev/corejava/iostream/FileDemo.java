@@ -6,7 +6,7 @@ import java.io.IOException;
 public class FileDemo {
 
     /**
-     * @param args
+     *
      */
     public static void main(String[] args) {
         // 了解构造函数的情况  查帮助

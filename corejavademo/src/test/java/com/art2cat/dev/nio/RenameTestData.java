@@ -2,8 +2,8 @@ package com.art2cat.dev.nio;
 
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  * @date 7/2/2018
  */
 public class RenameTestData {
-    
+
     @Test
     public void rename() {
         Path path = Paths

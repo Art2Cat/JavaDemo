@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * @date 27/12/2017
  */
 public class ComparatorTest {
-    
+
     @Test
     public void test() {
         Comparator<Object> comparator = new Comparator<Object>() {
@@ -19,7 +19,7 @@ public class ComparatorTest {
                 return o1.hashCode() - o2.hashCode();
             }
         };
-        
+
         System.out.println(comparator.compare(2, 4));
         System.out.println(comparator.compare(2, 1));
         System.out.println(comparator.compare(2, 2));

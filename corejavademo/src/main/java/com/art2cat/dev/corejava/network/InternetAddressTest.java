@@ -8,12 +8,12 @@ public class InternetAddressTest {
 
     public static void main(String[] args) {
         InetAddress[] addresses = new InetAddress[0];
-        
+
         try {
             InetAddress localHost = InetAddress.getLocalHost();
             System.out.println("Localhost: " + localHost);
             addresses = InetAddress.getAllByName(SocketTest.HOST);
-            
+
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }

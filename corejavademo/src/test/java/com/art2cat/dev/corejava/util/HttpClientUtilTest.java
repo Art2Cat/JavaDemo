@@ -22,10 +22,10 @@ import org.junit.jupiter.api.Test;
  * @date 11/01/2018
  */
 public class HttpClientUtilTest {
-    
+
     private final static String HTTPS_URL = "https://www.art2cat.com";
     private final static String HTTP_URL = "http://www.art2cat.com";
-    
+
     @Test
     public void testPost() {
         String url = "http://localhost:8080/api/byteArray/";
@@ -35,16 +35,16 @@ public class HttpClientUtilTest {
         String result = HttpClientUtil.doPost(url, map);
         System.out.println(result);
     }
-    
+
     @Test
     public void test() {
         StringJoiner stringJoiner = new StringJoiner("");
         byte[] bytes = "helloworld".getBytes(StandardCharsets.UTF_8);
-        
+
         Stream.of(Arrays.toString(bytes).replace(", ", "")).forEach(stringJoiner::add);
         System.out.println(stringJoiner);
     }
-    
+
     @Test
     public void testGet() {
         try {
@@ -54,7 +54,7 @@ public class HttpClientUtilTest {
             Assertions.fail(e.getMessage());
         }
     }
-    
+
     @Test
     public void testAsyncGet() {
         try {

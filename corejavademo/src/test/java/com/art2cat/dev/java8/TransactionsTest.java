@@ -18,18 +18,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TransactionsTest {
-    
+
     private List<Transaction> transactions = Transactions.getTransactions();
-    
+
     @Test
     public void testDeal() {
         List<Transaction> tr2011 = transactions.stream()
             .filter(transaction -> transaction.getYear() == 2011)
             .sorted(Comparator.comparing(Transaction::getValue))
             .collect(Collectors.toList());
-        
+
         tr2011.forEach(transaction -> System.out.println(transaction.getTrader().getName()));
-        
+
         List<String> cites = transactions.stream()
             .map(transaction -> transaction.getTrader().getCity())
             .distinct()
@@ -37,10 +37,10 @@ public class TransactionsTest {
         Set<String> cites1 = transactions.stream()
             .map(transaction -> transaction.getTrader().getCity())
             .collect(Collectors.toSet());
-        
+
         cites.forEach(s -> cites1.forEach(s1 -> System.out.println(s + " : " + s1)));
     }
-    
+
     @Test
     public void testFindCambridge() {
         List<Trader> traders = transactions.stream()
@@ -49,45 +49,45 @@ public class TransactionsTest {
             .distinct()
             .sorted(Comparator.comparing(Trader::getName))
             .collect(Collectors.toList());
-        
+
         String trader = traders.stream()
             .map(Trader::getName)
             .distinct().sorted()
             .collect(joining());
-        
+
         System.out.println(trader);
-        
+
         boolean milanBased = transactions.stream()
             .anyMatch(transaction -> transaction.getTrader().getCity().equals("Milan"));
-        
+
         Assertions.assertTrue(milanBased);
-        
+
         transactions.stream()
             .filter(transaction -> "Cambridge".equals(transaction.getTrader().getCity()))
             .map(Transaction::getValue)
             .forEach(System.out::println);
-        
+
         Optional<Integer> highestValue = transactions.stream()
             .map(Transaction::getValue)
             .reduce(Integer::max);
-    
+
         Assertions.assertTrue(highestValue.isPresent());
         System.out.println(highestValue.get());
-        
+
         Integer sumValue = transactions.stream()
             .mapToInt(Transaction::getValue)
             .sum();
-        
+
         System.out.println(sumValue);
     }
-    
+
     @Test
     public void testValueStream() {
         Stream<String> stream = Stream.of("Java 8 ", "Lambdas ", "In ", "Action");
         stream.map(String::toUpperCase).forEach(System.out::println);
         Stream<String> emptyStream = Stream.empty();
     }
-    
+
     @Test
     public void testFileStream() {
         long uniqueWords;
@@ -101,7 +101,7 @@ public class TransactionsTest {
             Assertions.fail(e.getMessage());
         }
     }
-    
+
     @Test
     public void testFileStream1() {
         try (Stream<String> lines = Files
@@ -111,7 +111,7 @@ public class TransactionsTest {
             Assertions.fail(e.getMessage());
         }
     }
-    
+
     @Test
     public void testListJavaContent() {
         try (Stream<Path> files = Files.walk(Paths.get("."))
@@ -127,7 +127,7 @@ public class TransactionsTest {
             Assertions.fail(e.getMessage());
         }
     }
-    
+
     @Test
     public void testGenerate() {
         Stream.generate(Math::random)

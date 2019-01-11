@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class AppleFilter {
-    
+
     public static List<Apple> filterApples(List<Apple> inventory, IAppleFilter filter) {
         List<Apple> result = new ArrayList<Apple>();
         for (Apple apple : inventory) {
@@ -15,7 +15,7 @@ public class AppleFilter {
         }
         return result;
     }
-    
+
     @SuppressWarnings("unchecked")
     public static <T> List<T> filter(List<T> list, Predicate<T> p) {
         List<Apple> result = new ArrayList<Apple>();
@@ -26,8 +26,8 @@ public class AppleFilter {
         });
         return (List<T>) result;
     }
-    
-    
+
+
     public static List<Apple> filterApplesByColor(List<Apple> inventory,
         String color) {
         List<Apple> result = new ArrayList<Apple>();
@@ -38,7 +38,7 @@ public class AppleFilter {
         }
         return result;
     }
-    
+
     public static List<Apple> filterApplesByWeight(List<Apple> inventory,
         int weight) {
         List<Apple> result = new ArrayList<Apple>();
@@ -49,7 +49,7 @@ public class AppleFilter {
         }
         return result;
     }
-    
+
     public static List<Apple> filterApplesByColor(List<Apple> inventory,
         IAppleFilter filter) {
         List<Apple> result = new ArrayList<Apple>();
@@ -60,7 +60,7 @@ public class AppleFilter {
         }
         return result;
     }
-    
+
     public static List<Apple> filterApplesByWeight(List<Apple> inventory,
         IAppleFilter filter) {
         List<Apple> result = new ArrayList<Apple>();
@@ -71,5 +71,5 @@ public class AppleFilter {
         }
         return result;
     }
-    
+
 }

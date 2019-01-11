@@ -35,9 +35,9 @@ public class Tweet {
     @Override
     public String toString() {
         return "Tweet{" +
-                "content='" + content + '\'' +
-                ", poster='" + poster + '\'' +
-                ", postTime=" + postTime +
-                '}';
+            "content='" + content + '\'' +
+            ", poster='" + poster + '\'' +
+            ", postTime=" + postTime +
+            '}';
     }
 }

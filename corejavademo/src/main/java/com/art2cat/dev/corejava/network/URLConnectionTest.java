@@ -5,9 +5,9 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class URLConnectionTest {
-    
+
     private static final String HOST = "https://art2cat.com";
-    
+
     public static void main(String[] args) {
         try {
             URL url = new URL(HOST);
@@ -18,6 +18,6 @@ public class URLConnectionTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 }

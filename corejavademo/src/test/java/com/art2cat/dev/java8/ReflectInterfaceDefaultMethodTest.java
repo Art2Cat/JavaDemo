@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  * @date 3/29/18
  */
 public class ReflectInterfaceDefaultMethodTest {
-    
+
     @Test
     public void testNormal() {
         ICat cat = (ICat) Proxy.newProxyInstance(
@@ -23,10 +23,10 @@ public class ReflectInterfaceDefaultMethodTest {
                 return null;
             }
         );
-        
+
         cat.meow();
     }
-    
+
     /**
      * use MethodHandles.Lookup to get Interface's default method
      */
@@ -47,7 +47,7 @@ public class ReflectInterfaceDefaultMethodTest {
                 return null;
             }
         );
-        
+
         duck.quack();
     }
 }

@@ -6,9 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class AppleFilterTest {
-    
+
     List<Apple> apples;
-    
+
     @BeforeEach
     public void init() {
         apples = new ArrayList<>();
@@ -24,25 +24,25 @@ public class AppleFilterTest {
             apples.add(apple);
         }
     }
-    
+
     @Test
     public void testAppleFilter() {
         apples.forEach(apple -> System.out.println("apples: " + apple.getColour()));
-        
+
         List<Apple> result = AppleFilter.filterApples(apples,
             apple -> "Red".equals(apple.getColour()) && apple.getWeight() > 150);
-        
+
         result.forEach(apple -> System.out.println("result: " + apple.getColour()));
     }
-    
+
     @Test
-    
+
     public void testFilter() {
         apples.forEach(apple -> System.out.println("apples: " + apple.getColour()));
-        
+
         List<Apple> result = AppleFilter.filter(apples,
             apple -> "Red".equals(apple.getColour()) && apple.getWeight() > 150);
-        
+
         result.forEach(apple -> System.out.println("result: " + apple.getColour()));
     }
 }

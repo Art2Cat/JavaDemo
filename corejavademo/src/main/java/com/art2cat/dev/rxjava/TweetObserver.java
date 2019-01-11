@@ -4,6 +4,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 public class TweetObserver implements Observer<Tweet> {
+
     @Override
     public void onSubscribe(Disposable disposable) {
         System.out.println("isDisposable: " + disposable.isDisposed());

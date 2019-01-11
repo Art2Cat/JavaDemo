@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FilePathTest {
-    
+
     public static void main(String[] args) throws URISyntaxException {
         FilePathTest filePathTest = new FilePathTest();
         System.out.println(FilePathTest.class.getClassLoader().getResource(""));
@@ -21,18 +21,18 @@ public class FilePathTest {
         System.out.println(Thread.currentThread()
             .getContextClassLoader().getResource(""));
         try {
-            
+
             System.out.println(directory.getCanonicalPath());//获取标准的路径
-            
+
             System.out.println(directory.getAbsolutePath());//获取绝对路径
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         System.out.println(classloader);
-        
+
         File file = new File(classloader.getResource("application.properties").getFile());
         System.out.println(file.getAbsolutePath());
         System.out.println(classloader);

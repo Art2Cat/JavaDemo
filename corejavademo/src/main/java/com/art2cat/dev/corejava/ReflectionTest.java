@@ -14,7 +14,7 @@ import javax.swing.Timer;
  * Created by Rorschach on 2017/3/31.
  */
 public class ReflectionTest {
-    
+
     public static void main(String[] args) {
         reflect(args);
         TimeListener timeListener = new TimeListener();
@@ -22,7 +22,7 @@ public class ReflectionTest {
         Timer timer = new Timer(10000, timeListener);
         timer.start();
     }
-    
+
     private static void reflect(String[] args) {
         String name;
         if (args.length > 0) {
@@ -32,7 +32,7 @@ public class ReflectionTest {
             System.out.println("Enter class name(e.g. java.util.Date): ");
             name = in.next();
         }
-        
+
         try {
             Class cl = Class.forName(name);
             Class superClass = cl.getSuperclass();
@@ -45,7 +45,7 @@ public class ReflectionTest {
             if (superClass != null && superClass != Object.class) {
                 System.out.print(" extends " + superClass.getName());
             }
-            
+
             System.out.println("{");
             printConstructors(cl);
             System.out.println();
@@ -58,7 +58,7 @@ public class ReflectionTest {
         }
         System.exit(0);
     }
-    
+
     private static void printFields(Class cl) {
         Field[] fields = cl.getDeclaredFields();
         for (Field f : fields) {
@@ -72,20 +72,20 @@ public class ReflectionTest {
             System.out.println(type.getName() + " " + name + ";");
         }
     }
-    
+
     private static void printMethods(Class cl) {
         Method[] methods = cl.getDeclaredMethods();
         for (Method m : methods) {
             Class retType = m.getReturnType();
             String name = m.getName();
-            
+
             System.out.print("   ");
             String modifiers = Modifier.toString(m.getModifiers());
             if (modifiers.length() > 0) {
                 System.out.print(modifiers + " ");
             }
             System.out.print(retType.getName() + " " + name + "(");
-            
+
             Class[] paramTypes = m.getParameterTypes();
             for (int i = 0; i < paramTypes.length; i++) {
                 if (i > 0) {
@@ -96,7 +96,7 @@ public class ReflectionTest {
             System.out.println(");");
         }
     }
-    
+
     private static void printConstructors(Class cl) {
         Constructor[] constructors = cl.getDeclaredConstructors();
         for (Constructor c : constructors) {
@@ -107,7 +107,7 @@ public class ReflectionTest {
                 System.out.print(modifiers + " ");
             }
             System.out.print(name + "(");
-            
+
             Class[] paramTypes = c.getParameterTypes();
             for (int j = 0; j < paramTypes.length; j++) {
                 if (j > 0) {
@@ -118,20 +118,20 @@ public class ReflectionTest {
             System.out.println(");");
         }
     }
-    
+
     static class TimeListener implements ActionListener {
-        
+
         @Override
         public void actionPerformed(final ActionEvent e) {
             Date date = new Date();
             System.out.println("The time is : " + date);
             class TestForOne {
-                
+
                 private void print() {
                     System.out.println(e.getActionCommand());
                 }
             }
-            
+
             new TestForOne().print();
         }
     }

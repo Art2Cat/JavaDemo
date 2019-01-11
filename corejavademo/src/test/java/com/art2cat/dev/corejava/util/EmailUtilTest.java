@@ -1,14 +1,17 @@
 package com.art2cat.dev.corejava.util;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import java.util.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * PACKAGE_NAME
@@ -18,9 +21,9 @@ import java.util.*;
  */
 @Disabled
 public class EmailUtilTest {
-    
+
     // telnet smtp.gmail.com 587
-    
+
     private Properties createEmailProperties() {
         Properties mailProp = new Properties();
         // SMTP Host
@@ -35,15 +38,15 @@ public class EmailUtilTest {
         mailProp.put("mail.smtp.auth", "true");
         return mailProp;
     }
-    
+
     @Test
     public void testSimpleMail() {
         System.out.println("SimpleEmail Start");
-        
+
         String emailID = "yiming.whz@gmail.com";
-        
+
         Session session = Session.getInstance(createEmailProperties(), null);
-        
+
         try {
             EmailUtil.sendEmail(session, emailID, "SimpleEmail Testing Subject",
                 "SimpleEmail Testing Body");
@@ -52,7 +55,7 @@ public class EmailUtilTest {
             Assertions.fail();
         }
     }
-    
+
     @Test
     public void testTSLMail() {
         final String fromEmail = "tes@test.com";
@@ -71,7 +74,7 @@ public class EmailUtilTest {
         // Enabling SMTP Authentication
         mailProp.put("mail.smtp.auth", "true");
         mailProp.put("mail.smtp.starttls.enable", "true");
-        
+
         //create Authenticator object to pass in Session.getInstance argument
         Authenticator auth = new Authenticator() {
             //override the getPasswordAuthentication method
@@ -80,7 +83,7 @@ public class EmailUtilTest {
             }
         };
         Session session = Session.getInstance(mailProp, auth);
-        
+
         try {
             EmailUtil
                 .sendEmail(session, toEmail, "TLSEmail Testing Subject", "TLSEmail Testing Body");
@@ -89,13 +92,13 @@ public class EmailUtilTest {
             Assertions.fail();
         }
     }
-    
+
     @Test
     public void testSSLMail() {
         final String fromEmail = "tes@test.com";
         final String password = "password";
         final String toEmail = "toemail@email.com";
-        
+
         System.out.println("SSLEmail Start");
         Properties mailProp = new Properties();
         // SMTP Host
@@ -112,14 +115,14 @@ public class EmailUtilTest {
         mailProp.put("mail.smtp.socketFactory.port", "587");
         // SSL Factory Class
         mailProp.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        
+
         Authenticator auth = new Authenticator() {
             //override the getPasswordAuthentication method
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(fromEmail, password);
             }
         };
-        
+
         Session session = Session.getDefaultInstance(mailProp, auth);
         System.out.println("Session created");
         try {
@@ -130,13 +133,13 @@ public class EmailUtilTest {
             Assertions.fail();
         }
     }
-    
+
     @Test
     public void testSSLMailAttachWithFile() {
         final String fromEmail = "tes@test.com";
         final String password = "password";
         final String toEmail = "toemail@email.com";
-        
+
         System.out.println("SSLEmail Start");
         Properties mailProp = new Properties();
         // SMTP Host
@@ -153,14 +156,14 @@ public class EmailUtilTest {
         mailProp.put("mail.smtp.socketFactory.port", "587");
         // SSL Factory Class
         mailProp.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        
+
         Authenticator auth = new Authenticator() {
             //override the getPasswordAuthentication method
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(fromEmail, password);
             }
         };
-        
+
         Session session = Session.getDefaultInstance(mailProp, auth);
         System.out.println("Session created");
         List<String> files = new ArrayList<>();
@@ -174,13 +177,13 @@ public class EmailUtilTest {
             Assertions.fail();
         }
     }
-    
+
     @Test
     public void testSSLMailAttachWithImageFile() {
         final String fromEmail = "tes@test.com";
         final String password = "password";
         final String toEmail = "toemail@email.com";
-        
+
         System.out.println("SSLEmail Start");
         Properties mailProp = new Properties();
         // SMTP Host
@@ -197,14 +200,14 @@ public class EmailUtilTest {
         mailProp.put("mail.smtp.socketFactory.port", "587");
         // SSL Factory Class
         mailProp.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        
+
         Authenticator auth = new Authenticator() {
             //override the getPasswordAuthentication method
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(fromEmail, password);
             }
         };
-        
+
         Session session = Session.getDefaultInstance(mailProp, auth);
         System.out.println("Session created");
         Map<String, String> files = new HashMap<>();
