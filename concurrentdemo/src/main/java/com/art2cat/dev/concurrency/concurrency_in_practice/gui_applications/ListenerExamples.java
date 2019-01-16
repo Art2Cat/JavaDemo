@@ -16,9 +16,9 @@ import javax.swing.JLabel;
  * @author Brian Goetz and Tim Peierls
  */
 public class ListenerExamples {
-    
+
     private static ExecutorService exec = Executors.newCachedThreadPool();
-    
+
     private final JButton colorButton = new JButton("Change color");
     private final Random random = new Random();
     private final JButton computeButton = new JButton("Big computation");
@@ -27,7 +27,7 @@ public class ListenerExamples {
     private final JButton startButton = new JButton("Start");
     private final JButton cancelButton = new JButton("Cancel");
     private Future<?> runningTask = null; // thread-confined
-    
+
     private void backgroundRandom() {
         colorButton.addActionListener(e -> colorButton.setBackground(new Color(random.nextInt())));
     }
@@ -54,7 +54,7 @@ public class ListenerExamples {
             });
         });
     }
-    
+
     private void taskWithCancellation() {
         startButton.addActionListener((ActionEvent e) -> {
             if (runningTask != null) {
@@ -82,17 +82,16 @@ public class ListenerExamples {
 
                 });
             }
-            ;
         });
-        
+
         cancelButton.addActionListener(event -> {
             if (runningTask != null) {
                 runningTask.cancel(true);
             }
         });
     }
-    
-    
+
+
     private void runInBackground(final Runnable task) {
         startButton.addActionListener(e -> {
             class CancelListener implements ActionListener {

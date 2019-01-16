@@ -9,18 +9,18 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.sharing_objects;
  */
 
 public class NoVisibility {
-    
+
     private static boolean ready;
     private static int number;
-    
+
     public static void main(String[] args) {
         new ReaderThread().start();
         number = 42;
         ready = true;
     }
-    
+
     private static class ReaderThread extends Thread {
-        
+
         @Override
         public void run() {
             while (!ready) {

@@ -12,7 +12,7 @@ import java.util.concurrent.FutureTask;
  */
 
 public class Preloader {
-    
+
     private final FutureTask<ProductInfo> future =
         new FutureTask<>(() -> loadProductInfo());
     private final Thread thread = new Thread(future);
@@ -20,11 +20,11 @@ public class Preloader {
     ProductInfo loadProductInfo() throws DataLoadException {
         return null;
     }
-    
+
     public void start() {
         thread.start();
     }
-    
+
     public ProductInfo get()
         throws DataLoadException, InterruptedException {
         try {
@@ -38,7 +38,7 @@ public class Preloader {
             }
         }
     }
-    
+
     interface ProductInfo {
 
     }

@@ -33,6 +33,7 @@ public class DateTimeTest {
     };
 
     @Test
+    @SuppressWarnings("deprecated")
     public void useOldDate() {
         Date date = new Date(114, 2, 18);
         System.out.println(date);

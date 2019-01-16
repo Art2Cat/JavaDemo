@@ -2,7 +2,7 @@ package com.art2cat.dev.concurrency;
 
 import com.art2cat.dev.concurrency.concurrency_in_practice.applying_thread_pools.BoundedExecutor;
 import java.util.concurrent.Executors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BoundedExecutorTest {
 

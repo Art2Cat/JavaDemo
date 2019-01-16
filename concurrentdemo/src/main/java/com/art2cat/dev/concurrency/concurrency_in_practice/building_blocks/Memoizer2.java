@@ -11,14 +11,14 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Brian Goetz and Tim Peierls
  */
 public class Memoizer2<A, V> implements Computable<A, V> {
-    
+
     private final Map<A, V> cache = new ConcurrentHashMap<A, V>();
     private final Computable<A, V> c;
-    
+
     public Memoizer2(Computable<A, V> c) {
         this.c = c;
     }
-    
+
     @Override
     public V compute(A arg) throws InterruptedException {
         V result = cache.get(arg);

@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 public class ConditionBoundedBuffer<T> {
-    
+
     private static final int BUFFER_SIZE = 100;
     protected final Lock lock = new ReentrantLock();
     // CONDITION PREDICATE: notFull (count < items.length)
@@ -25,7 +25,7 @@ public class ConditionBoundedBuffer<T> {
     private final T[] items = (T[]) new Object[BUFFER_SIZE];
 
     private int tail, head, count;
-    
+
     // BLOCKS-UNTIL: notFull
     public void put(T x) throws InterruptedException {
         lock.lock();
@@ -43,7 +43,7 @@ public class ConditionBoundedBuffer<T> {
             lock.unlock();
         }
     }
-    
+
     // BLOCKS-UNTIL: notEmpty
     public T take() throws InterruptedException {
         lock.lock();

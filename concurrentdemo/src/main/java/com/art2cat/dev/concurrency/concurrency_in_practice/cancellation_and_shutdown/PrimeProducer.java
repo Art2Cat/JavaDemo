@@ -11,13 +11,13 @@ import java.util.concurrent.BlockingQueue;
  * @author Brian Goetz and Tim Peierls
  */
 public class PrimeProducer extends Thread {
-    
+
     private final BlockingQueue<BigInteger> queue;
-    
+
     PrimeProducer(BlockingQueue<BigInteger> queue) {
         this.queue = queue;
     }
-    
+
     @Override
     public void run() {
         try {
@@ -29,7 +29,7 @@ public class PrimeProducer extends Thread {
             /* Allow thread to exit */
         }
     }
-    
+
     public void cancel() {
         interrupt();
     }

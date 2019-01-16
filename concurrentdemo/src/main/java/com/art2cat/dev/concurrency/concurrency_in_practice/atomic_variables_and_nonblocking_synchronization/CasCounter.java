@@ -10,13 +10,13 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.atomic_variables_and
  */
 
 public class CasCounter {
-    
+
     private SimulatedCAS value;
-    
+
     public int getValue() {
         return value.get();
     }
-    
+
     public int increment() {
         int v;
         do {

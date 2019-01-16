@@ -33,7 +33,7 @@ public class Stack {
                 System.out.println("pop操作中的： " + Thread.currentThread().getName() + " 线程处于wait状态");
                 this.wait();
             }
-            returnValue = list.get(0).toString();
+            returnValue = list.get(0);
             list.remove(0);
             // use notifyAll() avoid "fake dead"
             this.notifyAll();

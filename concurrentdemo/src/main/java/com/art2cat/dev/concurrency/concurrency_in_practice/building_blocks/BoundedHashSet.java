@@ -13,15 +13,15 @@ import java.util.concurrent.Semaphore;
  * @author Brian Goetz and Tim Peierls
  */
 public class BoundedHashSet<T> {
-    
+
     private final Set<T> set;
     private final Semaphore sem;
-    
+
     public BoundedHashSet(int bound) {
         this.set = Collections.synchronizedSet(new HashSet<T>());
         sem = new Semaphore(bound);
     }
-    
+
     public boolean add(T o) throws InterruptedException {
         sem.acquire();
         boolean wasAdded = false;
@@ -34,7 +34,7 @@ public class BoundedHashSet<T> {
             }
         }
     }
-    
+
     public boolean remove(Object o) {
         boolean wasRemoved = set.remove(o);
         if (wasRemoved) {

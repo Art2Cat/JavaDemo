@@ -1,6 +1,5 @@
 package com.art2cat.dev.concurrency;
 
-import static junit.framework.TestCase.assertEquals;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -8,7 +7,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * com.art2cat.dev.concurrency
@@ -29,7 +29,7 @@ public class CompletableFutureTest {
         CompletableFuture<String> future = completableFuture
             .thenApply(s -> s + " World");
         
-        assertEquals("Hello World", future.get());
+        Assertions.assertEquals("Hello World", future.get());
         System.out.println(future.get());
         
         CompletableFuture<String> stringCompletableFuture = new CompletableFuture<>();

@@ -8,35 +8,35 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.sharing_objects;
  * @author Brian Goetz and Tim Peierls
  */
 public class SafeListener {
-    
+
     private final EventListener listener;
-    
+
     private SafeListener() {
         listener = this::doSomething;
     }
-    
+
     public static SafeListener newInstance(EventSource source) {
         SafeListener safe = new SafeListener();
         source.registerListener(safe.listener);
         return safe;
     }
-    
+
     void doSomething(Event e) {
     }
-    
-    
+
+
     interface EventSource {
-        
+
         void registerListener(EventListener e);
     }
-    
+
     interface EventListener {
-        
+
         void onEvent(Event e);
     }
-    
+
     interface Event {
-    
+
     }
 }
 

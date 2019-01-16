@@ -18,9 +18,9 @@ import java.util.concurrent.Future;
  * @author Brian Goetz and Tim Peierls
  */
 public abstract class FutureRenderer {
-    
+
     private final ExecutorService executor = Executors.newCachedThreadPool();
-    
+
     void renderPage(CharSequence source) {
         final List<ImageInfo> imageInfos = scanForImageInfo(source);
         Callable<List<ImageData>> task =
@@ -34,10 +34,10 @@ public abstract class FutureRenderer {
                     return result;
                 }
             };
-        
+
         Future<List<ImageData>> future = executor.submit(task);
         renderText(source);
-        
+
         try {
             List<ImageData> imageData = future.get();
             for (ImageData data : imageData) {
@@ -52,19 +52,19 @@ public abstract class FutureRenderer {
             throw launderThrowable(e.getCause());
         }
     }
-    
+
     abstract void renderText(CharSequence s);
-    
+
     abstract List<ImageInfo> scanForImageInfo(CharSequence s);
-    
+
     abstract void renderImage(ImageData i);
-    
+
     interface ImageData {
 
     }
-    
+
     interface ImageInfo {
-        
+
         ImageData downloadImage();
     }
 }

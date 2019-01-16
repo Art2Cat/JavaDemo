@@ -7,5 +7,6 @@ package com.art2cat.dev.multi_thread.chapterThree;
  * @date 1/17/2018
  */
 public interface IConsumer {
+
     void consume();
 }

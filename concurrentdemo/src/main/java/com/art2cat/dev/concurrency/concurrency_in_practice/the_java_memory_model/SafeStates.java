@@ -11,9 +11,9 @@ import java.util.Map;
  * @author Brian Goetz and Tim Peierls
  */
 public class SafeStates {
-    
+
     private final Map<String, String> states;
-    
+
     public SafeStates() {
         states = new HashMap<String, String>();
         states.put("alaska", "AK");
@@ -21,7 +21,7 @@ public class SafeStates {
         /*...*/
         states.put("wyoming", "WY");
     }
-    
+
     public String getAbbreviation(String s) {
         return states.get(s);
     }

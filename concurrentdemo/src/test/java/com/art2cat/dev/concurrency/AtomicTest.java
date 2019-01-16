@@ -3,14 +3,22 @@ package com.art2cat.dev.concurrency;
 import java.math.BigDecimal;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class AtomicTest {
 
     private long x = 0;
+
+    private void waitToShut(ExecutorService executorService) throws InterruptedException {
+        executorService.shutdown();
+        while (!executorService.awaitTermination(100, TimeUnit.MICROSECONDS)) {
+            System.out.println("Still waiting...");
+        }
+    }
 
     @Test
     public void testAtomicLong() {
@@ -31,11 +39,14 @@ public class AtomicTest {
             });
         }
 
-        executor.shutdown();
-        while (!executor.isTerminated()) {
+        try {
+            waitToShut(executor);
+        } catch (InterruptedException e) {
+            Assertions.fail(e.getMessage());
         }
+
         System.out.println("Finished all threads");
-        Assert.assertEquals(10, atomicLong.get());
+        Assertions.assertEquals(10, atomicLong.get());
     }
 
     @Test
@@ -49,18 +60,21 @@ public class AtomicTest {
                 System.out.println(Thread.currentThread().getName() + " : " + money.get());
             });
         }
-        executorService.shutdown();
-        while (!executorService.isTerminated()) {
+
+        try {
+            waitToShut(executorService);
+        } catch (InterruptedException e) {
+            Assertions.fail(e.getMessage());
         }
         System.out.println("Finished all threads");
-        Assert.assertEquals(10, money.get());
+        Assertions.assertEquals(10, money.get().intValue());
     }
 
     private synchronized void updateBigDecimal(
         AtomicReference<BigDecimal> bigDecimalAtomicReference,
         BigDecimal bigDecimal) {
         if (bigDecimalAtomicReference != null
-            && bigDecimalAtomicReference.get().compareTo(bigDecimal) == -1) {
+            && bigDecimalAtomicReference.get().compareTo(bigDecimal) < 0) {
             bigDecimalAtomicReference.getAndSet(bigDecimal);
         }
     }
@@ -76,10 +90,13 @@ public class AtomicTest {
                 System.out.println(Thread.currentThread().getName() + " : " + money.get());
             });
         }
-        executorService.shutdown();
-        while (!executorService.isTerminated()) {
+
+        try {
+            waitToShut(executorService);
+        } catch (InterruptedException e) {
+            Assertions.fail(e.getMessage());
         }
         System.out.println("Finished all threads");
-        Assert.assertEquals(new BigDecimal(10240), money.get());
+        Assertions.assertEquals(new BigDecimal(10240), money.get());
     }
 }

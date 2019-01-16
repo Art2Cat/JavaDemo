@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author Brian Goetz and Tim Peierls
  */
 public class CheckForMail {
-    
+
     public boolean checkMail(Set<String> hosts, long timeout, TimeUnit unit)
         throws InterruptedException {
         ExecutorService exec = Executors.newCachedThreadPool();
@@ -33,7 +33,7 @@ public class CheckForMail {
         }
         return hasNewMail.get();
     }
-    
+
     private boolean checkMail(String host) {
         // Check for mail
         return false;

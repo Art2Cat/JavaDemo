@@ -4,11 +4,11 @@ package com.art2cat.dev.multi_thread.chapterOneAndTwo.synBlockString;
  * Created by Rorschach on 7/7/2017.
  */
 class Service {
-    
+
     String usernameParam;
     String passwordParam;
     String anyString = "";
-    
+
     void setUsernamePassword(String username, String password) {
         try {
             synchronized (this) {
@@ -24,7 +24,7 @@ class Service {
             e.printStackTrace();
         }
     }
-    
+
     void test() {
         try {
             synchronized (anyString) {
@@ -36,7 +36,7 @@ class Service {
             e.printStackTrace();
         }
     }
-    
+
     synchronized void b() {
         System.out.println("b begin");
         System.out.println("b end");

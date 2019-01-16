@@ -15,20 +15,20 @@ import javax.servlet.ServletResponse;
  * @author Brian Goetz and Tim Peierls
  */
 public class CachedFactorizer extends GenericServlet implements Servlet {
-    
+
     private BigInteger lastNumber;
     private BigInteger[] lastFactors;
     private long hits;
     private long cacheHits;
-    
+
     public synchronized long getHits() {
         return hits;
     }
-    
+
     public synchronized double getCacheHitRatio() {
         return (double) cacheHits / (double) hits;
     }
-    
+
     @Override
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);
@@ -49,14 +49,14 @@ public class CachedFactorizer extends GenericServlet implements Servlet {
         }
         encodeIntoResponse(resp, factors);
     }
-    
+
     void encodeIntoResponse(ServletResponse resp, BigInteger[] factors) {
     }
-    
+
     BigInteger extractFromRequest(ServletRequest req) {
         return new BigInteger("7");
     }
-    
+
     BigInteger[] factor(BigInteger i) {
         // Doesn't really factor
         return new BigInteger[]{i};

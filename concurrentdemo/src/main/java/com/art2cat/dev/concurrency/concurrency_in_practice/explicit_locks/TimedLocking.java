@@ -14,9 +14,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author Brian Goetz and Tim Peierls
  */
 public class TimedLocking {
-    
+
     private Lock lock = new ReentrantLock();
-    
+
     public boolean trySendOnSharedLine(String message,
         long timeout, TimeUnit unit)
         throws InterruptedException {
@@ -31,12 +31,12 @@ public class TimedLocking {
             lock.unlock();
         }
     }
-    
+
     private boolean sendOnSharedLine(String message) {
         /* send something */
         return true;
     }
-    
+
     long estimatedNanosToSend(String message) {
         return message.length();
     }

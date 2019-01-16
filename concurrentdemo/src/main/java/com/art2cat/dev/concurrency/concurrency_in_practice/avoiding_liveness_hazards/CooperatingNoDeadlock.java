@@ -12,22 +12,22 @@ import java.util.Set;
  * @author Brian Goetz and Tim Peierls
  */
 class CooperatingNoDeadlock {
-    
+
 
     class Taxi {
-        
+
         private final Dispatcher dispatcher;
 
         private Point location, destination;
-        
+
         public Taxi(Dispatcher dispatcher) {
             this.dispatcher = dispatcher;
         }
-        
+
         public synchronized Point getLocation() {
             return location;
         }
-        
+
         public synchronized void setLocation(Point location) {
             boolean reachedDestination;
             synchronized (this) {
@@ -38,33 +38,33 @@ class CooperatingNoDeadlock {
                 dispatcher.notifyAvailable(this);
             }
         }
-        
+
         public synchronized Point getDestination() {
             return destination;
         }
-        
+
         public synchronized void setDestination(Point destination) {
             this.destination = destination;
         }
     }
-    
+
 
     class Dispatcher {
-        
+
 
         private final Set<Taxi> taxis;
 
         private final Set<Taxi> availableTaxis;
-        
+
         public Dispatcher() {
             taxis = new HashSet<Taxi>();
             availableTaxis = new HashSet<Taxi>();
         }
-        
+
         public synchronized void notifyAvailable(Taxi taxi) {
             availableTaxis.add(taxi);
         }
-        
+
         public Image getImage() {
             Set<Taxi> copy;
             synchronized (this) {
@@ -77,11 +77,11 @@ class CooperatingNoDeadlock {
             return image;
         }
     }
-    
+
     class Image {
-        
+
         public void drawMarker(Point p) {
         }
     }
-    
+
 }

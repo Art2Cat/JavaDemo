@@ -2,7 +2,8 @@ package com.art2cat.dev.concurrency;
 
 import com.art2cat.dev.concurrency.concurrency_in_practice.testing_concurrent_programs.BarrierTimer;
 import java.util.concurrent.CyclicBarrier;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing with a barrier-based timer
@@ -19,7 +20,8 @@ public class TimedPutTakeTest extends PutTakeTest {
         barrier = new CyclicBarrier(nPairs * 2 + 1, timer);
     }
 
-    public static void main(String[] args) throws Exception {
+    @Test
+    public  void test2() throws Exception {
         int tpt = 100000; // trials per thread
         for (int cap = 1; cap <= 1000; cap *= 10) {
             System.out.println("Capacity: " + cap);
@@ -48,7 +50,7 @@ public class TimedPutTakeTest extends PutTakeTest {
             barrier.await();
             long nsPerItem = timer.getTime() / (nPairs * (long) nTrials);
             System.out.print("Throughput: " + nsPerItem + " ns/item");
-            Assert.assertEquals(putSum.get(), takeSum.get());
+            Assertions.assertEquals(putSum.get(), takeSum.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 
 public class LinkedQueue<E> {
-    
+
     private final LinkedQueue.Node<E> dummy = new LinkedQueue.Node<E>(null, null);
     private final AtomicReference<LinkedQueue.Node<E>> head
         = new AtomicReference<LinkedQueue.Node<E>>(dummy);
@@ -38,12 +38,12 @@ public class LinkedQueue<E> {
             }
         }
     }
-    
+
     private static class Node<E> {
-        
+
         final E item;
         final AtomicReference<LinkedQueue.Node<E>> next;
-        
+
         public Node(E item, LinkedQueue.Node<E> next) {
             this.item = item;
             this.next = new AtomicReference<LinkedQueue.Node<E>>(next);

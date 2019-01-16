@@ -13,7 +13,7 @@ import java.net.Socket;
  */
 
 public class SingleThreadWebServer {
-    
+
     public static void main(String[] args) throws IOException {
         ServerSocket socket = new ServerSocket(80);
         while (true) {
@@ -21,7 +21,7 @@ public class SingleThreadWebServer {
             handleRequest(connection);
         }
     }
-    
+
     private static void handleRequest(Socket connection) {
         // request-handling logic here
     }

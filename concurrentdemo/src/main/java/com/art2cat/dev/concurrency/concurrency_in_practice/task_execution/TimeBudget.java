@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 interface TravelCompany {
-    
+
     TravelQuote solicitQuote(TravelInfo travelInfo) throws Exception;
 }
 
@@ -35,19 +35,20 @@ interface TravelInfo {
  * @author Brian Goetz and Tim Peierls
  */
 public class TimeBudget {
-    
+
     private static ExecutorService exec = Executors.newCachedThreadPool();
-    
-    public List<TravelQuote> getRankedTravelQuotes(TravelInfo travelInfo, Set<TravelCompany> companies,
+
+    public List<TravelQuote> getRankedTravelQuotes(TravelInfo travelInfo,
+        Set<TravelCompany> companies,
         Comparator<TravelQuote> ranking, long time, TimeUnit unit)
         throws InterruptedException {
         List<QuoteTask> tasks = new ArrayList<QuoteTask>();
         for (TravelCompany company : companies) {
             tasks.add(new QuoteTask(company, travelInfo));
         }
-        
+
         List<Future<TravelQuote>> futures = exec.invokeAll(tasks, time, unit);
-        
+
         List<TravelQuote> quotes =
             new ArrayList<TravelQuote>(tasks.size());
         Iterator<QuoteTask> taskIter = tasks.iterator();
@@ -61,31 +62,31 @@ public class TimeBudget {
                 quotes.add(task.getTimeoutQuote(e));
             }
         }
-        
+
         Collections.sort(quotes, ranking);
         return quotes;
     }
-    
+
 }
 
 class QuoteTask implements Callable<TravelQuote> {
-    
+
     private final TravelCompany company;
     private final TravelInfo travelInfo;
-    
+
     public QuoteTask(TravelCompany company, TravelInfo travelInfo) {
         this.company = company;
         this.travelInfo = travelInfo;
     }
-    
+
     TravelQuote getFailureQuote(Throwable t) {
         return null;
     }
-    
+
     TravelQuote getTimeoutQuote(CancellationException e) {
         return null;
     }
-    
+
     public TravelQuote call() throws Exception {
         return company.solicitQuote(travelInfo);
     }

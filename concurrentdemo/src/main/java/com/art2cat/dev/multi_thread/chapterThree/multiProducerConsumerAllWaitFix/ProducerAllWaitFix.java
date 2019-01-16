@@ -7,14 +7,14 @@ import com.art2cat.dev.multi_thread.chapterThree.multiProducerConsumerAllWait.Pr
  * Created by huang.yiming on 7/10/2017.
  */
 public class ProducerAllWaitFix implements IProducer {
-    
+
     private String lock;
-    
+
     public ProducerAllWaitFix(String lock) {
         super();
         this.lock = lock;
     }
-    
+
     @Override
     public void produce() {
         try {
@@ -34,7 +34,7 @@ public class ProducerAllWaitFix implements IProducer {
                 Product.value = value;
                 // change notify() to notifyAll() fix "fake dead"
                 lock.notifyAll();
-                
+
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

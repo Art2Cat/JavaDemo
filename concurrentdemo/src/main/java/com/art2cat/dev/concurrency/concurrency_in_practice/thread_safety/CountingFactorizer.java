@@ -15,13 +15,13 @@ import javax.servlet.ServletResponse;
  * @author Brian Goetz and Tim Peierls
  */
 public class CountingFactorizer extends GenericServlet implements Servlet {
-    
+
     private final AtomicLong count = new AtomicLong(0);
-    
+
     public long getCount() {
         return count.get();
     }
-    
+
     @Override
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);
@@ -29,14 +29,14 @@ public class CountingFactorizer extends GenericServlet implements Servlet {
         count.incrementAndGet();
         encodeIntoResponse(resp, factors);
     }
-    
+
     void encodeIntoResponse(ServletResponse res, BigInteger[] factors) {
     }
-    
+
     BigInteger extractFromRequest(ServletRequest req) {
         return null;
     }
-    
+
     BigInteger[] factor(BigInteger i) {
         return null;
     }

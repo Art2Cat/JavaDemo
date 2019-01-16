@@ -13,7 +13,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @author Brian Goetz and Tim Peierls
  */
 public class LogService {
-    
+
     private final BlockingQueue<String> queue;
     private final LoggerThread loggerThread;
     private final PrintWriter writer;
@@ -21,24 +21,24 @@ public class LogService {
     private boolean isShutdown;
 
     private int reservations;
-    
+
     public LogService(Writer writer) {
         this.queue = new LinkedBlockingQueue<String>();
         this.loggerThread = new LoggerThread();
         this.writer = new PrintWriter(writer);
     }
-    
+
     public void start() {
         loggerThread.start();
     }
-    
+
     public void stop() {
         synchronized (this) {
             isShutdown = true;
         }
         loggerThread.interrupt();
     }
-    
+
     public void log(String msg) throws InterruptedException {
         synchronized (this) {
             if (isShutdown) {
@@ -48,9 +48,9 @@ public class LogService {
         }
         queue.put(msg);
     }
-    
+
     private class LoggerThread extends Thread {
-        
+
         @Override
         public void run() {
             try {

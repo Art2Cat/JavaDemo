@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * @author Brian Goetz and Tim Peierls
  */
 public class UEHLogger implements Thread.UncaughtExceptionHandler {
-    
+
     @Override
     public void uncaughtException(Thread t, Throwable e) {
         Logger logger = Logger.getAnonymousLogger();

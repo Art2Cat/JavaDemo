@@ -10,9 +10,9 @@ import java.util.concurrent.BlockingQueue;
  * @author Brian Goetz and Tim Peierls
  */
 public class TaskRunnable implements Runnable {
-    
+
     BlockingQueue<Task> queue;
-    
+
     @Override
     public void run() {
         try {
@@ -22,11 +22,11 @@ public class TaskRunnable implements Runnable {
             Thread.currentThread().interrupt();
         }
     }
-    
+
     void processTask(Task task) {
         // Handle the task
     }
-    
+
     interface Task {
 
     }

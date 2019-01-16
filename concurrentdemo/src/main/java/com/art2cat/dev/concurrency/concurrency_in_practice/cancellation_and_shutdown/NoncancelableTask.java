@@ -10,7 +10,7 @@ import java.util.concurrent.BlockingQueue;
  * @author Brian Goetz and Tim Peierls
  */
 public class NoncancelableTask {
-    
+
     public Task getNextTask(BlockingQueue<Task> queue) {
         boolean interrupted = false;
         try {
@@ -28,7 +28,7 @@ public class NoncancelableTask {
             }
         }
     }
-    
+
     interface Task {
 
     }

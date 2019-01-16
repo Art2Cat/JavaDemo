@@ -18,12 +18,10 @@ public class CustomThread extends Thread {
     }
 
     @Override
-    synchronized public void run() {
+    public void run() {
         super.run();
 
-//        while (count > 0) {
         count--;
         System.out.println(Thread.currentThread().getName() + ": " + count);
-//        }
     }
 }

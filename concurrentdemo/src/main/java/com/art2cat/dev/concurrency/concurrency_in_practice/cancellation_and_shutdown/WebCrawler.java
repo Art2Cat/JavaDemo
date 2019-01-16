@@ -19,18 +19,18 @@ import java.util.concurrent.TimeUnit;
  * @author Brian Goetz and Tim Peierls
  */
 public abstract class WebCrawler {
-    
+
     private static final long TIMEOUT = 500;
     private static final TimeUnit UNIT = MILLISECONDS;
 
     private final Set<URL> urlsToCrawl = new HashSet<>();
     private final ConcurrentMap<URL, Boolean> seen = new ConcurrentHashMap<URL, Boolean>();
     private volatile TrackingExecutor exec;
-    
+
     public WebCrawler(URL startUrl) {
         urlsToCrawl.add(startUrl);
     }
-    
+
     public synchronized void start() {
         exec = new TrackingExecutor(Executors.newCachedThreadPool());
         for (URL url : urlsToCrawl) {
@@ -38,7 +38,7 @@ public abstract class WebCrawler {
         }
         urlsToCrawl.clear();
     }
-    
+
     public synchronized void stop() throws InterruptedException {
         try {
             saveUncrawled(exec.shutdownNow());
@@ -49,37 +49,37 @@ public abstract class WebCrawler {
             exec = null;
         }
     }
-    
+
     protected abstract List<URL> processPage(URL url);
-    
+
     private void saveUncrawled(List<Runnable> uncrawled) {
         for (Runnable task : uncrawled) {
             urlsToCrawl.add(((CrawlTask) task).getPage());
         }
     }
-    
+
     private void submitCrawlTask(URL u) {
         exec.execute(new CrawlTask(u));
     }
-    
+
     private class CrawlTask implements Runnable {
-        
+
         private final URL url;
         private int count = 1;
-        
+
         CrawlTask(URL url) {
             this.url = url;
         }
-        
+
         boolean alreadyCrawled() {
             return seen.putIfAbsent(url, true) != null;
         }
-        
+
         void markUncrawled() {
             seen.remove(url);
             System.out.printf("marking %s uncrawled%n", url);
         }
-        
+
         @Override
         public void run() {
             for (URL link : processPage(url)) {
@@ -89,7 +89,7 @@ public abstract class WebCrawler {
                 submitCrawlTask(link);
             }
         }
-        
+
         public URL getPage() {
             return url;
         }

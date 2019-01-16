@@ -11,14 +11,14 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 
 public class CasNumberRange {
-    
+
     private final AtomicReference<IntPair> values =
         new AtomicReference<IntPair>(new IntPair(0, 0));
-    
+
     public int getLower() {
         return values.get().lower;
     }
-    
+
     public void setLower(int i) {
         while (true) {
             IntPair oldv = values.get();
@@ -31,11 +31,11 @@ public class CasNumberRange {
             }
         }
     }
-    
+
     public int getUpper() {
         return values.get().upper;
     }
-    
+
     public void setUpper(int i) {
         while (true) {
             IntPair oldv = values.get();
@@ -48,14 +48,14 @@ public class CasNumberRange {
             }
         }
     }
-    
+
 
     private static class IntPair {
-        
+
         // INVARIANT: lower <= upper
         final int lower;
         final int upper;
-        
+
         public IntPair(int lower, int upper) {
             this.lower = lower;
             this.upper = upper;

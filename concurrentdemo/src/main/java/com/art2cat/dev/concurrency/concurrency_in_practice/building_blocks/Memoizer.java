@@ -16,15 +16,15 @@ import java.util.concurrent.FutureTask;
  * @author Brian Goetz and Tim Peierls
  */
 public class Memoizer<A, V> implements Computable<A, V> {
-    
+
     private final ConcurrentMap<A, Future<V>> cache
         = new ConcurrentHashMap<A, Future<V>>();
     private final Computable<A, V> c;
-    
+
     public Memoizer(Computable<A, V> c) {
         this.c = c;
     }
-    
+
     @Override
     public V compute(final A arg) throws InterruptedException {
         while (true) {

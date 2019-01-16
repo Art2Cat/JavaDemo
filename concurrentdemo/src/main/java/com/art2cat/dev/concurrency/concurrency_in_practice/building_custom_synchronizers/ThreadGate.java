@@ -9,23 +9,23 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.building_custom_sync
  */
 
 public class ThreadGate {
-    
+
     // CONDITION-PREDICATE: opened-since(n) (isOpen || generation>n)
 
     private boolean isOpen;
 
     private int generation;
-    
+
     public synchronized void close() {
         isOpen = false;
     }
-    
+
     public synchronized void open() {
         ++generation;
         isOpen = true;
         notifyAll();
     }
-    
+
     // BLOCKS-UNTIL: opened-since(generation on entry)
     public synchronized void await() throws InterruptedException {
         int arrivalGeneration = generation;

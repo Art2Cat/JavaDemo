@@ -6,8 +6,7 @@ import java.util.concurrent.Callable;
 
 public class TmpFileCreator implements Callable<File> {
 
-    private String tmpPath;
-    private File createdFile;
+    private final String tmpPath;
 
     public TmpFileCreator(String tmpPath) {
         this.tmpPath = tmpPath;
@@ -18,9 +17,10 @@ public class TmpFileCreator implements Callable<File> {
         try {
             Thread.sleep(1000);
             System.out.println("Creating file");
-            createdFile = new File(tmpPath + "/MyFileSema.For");
-            createdFile.createNewFile();
-            return createdFile;
+            File createdFile = new File(tmpPath + "/MyFileSema.For");
+            if (createdFile.createNewFile()) {
+                return createdFile;
+            }
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }

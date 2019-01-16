@@ -15,12 +15,12 @@ import javax.servlet.ServletResponse;
  */
 
 public class Factorizer extends GenericServlet implements Servlet {
-    
+
     private final Computable<BigInteger, BigInteger[]> c =
         this::factor;
     private final Computable<BigInteger, BigInteger[]> cache
         = new Memoizer<>(c);
-    
+
     @Override
     public void service(ServletRequest req,
         ServletResponse resp) {
@@ -31,17 +31,17 @@ public class Factorizer extends GenericServlet implements Servlet {
             encodeError(resp, "factorization interrupted");
         }
     }
-    
+
     void encodeIntoResponse(ServletResponse resp, BigInteger[] factors) {
     }
-    
+
     void encodeError(ServletResponse resp, String errorString) {
     }
-    
+
     BigInteger extractFromRequest(ServletRequest req) {
         return new BigInteger("7");
     }
-    
+
     BigInteger[] factor(BigInteger i) {
         // Doesn't really factor
         return new BigInteger[]{i};

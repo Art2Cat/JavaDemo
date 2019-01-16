@@ -12,9 +12,9 @@ import java.sql.SQLException;
  * @author Brian Goetz and Tim Peierls
  */
 public class ConnectionDispenser {
-    
+
     static String DB_URL = "jdbc:mysql://localhost/mydatabase";
-    
+
     private ThreadLocal<Connection> connectionHolder
         = ThreadLocal.withInitial(() -> {
         try {
@@ -23,7 +23,7 @@ public class ConnectionDispenser {
             throw new RuntimeException("Unable to acquire Connection, e");
         }
     });
-    
+
     public Connection getConnection() {
         return connectionHolder.get();
     }

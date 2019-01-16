@@ -12,7 +12,7 @@ import java.net.Socket;
  * @author Brian Goetz and Tim Peierls
  */
 public class ThreadPerTaskWebServer {
-    
+
     public static void main(String[] args) throws IOException {
         ServerSocket socket = new ServerSocket(80);
         while (true) {
@@ -21,7 +21,7 @@ public class ThreadPerTaskWebServer {
             new Thread(task).start();
         }
     }
-    
+
     private static void handleRequest(Socket connection) {
         // request-handling logic here
     }

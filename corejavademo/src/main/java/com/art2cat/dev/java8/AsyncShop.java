@@ -17,6 +17,14 @@ public class AsyncShop {
         random = new Random(name.charAt(0) * name.charAt(1) * name.charAt(2));
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
     public Future<Double> getPrice(String product) {
 /*
         CompletableFuture<Double> futurePrice = new CompletableFuture<>();

@@ -10,13 +10,13 @@ package com.art2cat.dev.concurrency.concurrency_in_practice.sharing_objects;
 
 
 public class MutableInteger {
-    
+
     private int value;
-    
+
     public int get() {
         return value;
     }
-    
+
     public void set(int value) {
         this.value = value;
     }

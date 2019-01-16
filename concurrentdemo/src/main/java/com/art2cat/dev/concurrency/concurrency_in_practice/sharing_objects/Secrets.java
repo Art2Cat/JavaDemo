@@ -11,9 +11,9 @@ import java.util.Set;
  * @author Brian Goetz and Tim Peierls
  */
 class Secrets {
-    
+
     public static Set<Secret> knownSecrets;
-    
+
     public void initialize() {
         knownSecrets = new HashSet<Secret>();
     }

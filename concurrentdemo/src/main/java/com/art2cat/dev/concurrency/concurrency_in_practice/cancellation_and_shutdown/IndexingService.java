@@ -13,7 +13,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @author Brian Goetz and Tim Peierls
  */
 public class IndexingService {
-    
+
     private static final int CAPACITY = 1000;
     private static final File POISON = new File("");
     private final IndexerThread consumer = new IndexerThread();
@@ -21,32 +21,32 @@ public class IndexingService {
     private final BlockingQueue<File> queue;
     private final FileFilter fileFilter;
     private final File root;
-    
+
     public IndexingService(File root, final FileFilter fileFilter) {
         this.root = root;
         this.queue = new LinkedBlockingQueue<File>(CAPACITY);
         this.fileFilter = f -> f.isDirectory() || fileFilter.accept(f);
     }
-    
+
     private boolean alreadyIndexed(File f) {
         return false;
     }
-    
+
     public void start() {
         producer.start();
         consumer.start();
     }
-    
+
     public void stop() {
         producer.interrupt();
     }
-    
+
     public void awaitTermination() throws InterruptedException {
         consumer.join();
     }
-    
+
     class CrawlerThread extends Thread {
-        
+
         @Override
         public void run() {
             try {
@@ -62,7 +62,7 @@ public class IndexingService {
                 }
             }
         }
-        
+
         private void crawl(File root) throws InterruptedException {
             File[] entries = root.listFiles(fileFilter);
             if (entries != null) {
@@ -76,9 +76,9 @@ public class IndexingService {
             }
         }
     }
-    
+
     class IndexerThread extends Thread {
-        
+
         @Override
         public void run() {
             try {
@@ -93,11 +93,10 @@ public class IndexingService {
             } catch (InterruptedException consumed) {
             }
         }
-        
+
         public void indexFile(File file) {
             /*...*/
         }
-        
-        ;
+
     }
 }

@@ -19,13 +19,13 @@ import java.util.concurrent.Future;
  * @author Brian Goetz and Tim Peierls
  */
 public abstract class Renderer {
-    
+
     private final ExecutorService executor;
-    
+
     Renderer(ExecutorService executor) {
         this.executor = executor;
     }
-    
+
     void renderPage(CharSequence source) {
         final List<ImageInfo> info = scanForImageInfo(source);
         CompletionService<ImageData> completionService =
@@ -37,9 +37,9 @@ public abstract class Renderer {
                 }
             });
         }
-        
+
         renderText(source);
-        
+
         try {
             for (int t = 0, n = info.size(); t < n; t++) {
                 Future<ImageData> f = completionService.take();
@@ -52,20 +52,20 @@ public abstract class Renderer {
             throw launderThrowable(e.getCause());
         }
     }
-    
+
     abstract void renderText(CharSequence s);
-    
+
     abstract List<ImageInfo> scanForImageInfo(CharSequence s);
-    
+
     abstract void renderImage(ImageData i);
-    
+
     interface ImageData {
 
     }
-    
+
     interface ImageInfo {
-        
+
         ImageData downloadImage();
     }
-    
+
 }

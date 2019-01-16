@@ -13,16 +13,16 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author Brian Goetz and Tim Peierls
  */
 public class ReadWriteMap<K, V> {
-    
+
     private final Map<K, V> map;
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final Lock r = lock.readLock();
     private final Lock w = lock.writeLock();
-    
+
     public ReadWriteMap(Map<K, V> map) {
         this.map = map;
     }
-    
+
     public V put(K key, V value) {
         w.lock();
         try {
@@ -31,7 +31,7 @@ public class ReadWriteMap<K, V> {
             w.unlock();
         }
     }
-    
+
     public V remove(Object key) {
         w.lock();
         try {
@@ -40,7 +40,7 @@ public class ReadWriteMap<K, V> {
             w.unlock();
         }
     }
-    
+
     public void putAll(Map<? extends K, ? extends V> m) {
         w.lock();
         try {
@@ -49,7 +49,7 @@ public class ReadWriteMap<K, V> {
             w.unlock();
         }
     }
-    
+
     public void clear() {
         w.lock();
         try {
@@ -58,7 +58,7 @@ public class ReadWriteMap<K, V> {
             w.unlock();
         }
     }
-    
+
     public V get(Object key) {
         r.lock();
         try {
@@ -67,7 +67,7 @@ public class ReadWriteMap<K, V> {
             r.unlock();
         }
     }
-    
+
     public int size() {
         r.lock();
         try {
@@ -76,7 +76,7 @@ public class ReadWriteMap<K, V> {
             r.unlock();
         }
     }
-    
+
     public boolean isEmpty() {
         r.lock();
         try {
@@ -85,7 +85,7 @@ public class ReadWriteMap<K, V> {
             r.unlock();
         }
     }
-    
+
     public boolean containsKey(Object key) {
         r.lock();
         try {
@@ -94,7 +94,7 @@ public class ReadWriteMap<K, V> {
             r.unlock();
         }
     }
-    
+
     public boolean containsValue(Object value) {
         r.lock();
         try {

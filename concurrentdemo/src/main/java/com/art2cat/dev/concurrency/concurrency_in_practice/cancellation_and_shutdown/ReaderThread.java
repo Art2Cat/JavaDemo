@@ -12,16 +12,16 @@ import java.net.Socket;
  * @author Brian Goetz and Tim Peierls
  */
 public class ReaderThread extends Thread {
-    
+
     private static final int BUFSZ = 512;
     private final Socket socket;
     private final InputStream in;
-    
+
     public ReaderThread(Socket socket) throws IOException {
         this.socket = socket;
         this.in = socket.getInputStream();
     }
-    
+
     @Override
     public void interrupt() {
         try {
@@ -31,7 +31,7 @@ public class ReaderThread extends Thread {
             super.interrupt();
         }
     }
-    
+
     @Override
     public void run() {
         try {
@@ -47,7 +47,7 @@ public class ReaderThread extends Thread {
         } catch (IOException e) { /* Allow thread to exit */
         }
     }
-    
+
     public void processBuffer(byte[] buf, int count) {
     }
 }

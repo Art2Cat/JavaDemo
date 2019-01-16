@@ -16,12 +16,12 @@ import javax.servlet.ServletResponse;
 
 
 public class SynchronizedFactorizer extends GenericServlet implements Servlet {
-    
+
 
     private BigInteger lastNumber;
 
     private BigInteger[] lastFactors;
-    
+
     @Override
     public synchronized void service(ServletRequest req,
         ServletResponse resp) {
@@ -35,14 +35,14 @@ public class SynchronizedFactorizer extends GenericServlet implements Servlet {
             encodeIntoResponse(resp, factors);
         }
     }
-    
+
     void encodeIntoResponse(ServletResponse resp, BigInteger[] factors) {
     }
-    
+
     BigInteger extractFromRequest(ServletRequest req) {
         return new BigInteger("7");
     }
-    
+
     BigInteger[] factor(BigInteger i) {
         // Doesn't really factor
         return new BigInteger[]{i};

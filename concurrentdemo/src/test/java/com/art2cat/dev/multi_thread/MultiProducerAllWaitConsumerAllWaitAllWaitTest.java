@@ -6,7 +6,8 @@ import com.art2cat.dev.multi_thread.chapterThree.multiProducerConsumerAllWait.Co
 import com.art2cat.dev.multi_thread.chapterThree.multiProducerConsumerAllWait.ProducerAllWait;
 import com.art2cat.dev.multi_thread.chapterThree.multiProducerConsumerAllWaitFix.ConsumerAllWaitFix;
 import com.art2cat.dev.multi_thread.chapterThree.multiProducerConsumerAllWaitFix.ProducerAllWaitFix;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * com.art2cat.dev.multi_thread
@@ -15,7 +16,7 @@ import org.junit.Test;
  * @date 1/17/2018
  */
 public class MultiProducerAllWaitConsumerAllWaitAllWaitTest {
-    
+
     @Test
     public void test() {
         String lock = "lock";
@@ -34,7 +35,7 @@ public class MultiProducerAllWaitConsumerAllWaitAllWaitTest {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Assertions.fail(e.getMessage());
         }
         Thread[] threads = new Thread[Thread.currentThread().getThreadGroup().activeCount()];
         Thread.currentThread().getThreadGroup().enumerate(threads);
@@ -43,7 +44,7 @@ public class MultiProducerAllWaitConsumerAllWaitAllWaitTest {
                 thread.getState());
         }
     }
-    
+
     @Test
     public void testFix() {
         String lock = "lock";
@@ -62,7 +63,7 @@ public class MultiProducerAllWaitConsumerAllWaitAllWaitTest {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Assertions.fail(e.getMessage());
         }
         Thread[] threads = new Thread[Thread.currentThread().getThreadGroup().activeCount()];
         Thread.currentThread().getThreadGroup().enumerate(threads);

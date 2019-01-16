@@ -10,10 +10,9 @@ import java.util.concurrent.Executor;
  * @author Brian Goetz and Tim Peierls
  */
 public class ThreadPerTaskExecutor implements Executor {
-    
+
     public void execute(Runnable r) {
         new Thread(r).start();
     }
-    
-    ;
+
 }

@@ -6,23 +6,23 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
 public class TimingThreadPool extends ThreadPoolExecutor {
-    
+
     private final ThreadLocal<Long> startTime = new ThreadLocal<Long>();
     private final Logger log = Logger.getLogger("TimingThreadPool");
     private final AtomicLong numTasks = new AtomicLong();
     private final AtomicLong totalTime = new AtomicLong();
-    
+
     public TimingThreadPool() {
         super(1, 1, 0L, TimeUnit.SECONDS, null);
     }
-    
+
     @Override
     protected void beforeExecute(Thread t, Runnable r) {
         super.beforeExecute(t, r);
         log.fine(String.format("Thread %s: start %s", t, r));
         startTime.set(System.nanoTime());
     }
-    
+
     @Override
     protected void afterExecute(Runnable r, Throwable t) {
         try {
@@ -36,7 +36,7 @@ public class TimingThreadPool extends ThreadPoolExecutor {
             super.afterExecute(r, t);
         }
     }
-    
+
     @Override
     protected void terminated() {
         try {

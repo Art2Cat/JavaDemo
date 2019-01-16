@@ -5,7 +5,7 @@ import com.art2cat.dev.multi_thread.chapterThree.IConsumer;
 /**
  * Created by huang.yiming on 7/10/2017.
  */
-public class ConsumerAllWait implements IConsumer{
+public class ConsumerAllWait implements IConsumer {
 
     private String lock;
 

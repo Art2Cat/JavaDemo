@@ -28,6 +28,7 @@ class NotHelloWorldComponent extends JComponent {
     private static final int DEFAULT_WIDTH = 300;
     private static final int DEFAULT_HEIGHT = 300;
 
+    @Override
     public void paintComponent(Graphics graphics) {
         graphics.drawString("Not a hello, this is Fuck message.", 200, 200);
     }

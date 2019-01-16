@@ -15,9 +15,9 @@ import javax.servlet.ServletResponse;
  */
 
 public class VolatileCachedFactorizer extends GenericServlet implements Servlet {
-    
+
     private volatile OneValueCache cache = new OneValueCache(null, null);
-    
+
     @Override
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);
@@ -28,14 +28,14 @@ public class VolatileCachedFactorizer extends GenericServlet implements Servlet 
         }
         encodeIntoResponse(resp, factors);
     }
-    
+
     void encodeIntoResponse(ServletResponse resp, BigInteger[] factors) {
     }
-    
+
     BigInteger extractFromRequest(ServletRequest req) {
         return new BigInteger("7");
     }
-    
+
     BigInteger[] factor(BigInteger i) {
         // Doesn't really factor
         return new BigInteger[]{i};

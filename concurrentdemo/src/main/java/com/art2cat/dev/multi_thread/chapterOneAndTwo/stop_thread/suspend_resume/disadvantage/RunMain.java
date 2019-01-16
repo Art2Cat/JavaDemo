@@ -18,7 +18,7 @@ public class RunMain {
                 public void run() {
                     super.run();
                     System.out.println("thread 2 start");
-                    System.out.println("");
+                    System.out.println();
                     object.printString();
                 }
             };

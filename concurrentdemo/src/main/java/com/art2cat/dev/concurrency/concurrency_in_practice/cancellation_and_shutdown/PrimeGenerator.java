@@ -17,14 +17,14 @@ import java.util.concurrent.Executors;
  */
 
 public class PrimeGenerator implements Runnable {
-    
+
     private static ExecutorService exec = Executors.newCachedThreadPool();
-    
+
 
     private final List<BigInteger> primes
         = new ArrayList<BigInteger>();
     private volatile boolean cancelled;
-    
+
     static List<BigInteger> aSecondOfPrimes() throws InterruptedException {
         PrimeGenerator generator = new PrimeGenerator();
         exec.execute(generator);
@@ -35,7 +35,7 @@ public class PrimeGenerator implements Runnable {
         }
         return generator.get();
     }
-    
+
     @Override
     public void run() {
         BigInteger p = BigInteger.ONE;
@@ -46,11 +46,11 @@ public class PrimeGenerator implements Runnable {
             }
         }
     }
-    
+
     public void cancel() {
         cancelled = true;
     }
-    
+
     public synchronized List<BigInteger> get() {
         return new ArrayList<>(primes);
     }

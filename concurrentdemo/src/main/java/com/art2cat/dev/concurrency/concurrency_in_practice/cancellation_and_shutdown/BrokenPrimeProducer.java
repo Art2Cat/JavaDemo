@@ -11,14 +11,14 @@ import java.util.concurrent.BlockingQueue;
  * @author Brian Goetz and Tim Peierls
  */
 class BrokenPrimeProducer extends Thread {
-    
+
     private final BlockingQueue<BigInteger> queue;
     private volatile boolean cancelled = false;
-    
+
     BrokenPrimeProducer(BlockingQueue<BigInteger> queue) {
         this.queue = queue;
     }
-    
+
     @Override
     public void run() {
         try {
@@ -29,7 +29,7 @@ class BrokenPrimeProducer extends Thread {
         } catch (InterruptedException consumed) {
         }
     }
-    
+
     public void cancel() {
         cancelled = true;
     }

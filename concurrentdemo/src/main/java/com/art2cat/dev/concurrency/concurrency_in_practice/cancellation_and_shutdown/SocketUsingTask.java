@@ -14,9 +14,9 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 interface CancellableTask<T> extends Callable<T> {
-    
+
     void cancel();
-    
+
     RunnableFuture<T> newTask();
 }
 
@@ -29,14 +29,14 @@ interface CancellableTask<T> extends Callable<T> {
  */
 
 public abstract class SocketUsingTask<T> implements CancellableTask<T> {
-    
+
     @GuardedBy("this")
     private Socket socket;
-    
+
     protected synchronized void setSocket(Socket s) {
         socket = s;
     }
-    
+
     public synchronized void cancel() {
         try {
             if (socket != null) {
@@ -45,7 +45,7 @@ public abstract class SocketUsingTask<T> implements CancellableTask<T> {
         } catch (IOException ignored) {
         }
     }
-    
+
     public RunnableFuture<T> newTask() {
         return new FutureTask<T>(this) {
             public boolean cancel(boolean mayInterruptIfRunning) {
@@ -61,27 +61,33 @@ public abstract class SocketUsingTask<T> implements CancellableTask<T> {
 
 @ThreadSafe
 class CancellingExecutor extends ThreadPoolExecutor {
-    
-    public CancellingExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit,
+
+    public CancellingExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime,
+        TimeUnit unit,
         BlockingQueue<Runnable> workQueue) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
     }
-    
-    public CancellingExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit,
+
+    public CancellingExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime,
+        TimeUnit unit,
         BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory);
     }
-    
-    public CancellingExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit,
+
+    public CancellingExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime,
+        TimeUnit unit,
         BlockingQueue<Runnable> workQueue, RejectedExecutionHandler handler) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, handler);
     }
-    
-    public CancellingExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit,
-        BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory, RejectedExecutionHandler handler) {
-        super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory, handler);
+
+    public CancellingExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime,
+        TimeUnit unit,
+        BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory,
+        RejectedExecutionHandler handler) {
+        super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory,
+            handler);
     }
-    
+
     protected <T> RunnableFuture<T> newTaskFor(Callable<T> callable) {
         if (callable instanceof CancellableTask) {
             return ((CancellableTask<T>) callable).newTask();

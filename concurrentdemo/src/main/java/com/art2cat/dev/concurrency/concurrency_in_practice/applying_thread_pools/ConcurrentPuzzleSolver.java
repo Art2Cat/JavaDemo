@@ -8,12 +8,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class ConcurrentPuzzleSolver<P, M> {
-    
+
     protected final ValueLatch<PuzzleNode<P, M>> solution = new ValueLatch<PuzzleNode<P, M>>();
     private final Puzzle<P, M> puzzle;
     private final ExecutorService exec;
     private final ConcurrentMap<P, Boolean> seen;
-    
+
     public ConcurrentPuzzleSolver(Puzzle<P, M> puzzle) {
         this.puzzle = puzzle;
         this.exec = initThreadPool();
@@ -23,11 +23,11 @@ public class ConcurrentPuzzleSolver<P, M> {
             tpe.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy());
         }
     }
-    
+
     private ExecutorService initThreadPool() {
         return Executors.newCachedThreadPool();
     }
-    
+
     public List<M> solve() throws InterruptedException {
         try {
             P p = puzzle.initialPosition();
@@ -39,17 +39,17 @@ public class ConcurrentPuzzleSolver<P, M> {
             exec.shutdown();
         }
     }
-    
+
     protected Runnable newTask(P p, M m, PuzzleNode<P, M> n) {
         return new SolverTask(p, m, n);
     }
-    
+
     protected class SolverTask extends PuzzleNode<P, M> implements Runnable {
-        
+
         SolverTask(P pos, M move, PuzzleNode<P, M> prev) {
             super(pos, move, prev);
         }
-        
+
         @Override
         public void run() {
             if (solution.isSet()
