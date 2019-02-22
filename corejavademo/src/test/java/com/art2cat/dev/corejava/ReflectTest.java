@@ -8,6 +8,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
@@ -42,7 +43,7 @@ public class ReflectTest {
             car = initByDefaultConst();
             car.introduce();
         } catch (Throwable throwable) {
-            throwable.printStackTrace();
+            Assertions.fail(throwable);
         }
     }
 
@@ -66,9 +67,9 @@ public class ReflectTest {
 
             Method drive = clazz.getDeclaredMethod("drive", (Class[]) null);
             drive.setAccessible(true);
-            drive.invoke(privateCar, (Object) null);
+            drive.invoke(privateCar, (Object[]) null);
         } catch (Exception e) {
-            e.printStackTrace();
+            Assertions.fail(e);
         }
     }
 

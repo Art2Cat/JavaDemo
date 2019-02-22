@@ -1,6 +1,8 @@
 package com.art2cat.dev.corejava;
 
+import java.time.Duration;
 import java.time.LocalTime;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -13,13 +15,15 @@ public class OneMinuteOfMillisecondTest {
 
     @Test
     public void test() {
-        System.out.println(LocalTime.now());
+        var localTime =  LocalTime.now();
+        System.out.println(localTime);
         try {
             Thread.sleep(6000 * 10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        System.out.println(LocalTime.now());
+        Duration duration = Duration.between(localTime, LocalTime.now());
+        Assertions.assertEquals(60, duration.getSeconds());
     }
 }

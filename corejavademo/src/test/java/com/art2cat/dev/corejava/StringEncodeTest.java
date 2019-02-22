@@ -24,25 +24,25 @@ public class StringEncodeTest {
     public void test() {
         Path path = Paths.get("src", "test", "resources", "test.txt");
         String charset = "UTF-8";
-        try (FileOutputStream outputStream = new FileOutputStream(path.toString())) {
-            try (OutputStreamWriter writer = new OutputStreamWriter(outputStream)) {
-                writer.write("我是要测试的中文文字");
-            }
+        try (FileOutputStream outputStream = new FileOutputStream(path.toString());
+            OutputStreamWriter writer = new OutputStreamWriter(outputStream)) {
+            writer.write("我是要测试的中文文字");
+
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail();
         }
 
-        try (FileInputStream inputStream = new FileInputStream(path.toString())) {
-            try (InputStreamReader reader = new InputStreamReader(inputStream, charset)) {
-                StringBuilder buffer = new StringBuilder();
-                char[] buf = new char[64];
-                int count = 0;
-                while ((count = reader.read(buf)) != -1) {
-                    buffer.append(buf, 0, count);
-                }
-                System.out.println(buffer.toString());
+        try (FileInputStream inputStream = new FileInputStream(path.toString());
+            InputStreamReader reader = new InputStreamReader(inputStream, charset)) {
+            StringBuilder buffer = new StringBuilder();
+            char[] buf = new char[64];
+            int count = 0;
+            while ((count = reader.read(buf)) != -1) {
+                buffer.append(buf, 0, count);
             }
+            System.out.println(buffer.toString());
+
         } catch (Exception e) {
             e.printStackTrace();
             Assertions.fail();

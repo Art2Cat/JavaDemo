@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Main {
 
     public static void main(String[] args) {
-        Cat cat = Cat.newInstance();
+        Cat cat = new Cat();
         cat.setAge(12);
         cat.setName("Art2cat");
         cat.setColor("white");
@@ -23,7 +23,7 @@ public class Main {
         String s2 = s1.intern();
         System.out.println(s1.equals(s2));
 
-        WeakReference<Cat> catWeakReference = new WeakReference<Cat>(Cat.newInstance());
+        WeakReference<Cat> catWeakReference = new WeakReference<Cat>(new Cat());
         catWeakReference.get().setName("Art2cat");
         System.out.println(cat.toString());
         System.out.println(catWeakReference.get().toString());
