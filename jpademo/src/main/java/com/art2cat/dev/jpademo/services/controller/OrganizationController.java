@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/org")
 public class OrganizationController {
 
-    private static final Logger LOGGER = Logger.getLogger(DataBagController.class.getName());
-
     @Autowired
     private EntityManager entityManager;
 
@@ -46,16 +44,16 @@ public class OrganizationController {
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
-    @RequestMapping(value = "/getGroupByName", method = RequestMethod.GET)
+    @RequestMapping(value = "/getGroupsByName", method = RequestMethod.GET)
     public List<Group> getGroupsByName(@RequestParam(value = "name") String name) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Group> criteriaQuery = builder.createQuery(Group.class);
         Root<Group> root = criteriaQuery.from(Group.class);
         criteriaQuery.select(root)
             .where(
-                builder.like(root.get("name").as(String.class), name)
-//                builder.isNotNull(root.get("phone")),
-//                builder.isNotNull(root.get("fax"))
+                builder.like(root.get("name").as(String.class), name + "%"),
+                builder.isNotNull(root.get("phone")),
+                builder.isNotNull(root.get("fax"))
             );
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
