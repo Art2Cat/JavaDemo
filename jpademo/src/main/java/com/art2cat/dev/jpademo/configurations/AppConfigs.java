@@ -44,16 +44,16 @@ public class AppConfigs {
 
     @Bean
     @ConditionalOnProperty(
-            name = "usemysql",
-            havingValue = "dev")
+        name = "usemysql",
+        havingValue = "dev")
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl(env.getProperty("mysql.url"));
         dataSource.setUsername(env.getProperty("mysql.username") != null
-                ? env.getProperty("mysql.username") : "");
+            ? env.getProperty("mysql.username") : "");
         dataSource.setPassword(env.getProperty("mysql.password") != null
-                ? env.getProperty("mysql.password") : "");
+            ? env.getProperty("mysql.password") : "");
 
         Properties properties = new Properties();
         properties.setProperty("maxActive", "50");
@@ -83,10 +83,11 @@ public class AppConfigs {
     @Bean(name = "entityManagerFactory")
     @ConditionalOnMissingBean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
-                                                                       JpaVendorAdapter jpaVendorAdapter) {
+        JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean lemfb = new LocalContainerEntityManagerFactoryBean();
         lemfb.setDataSource(dataSource);
         lemfb.setJpaVendorAdapter(jpaVendorAdapter);
+        lemfb.setMappingResources("/hibernate/type.hbm.xml");
         lemfb.setPackagesToScan("com.art2cat.dev.jpademo.models", "com.art2cat.dev.common.model");
         return lemfb;
     }
@@ -101,23 +102,34 @@ public class AppConfigs {
     @Conditional(HibernateCondition.class)
     final Properties additionalProperties() {
         final Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("mysql-hibernate.hbm2ddl.auto"));
-        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("mysql-hibernate.dialect"));
-        hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("mysql-hibernate.show_sql") != null ? env.getProperty("mysql-hibernate.show_sql") : "false");
+        hibernateProperties
+            .setProperty("hibernate.hbm2ddl.auto", env.getProperty("mysql-hibernate.hbm2ddl.auto"));
+        hibernateProperties
+            .setProperty("hibernate.dialect", env.getProperty("mysql-hibernate.dialect"));
+        hibernateProperties.setProperty("hibernate.show_sql",
+            env.getProperty("mysql-hibernate.show_sql") != null ? env
+                .getProperty("mysql-hibernate.show_sql") : "false");
 
         return hibernateProperties;
     }
 
     static class HibernateCondition extends SpringBootCondition {
 
-        private static final String[] CLASS_NAMES = {"org.hibernate.ejb.HibernateEntityManager", "org.hibernate.jpa.HibernateEntityManager"};
+        private static final String[] CLASS_NAMES = {"org.hibernate.ejb.HibernateEntityManager",
+            "org.hibernate.jpa.HibernateEntityManager"};
 
         @Override
-        public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        public ConditionOutcome getMatchOutcome(ConditionContext context,
+            AnnotatedTypeMetadata metadata) {
             ConditionMessage.Builder message = ConditionMessage.forCondition("Hibernate");
 
-            return Arrays.stream(CLASS_NAMES).filter(className -> ClassUtils.isPresent(className, context.getClassLoader())).map(className -> ConditionOutcome.match(message.found("class").items(ConditionMessage.Style.NORMAL, className))).findAny()
-                    .orElseGet(() -> ConditionOutcome.noMatch(message.didNotFind("class", "classes").items(ConditionMessage.Style.NORMAL, Arrays.asList(CLASS_NAMES))));
+            return Arrays.stream(CLASS_NAMES)
+                .filter(className -> ClassUtils.isPresent(className, context.getClassLoader())).map(
+                    className -> ConditionOutcome.match(
+                        message.found("class").items(ConditionMessage.Style.NORMAL, className)))
+                .findAny()
+                .orElseGet(() -> ConditionOutcome.noMatch(message.didNotFind("class", "classes")
+                    .items(ConditionMessage.Style.NORMAL, Arrays.asList(CLASS_NAMES))));
         }
 
     }

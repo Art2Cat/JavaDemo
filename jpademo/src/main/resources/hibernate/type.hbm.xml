@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.art2cat.dev.jpademo.models" default-lazy="true">
+
+  <class name="com.art2cat.dev.jpademo.models.CustomData" table="custom_data"
+    dynamic-update="true">
+
+    <id name="id" type="integer" column="id">
+      <generator class="identity"/>
+    </id>
+    <property name="name" type="string" column="name"/>
+  </class>
+
+  <class name="Organization" table="organization">
+    <comment>A Organization of the application.
+    </comment>
+
+    <id name="id" type="integer" column="id">
+      <generator class="identity"/>
+    </id>
+    <discriminator type="string">
+      <column name="discriminator" />
+    </discriminator>
+    <natural-id mutable="true">
+      <property name="name" not-null="true"/>
+    </natural-id>
+    <property name="phone" type="string" column="phone"/>
+    <property name="fax" type="string" column="fax"/>
+
+    <subclass name="Group" discriminator-value="group">
+      <property name="groupCode" type="string" column="group_code"/>
+    </subclass>
+    <subclass name="Team" discriminator-value="team">
+      <property name="teamCode" type="string" column="team_code"/>
+    </subclass>
+  </class>
+</hibernate-mapping>
