@@ -2,8 +2,13 @@ package com.art2cat.dev.jpademo.models;
 
 import com.art2cat.dev.jpademo.CustomerDateAndTimeDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import javax.persistence.*;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * com.art2cat.dev.jpademo.mybatis.mapper

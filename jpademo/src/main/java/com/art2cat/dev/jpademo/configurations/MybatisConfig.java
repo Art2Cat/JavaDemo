@@ -1,5 +1,6 @@
 package com.art2cat.dev.jpademo.configurations;
 
+import javax.sql.DataSource;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -13,7 +14,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
-import javax.sql.DataSource;
 
 /**
  * com.art2cat.dev.jpademo.configurations

@@ -1,7 +1,6 @@
 package com.art2cat.dev.jpademo.services.intf;
 
 import com.art2cat.dev.jpademo.models.Role;
-
 import java.util.List;
 
 /**

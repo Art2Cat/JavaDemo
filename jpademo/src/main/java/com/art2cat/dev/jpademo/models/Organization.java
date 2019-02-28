@@ -5,13 +5,13 @@ package com.art2cat.dev.jpademo.models;
  */
 public class Organization {
 
-    private Integer id;
+    protected Integer id;
 
-    private String name;
+    protected String name;
 
-    private String phone;
+    protected String phone;
 
-    private String fax;
+    protected String fax;
 
     public Integer getId() {
         return id;

@@ -4,15 +4,6 @@
   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.art2cat.dev.jpademo.models" default-lazy="true">
 
-  <class name="com.art2cat.dev.jpademo.models.CustomData" table="custom_data"
-    dynamic-update="true">
-
-    <id name="id" type="integer" column="id">
-      <generator class="identity"/>
-    </id>
-    <property name="name" type="string" column="name"/>
-  </class>
-
   <class name="Organization" table="organization">
     <comment>A Organization of the application.
     </comment>
@@ -21,7 +12,7 @@
       <generator class="identity"/>
     </id>
     <discriminator type="string">
-      <column name="discriminator" />
+      <column name="discriminator"/>
     </discriminator>
     <natural-id mutable="true">
       <property name="name" not-null="true"/>

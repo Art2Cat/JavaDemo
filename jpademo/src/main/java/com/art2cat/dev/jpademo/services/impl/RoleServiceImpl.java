@@ -3,14 +3,13 @@ package com.art2cat.dev.jpademo.services.impl;
 import com.art2cat.dev.jpademo.models.Role;
 import com.art2cat.dev.jpademo.repositories.RoleMapper;
 import com.art2cat.dev.jpademo.services.intf.IRoleService;
+import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * com.art2cat.dev.jpademo.services.impl

@@ -1,7 +1,10 @@
 package com.art2cat.dev.jpademo.services.controller;
 
 import com.art2cat.dev.jpademo.models.CustomData;
-import com.art2cat.dev.jpademo.models.ICustomData;
+import com.art2cat.dev.jpademo.models.DataBag;
+import com.art2cat.dev.jpademo.repositories.CustomDataRepository;
+import com.art2cat.dev.jpademo.repositories.DataBagRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -32,6 +35,12 @@ public class DataBagController {
     @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    private CustomDataRepository customDataRepository;
+
+    @Autowired
+    private DataBagRepository dataBagRepository;
+
     @RequestMapping(value = "/getAllCustomData", method = RequestMethod.GET)
     public ResponseEntity<List<CustomData>> getAllCustomData() {
         try {
@@ -39,6 +48,62 @@ public class DataBagController {
             CriteriaQuery<CustomData> criteriaQuery = builder.createQuery(CustomData.class);
             Root<CustomData> root = criteriaQuery.from(CustomData.class);
             criteriaQuery.select(root);
+            TypedQuery<CustomData> query = entityManager.createQuery(criteriaQuery);
+            List<CustomData> result = query.getResultList();
+            if (Objects.isNull(result) || result.isEmpty()) {
+                LOGGER.warning("CustomData not found in the database");
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            return new ResponseEntity<List<CustomData>>(result, HttpStatus.ACCEPTED);
+
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "request getAllCustomData fail: ", e.getCause());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    @RequestMapping(value = "/saveCustomData", method = RequestMethod.POST)
+    public void saveCustomData() {
+        List<DataBag> dataBags = dataBagRepository.findAll();
+        for (int i = 0; i < 10; i++) {
+
+            var data = new CustomData();
+            data.setName("Data " + i);
+            if (i < 5) {
+                data.setDataBag(dataBags.get(0));
+
+            } else {
+                data.setDataBag(dataBags.get(1));
+            }
+            customDataRepository.save(data);
+        }
+
+    }
+
+    @RequestMapping(value = "/saveDataBag", method = RequestMethod.POST)
+    public void saveDataBag() {
+
+        var dataBagList = new ArrayList<DataBag>(2);
+
+        for (int i = 0; i < 2; i++) {
+            DataBag dataBag = new DataBag();
+            dataBag.setName("DataBag " + i);
+            dataBagList.add(dataBag);
+        }
+        dataBagRepository.saveAll(dataBagList);
+    }
+
+    @RequestMapping(value = "/getTest", method = RequestMethod.GET)
+    public ResponseEntity<List<CustomData>> getCustomData() {
+        try {
+            CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<CustomData> criteriaQuery = builder.createQuery(CustomData.class);
+            Root<DataBag> root = criteriaQuery.from(DataBag.class);
+            criteriaQuery.select(root.get("customDataList"))
+                .where(builder.and(root.get("customDataList").get("id").in(13, 14, 15),
+                    builder.equal(root.get("id"), 1)));
             TypedQuery<CustomData> query = entityManager.createQuery(criteriaQuery);
             List<CustomData> result = query.getResultList();
             if (Objects.isNull(result) || result.isEmpty()) {

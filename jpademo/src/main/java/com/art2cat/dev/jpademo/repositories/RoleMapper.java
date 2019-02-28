@@ -1,11 +1,16 @@
 package com.art2cat.dev.jpademo.repositories;
 
 import com.art2cat.dev.jpademo.models.Role;
-import org.apache.ibatis.annotations.*;
+import java.util.List;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * com.art2cat.dev.jpademo.repositories
