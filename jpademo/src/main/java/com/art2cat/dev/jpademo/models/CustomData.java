@@ -1,5 +1,6 @@
 package com.art2cat.dev.jpademo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 import java.util.StringJoiner;
 import javax.persistence.Column;
@@ -29,6 +30,7 @@ public class CustomData {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_data_bag")
+    @JsonIgnore
     private DataBag dataBag;
 
     public Integer getId() {

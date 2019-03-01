@@ -1,6 +1,7 @@
 package com.art2cat.dev.jpademo.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class DataBag {
     private String name;
 
     @OneToMany(mappedBy = "dataBag", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties
+    @JsonIgnore
     private List<CustomData> customDataList = new ArrayList<>();
 
     public Integer getId() {

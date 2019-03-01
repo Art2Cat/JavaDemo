@@ -96,22 +96,21 @@ public class DataBagController {
     }
 
     @RequestMapping(value = "/getTest", method = RequestMethod.GET)
-    public ResponseEntity<List<CustomData>> getCustomData() {
+    public ResponseEntity<List<DataBag>> getCustomData() {
         try {
             CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-            CriteriaQuery<CustomData> criteriaQuery = builder.createQuery(CustomData.class);
+            CriteriaQuery<DataBag> criteriaQuery = builder.createQuery(DataBag.class);
             Root<DataBag> root = criteriaQuery.from(DataBag.class);
-            criteriaQuery.select(root.get("customDataList"))
-                .where(builder.and(root.get("customDataList").get("id").in(13, 14, 15),
-                    builder.equal(root.get("id"), 1)));
-            TypedQuery<CustomData> query = entityManager.createQuery(criteriaQuery);
-            List<CustomData> result = query.getResultList();
+            criteriaQuery.select(root)
+                .where(builder.equal(root.get("id"), 1));
+            TypedQuery<DataBag> query = entityManager.createQuery(criteriaQuery);
+            List<DataBag> result = query.getResultList();
             if (Objects.isNull(result) || result.isEmpty()) {
                 LOGGER.warning("CustomData not found in the database");
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
 
-            return new ResponseEntity<List<CustomData>>(result, HttpStatus.ACCEPTED);
+            return new ResponseEntity<List<DataBag>>(result, HttpStatus.ACCEPTED);
 
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "request getAllCustomData fail: ", e.getCause());
