@@ -7,7 +7,7 @@ import java.io.File;
  */
 public class FileUtils {
 
-    public static FileUtils instance;
+    public static volatile FileUtils instance;
 
     private FileUtils() {
 
