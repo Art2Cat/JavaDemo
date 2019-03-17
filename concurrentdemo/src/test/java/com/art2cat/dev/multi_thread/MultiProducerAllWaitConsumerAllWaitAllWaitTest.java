@@ -1,11 +1,11 @@
 package com.art2cat.dev.multi_thread;
 
-import com.art2cat.dev.multi_thread.chapterThree.IConsumer;
-import com.art2cat.dev.multi_thread.chapterThree.IProducer;
-import com.art2cat.dev.multi_thread.chapterThree.multiProducerConsumerAllWait.ConsumerAllWait;
-import com.art2cat.dev.multi_thread.chapterThree.multiProducerConsumerAllWait.ProducerAllWait;
-import com.art2cat.dev.multi_thread.chapterThree.multiProducerConsumerAllWaitFix.ConsumerAllWaitFix;
-import com.art2cat.dev.multi_thread.chapterThree.multiProducerConsumerAllWaitFix.ProducerAllWaitFix;
+import com.art2cat.dev.multithread.chapterthree.IConsumer;
+import com.art2cat.dev.multithread.chapterthree.IProducer;
+import com.art2cat.dev.multithread.chapterthree.multiProducerConsumerAllWait.ConsumerAllWait;
+import com.art2cat.dev.multithread.chapterthree.multiProducerConsumerAllWait.ProducerAllWait;
+import com.art2cat.dev.multithread.chapterthree.multiProducerConsumerAllWaitFix.ConsumerAllWaitFix;
+import com.art2cat.dev.multithread.chapterthree.multiProducerConsumerAllWaitFix.ProducerAllWaitFix;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

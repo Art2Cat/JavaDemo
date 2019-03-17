@@ -3,6 +3,9 @@ package com.art2cat.dev.concurrency;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * @author rorschach.h
+ */
 public class Kitchen {
 
     static class AssistantCook implements Runnable {

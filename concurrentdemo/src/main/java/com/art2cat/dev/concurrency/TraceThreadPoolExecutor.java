@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 /**
  * com.art2cat.dev.concurrency
  *
- * @author art2c
+ * @author rorschach.h
  * @date 11/6/2018
  */
 public class TraceThreadPoolExecutor extends ThreadPoolExecutor {
