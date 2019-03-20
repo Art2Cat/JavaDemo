@@ -1,6 +1,7 @@
 package com.art2cat.dev.concurrency;
 
 import com.art2cat.dev.concurrency.concurrency_in_practice.testing_concurrent_programs.BarrierTimer;
+import com.art2cat.dev.concurrency.concurrency_in_practice.testing_concurrent_programs.SemaphoreBoundedBuffer;
 import java.util.concurrent.CyclicBarrier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,23 +16,31 @@ public class TimedPutTakeTest extends PutTakeTest {
 
     private BarrierTimer timer = new BarrierTimer();
 
-    private TimedPutTakeTest(int cap, int pairs, int trials) {
-        super(cap, pairs, trials);
-        barrier = new CyclicBarrier(nPairs * 2 + 1, timer);
+    TimedPutTakeTest() {
+    }
+
+
+    static TimedPutTakeTest build(int cap, int pairs, int trials) {
+        TimedPutTakeTest takeTest = new TimedPutTakeTest();
+        takeTest.bb = new SemaphoreBoundedBuffer<Integer>(cap);
+        takeTest.nPairs = pairs;
+        takeTest.nTrials = trials;
+        takeTest.barrier = new CyclicBarrier(takeTest.nPairs * 2 + 1, takeTest.timer);
+        return takeTest;
     }
 
     @Test
-    public  void test2() throws Exception {
+    void test2() throws Exception {
         int tpt = 100000; // trials per thread
         for (int cap = 1; cap <= 1000; cap *= 10) {
             System.out.println("Capacity: " + cap);
             for (int pairs = 1; pairs <= 128; pairs *= 2) {
-                TimedPutTakeTest t = new TimedPutTakeTest(cap, pairs, tpt);
+                TimedPutTakeTest t = TimedPutTakeTest.build(cap, pairs, tpt);
                 System.out.print("Pairs: " + pairs + "\t");
-                t.test();
+                t.start();
                 System.out.print("\t");
                 Thread.sleep(1000);
-                t.test();
+                t.start();
                 System.out.println();
                 Thread.sleep(1000);
             }
@@ -39,7 +48,8 @@ public class TimedPutTakeTest extends PutTakeTest {
         pool.shutdown();
     }
 
-    public void test() {
+    @Override
+    public void start() {
         try {
             timer.clear();
             for (int i = 0; i < nPairs; i++) {

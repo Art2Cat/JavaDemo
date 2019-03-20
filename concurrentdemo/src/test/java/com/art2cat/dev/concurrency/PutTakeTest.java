@@ -16,21 +16,27 @@ import org.junit.jupiter.api.Test;
  */
 public class PutTakeTest {
 
-    static final ExecutorService pool = Executors.newCachedThreadPool();
-    final int nTrials, nPairs;
+    final ExecutorService pool = Executors.newCachedThreadPool();
+    int nTrials, nPairs;
     final AtomicInteger putSum = new AtomicInteger(0);
     final AtomicInteger takeSum = new AtomicInteger(0);
-    private final SemaphoreBoundedBuffer<Integer> bb;
+    SemaphoreBoundedBuffer<Integer> bb;
     CyclicBarrier barrier;
 
-    PutTakeTest(int capacity, int npairs, int ntrials) {
-        this.bb = new SemaphoreBoundedBuffer<Integer>(capacity);
-        this.nTrials = ntrials;
-        this.nPairs = npairs;
-        this.barrier = new CyclicBarrier(npairs * 2 + 1);
+    PutTakeTest() {
+
     }
 
-    private static int xorShift(int y) {
+    static PutTakeTest getInstance(int capacity, int npairs, int ntrials) {
+        PutTakeTest putTakeTest = new PutTakeTest();
+        putTakeTest.bb = new SemaphoreBoundedBuffer<Integer>(capacity);
+        putTakeTest.nTrials = ntrials;
+        putTakeTest.nPairs = npairs;
+        putTakeTest.barrier = new CyclicBarrier(npairs * 2 + 1);
+        return putTakeTest;
+    }
+
+    private int xorShift(int y) {
         y ^= (y << 6);
         y ^= (y >>> 21);
         y ^= (y << 7);
@@ -39,9 +45,11 @@ public class PutTakeTest {
 
     @Test
     public void test() {
+        PutTakeTest putTakeTest = PutTakeTest.getInstance(10, 10, 10000);
+        putTakeTest.start();
+    }
 
-        new PutTakeTest(10, 10, 100000).test(); // sample parameters
-
+    void start() {
         try {
             for (int i = 0; i < nPairs; i++) {
                 pool.execute(new Producer());
@@ -51,7 +59,7 @@ public class PutTakeTest {
             barrier.await(); // wait for all threads to finish
             Assertions.assertEquals(putSum.get(), takeSum.get());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Assertions.fail(e);
         }
 
         pool.shutdown();

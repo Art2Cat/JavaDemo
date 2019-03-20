@@ -16,14 +16,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author rorschach
  * @date 4/11/18
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConfigs.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = AppConfigs.class)
 public class JdbcTest {
     
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
     
-    @Test
+//    @Test
     public void getAllMember() {
         String sql = "select * from member";
         List<Member> members = jdbcTemplate.query(sql, (rs, rowNum) -> {
@@ -39,7 +39,7 @@ public class JdbcTest {
         }
     }
     
-    @Test
+//    @Test
     public void getAllSalary() {
         String sql = "select name, salary from member";
         

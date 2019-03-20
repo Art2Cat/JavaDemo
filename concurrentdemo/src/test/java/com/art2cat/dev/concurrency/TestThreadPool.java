@@ -40,7 +40,7 @@ public class TestThreadPool {
 
 class TestingThreadFactory implements ThreadFactory {
 
-    public final AtomicInteger numCreated = new AtomicInteger(0);
+    final AtomicInteger numCreated = new AtomicInteger(0);
     private final ThreadFactory factory = Executors.defaultThreadFactory();
 
     public Thread newThread(Runnable r) {

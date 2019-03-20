@@ -21,8 +21,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author rorschach
  * @date 4/12/18
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConfigs.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = AppConfigs.class)
 public class EntityAndSubTest {
     
     @Autowired
@@ -30,7 +30,7 @@ public class EntityAndSubTest {
     @Autowired
     private ParentEntityRepository parentEntityRepository;
     
-    @Test
+//    @Test
     public void getParentEntity() {
         ParentEntity entity = parentEntityRepository.findEntityByEntityId(1003);
         if (entity == null) {
@@ -43,7 +43,7 @@ public class EntityAndSubTest {
         entity.getSubsidiaries().forEach(subsidiary -> System.out.println(subsidiary.getName()));
     }
     
-    @Test
+//    @Test
     public void addEntity() {
         ParentEntity parentEntity = new ParentEntity();
         parentEntity.setEntityId(1003);

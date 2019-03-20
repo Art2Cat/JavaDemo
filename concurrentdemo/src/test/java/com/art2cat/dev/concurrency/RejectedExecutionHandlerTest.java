@@ -31,28 +31,28 @@ public class RejectedExecutionHandlerTest {
 
     private void test(RejectedExecutionHandler handler) {
         pool.setRejectedExecutionHandler(handler);
-        for (int i = 0; i < 10; i++) {
-            final int index = i;
-            pool.submit(() -> {
-                log(Thread.currentThread().getName() + "begin run task :" + index);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                log(Thread.currentThread().getName() + " finish run  task :" + index);
-            });
-        }
-
-        log("main thread before sleep!!!");
         try {
+            for (int i = 0; i < 10; i++) {
+                final int index = i;
+                pool.submit(() -> {
+                    log(Thread.currentThread().getName() + "begin run task :" + index);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Assertions.fail();
+                    }
+                    log(Thread.currentThread().getName() + " finish run  task :" + index);
+                });
+            }
+
+            log("main thread before sleep!!!");
             Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            Assertions.fail(e);
+            log("before shutdown()");
+        } catch (Exception e) {
+            if (!(handler instanceof AbortPolicy)) {
+                Assertions.fail(e);
+            }
         }
-        log("before shutdown()");
-
-
     }
 
     @Test

@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -58,7 +59,7 @@ public class DataBagController {
             return new ResponseEntity<List<CustomData>>(result, HttpStatus.ACCEPTED);
 
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "request getAllCustomData fail: ", e.getCause());
+            LOGGER.log(Level.SEVERE, "request getAllCustomData fail: ", e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -113,7 +114,42 @@ public class DataBagController {
             return new ResponseEntity<List<DataBag>>(result, HttpStatus.ACCEPTED);
 
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "request getAllCustomData fail: ", e.getCause());
+            LOGGER.log(Level.SEVERE, "request getAllCustomData fail: ", e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "/getTestsss", method = RequestMethod.GET)
+    public List<CustomData> getTestss() {
+        Query query = entityManager.createNativeQuery("select * from custom_data where id in :ids");
+        List<Integer> ids = new ArrayList<>(3);
+        ids.add(11);
+        ids.add(12);
+        ids.add(13);
+        query.setParameter("ids", ids);
+        return query.getResultList();
+
+    }
+
+    @RequestMapping(value = "/getSingleCustomData", method = RequestMethod.GET)
+    public ResponseEntity<CustomData> getSingleCustomData() {
+        try {
+            CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<CustomData> criteriaQuery = builder.createQuery(CustomData.class);
+            Root<CustomData> root = criteriaQuery.from(CustomData.class);
+            var idPredicate = builder.equal(root.get("id"), 11);
+            var secondIdPredicate = builder.equal(root.get("name"), "Data 0");
+            criteriaQuery.select(root).where(idPredicate, secondIdPredicate);
+            TypedQuery<CustomData> query = entityManager.createQuery(criteriaQuery);
+            if (query.getResultList().isEmpty()) {
+                LOGGER.warning("CustomData not found in the database");
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            return new ResponseEntity<CustomData>(query.getSingleResult(), HttpStatus.ACCEPTED);
+
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "request getSingleCustomData fail: ", e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

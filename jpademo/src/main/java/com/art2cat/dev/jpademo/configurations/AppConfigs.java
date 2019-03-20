@@ -1,5 +1,6 @@
 package com.art2cat.dev.jpademo.configurations;
 
+import com.zaxxer.hikari.HikariDataSource;
 import java.util.Arrays;
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
@@ -22,7 +23,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -56,19 +56,14 @@ public class AppConfigs {
         name = "usemysql",
         havingValue = "dev")
     public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        var dataSource = new HikariDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl(env.getProperty("mysql.url"));
+        dataSource.setJdbcUrl(env.getProperty("mysql.url"));
         dataSource.setUsername(env.getProperty("mysql.username") != null
             ? env.getProperty("mysql.username") : "");
         dataSource.setPassword(env.getProperty("mysql.password") != null
             ? env.getProperty("mysql.password") : "");
-
-        Properties properties = new Properties();
-        properties.setProperty("maxActive", "50");
-        properties.setProperty("maxIdle", "30");
-        properties.setProperty("maxWait", "10000");
-        dataSource.setConnectionProperties(properties);
+        dataSource.setMaximumPoolSize(10);
         return dataSource;
     }
 
