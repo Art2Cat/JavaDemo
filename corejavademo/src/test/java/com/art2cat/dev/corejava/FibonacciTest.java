@@ -15,21 +15,11 @@ public class FibonacciTest {
         System.out.println("recursion called: " + k + " times");
     }
 
-    private static synchronized long fibonacci(long m) {
+    private long fibonacci(long m) {
         if (m <= 1) {
             k++;
             return m;
         }
         return fibonacci(m - 1) + fibonacci(m - 2);
     }
-
-    @Test
-    void test1() {
-
-        int i = 0;
-        int j = 2;
-        if (++i < j) i = 0;
-        System.out.println(i);
-    }
-
 }

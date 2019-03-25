@@ -43,7 +43,6 @@ public class ConditionTest {
                     }
                 } catch (InterruptedException e) {
                     Assertions.fail(e);
-                    e.printStackTrace();
                 } finally {
                     lock.unlock();
                 }
