@@ -11,18 +11,18 @@ import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
 import java.util.concurrent.ThreadPoolExecutor.DiscardOldestPolicy;
 import java.util.concurrent.ThreadPoolExecutor.DiscardPolicy;
 import java.util.concurrent.TimeUnit;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class RejectedExecutionHandlerTest {
 
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME;
-    protected ThreadPoolExecutor pool;
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME;
+    private static ThreadPoolExecutor pool;
 
-    @BeforeEach
-    public void preTest() {
+    @BeforeAll
+    static void preTest() {
         BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(1);
         pool = new TraceThreadPoolExecutor(1, 1,
             0, TimeUnit.SECONDS, queue);
@@ -76,13 +76,13 @@ public class RejectedExecutionHandlerTest {
     }
 
 
-    @AfterEach
-    public void afterTest() {
+    @AfterAll
+    public static void afterTest() {
         if (pool != null) {
             pool.shutdown();
             log("after shutdown(),pool.isTerminated=" + pool.isTerminated());
             try {
-                pool.awaitTermination(1000L, TimeUnit.SECONDS);
+                pool.awaitTermination(1L, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 Assertions.fail(e);
             }
@@ -91,7 +91,7 @@ public class RejectedExecutionHandlerTest {
 
     }
 
-    protected void log(String string) {
+    static void log(String string) {
         System.out.println(dateTimeFormatter.format(LocalDateTime.now()) + "  " + string);
     }
 }
