@@ -22,7 +22,7 @@ public class CyclicBarrierTest {
         }
         pool.shutdown();
         try {
-            while (!pool.awaitTermination(10000, TimeUnit.MILLISECONDS)) {
+            while (!pool.awaitTermination(10L, TimeUnit.SECONDS)) {
                 System.out.println("waiting......");
             }
         } catch (InterruptedException e) {

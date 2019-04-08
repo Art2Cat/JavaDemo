@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class BusStation {
 
-    static int busCounter = 0;
+    private static int busCounter = 0;
 
     public static synchronized void departBus() {
         busCounter++;

@@ -12,10 +12,10 @@ import org.junit.jupiter.api.Test;
  * @author art2c
  * @date 11/6/2018
  */
-public class TraceThreadPoolExecutorTest {
+class TraceThreadPoolExecutorTest {
 
     @Test
-    public void test() {
+    void test() {
         ThreadPoolExecutor executor = new TraceThreadPoolExecutor(0, 5, 0L, TimeUnit.SECONDS,
             new SynchronousQueue<>());
 
@@ -29,11 +29,11 @@ public class TraceThreadPoolExecutorTest {
         }
     }
 
-    static class DivTask implements Runnable {
+    class DivTask implements Runnable {
 
         int a, b;
 
-        public DivTask(int a, int b) {
+        DivTask(int a, int b) {
             this.a = a;
             this.b = b;
         }

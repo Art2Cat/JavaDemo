@@ -49,7 +49,7 @@ public class SemaphoreTest {
                 semaphore.release();
                 System.out.println("第" + index + "个客人吃完离场");
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Assertions.fail(e);
             }
         }
 

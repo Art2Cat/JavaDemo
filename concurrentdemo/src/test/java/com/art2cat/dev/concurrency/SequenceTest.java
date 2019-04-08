@@ -4,6 +4,8 @@ import com.art2cat.dev.concurrency.concurrency_in_practice.Sequence;
 import com.art2cat.dev.concurrency.concurrency_in_practice.UnsafeSequence;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SequenceTest {
@@ -20,7 +22,12 @@ public class SequenceTest {
         }
 
         executorService.shutdown();
-        while (!executorService.isTerminated()) {
+        try {
+            while (!executorService.awaitTermination(1L, TimeUnit.SECONDS)) {
+                System.out.println("waiting...");
+            }
+        } catch (InterruptedException e) {
+            Assertions.fail(e);
         }
         System.out.println("Finished all threads");
     }
@@ -37,7 +44,12 @@ public class SequenceTest {
         }
 
         executorService.shutdown();
-        while (!executorService.isTerminated()) {
+        try {
+            while (!executorService.awaitTermination(1L, TimeUnit.SECONDS)) {
+                System.out.println("waiting...");
+            }
+        } catch (InterruptedException e) {
+            Assertions.fail(e);
         }
         System.out.println("Finished all threads");
     }

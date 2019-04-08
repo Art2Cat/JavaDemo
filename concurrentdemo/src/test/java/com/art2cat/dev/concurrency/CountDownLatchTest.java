@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
-public class CounDownLatchTest {
+public class CountDownLatchTest {
 
     @Test
     public void test() {

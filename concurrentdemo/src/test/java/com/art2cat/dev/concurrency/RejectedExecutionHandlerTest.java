@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class RejectedExecutionHandlerTest {
+class RejectedExecutionHandlerTest {
 
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME;
     private static ThreadPoolExecutor pool;
@@ -35,7 +35,7 @@ public class RejectedExecutionHandlerTest {
             for (int i = 0; i < 10; i++) {
                 final int index = i;
                 pool.submit(() -> {
-                    log(Thread.currentThread().getName() + "begin run task :" + index);
+                    log(Thread.currentThread().getName() + " begin run task :" + index);
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -56,28 +56,28 @@ public class RejectedExecutionHandlerTest {
     }
 
     @Test
-    public void testDiscardPolicy() {
+    void testDiscardPolicy() {
         test(new DiscardPolicy());
     }
 
     @Test
-    public void testDiscardOldestPolicy() {
+    void testDiscardOldestPolicy() {
         test(new DiscardOldestPolicy());
     }
 
     @Test
-    public void testAbortPolicy() {
+    void testAbortPolicy() {
         test(new AbortPolicy());
     }
 
     @Test
-    public void testCallerRunsPolicy() {
+    void testCallerRunsPolicy() {
         test(new CallerRunsPolicy());
     }
 
 
     @AfterAll
-    public static void afterTest() {
+    static void afterTest() {
         if (pool != null) {
             pool.shutdown();
             log("after shutdown(),pool.isTerminated=" + pool.isTerminated());

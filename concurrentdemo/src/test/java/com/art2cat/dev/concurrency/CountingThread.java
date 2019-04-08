@@ -3,6 +3,8 @@ package com.art2cat.dev.concurrency;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,6 +21,9 @@ public class CountingThread {
             int count = 0;
             while (true) {
                 System.out.println(name + ": " + count++);
+                if (count > 10) {
+                    break;
+                }
             }
         };
 
@@ -27,6 +32,13 @@ public class CountingThread {
 
         esA.submit(runnable);
         esB.submit(runnable);
+
+        try {
+            esA.awaitTermination(1L, TimeUnit.SECONDS);
+            esB.awaitTermination(1L, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Assertions.fail(e);
+        }
     }
 
     class NamedThread implements ThreadFactory {

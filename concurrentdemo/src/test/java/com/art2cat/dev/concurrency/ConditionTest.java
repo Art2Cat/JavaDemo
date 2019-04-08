@@ -1,6 +1,8 @@
 package com.art2cat.dev.concurrency;
 
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -98,6 +100,7 @@ public class ConditionTest {
 
     @AfterAll
     static void destroy() {
+        pool.shutdown();
         try {
             pool.awaitTermination(1L, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
