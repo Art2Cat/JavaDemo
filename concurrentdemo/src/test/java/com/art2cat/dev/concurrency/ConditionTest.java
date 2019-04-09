@@ -1,10 +1,7 @@
 package com.art2cat.dev.concurrency;
 
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
@@ -14,18 +11,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class ConditionTest {
+class ConditionTest {
 
-    static ThreadPoolExecutor pool;
+    private static ThreadPoolExecutor pool;
+    private static final String EXPECT = "ABCABCABCABCABCABCABCABCABCABC";
 
     @BeforeAll
     static void init() {
         pool = new TraceThreadPoolExecutor(3, 3, 0L, TimeUnit.MILLISECONDS,
-            new SynchronousQueue<>());
+            new LinkedBlockingQueue<>());
     }
 
     @Test
-    void test() {
+    void test() throws InterruptedException {
 
         final String[] strings = new String[]{"A", "B", "C"};
         final var lock = new ReentrantLock();
@@ -38,6 +36,8 @@ public class ConditionTest {
         cvs.put(1, lock.newCondition());
         cvs.put(2, lock.newCondition());
 
+        var buffer = new StringBuffer();
+
         for (int i = 0; i < 3; i++) {
             int finalI = i;
             pool.submit(() -> {
@@ -47,7 +47,7 @@ public class ConditionTest {
                         while (ref.token != finalI) {
                             cvs.get(finalI).await();
                         }
-                        System.out.println(strings[finalI]);
+                        buffer.append(strings[finalI]);
                         ref.token = (ref.token + 1) % total;
                         cvs.get(ref.token).signal();
                     }
@@ -59,43 +59,9 @@ public class ConditionTest {
             });
         }
 
-
-    }
-
-    @Test
-    void testSemaphore() {
-        var semaphore = new Semaphore(3);
-        var workerA = new Worker(semaphore, "A");
-        var workerB = new Worker(semaphore, "B");
-        var workerC = new Worker(semaphore, "C");
-        for (int i = 0; i < 10; i++) {
-            pool.submit(workerA);
-            pool.submit(workerB);
-            pool.submit(workerC);
-        }
-    }
-
-    class Worker implements Runnable {
-
-        Semaphore semaphore;
-        String name;
-
-        Worker(Semaphore semaphore, String name) {
-            this.semaphore = semaphore;
-            this.name = name;
-        }
-
-        @Override
-        public void run() {
-            try {
-                semaphore.acquire();
-                System.out.println(name);
-            } catch (InterruptedException e) {
-                Assertions.fail(e);
-            } finally {
-                semaphore.release();
-            }
-        }
+        pool.awaitTermination(1L, TimeUnit.SECONDS);
+        Assertions.assertEquals(EXPECT, buffer.toString());
+        System.out.println(buffer.toString());
     }
 
     @AfterAll
