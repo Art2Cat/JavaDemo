@@ -15,7 +15,7 @@ public class OneMinuteOfMillisecondTest {
 
     @Test
     public void test() {
-        var localTime =  LocalTime.now();
+        var localTime = LocalTime.now();
         System.out.println(localTime);
         try {
             Thread.sleep(6000 * 10);

@@ -9,12 +9,15 @@ import org.junit.jupiter.api.Test;
  * @author Rorschach
  * @date 27/12/2017
  */
-public class VarArgsTest {
+class VarArgsTest {
 
     @Test
-    public void test() {
+    void test() {
         threeDots(2, 3, 4, 1);
+        System.out.println();
         threeDots(false, 2, 3, 4, 1);
+        System.out.println();
+        threeDots(true, 2, 3, 4, 1);
     }
 
     private void threeDots(Object... objects) {
@@ -22,8 +25,12 @@ public class VarArgsTest {
     }
 
     private void threeDots(Boolean flag, Object... objects) {
+        Stream<Object> objectStream = Stream.of(objects);
         if (flag) {
-            Stream.of(objects).forEach(System.out::println);
+            objectStream.forEach(System.out::println);
+        } else {
+            objectStream.filter(o -> o.getClass() == Integer.class && (Integer) o % 2 == 0)
+                .forEach(System.out::println);
         }
     }
 }
