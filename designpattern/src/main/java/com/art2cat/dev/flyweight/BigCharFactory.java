@@ -10,17 +10,17 @@ import java.util.Map;
  * @date 6/14/2018
  */
 public class BigCharFactory {
-    
-    private Map<String, BigChar> pool = new HashMap<>();
+
     private static BigCharFactory singleton = new BigCharFactory();
-    
+    private Map<String, BigChar> pool = new HashMap<>();
+
     private BigCharFactory() {
     }
-    
+
     public static BigCharFactory getInstance() {
         return singleton;
     }
-    
+
     public synchronized BigChar getBigChar(char charName) {
         return pool.computeIfAbsent("" + charName, BigChar::new);
     }

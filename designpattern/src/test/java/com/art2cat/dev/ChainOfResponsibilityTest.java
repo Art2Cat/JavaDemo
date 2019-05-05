@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.chainofresponsibility.AbstractSupport;
 import com.art2cat.dev.chainofresponsibility.LimitSupport;
@@ -15,7 +15,7 @@ import org.junit.Test;
  * @date 6/4/2018
  */
 public class ChainOfResponsibilityTest {
-    
+
     @Test
     public void test() {
         AbstractSupport alice = new NoSupport("Alice");
@@ -24,15 +24,15 @@ public class ChainOfResponsibilityTest {
         AbstractSupport diana = new LimitSupport("Diana", 200);
         AbstractSupport elmo = new OddSupport("Elmo");
         AbstractSupport fred = new LimitSupport("fred", 300);
-        
+
         alice.setNext(bob).setNext(charlie).setNext(diana).setNext(elmo).setNext(fred);
-        
+
         for (int i = 0; i < 500; i += 33) {
             alice.support(new Trouble(i));
-            
+
         }
-        
-        
+
+
     }
-    
+
 }

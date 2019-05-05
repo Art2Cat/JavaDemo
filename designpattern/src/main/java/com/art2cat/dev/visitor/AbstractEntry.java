@@ -10,17 +10,17 @@ import java.util.Iterator;
  * @date 6/1/2018
  */
 public abstract class AbstractEntry implements IElement {
-    
+
     @Override
     public IElement add(IElement element) throws FileTreatmentException {
         throw new FileTreatmentException();
     }
-    
+
     @Override
     public Iterator iterator() throws FileTreatmentException {
         throw new FileTreatmentException();
     }
-    
+
     @Override
     public String toString() {
         return getName() + " (" + getSize() + ")";

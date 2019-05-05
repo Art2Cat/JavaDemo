@@ -12,15 +12,16 @@ import java.util.Properties;
  * @date 6/5/2018
  */
 public class Database {
-    
+
     private Database() {
     }
-    
+
     public static Properties getProperties(String dbName) {
         String fileName = dbName + ".txt";
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(Paths.get("src", "main", "resources", fileName).toString()));
+            properties.load(
+                new FileInputStream(Paths.get("src", "main", "resources", fileName).toString()));
         } catch (IOException e) {
             e.printStackTrace();
         }

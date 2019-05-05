@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.factorymethod.IDCardFactory;
 import com.art2cat.dev.factorymethod.IFactory;
@@ -12,7 +12,7 @@ import org.junit.Test;
  * @date 5/22/2018
  */
 public class FactoryMethodTest {
-    
+
     @Test
     public void test() {
         IFactory factory = new IDCardFactory();

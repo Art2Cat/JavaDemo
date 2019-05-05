@@ -7,11 +7,11 @@ package com.art2cat.dev.proxy;
  * @date 6/15/2018
  */
 public interface IPrintable {
-    
-    void setPrinterName(String printerName);
-    
+
     String getPrinterName();
-    
+
+    void setPrinterName(String printerName);
+
     void print(String content);
-    
+
 }

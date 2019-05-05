@@ -12,10 +12,10 @@ import java.util.Properties;
  * @date 6/5/2018
  */
 public class PageMaker {
-    
+
     private PageMaker() {
     }
-    
+
     public static void makeWelcomePage(String mail, String fileName) {
         try {
             Properties mailProp = Database.getProperties("maildata");

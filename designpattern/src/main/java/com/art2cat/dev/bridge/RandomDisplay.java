@@ -1,6 +1,5 @@
 package com.art2cat.dev.bridge;
 
-import com.art2cat.dev.bridge.Display;
 import com.art2cat.dev.bridge.impl.AbstractRawDisplay;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -11,14 +10,14 @@ import java.util.concurrent.ThreadLocalRandom;
  * @date 5/28/2018
  */
 public class RandomDisplay extends Display {
-    
+
     private ThreadLocalRandom random;
-    
+
     public RandomDisplay(AbstractRawDisplay display) {
         super(display);
         random = ThreadLocalRandom.current();
     }
-    
+
     public void randomDisPlay(int times) {
         int t = random.nextInt(times);
         open();

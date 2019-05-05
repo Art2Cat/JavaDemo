@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.builder.Director;
 import com.art2cat.dev.builder.HTMLBuilder;
@@ -16,7 +16,7 @@ import org.junit.Test;
  * @date 5/24/2018
  */
 public class BuilderTest {
-    
+
     @Test
     public void testTextBuilder() {
         TextBuilder textBuilder = new TextBuilder();
@@ -25,10 +25,10 @@ public class BuilderTest {
         String result = textBuilder.getResult();
         System.out.println(result);
     }
-    
+
     @Test
     public void testHTMLBuilder() throws IOException {
-        
+
         Path path = Paths.get("src", "main", "resources", "Greeting.html");
         Files.deleteIfExists(path);
         HTMLBuilder htmlBuilder = new HTMLBuilder();
@@ -37,5 +37,5 @@ public class BuilderTest {
         String result = htmlBuilder.getResult();
         System.out.println(result);
     }
-    
+
 }

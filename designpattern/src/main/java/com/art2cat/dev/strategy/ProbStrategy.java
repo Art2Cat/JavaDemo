@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @date 5/29/2018
  */
 public class ProbStrategy implements IStrategy {
-    
+
     private ThreadLocalRandom threadLocalRandom;
     private int prevHandSignFlag = 0;
     private int currentHandSignFlag = 0;
@@ -18,11 +18,11 @@ public class ProbStrategy implements IStrategy {
         {1, 1, 1,},
         {1, 1, 1,},
     };
-    
+
     public ProbStrategy() {
         threadLocalRandom = ThreadLocalRandom.current();
     }
-    
+
     private int getSum(int hv) {
         int sum = 0;
         for (int i = 0; i < 3; i++) {
@@ -30,7 +30,7 @@ public class ProbStrategy implements IStrategy {
         }
         return sum;
     }
-    
+
     @Override
     public HandSign nextHandSign() {
         int bet = threadLocalRandom.nextInt(getSum(currentHandSignFlag));
@@ -46,7 +46,7 @@ public class ProbStrategy implements IStrategy {
         currentHandSignFlag = handSignFlag;
         return HandSign.getHandSignByFlag(handSignFlag);
     }
-    
+
     @Override
     public void study(boolean win) {
         if (win) {
@@ -54,7 +54,7 @@ public class ProbStrategy implements IStrategy {
         } else {
             history[prevHandSignFlag][(currentHandSignFlag + 1) % 3]++;
             history[prevHandSignFlag][(currentHandSignFlag + 2) % 3]++;
-            
+
         }
     }
 }

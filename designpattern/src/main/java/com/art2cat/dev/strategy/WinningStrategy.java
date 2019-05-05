@@ -9,15 +9,15 @@ import java.util.concurrent.ThreadLocalRandom;
  * @date 5/29/2018
  */
 public class WinningStrategy implements IStrategy {
-    
+
     private ThreadLocalRandom threadLocalRandom;
     private boolean won = false;
     private HandSign preHandSign;
-    
+
     public WinningStrategy() {
         threadLocalRandom = ThreadLocalRandom.current();
     }
-    
+
     @Override
     public HandSign nextHandSign() {
         if (!won) {
@@ -25,7 +25,7 @@ public class WinningStrategy implements IStrategy {
         }
         return preHandSign;
     }
-    
+
     @Override
     public void study(boolean win) {
         won = win;

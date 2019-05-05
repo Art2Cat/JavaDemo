@@ -7,6 +7,6 @@ package com.art2cat.dev.abstractfactory.factory.intf;
  * @date 5/25/2018
  */
 public interface IItem {
-    
+
     String makeHTML();
 }

@@ -10,9 +10,9 @@ import java.util.Iterator;
  * @date 6/1/2018
  */
 public class ListVisitor extends AbstractVisitor {
-    
+
     private String currentDir = "";
-    
+
     @Override
     public void visit(IElement element) {
         if (element instanceof File) {

@@ -8,10 +8,10 @@ package com.art2cat.dev.bridge.impl;
  * @date 5/28/2018
  */
 public abstract class AbstractRawDisplay {
-    
+
     public abstract void rawOpen();
-    
+
     public abstract void rawPrint();
-    
+
     public abstract void rawClose();
 }

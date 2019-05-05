@@ -7,7 +7,7 @@ package com.art2cat.dev.factorymethod;
  * @date 5/22/2018
  */
 public interface IProduct {
-    
+
     void use();
-    
+
 }

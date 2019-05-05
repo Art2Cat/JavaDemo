@@ -1,8 +1,8 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
+import com.art2cat.dev.composite.FileTreatmentException;
 import com.art2cat.dev.visitor.Directory;
 import com.art2cat.dev.visitor.File;
-import com.art2cat.dev.composite.FileTreatmentException;
 import com.art2cat.dev.visitor.ListVisitor;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import org.junit.Test;
  * @date 5/30/2018
  */
 public class VisitorTest {
-    
+
     @Test
     public void test() {
         System.out.println("Making root entries...");

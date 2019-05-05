@@ -9,15 +9,15 @@ import java.util.concurrent.ThreadLocalRandom;
  * @date 6/8/2018
  */
 public class RandomNumberGenerator extends AbstractNumberGenerator {
-    
+
     private static final int TIMES = 20;
     private int number;
-    
+
     @Override
     public int getNumber() {
         return number;
     }
-    
+
     @Override
     public void execute() {
         for (int i = 0; i < TIMES; i++) {

@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.bridge.CountDisplay;
 import com.art2cat.dev.bridge.Display;
@@ -15,7 +15,7 @@ import org.junit.Test;
  * @date 5/28/2018
  */
 public class BridgeTest {
-    
+
     @Test
     public void test() {
         Display display = new Display(new StringDisplayImpl("Hello, World"));
@@ -25,12 +25,13 @@ public class BridgeTest {
         display1.display();
         display2.display();
         display2.multiDisplay(5);
-        
+
         RandomDisplay random = new RandomDisplay(new StringDisplayImpl("FXXX, World"));
         random.randomDisPlay(10);
-        
-        Display display3 = new Display(new TextDisplayImpl(Paths.get("src", "test", "resources", "properties.txt")));
+
+        Display display3 = new Display(
+            new TextDisplayImpl(Paths.get("src", "test", "resources", "properties.txt")));
         display3.display();
     }
-    
+
 }

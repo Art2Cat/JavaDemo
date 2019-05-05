@@ -10,16 +10,17 @@ import com.art2cat.dev.abstractfactory.factory.intf.IItem;
  * @date 5/25/2018
  */
 public class TableTray extends AbstractTray {
-    
+
     public TableTray(String caption) {
         super(caption);
     }
-    
+
     @Override
     public String makeHTML() {
         StringBuilder builder = new StringBuilder();
         builder.append("<td>\n").append("<table width=\"100%\" border=\"1\"><tr>");
-        builder.append("<td bgcolor=\"#ccccccc\" align=\"center\" colspan=\"").append(trays.size()).append("\"><b>");
+        builder.append("<td bgcolor=\"#ccccccc\" align=\"center\" colspan=\"").append(trays.size())
+            .append("\"><b>");
         builder.append(caption).append("</b></td>\n");
         builder.append("</tr>\n");
         builder.append("<tr>\n");

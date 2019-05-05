@@ -7,13 +7,13 @@ package com.art2cat.dev.builder;
  * @date 5/24/2018
  */
 public class Director {
-    
+
     private AbstractBuilder builder;
-    
+
     public Director(AbstractBuilder builder) {
         this.builder = builder;
     }
-    
+
     public void construct() {
         builder.makeTitle("Greeting");
         builder.makeString("From morning to afternoon");

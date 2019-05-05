@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.templatemethod.AbstractDisplay;
 import com.art2cat.dev.templatemethod.CharDisplay;
@@ -12,7 +12,7 @@ import org.junit.Test;
  * @date 5/21/2018
  */
 public class TemplateMethodTest {
-    
+
     @Test
     public void test() {
         AbstractDisplay charDisplay = new CharDisplay('H');
@@ -20,5 +20,5 @@ public class TemplateMethodTest {
         charDisplay.display();
         stringDisplay.display();
     }
-    
+
 }

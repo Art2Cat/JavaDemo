@@ -12,17 +12,17 @@ import com.art2cat.dev.abstractfactory.factory.intf.ITray;
  * @date 5/25/2018
  */
 public class TableFactory extends AbstractFactory {
-    
+
     @Override
     public ILink createLink(String caption, String url) {
         return new TableLink(caption, url);
     }
-    
+
     @Override
     public ITray createTray(String caption) {
         return new TableTray(caption);
     }
-    
+
     @Override
     public IPage createPage(String title, String author) {
         return new TablePage(title, author);

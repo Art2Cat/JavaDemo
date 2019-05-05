@@ -7,12 +7,12 @@ package com.art2cat.dev.state;
  * @date 6/13/2018
  */
 public interface IContext {
-    
+
     void setClock(int hour);
-    
+
     void changeState(IState state);
-    
+
     void callSecurityCenter(String msg);
-    
+
     void recordLog(String msg);
 }

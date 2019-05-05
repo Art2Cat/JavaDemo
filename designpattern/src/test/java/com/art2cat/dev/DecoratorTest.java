@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.decorator.AbstractDisplay;
 import com.art2cat.dev.decorator.FullBorder;
@@ -13,13 +13,13 @@ import org.junit.Test;
  * @date 5/31/2018
  */
 public class DecoratorTest {
-    
+
     @Test
     public void test() {
         AbstractDisplay b1 = new StringDisplay("Hello, world.");
         AbstractDisplay b2 = new SideBorder(b1, '#');
         AbstractDisplay b3 = new FullBorder(b2);
-        
+
         b1.show();
         b2.show();
         b3.show();
@@ -38,5 +38,5 @@ public class DecoratorTest {
             );
         display.show();
     }
-    
+
 }

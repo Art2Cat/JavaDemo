@@ -10,15 +10,15 @@ import java.util.Iterator;
  * @date 6/1/2018
  */
 public interface IElement {
-    
+
     String getName();
-    
+
     int getSize();
-    
+
     void accept(AbstractVisitor visitor);
-    
-    
+
+
     public IElement add(IElement element) throws FileTreatmentException;
-    
+
     Iterator iterator() throws FileTreatmentException;
 }

@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.strategy.HandSign;
 import com.art2cat.dev.strategy.Player;
@@ -13,7 +13,7 @@ import org.junit.Test;
  * @date 5/29/2018
  */
 public class StrategyTest {
-    
+
     @Test
     public void test() {
         Player player = new Player(new WinningStrategy(), "Taro");

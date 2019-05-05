@@ -12,19 +12,19 @@ import java.nio.file.Paths;
  * @date 6/14/2018
  */
 public class BigChar {
-    
+
     private String charName;
     private String fontData;
-    
+
     public BigChar(String charName) {
         this.charName = charName;
-        
+
         try (FileReader reader = new FileReader(
             Paths.get("src", "main", "resources", "big" + charName + ".txt").toString())) {
             try (BufferedReader bufferedReader = new BufferedReader(reader)) {
                 String line;
                 StringBuilder builder = new StringBuilder();
-                
+
                 while ((line = bufferedReader.readLine()) != null) {
                     builder.append(line).append("\n");
                 }
@@ -34,7 +34,7 @@ public class BigChar {
             this.fontData = charName + "?";
         }
     }
-    
+
     public void print() {
         System.out.println(fontData);
     }

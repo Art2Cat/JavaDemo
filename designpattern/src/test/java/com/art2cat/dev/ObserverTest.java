@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.observer.DigitObserver;
 import com.art2cat.dev.observer.GraphObserver;
@@ -14,18 +14,18 @@ import org.junit.Test;
  * @date 6/8/2018
  */
 public class ObserverTest {
-    
+
     @Test
     public void test() {
         IGenerator generator = new RandomNumberGenerator();
-        
+
         IObserver observer = new DigitObserver();
         IObserver observer1 = new GraphObserver();
-        
+
         generator.addObserver(observer);
         generator.addObserver(observer1);
-        
+
         generator.execute();
     }
-    
+
 }

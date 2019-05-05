@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.adapter.Badge;
 import com.art2cat.dev.adapter.Banner;
@@ -20,13 +20,13 @@ import org.junit.Test;
  * @date 5/15/2018
  */
 public class AdapterTest {
-    
+
     @Test
     public void test() {
         IPrint printBanner = new PrintBanner("Hello");
         printBanner.printWeak();
         printBanner.printStrong();
-        
+
         INotification banner = new Banner("Hello");
         INotification badge = new Badge("World");
         IPrint bannerAdapter = new PrintAdapter(banner);
@@ -36,7 +36,7 @@ public class AdapterTest {
         bannerAdapter.printStrong();
         badgeAdapter.printWeak();
     }
-    
+
     @Test
     public void testFileProperties() {
         Path filePath = Paths.get("src", "test", "resources", "properties.txt");

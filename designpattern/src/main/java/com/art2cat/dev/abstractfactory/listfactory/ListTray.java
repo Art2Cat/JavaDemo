@@ -10,11 +10,11 @@ import com.art2cat.dev.abstractfactory.factory.intf.IItem;
  * @date 5/25/2018
  */
 public class ListTray extends AbstractTray {
-    
+
     public ListTray(String caption) {
         super(caption);
     }
-    
+
     @Override
     public String makeHTML() {
         StringBuilder builder = new StringBuilder();

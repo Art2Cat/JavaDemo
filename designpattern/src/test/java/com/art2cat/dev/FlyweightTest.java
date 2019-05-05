@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.flyweight.BigString;
 import java.util.ArrayList;
@@ -12,13 +12,13 @@ import org.junit.Test;
  * @date 6/14/2018
  */
 public class FlyweightTest {
-    
+
     @Test
     public void test() {
         BigString bigString = new BigString("b4");
         bigString.print();
     }
-    
+
     @Test
     public void test1() {
         List<Role> roles = new ArrayList<>();
@@ -28,11 +28,10 @@ public class FlyweightTest {
         roles.add(new Role(true));
         roles.add(new Role(null));
         roles.add(new Role(null));
-        
-        
+
         if (roles.stream().noneMatch(role -> role.getEnabled() != null && role.getEnabled())) {
             System.out.println("pass");
         }
     }
-    
+
 }

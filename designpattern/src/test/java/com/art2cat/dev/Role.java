@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 /**
  * com.art2cat.dev.iterator
@@ -7,17 +7,17 @@ package com.art2cat.dev.iterator;
  * @date 6/14/2018
  */
 public class Role {
-    
+
     private Boolean enabled;
-    
+
     public Role(Boolean enabled) {
         this.enabled = enabled;
     }
-    
+
     public Boolean getEnabled() {
         return enabled;
     }
-    
+
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }

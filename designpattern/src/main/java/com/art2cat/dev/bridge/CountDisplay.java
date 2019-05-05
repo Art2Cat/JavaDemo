@@ -9,11 +9,11 @@ import com.art2cat.dev.bridge.impl.AbstractRawDisplay;
  * @date 5/28/2018
  */
 public class CountDisplay extends Display {
-    
+
     public CountDisplay(AbstractRawDisplay display) {
         super(display);
     }
-    
+
     public void multiDisplay(int times) {
         open();
         for (int i = 0; i < times; i++) {

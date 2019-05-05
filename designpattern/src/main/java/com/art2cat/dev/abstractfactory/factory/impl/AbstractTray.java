@@ -12,13 +12,13 @@ import java.util.List;
  * @date 5/25/2018
  */
 public abstract class AbstractTray extends AbstractItem implements ITray {
-    
+
     protected List<IItem> trays = new ArrayList<>();
-    
+
     public AbstractTray(String caption) {
         super(caption);
     }
-    
+
     @Override
     public void add(IItem item) {
         trays.add(item);

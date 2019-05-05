@@ -9,11 +9,11 @@ import com.art2cat.dev.abstractfactory.factory.intf.IItem;
  * @date 5/25/2018
  */
 public abstract class AbstractItem implements IItem {
-    
+
     protected String caption;
-    
+
     public AbstractItem(String caption) {
         this.caption = caption;
     }
-    
+
 }

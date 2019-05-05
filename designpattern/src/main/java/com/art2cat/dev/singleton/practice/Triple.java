@@ -10,16 +10,18 @@ import java.util.Map;
  * @date 5/23/2018
  */
 public class Triple {
-    private static Map<Integer,Triple> triples = new HashMap<>(3);
+
+    private static Map<Integer, Triple> triples = new HashMap<>(3);
+
+    private Triple() {
+        System.out.println("init instance.");
+    }
+
     public static Triple getInstance(int id) {
         if (id > 2) {
             throw new IndexOutOfBoundsException("Triple could create three instance only.");
         }
         return triples.computeIfAbsent(id, (integer -> new Triple()));
     }
-    
-    private Triple(){
-        System.out.println("init instance.");
-    }
-    
+
 }

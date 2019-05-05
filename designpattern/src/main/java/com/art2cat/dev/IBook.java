@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 /**
  * com.art2cat.dev.iterator
@@ -7,16 +7,16 @@ package com.art2cat.dev.iterator;
  * @date 5/15/2018
  */
 public interface IBook {
-    
-    void setBookName(String bookName);
-    
-    void setAuthor(String author);
-    
-    void setPrice(double price);
-    
+
     String getBookName();
-    
+
+    void setBookName(String bookName);
+
     String getAuthor();
-    
+
+    void setAuthor(String author);
+
     double getPrice();
+
+    void setPrice(double price);
 }

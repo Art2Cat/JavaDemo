@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import java.util.List;
 
@@ -9,17 +9,17 @@ import java.util.List;
  * @date 5/15/2018
  */
 public class BookShelf implements IAggregate {
-    
+
     private List<IBook> bookList;
-    
+
     public List<IBook> getBookList() {
         return bookList;
     }
-    
+
     public void setBookList(List<IBook> bookList) {
         this.bookList = bookList;
     }
-    
+
     @Override
     public IIterator iterator() {
         return new BookShelfIterator(this);

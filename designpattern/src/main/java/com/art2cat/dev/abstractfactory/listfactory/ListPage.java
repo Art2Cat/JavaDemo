@@ -10,11 +10,11 @@ import com.art2cat.dev.abstractfactory.factory.intf.IItem;
  * @date 5/25/2018
  */
 public class ListPage extends AbstractPage {
-    
+
     public ListPage(String title, String author) {
         super(title, author);
     }
-    
+
     @Override
     public String makeHTML() {
         StringBuilder builder = new StringBuilder();

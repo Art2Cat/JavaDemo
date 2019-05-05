@@ -7,8 +7,8 @@ package com.art2cat.dev.prototype.framework;
  * @date 5/23/2018
  */
 public interface IProduct extends Cloneable {
-    
+
     void use(String str);
-    
+
     IProduct createClone();
 }

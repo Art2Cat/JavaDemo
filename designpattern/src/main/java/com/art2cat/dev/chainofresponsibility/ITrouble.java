@@ -7,6 +7,6 @@ package com.art2cat.dev.chainofresponsibility;
  * @date 6/4/2018
  */
 public interface ITrouble {
-    
+
     int getNumber();
 }

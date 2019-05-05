@@ -7,14 +7,14 @@ package com.art2cat.dev.factorymethod;
  * @date 5/22/2018
  */
 public abstract class AbstractFactory {
-    
+
     public final IProduct create(String owner) {
         IProduct p = createProduct(owner);
         registerProduct(p);
         return p;
     }
-    
+
     protected abstract void registerProduct(IProduct p);
-    
+
     protected abstract IProduct createProduct(String owner);
 }

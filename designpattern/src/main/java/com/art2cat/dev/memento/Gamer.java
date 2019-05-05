@@ -12,20 +12,21 @@ import java.util.concurrent.ThreadLocalRandom;
  * @date 6/11/2018
  */
 public class Gamer {
-    
+
+    private static final List<String> FRUIT_NAME = Arrays
+        .asList("apple", "grape", "banana", "orange");
     private int money;
     private List<String> fruits = new ArrayList<>();
     private ThreadLocalRandom random = ThreadLocalRandom.current();
-    private static final List<String> FRUIT_NAME = Arrays.asList("apple", "grape", "banana", "orange");
-    
+
     public Gamer(int money) {
         this.money = money;
     }
-    
+
     public int getMoney() {
         return money;
     }
-    
+
     public void bet() {
         int dice = random.nextInt(6) + 1;
         if (dice == 1) {
@@ -42,18 +43,18 @@ public class Gamer {
             System.out.println("nothing happened.");
         }
     }
-    
+
     public Memento createMemento() {
         Memento memento = new Memento(money);
         memento.getFruits().addAll(fruits);
         return memento;
     }
-    
+
     public void restoreMemento(Memento memento) {
         this.money = memento.getMoney();
         this.fruits = memento.getFruits();
     }
-    
+
     @Override
     public String toString() {
         return "Gamer{" +
@@ -61,7 +62,7 @@ public class Gamer {
             ", fruits=" + fruits +
             '}';
     }
-    
+
     private String getFruit() {
         String prefix = "";
         if (random.nextBoolean()) {

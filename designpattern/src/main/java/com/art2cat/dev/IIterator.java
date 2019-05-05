@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 /**
  * com.art2cat.dev.iterator
@@ -7,8 +7,8 @@ package com.art2cat.dev.iterator;
  * @date 5/15/2018
  */
 public interface IIterator {
-    
+
     boolean hasNext();
-    
+
     IBook next();
 }

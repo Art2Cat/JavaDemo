@@ -7,7 +7,7 @@ package com.art2cat.dev.abstractfactory.factory.intf;
  * @date 5/25/2018
  */
 public interface ITray extends IItem {
-    
+
     void add(IItem item);
-    
+
 }

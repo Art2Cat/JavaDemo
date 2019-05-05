@@ -7,10 +7,10 @@ package com.art2cat.dev.observer;
  * @date 6/8/2018
  */
 public interface IObserver {
-    
+
     void update(IGenerator generator);
-    
+
     void update(IGenerator generator, int number);
-    
+
     void update(int number);
 }

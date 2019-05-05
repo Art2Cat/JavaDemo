@@ -10,30 +10,30 @@ import java.util.stream.Stream;
  */
 public enum HandSign {
     Rock(0), Paper(1), Scissors(2);
-    
+
     private int flag;
-    
+
     HandSign(int flag) {
         this.flag = flag;
     }
-    
-    public int getFlag() {
-        return flag;
-    }
-    
+
     public static HandSign getHandSignByFlag(int flag) {
         return Stream.of(HandSign.values())
             .filter(handSign -> handSign.getFlag() == flag).findFirst().orElse(null);
     }
-    
+
+    public int getFlag() {
+        return flag;
+    }
+
     public boolean isStrongerThan(HandSign handSign) {
         return fight(handSign) == 1;
     }
-    
+
     public boolean isWeakerThan(HandSign handSign) {
         return fight(handSign) == -1;
     }
-    
+
     private int fight(HandSign handSign) {
         return this.compareTo(handSign);
     }

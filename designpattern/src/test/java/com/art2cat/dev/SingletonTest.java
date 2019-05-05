@@ -1,4 +1,4 @@
-package com.art2cat.dev.iterator;
+package com.art2cat.dev;
 
 import com.art2cat.dev.singleton.Singleton;
 import com.art2cat.dev.singleton.practice.Triple;
@@ -14,7 +14,7 @@ import org.junit.Test;
  * @date 5/23/2018
  */
 public class SingletonTest {
-    
+
     @Test
     public void test() {
         Singleton singleton = Singleton.getInstance();
@@ -23,22 +23,23 @@ public class SingletonTest {
         System.out.println(singleton1);
         Assert.assertEquals(singleton, singleton1);
     }
-    
+
     @Test
     public void multiThreadTest() throws InterruptedException {
         ExecutorService service = Executors.newFixedThreadPool(3);
         for (int i = 0; i < 6; i++) {
             service
-                .submit(() -> System.out.println(Thread.currentThread().getName() + " -> " + Singleton.getInstance()));
+                .submit(() -> System.out
+                    .println(Thread.currentThread().getName() + " -> " + Singleton.getInstance()));
         }
-        
+
         Thread.sleep(10000);
         if (!service.isTerminated()) {
             System.out.println("terminate the thread pool.");
             service.shutdown();
         }
     }
-    
+
     @Test
     public void TripleTest() {
         Triple triple = Triple.getInstance(0);
@@ -50,7 +51,7 @@ public class SingletonTest {
         Assert.assertEquals(triple, Triple.getInstance(0));
         Assert.assertEquals(triple1, Triple.getInstance(1));
         Assert.assertEquals(triple2, Triple.getInstance(2));
-        
+
         try {
             Triple.getInstance(3);
             Assert.fail();
@@ -58,5 +59,5 @@ public class SingletonTest {
             // e.printStackTrace();
         }
     }
-    
+
 }

@@ -9,9 +9,9 @@ import com.art2cat.dev.abstractfactory.factory.intf.ILink;
  * @date 5/25/2018
  */
 public abstract class AbstractLink extends AbstractItem implements ILink {
-    
+
     protected String url;
-    
+
     public AbstractLink(String caption, String url) {
         super(caption);
         this.url = url;

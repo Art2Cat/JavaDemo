@@ -9,10 +9,10 @@ import java.io.IOException;
  * @date 5/25/2018
  */
 public interface IPage {
-    
+
     void add(IItem item);
-    
+
     void output() throws IOException;
-    
+
     String makeHTML();
 }
