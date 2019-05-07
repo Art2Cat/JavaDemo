@@ -155,7 +155,7 @@
               <addClasspath>true</addClasspath>
               <useUniqueVersions>false</useUniqueVersions>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>com.art2cat.dev.restful.Application</mainClass>
+              <mainClass>com.art2cat.dev.jpademo.Application</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -164,9 +164,10 @@
     <sourceDirectory>src/main/java</sourceDirectory>
     <resources>
       <resource>
-        <directory>resources</directory>
+        <directory>src/main/resources</directory>
       </resource>
     </resources>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
   </build>
   <repositories>
     <!--<repository>-->
