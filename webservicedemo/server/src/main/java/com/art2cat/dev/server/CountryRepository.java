@@ -1,11 +1,11 @@
-package com.art2cat.dev.webservicedemo;
+package com.art2cat.dev.server;
 
-import com.baeldung.springsoap.gen.*;
+import com.art2cat.dev.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 @Component
 public class CountryRepository {
@@ -25,7 +25,7 @@ public class CountryRepository {
         Country poland = new Country();
         poland.setName("Poland");
         poland.setCapital("Warsaw");
-        poland.setCurrency(Currency.PLN);
+        poland.setCurrency(Currency.EUR);
         poland.setPopulation(38186860);
 
         countries.put(poland.getName(), poland);
@@ -37,10 +37,18 @@ public class CountryRepository {
         uk.setPopulation(63705000);
 
         countries.put(uk.getName(), uk);
+
+        Country us = new Country();
+        us.setName("United States");
+        us.setCapital("W");
+        us.setCurrency(Currency.USD);
+        us.setPopulation(33705000);
+
+        countries.put(us.getName(), us);
     }
 
     public Country findCountry(String name) {
-        Assert.notNull(name, "The country's name must not be null");
+        Objects.requireNonNull(name, "The country's name must not be null");
         return countries.get(name);
     }
 }

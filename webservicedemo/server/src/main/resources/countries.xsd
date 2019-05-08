@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.baeldung.com/springsoap/gen"
-  targetNamespace="http://www.baeldung.com/springsoap/gen" elementFormDefault="qualified">
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:tns="http://dev.art2cat.com/schemas"
+  targetNamespace="http://dev.art2cat.com/schemas"
+  elementFormDefault="qualified">
 
   <xs:element name="getCountryRequest">
     <xs:complexType>
@@ -30,8 +32,10 @@
   <xs:simpleType name="currency">
     <xs:restriction base="xs:string">
       <xs:enumeration value="GBP"/>
+      <xs:enumeration value="USD"/>
+      <xs:enumeration value="INR"/>
       <xs:enumeration value="EUR"/>
-      <xs:enumeration value="PLN"/>
+      <xs:enumeration value="JPY"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
