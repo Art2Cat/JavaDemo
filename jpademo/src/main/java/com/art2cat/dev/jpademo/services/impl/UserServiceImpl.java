@@ -1,7 +1,7 @@
 package com.art2cat.dev.jpademo.services.impl;
 
 import com.art2cat.dev.jpademo.models.User;
-import com.art2cat.dev.jpademo.repositories.UserRepository;
+import com.art2cat.dev.jpademo.repositories.UserMapper;
 import com.art2cat.dev.jpademo.services.intf.IUserService;
 import java.util.List;
 import org.apache.ibatis.session.RowBounds;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements IUserService {
     
     @Autowired
-    private UserRepository userRepository;
+    private UserMapper userRepository;
     
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS)

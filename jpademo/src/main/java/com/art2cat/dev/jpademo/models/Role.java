@@ -2,13 +2,16 @@ package com.art2cat.dev.jpademo.models;
 
 import com.art2cat.dev.jpademo.CustomerDateAndTimeDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * com.art2cat.dev.jpademo.mybatis.mapper
@@ -33,6 +36,9 @@ public class Role {
 
     @Column(name = "note")
     private String note;
+
+    @Transient
+    private List<User> userList = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -64,6 +70,14 @@ public class Role {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
     @Override

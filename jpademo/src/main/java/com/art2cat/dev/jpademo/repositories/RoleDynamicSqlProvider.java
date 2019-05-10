@@ -5,14 +5,19 @@ import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-@Component
-public class RoleSqlProvider {
+public class RoleDynamicSqlProvider {
+
+    public String getRoles() {
+        SQL sql = new SQL().SELECT("id, role_name as roleName, create_date as createDate, note")
+            .FROM("role");
+        return sql.toString();
+    }
 
     public String getRoleByName(String name) {
         SQL sql = new SQL().SELECT("id, role_name as roleName, create_date as createDate, note")
             .FROM("role");
         if (!StringUtils.isEmpty(name)) {
-            sql.WHERE("role_name like concat('%',#{name},'%')");
+            sql.WHERE("role_name like concat(#{name},'%')");
         }
         return sql.toString();
     }

@@ -18,6 +18,8 @@ public interface IRoleService {
     int deleteRole(Integer id);
     
     Role getRole(Integer id);
-    
+
+    Role getRoleByName(String name);
+
     List<Role> findRoles(String roleName, int start, int limit);
 }

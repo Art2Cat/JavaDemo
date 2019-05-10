@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/role")
 public class RoleServiceController {
-    
+
     @Autowired
     private IRoleService roleService;
-    
+
     @RequestMapping(value = "/insertRole", method = RequestMethod.POST)
     public ResponseEntity<?> insertRole(@Valid @RequestBody Role role, Errors errors) {
         String result;
@@ -37,13 +37,13 @@ public class RoleServiceController {
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.joining(","));
-            
+
             return ResponseEntity.badRequest().body(result);
         }
         int returnCode = roleService.insertRole(role);
         return ResponseEntity.ok(returnCode);
     }
-    
+
     @RequestMapping(value = "/updateRole", method = RequestMethod.PUT)
     public ResponseEntity<?> updateRole(@Valid @RequestBody Role role, Errors errors) {
         String result;
@@ -53,23 +53,28 @@ public class RoleServiceController {
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.joining(","));
-            
+
             return ResponseEntity.badRequest().body(result);
         }
         int returnCode = roleService.updateRole(role);
         return ResponseEntity.ok(returnCode);
     }
-    
+
     @RequestMapping(value = "/deleteRole", method = RequestMethod.DELETE)
     public int deleteRole(@RequestParam(value = "id") Integer id) {
         return roleService.deleteRole(id);
     }
-    
+
     @RequestMapping(value = "/getRole", method = RequestMethod.GET)
     public Role getRole(@RequestParam(value = "id") Integer id) {
         return roleService.getRole(id);
     }
-    
+
+    @RequestMapping(value = "/getRoleByName", method = RequestMethod.GET)
+    public Role getRoleByName(@RequestParam(value = "name") String name) {
+        return roleService.getRoleByName(name);
+    }
+
     @RequestMapping(value = "/findRoles", method = RequestMethod.GET)
     public List<Role> findRoles(@RequestParam(value = "roleName") String roleName,
         @RequestParam(value = "start") int start, @RequestParam(value = "limit") int limit) {

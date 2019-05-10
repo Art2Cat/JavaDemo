@@ -19,38 +19,44 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("roleService")
 public class RoleServiceImpl implements IRoleService {
-    
+
     @Autowired
     private RoleMapper roleRepository;
-    
+
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public int insertRole(Role role) {
         return roleRepository.insertRole(role);
     }
-    
+
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     public int updateRole(Role role) {
         return roleRepository.updateRole(role);
     }
-    
+
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public int deleteRole(Integer id) {
         return roleRepository.deleteRole(id);
     }
-    
+
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS)
     public Role getRole(Integer id) {
         return roleRepository.getRole(id);
     }
-    
+
+    @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS)
+    public Role getRoleByName(String name) {
+        return roleRepository.getRoleByName(name);
+    }
+
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public List<Role> findRoles(String roleName, int start, int limit) {
-        RowBounds rowBounds = new RowBounds(start, limit);
-        return roleRepository.findRoles(roleName, rowBounds);
+//        RowBounds rowBounds = new RowBounds(start, limit);
+        return roleRepository.findRoles();
     }
 }
