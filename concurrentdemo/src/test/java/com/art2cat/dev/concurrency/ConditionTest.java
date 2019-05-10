@@ -2,24 +2,20 @@ package com.art2cat.dev.concurrency;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class ConditionTest {
+class ConditionTest extends AbstractThreadPoolTest {
 
-    private static ThreadPoolExecutor pool;
     private static final String EXPECT = "ABCABCABCABCABCABCABCABCABCABC";
 
-    @BeforeAll
-    static void init() {
+    @Override
+    public void _init() {
         pool = new TraceThreadPoolExecutor(3, 3, 0L, TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<>());
+                new LinkedBlockingQueue<>(3));
     }
 
     @Test
@@ -64,13 +60,9 @@ class ConditionTest {
         System.out.println(buffer.toString());
     }
 
-    @AfterAll
-    static void destroy() {
-        pool.shutdown();
-        try {
-            pool.awaitTermination(1L, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            Assertions.fail(e);
-        }
+
+    @Override
+    public void _destroy() {
+        stop(1L, TimeUnit.SECONDS);
     }
 }

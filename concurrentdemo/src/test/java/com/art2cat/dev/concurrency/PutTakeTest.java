@@ -17,9 +17,9 @@ import org.junit.jupiter.api.Test;
 public class PutTakeTest {
 
     final ExecutorService pool = Executors.newCachedThreadPool();
-    int nTrials, nPairs;
     final AtomicInteger putSum = new AtomicInteger(0);
     final AtomicInteger takeSum = new AtomicInteger(0);
+    int nTrials, nPairs;
     SemaphoreBoundedBuffer<Integer> bb;
     CyclicBarrier barrier;
 

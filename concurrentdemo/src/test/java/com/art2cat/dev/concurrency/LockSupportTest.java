@@ -1,13 +1,13 @@
 package com.art2cat.dev.concurrency;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
+import org.junit.jupiter.api.Test;
 
 class LockSupportTest {
+
+    static int sum = 0;
 
     @Test
     void test() throws InterruptedException {
@@ -22,8 +22,6 @@ class LockSupportTest {
 
         LockSupport.unpark(thread);
     }
-
-    static int sum = 0;
 
     @Test
     void test1() throws InterruptedException {
@@ -41,7 +39,8 @@ class LockSupportTest {
 
                 }
 
-                System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getState());
+                System.out.println(
+                        Thread.currentThread().getName() + " " + Thread.currentThread().getState());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
@@ -51,40 +50,52 @@ class LockSupportTest {
         Thread thread1 = new Thread(() -> {
 
             try {
-                System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getState() + " : " + System.currentTimeMillis());
+                System.out.println(
+                        Thread.currentThread().getName() + " " + Thread.currentThread().getState()
+                                + " : " + System.currentTimeMillis());
                 lock.tryLock();
-                System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getState() + " : " + System.currentTimeMillis());
+                System.out.println(
+                        Thread.currentThread().getName() + " " + Thread.currentThread().getState()
+                                + " : " + System.currentTimeMillis());
                 for (int i = 0; i < 10; i++) {
                     Thread.sleep(100L);
                     System.out.println(Thread.currentThread().getName() + " " + sum++);
                 }
-                System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getState());
+                System.out.println(
+                        Thread.currentThread().getName() + " " + Thread.currentThread().getState());
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
-                if (lock.isHeldByCurrentThread())
+                if (lock.isHeldByCurrentThread()) {
                     lock.unlock();
+                }
             }
 
         }, "B");
         Thread thread2 = new Thread(() -> {
 
             try {
-                System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getState() + " : " + System.currentTimeMillis());
+                System.out.println(
+                        Thread.currentThread().getName() + " " + Thread.currentThread().getState()
+                                + " : " + System.currentTimeMillis());
                 lock.tryLock();
-                System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getState() + " : " + System.currentTimeMillis());
+                System.out.println(
+                        Thread.currentThread().getName() + " " + Thread.currentThread().getState()
+                                + " : " + System.currentTimeMillis());
                 for (int i = 0; i < 10; i++) {
                     Thread.sleep(100L);
                     System.out.println(Thread.currentThread().getName() + " " + sum++);
                 }
-                System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getState());
+                System.out.println(
+                        Thread.currentThread().getName() + " " + Thread.currentThread().getState());
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
-                if (lock.isHeldByCurrentThread())
+                if (lock.isHeldByCurrentThread()) {
                     lock.unlock();
+                }
             }
 
         }, "C");

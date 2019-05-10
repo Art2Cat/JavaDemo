@@ -2,55 +2,55 @@ package com.art2cat.dev.concurrency;
 
 import com.art2cat.dev.concurrency.concurrency_in_practice.Sequence;
 import com.art2cat.dev.concurrency.concurrency_in_practice.UnsafeSequence;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class SequenceTest {
+public class SequenceTest extends AbstractThreadPoolTest {
 
     @Test
-    public void testSafe() {
+    public void testSafe() throws InterruptedException {
         Sequence sequence = new Sequence();
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
         for (int i = 0; i <= 100; i++) {
-            executorService.execute(() -> {
+            pool.execute(() -> {
                 System.out.println("safe: " + Thread.currentThread().getName() + " : "
-                    + sequence.getNext());
+                        + sequence.getNext());
             });
         }
 
-        executorService.shutdown();
-        try {
-            while (!executorService.awaitTermination(1L, TimeUnit.SECONDS)) {
-                System.out.println("waiting...");
-            }
-        } catch (InterruptedException e) {
-            Assertions.fail(e);
+        pool.shutdown();
+        while (!pool.awaitTermination(1L, TimeUnit.SECONDS)) {
+
         }
-        System.out.println("Finished all threads");
+        Assertions.assertEquals(101, sequence.getNext().intValue());
+
     }
 
     @Test
-    public void testUnsafe() {
+    public void testUnsafe() throws InterruptedException {
         UnsafeSequence sequence = new UnsafeSequence();
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
         for (int i = 0; i <= 100; i++) {
-            executorService.execute(() -> {
+            pool.execute(() -> {
                 System.out.println("unsafe: " + Thread.currentThread().getName() + " : "
-                    + sequence.getNext());
+                        + sequence.getNext());
             });
         }
+        pool.shutdown();
+        while (!pool.awaitTermination(1L, TimeUnit.SECONDS)) {
 
-        executorService.shutdown();
-        try {
-            while (!executorService.awaitTermination(1L, TimeUnit.SECONDS)) {
-                System.out.println("waiting...");
-            }
-        } catch (InterruptedException e) {
-            Assertions.fail(e);
         }
-        System.out.println("Finished all threads");
+        Assertions.assertNotEquals(100, sequence.getNext());
+    }
+
+    @Override
+    public void _init() {
+        pool = new TraceThreadPoolExecutor(5, 5, 0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>());
+    }
+
+    @Override
+    public void _destroy() {
+        stop(1L, TimeUnit.SECONDS);
     }
 }

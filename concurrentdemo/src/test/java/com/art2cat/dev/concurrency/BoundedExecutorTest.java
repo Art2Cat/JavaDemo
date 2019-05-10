@@ -9,7 +9,7 @@ public class BoundedExecutorTest {
     @Test
     public void test() throws InterruptedException {
         BoundedExecutor boundedExecutor =
-            new BoundedExecutor(Executors.newSingleThreadExecutor(), 1);
+                new BoundedExecutor(Executors.newSingleThreadExecutor(), 1);
 
         boundedExecutor.submitTask(() -> {
         });

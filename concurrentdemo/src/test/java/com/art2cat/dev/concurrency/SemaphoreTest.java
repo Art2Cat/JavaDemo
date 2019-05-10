@@ -1,31 +1,31 @@
 package com.art2cat.dev.concurrency;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class SemaphoreTest {
+public class SemaphoreTest extends AbstractThreadPoolTest {
 
     @Test
-    public void test() {
+    void test() {
         Semaphore semaphore = new Semaphore(5, true);
-
-        ExecutorService pool = Executors.newFixedThreadPool(20);
         for (int i = 0; i < 100; i++) {
             pool.submit(new Eater(i + 1, semaphore));
         }
-        pool.shutdown();
-        try {
-            while (!pool.awaitTermination(10000, TimeUnit.MILLISECONDS)) {
-                System.out.println("waiting......");
-            }
-        } catch (InterruptedException e) {
-            Assertions.fail();
-        }
+    }
+
+    @Override
+    public void _init() {
+        pool = new TraceThreadPoolExecutor(20, 20, 0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>());
+    }
+
+    @Override
+    public void _destroy() {
+        stop(60L, TimeUnit.SECONDS);
     }
 
     class Eater implements Runnable {
@@ -33,7 +33,7 @@ public class SemaphoreTest {
         int index;
         Semaphore semaphore;
 
-        public Eater(int index, Semaphore semaphore) {
+        Eater(int index, Semaphore semaphore) {
             this.index = index;
             this.semaphore = semaphore;
         }

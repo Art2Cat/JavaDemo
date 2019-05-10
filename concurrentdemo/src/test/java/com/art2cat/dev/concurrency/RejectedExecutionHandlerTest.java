@@ -5,28 +5,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
 import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
 import java.util.concurrent.ThreadPoolExecutor.DiscardOldestPolicy;
 import java.util.concurrent.ThreadPoolExecutor.DiscardPolicy;
 import java.util.concurrent.TimeUnit;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class RejectedExecutionHandlerTest {
+class RejectedExecutionHandlerTest extends AbstractThreadPoolTest {
 
     private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME;
-    private static ThreadPoolExecutor pool;
 
-    @BeforeAll
-    static void preTest() {
-        BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(1);
-        pool = new TraceThreadPoolExecutor(1, 1,
-            0, TimeUnit.SECONDS, queue);
-
+    static void log(String string) {
+        System.out.println(dateTimeFormatter.format(LocalDateTime.now()) + "  " + string);
     }
 
     private void test(RejectedExecutionHandler handler) {
@@ -75,23 +67,18 @@ class RejectedExecutionHandlerTest {
         test(new CallerRunsPolicy());
     }
 
-
-    @AfterAll
-    static void afterTest() {
-        if (pool != null) {
-            pool.shutdown();
-            log("after shutdown(),pool.isTerminated=" + pool.isTerminated());
-            try {
-                pool.awaitTermination(1L, TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                Assertions.fail(e);
-            }
-            log("now,pool.isTerminated=" + pool.isTerminated());
-        }
+    @Override
+    public void _init() {
+        BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(1);
+        pool = new TraceThreadPoolExecutor(1, 1,
+                0, TimeUnit.SECONDS, queue);
 
     }
 
-    static void log(String string) {
-        System.out.println(dateTimeFormatter.format(LocalDateTime.now()) + "  " + string);
+    @Override
+    public void _destroy() {
+        log("after shutdown(),pool.isTerminated=" + pool.isTerminated());
+        stop(1L, TimeUnit.SECONDS);
+        log("now, pool.isTerminated=" + pool.isTerminated());
     }
 }
