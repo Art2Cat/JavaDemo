@@ -11,14 +11,13 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class MapComputeTest {
+class MapComputeTest {
 
     private Map<Integer, Set<Apple>> origin;
 
-    private ThreadLocalRandom random = ThreadLocalRandom.current();
-
     @BeforeEach
-    public void before() {
+    void before() {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
         origin = new HashMap<>();
         IntStream.range(0, 10).forEach(id -> {
             Set<Apple> apples = IntStream.range(0, 10).mapToObj(i -> {
@@ -39,7 +38,7 @@ public class MapComputeTest {
     }
 
     @Test
-    public void test() {
+    void test() {
         var result = new HashMap<Apple, Set<Integer>>();
 
         origin.forEach((id, value) -> {
@@ -57,12 +56,14 @@ public class MapComputeTest {
             }
         );
 
-        result.forEach((key, value) -> {
-            System.out.println(key);
-            value.forEach(System.out::print);
-            System.out.println();
-        });
-
+        result.entrySet().stream()
+            .peek(e -> {
+                System.out.println(e.getKey());
+            })
+            .forEach(e -> {
+                e.getValue().forEach(System.out::print);
+                System.out.println();
+            });
     }
 
 }
