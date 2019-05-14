@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Test;
  * @author Rorschach
  * @date 22/10/2017
  */
-public class TestThreadPool extends AbstractThreadPoolTest {
+public class ThreadPoolTest extends AbstractThreadPoolTest {
 
     private final TestingThreadFactory threadFactory = new TestingThreadFactory();
 
     @Test
-    public void testPoolExpansion() throws InterruptedException {
+    void testPoolExpansion() throws InterruptedException {
         int MAX_SIZE = 10;
 
         for (int i = 0; i < 10 * MAX_SIZE; i++) {
