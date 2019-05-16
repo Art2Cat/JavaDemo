@@ -8,7 +8,19 @@ package com.art2cat.dev.corejava;
  */
 public enum Gender {
 
-    Male(1), Female(2), Third(3);
+    /**
+     * Male
+     */
+    Male(1),
+    /**
+     * Female
+     */
+    Female(2),
+    /**
+     * Third
+     */
+    Third(3);
+
     private int value;
 
     Gender(int value) {

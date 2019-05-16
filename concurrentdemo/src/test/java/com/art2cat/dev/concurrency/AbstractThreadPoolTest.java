@@ -1,5 +1,6 @@
 package com.art2cat.dev.concurrency;
 
+import java.util.Objects;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.AfterEach;
@@ -17,6 +18,7 @@ public abstract class AbstractThreadPoolTest {
     @BeforeEach
     final void init() {
         _init();
+        Objects.requireNonNull(pool, "ThreadPoolExecutor must be instanced.");
     }
 
     @AfterEach
@@ -25,17 +27,15 @@ public abstract class AbstractThreadPoolTest {
     }
 
     final void stop(long awaitTime, TimeUnit timeUnit) {
-        if (pool != null) {
-            if (pool.isShutdown()) {
-                System.out.println("pool isShutdown: " + pool.isShutdown());
-                return;
-            }
-            pool.shutdown();
-            try {
-                pool.awaitTermination(awaitTime, timeUnit);
-            } catch (InterruptedException e) {
-                Assertions.fail(e);
-            }
+        if (pool.isShutdown()) {
+            System.out.println("pool isShutdown: " + pool.isShutdown());
+            return;
+        }
+        pool.shutdown();
+        try {
+            pool.awaitTermination(awaitTime, timeUnit);
+        } catch (InterruptedException e) {
+            Assertions.fail(e);
         }
     }
 }

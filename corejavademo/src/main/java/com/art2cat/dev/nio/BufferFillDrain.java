@@ -17,24 +17,14 @@ public class BufferFillDrain {
         "'Scuse me while I kiss this fly",
         "Help Me! Help Me!",};
 
-    public static void main(String[] argv)
-        throws Exception {
-        CharBuffer buffer = CharBuffer.allocate(100);
-        while (fillBuffer(buffer)) {
-            buffer.flip();
-            drainBuffer(buffer);
-            buffer.clear();
-        }
-    }
-
-    private static void drainBuffer(CharBuffer buffer) {
+    static void drainBuffer(CharBuffer buffer) {
         while (buffer.hasRemaining()) {
             System.out.print(buffer.get());
         }
         System.out.println();
     }
 
-    private static boolean fillBuffer(CharBuffer buffer) {
+    static boolean fillBuffer(CharBuffer buffer) {
         if (index >= strings.length) {
             return (false);
         }

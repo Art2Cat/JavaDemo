@@ -5,7 +5,6 @@ package com.art2cat.dev.corejava;
  */
 public interface Behavior {
 
-    String word = null;
 
     void speak(String word);
 }

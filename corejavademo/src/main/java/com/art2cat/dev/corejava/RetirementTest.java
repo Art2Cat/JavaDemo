@@ -62,7 +62,7 @@ public class RetirementTest {
             System.out.println("Ready to retire?(Y/N)");
             input = in.next();
             input = input.toUpperCase();
-        } while (input.equals("N"));
+        } while ("N".equals(input));
     }
 
 }
