@@ -1,26 +1,19 @@
 package com.art2cat.dev.rabbitmqdemo;
 
-import com.alibaba.druid.support.json.JSONUtils;
-import com.art2cat.dev.rabbitmqdemo.entity.RabbitMqRequest;
-import com.art2cat.dev.rabbitmqdemo.mapper.RabbitMqRequestMapper;
+import com.art2cat.dev.rabbitmqdemo.entity.RabbitmqRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.mysql.cj.xdevapi.JsonArray;
-import com.rabbitmq.tools.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.jackson.JsonObjectSerializer;
-import org.springframework.boot.json.JsonParser;
-import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class Producer {
+public class Producer extends BaseApiService {
 
     @Value("${queue.topicExchange}")
     private String topicExchange;
@@ -35,7 +28,7 @@ public class Producer {
     private String directQueue;
 
 //    @Autowired
-//    private RabbitMqRequestMapper rabbitMqRequestMapper;
+//    private RabbitmqRequestMapper rabbitMqRequestMapper;
 
     @Autowired
     private RabbitMessagingTemplate rabbitMessagingTemplate;
@@ -56,20 +49,12 @@ public class Producer {
         rabbitTemplate.convertAndSend(topicExchange, "topic#key", message);
     }
 
-    public void sendMessage(String className, String methodName, String params) {
-        var rabbitMqRequest = new RabbitMqRequest();
-        rabbitMqRequest.setFromClassName(this.getClass().getName());
-        rabbitMqRequest.setToClassName(className);
-        rabbitMqRequest.setMethodName(methodName);
-        rabbitMqRequest.setParams(params);
+    public void sendMessage(String type, String remark, Object params) {
+        var rabbitMqRequest = new RabbitmqRequest();
+        rabbitMqRequest.setRabbitmqType(type);
+        rabbitMqRequest.setRabbitmqRemark(remark);
+        rabbitMqRequest.setRabbitmqContext(serialize(params).orElse(null));
 //        rabbitMqRequestMapper.insert(rabbitMqRequest);
-        var objectMapper = new ObjectMapper();
-        objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-        try {
-            var json = objectMapper.writeValueAsString(rabbitMqRequest);
-            rabbitTemplate.convertAndSend(topicQueue, json);
-        } catch (JsonProcessingException e) {
-            log.error(e.getMessage());
-        }
+        serialize(rabbitMqRequest).ifPresent(this::sendTopicMessage);
     }
 }
