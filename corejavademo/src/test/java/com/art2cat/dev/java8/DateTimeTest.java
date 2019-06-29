@@ -35,14 +35,14 @@ public class DateTimeTest {
     @Test
     @SuppressWarnings("deprecated")
     public void useOldDate() {
-        Date date = new Date(114, 2, 18);
+        Date date = new Date(114, Calendar.FEBRUARY, 18);
         System.out.println(date);
 
         System.out.println(formaters.get().format(date));
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(2014, Calendar.FEBRUARY, 18);
-        System.out.println(calendar);
+        System.out.println(calendar.toString());
     }
 
     @Test

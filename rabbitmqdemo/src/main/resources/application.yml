@@ -1,0 +1,38 @@
+spring:
+    application:
+        name: rabbitmqdemo
+    profiles:
+        active:
+            dev
+    main:
+        banner-mode: "off"
+        allow-bean-definition-overriding: true
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: admin
+        password: password
+
+mybatis-plus:
+    mapper-locations: classpath:mybatisPlus/*Mapper.xml
+    #实体扫描，多个package用逗号或者分号分隔
+    typeAliasesPackage: com.art2cat.dev.*.entity
+    global-config:
+        db-config:
+            #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+            id-type: UUID
+            #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+            field-strategy: NOT_EMPTY
+            db-type: mysql
+    configuration:
+        map-underscore-to-camel-case: true
+        cache-enabled: false
+
+server:
+    port: 6447
+
+queue:
+    topicExchange: com.art2cat.amqp-simple.topic.exchange
+    topicQueue: com.art2cat.amqp-simple.topic.queue
+    directExchange: com.art2cat.amqp-simple.direct.exchange
+    directQueue: com.art2cat.amqp-simple.direct.queue
