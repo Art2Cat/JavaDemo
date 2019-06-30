@@ -1,19 +1,10 @@
 package com.art2cat.dev.rabbitmqdemo;
 
 import com.art2cat.dev.rabbitmqdemo.entity.RabbitmqRequest;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import java.io.IOException;
-import java.lang.invoke.MethodHandle;
-import java.lang.reflect.Constructor;
+import com.art2cat.dev.rabbitmqdemo.service.BaseApiService;
+import com.art2cat.dev.rabbitmqdemo.service.HelloService;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.concurrent.CountDownLatch;
-import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
@@ -63,6 +54,6 @@ public class Receiver extends BaseApiService {
     }
 
     public void sayHello(RabbitmqRequest request) {
-        helloService.sayHello(request.getRabbitmqContext());
+        helloService.sayHello((String) request.getRabbitmqContext());
     }
 }
