@@ -1,4 +1,4 @@
-package com.art2cat.dev.rabbitmqdemo;
+package com.art2cat.dev.rabbitmqdemo.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,5 +47,4 @@ public class BaseApiService {
         }
         return Optional.empty();
     }
-
 }

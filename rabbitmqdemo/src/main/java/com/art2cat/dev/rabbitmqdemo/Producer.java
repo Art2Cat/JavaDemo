@@ -1,9 +1,8 @@
 package com.art2cat.dev.rabbitmqdemo;
 
 import com.art2cat.dev.rabbitmqdemo.entity.RabbitmqRequest;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.art2cat.dev.rabbitmqdemo.mapper.RabbitmqRequestMapper;
+import com.art2cat.dev.rabbitmqdemo.service.BaseApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -27,8 +26,8 @@ public class Producer extends BaseApiService {
     @Value("${queue.directQueue}")
     private String directQueue;
 
-//    @Autowired
-//    private RabbitmqRequestMapper rabbitMqRequestMapper;
+    @Autowired
+    private RabbitmqRequestMapper rabbitMqRequestMapper;
 
     @Autowired
     private RabbitMessagingTemplate rabbitMessagingTemplate;
@@ -54,7 +53,7 @@ public class Producer extends BaseApiService {
         rabbitMqRequest.setRabbitmqType(type);
         rabbitMqRequest.setRabbitmqRemark(remark);
         rabbitMqRequest.setRabbitmqContext(serialize(params).orElse(null));
-//        rabbitMqRequestMapper.insert(rabbitMqRequest);
+        rabbitMqRequestMapper.insert(rabbitMqRequest);
         serialize(rabbitMqRequest).ifPresent(this::sendTopicMessage);
     }
 }

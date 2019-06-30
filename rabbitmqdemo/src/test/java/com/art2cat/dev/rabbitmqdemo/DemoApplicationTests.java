@@ -21,7 +21,7 @@ public class DemoApplicationTests {
     @Test
     public void testSendMessage() throws JsonProcessingException {
         if (producer != null) {
-            producer.sendMessage("com.art2cat.dev.rabbitmqdemo.HelloService", "sayHello", "world");
+            producer.sendMessage("sayHello", "sayHello", "world");
         }
     }
 

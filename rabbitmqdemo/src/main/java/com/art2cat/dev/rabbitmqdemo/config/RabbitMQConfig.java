@@ -1,4 +1,4 @@
-package com.art2cat.dev.rabbitmqdemo;
+package com.art2cat.dev.rabbitmqdemo.config;
 
 import org.springframework.context.annotation.Configuration;
 

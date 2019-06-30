@@ -1,23 +1,26 @@
 /**
- * Copyright (c) 2003-2006, Joe Walnes Copyright (c) 2006-2007, XStream Committers All rights reserved.
+ * Copyright (c) 2003-2006, Joe Walnes Copyright (c) 2006-2007, XStream Committers All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
- * following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
  *
- * Redistributions of source code must retain the above copyright notice, this list of conditions and the following
- * disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
- * following disclaimer in the documentation and/or other materials provided with the distribution.
+ * Redistributions of source code must retain the above copyright notice, this list of conditions
+ * and the following disclaimer. Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the documentation and/or other
+ * materials provided with the distribution.
  *
- * Neither the name of XStream nor the names of its contributors may be used to endorse or promote products derived from
- * this software without specific prior written permission.
+ * Neither the name of XStream nor the names of its contributors may be used to endorse or promote
+ * products derived from this software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  **/
 package com.thoughtworks.xstream.mapper;
 
@@ -37,26 +40,27 @@ import org.slf4j.LoggerFactory;
  */
 @SuppressWarnings("unchecked")
 public class ClassAliasingMapper extends MapperWrapper {
-    
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClassAliasingMapper.class.getName());
+
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(ClassAliasingMapper.class.getName());
     protected final Map typeToName = new HashMap();
     protected final Map classToName = new HashMap();
     protected final Set knownAttributes = new HashSet();
     protected final Map<String, String> customMappings = new HashMap<>();
     protected transient Map nameToType = new HashMap();
-    
+
     /**
      *
      * @param wrapped
      */
     public ClassAliasingMapper(Mapper wrapped) {
         super(wrapped);
-        
+
         customMappings.put("com.art2cat.dev.model.Country", "com.art2cat.dev.model.CountryEnum");
-        
-        
+
+
     }
-    
+
     /**
      *
      * @param name
@@ -66,7 +70,7 @@ public class ClassAliasingMapper extends MapperWrapper {
         nameToType.put(name, type.getName());
         classToName.put(type.getName(), name);
     }
-    
+
     /**
      *
      * @param name
@@ -76,7 +80,7 @@ public class ClassAliasingMapper extends MapperWrapper {
         addClassAlias(name, type);
         knownAttributes.add(name);
     }
-    
+
     /**
      *
      * @param name
@@ -86,7 +90,7 @@ public class ClassAliasingMapper extends MapperWrapper {
         nameToType.put(name, type.getName());
         typeToName.put(type, name);
     }
-    
+
     /**
      *
      * @param type
@@ -94,7 +98,7 @@ public class ClassAliasingMapper extends MapperWrapper {
      */
     @Override
     public String serializedClass(Class type) {
-        
+
         // if the class is a service
         // use the name of the service as an alias
         if (ICustomEnum.class.isAssignableFrom(type)) {
@@ -102,7 +106,7 @@ public class ClassAliasingMapper extends MapperWrapper {
         } else if (Enum.class.isAssignableFrom(type)) {
             return type.getName();
         }
-        
+
         // Usual XStream code in any other case.
         String alias = (String) classToName.get(type.getName());
         if (alias != null) {
@@ -117,7 +121,7 @@ public class ClassAliasingMapper extends MapperWrapper {
             return super.serializedClass(type);
         }
     }
-    
+
     /**
      *
      * @param elementName
@@ -125,14 +129,14 @@ public class ClassAliasingMapper extends MapperWrapper {
      */
     @Override
     public Class realClass(String elementName) {
-        
+
         // check custom converted plugin types
         if (customMappings.containsKey(elementName)) {
             String oldName = elementName;
             elementName = customMappings.get(oldName);
             LOGGER.info("--- Changed elementName FROM [{}] TO [{}] ", oldName, elementName);
         }
-        
+
         // If it failed, back to the normal XStream code.
         String mappedName = (String) nameToType.get(elementName);
         if (mappedName != null) {
@@ -142,10 +146,10 @@ public class ClassAliasingMapper extends MapperWrapper {
             }
             elementName = mappedName;
         }
-        
+
         return super.realClass(elementName);
     }
-    
+
     /**
      *
      * @param clazz
@@ -154,7 +158,7 @@ public class ClassAliasingMapper extends MapperWrapper {
     public boolean itemTypeAsAttribute(Class clazz) {
         return classToName.containsKey(clazz);
     }
-    
+
     /**
      *
      * @param name
@@ -163,7 +167,7 @@ public class ClassAliasingMapper extends MapperWrapper {
     public boolean aliasIsAttribute(String name) {
         return nameToType.containsKey(name);
     }
-    
+
     private Object readResolve() {
         nameToType = new HashMap();
         for (final Iterator iter = classToName.keySet().iterator(); iter.hasNext(); ) {
@@ -176,7 +180,7 @@ public class ClassAliasingMapper extends MapperWrapper {
         }
         return this;
     }
-    
+
     private Class primitiveClassNamed(String name) {
         return name.equals("void") ? Void.TYPE
             : name.equals("boolean") ? Boolean.TYPE
@@ -189,5 +193,5 @@ public class ClassAliasingMapper extends MapperWrapper {
                                         : name.equals("double") ? Double.TYPE
                                             : null;
     }
-    
+
 }
