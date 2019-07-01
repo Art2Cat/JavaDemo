@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,11 +23,15 @@ public class SerializeJsonBasicTypeTest {
 
     @BeforeEach
     public void before() throws IOException {
-        person = new Person("test", 12, 133, "female");
+        person = new Person("test", 12, 133, "female", LocalDateTime.of(2019,7,1,0,0));
         Path jsonFile = Paths.get("src", "test", "resources", "person.json");
-        jsonFromFile = Files.readString(jsonFile);
+        if (Files.exists(jsonFile)) {
+            jsonFromFile = Files.readString(jsonFile);
+        }
         Path xmlFile = Paths.get("src", "test", "resources", "person.xml");
-        xmlFromFile = Files.readAllBytes(xmlFile);
+        if (Files.exists(xmlFile)) {
+            xmlFromFile = Files.readAllBytes(xmlFile);
+        }
     }
 
     @Test
@@ -33,7 +39,7 @@ public class SerializeJsonBasicTypeTest {
         SerializeJsonBasicType serializeJsonBasicType = new SerializeJsonBasicType();
         try {
             var json = serializeJsonBasicType
-                .serializePerson(person, SerializationFeature.INDENT_OUTPUT);
+                    .serializePerson(person, SerializationFeature.INDENT_OUTPUT);
             System.out.println(json);
             Assertions.assertEquals(jsonFromFile, json);
         } catch (IOException e) {
@@ -46,7 +52,7 @@ public class SerializeJsonBasicTypeTest {
         SerializeJsonBasicType serializeJsonBasicType = new SerializeJsonBasicType();
         try {
             var p = serializeJsonBasicType
-                .deserializePerson(jsonFromFile, SerializationFeature.INDENT_OUTPUT);
+                    .deserializePerson(jsonFromFile, SerializationFeature.INDENT_OUTPUT);
 
             System.out.println(p);
             Assertions.assertEquals(person, p);
@@ -60,7 +66,7 @@ public class SerializeJsonBasicTypeTest {
         SerializeJsonBasicType serializeJsonBasicType = new SerializeJsonBasicType();
         try {
             var json = serializeJsonBasicType
-                .xmlToJson(xmlFromFile, SerializationFeature.INDENT_OUTPUT);
+                    .xmlToJson(xmlFromFile, SerializationFeature.INDENT_OUTPUT);
 
             if (Objects.isNull(json)) {
                 Assertions.fail("json is null");
@@ -77,7 +83,7 @@ public class SerializeJsonBasicTypeTest {
         SerializeJsonBasicType serializeJsonBasicType = new SerializeJsonBasicType();
         try {
             var xml = serializeJsonBasicType
-                .jsonToXml(jsonFromFile.getBytes(), SerializationFeature.INDENT_OUTPUT);
+                    .jsonToXml(jsonFromFile.getBytes(), SerializationFeature.INDENT_OUTPUT);
 
             if (Objects.isNull(xml)) {
                 Assertions.fail("xml is null");

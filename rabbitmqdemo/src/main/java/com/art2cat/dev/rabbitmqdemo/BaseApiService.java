@@ -10,9 +10,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BaseApiService {
 
+    ThreadLocal<ObjectMapper> mapperThreadLocal = new ThreadLocal<>();
+
     protected Optional<String> serialize(Object object) {
-        var objectMapper = new ObjectMapper();
-        objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        ObjectMapper objectMapper = mapperThreadLocal.get();
+        if (objectMapper == null) {
+            objectMapper = new ObjectMapper();
+            objectMapper.findAndRegisterModules();
+            objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+            mapperThreadLocal.set(objectMapper);
+        }
         try {
             return Optional.of(objectMapper.writeValueAsString(object));
         } catch (JsonProcessingException e) {
@@ -22,7 +29,14 @@ public class BaseApiService {
     }
 
     protected Optional<Object> deserialize(String json, Class<?> clazz) {
-        var objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = mapperThreadLocal.get();
+        if (objectMapper == null) {
+            objectMapper = new ObjectMapper();
+            objectMapper.findAndRegisterModules();
+            objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+            mapperThreadLocal.set(objectMapper);
+        }
+        objectMapper.findAndRegisterModules();
         objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         try {
             return Optional.of(objectMapper.readValue(json, clazz));

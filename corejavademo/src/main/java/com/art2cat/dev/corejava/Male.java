@@ -1,5 +1,7 @@
 package com.art2cat.dev.corejava;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by Rorschach on 2017/3/30.
  */
@@ -8,7 +10,7 @@ public class Male extends Person implements Comparable<Person> {
     private static final String MALE = "Male";
 
     public Male(String name, int age, int height) {
-        super(name, age, height, MALE);
+        super(name, age, height, MALE, LocalDateTime.now());
     }
 
     @Override
