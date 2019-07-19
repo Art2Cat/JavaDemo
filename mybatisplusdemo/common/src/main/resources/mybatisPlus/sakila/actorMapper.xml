@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.art2cat.dev.common.sakila.mapper.ActorMapper">
+    <select id="selectFilms" resultType="com.art2cat.dev.common.sakila.FilmData">
+        select f.*, a.first_name, a.last_name
+        from film f
+        inner join film_actor fa
+        on (f.film_id = fa.film_id)
+        inner join actor a
+        on(fa.actor_id = a.actor_id)
+        where
+        a.actor_id = #{actorId}
+    </select>
+</mapper>
