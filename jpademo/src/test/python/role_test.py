@@ -43,7 +43,7 @@ def main():
     insert_role()
     get_role()
     update_role()
-    delete_role()
+    # delete_role()
 
 
 if __name__ == '__main__':
