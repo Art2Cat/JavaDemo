@@ -1,6 +1,6 @@
 package com.art2cat.dev.jvm.ch8;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class StaticDispatchTest {
 

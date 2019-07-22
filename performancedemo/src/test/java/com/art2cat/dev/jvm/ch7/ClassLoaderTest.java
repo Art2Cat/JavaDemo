@@ -3,7 +3,7 @@ package com.art2cat.dev.jvm.ch7;
 import com.art2cat.dev.ClassLoaderA;
 import java.io.IOException;
 import java.io.InputStream;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ClassLoaderTest {
 
