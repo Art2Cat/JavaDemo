@@ -24,13 +24,6 @@ public class CountDownLatchTest extends AbstractThreadPoolTest {
         pool.submit(eggCook);
         pool.submit(spicesCook);
 
-        pool.shutdown();
-        try {
-            while (!pool.awaitTermination(1L, TimeUnit.SECONDS)) {
-            }
-        } catch (Exception e) {
-            Assertions.fail(e);
-        }
     }
 
     @Override
@@ -43,7 +36,7 @@ public class CountDownLatchTest extends AbstractThreadPoolTest {
 
     @Override
     public void _destroy() {
-        stop(1L, TimeUnit.SECONDS);
+        stop(5L, TimeUnit.SECONDS);
 
     }
 }
