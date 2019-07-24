@@ -14,18 +14,9 @@ public class CyclicBarrierTest extends AbstractThreadPoolTest {
 
         CyclicBarrier barrier = new CyclicBarrier(10, new BusManager());
 
-//        ExecutorService pool = Executors.newFixedThreadPool(10);
         for (int i = 0; i < 50; i++) {
             pool.submit(new Passenger(barrier));
         }
-//        pool.shutdown();
-//        try {
-//            while (!pool.awaitTermination(10L, TimeUnit.SECONDS)) {
-//                System.out.println("waiting......");
-//            }
-//        } catch (InterruptedException e) {
-//            Assertions.fail(e.getMessage());
-//        }
     }
 
     @Override
