@@ -4,12 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <artifactId>javademo</artifactId>
-        <groupId>com.art2cat.dev.javademo</groupId>
-        <version>1.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
 
     <groupId>com.art2cat.dev</groupId>
     <artifactId>xstreamtest</artifactId>
@@ -26,6 +20,14 @@
             </plugin>
         </plugins>
     </build>
+    <properties>
+        <xstream>1.4.11.1</xstream>
+        <lombok>1.18.0</lombok>
+        <xmlbean>3.1.0</xmlbean>
+        <slf4j>1.7.26</slf4j>
+        <junit.version>4.12</junit.version>
+        <junit-theories.version>4.12</junit-theories.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -42,6 +44,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+            <version>${slf4j}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
