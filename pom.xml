@@ -56,6 +56,9 @@
         <log4j.version>1.7.25</log4j.version>
         <xstream>1.4.11.1</xstream>
 
+        <swagger2>2.9.2</swagger2>
+        <swagger2-ui>2.9.2</swagger2-ui>
+
         <!-- apache -->
         <common-io.version>2.5</common-io.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
@@ -70,9 +73,10 @@
         <javax.persistence>2.2.0</javax.persistence>
         <javax.servlet-api>4.0.1</javax.servlet-api>
 
-        <jackson-databind>2.9.9.1</jackson-databind>
+        <jackson-databind>2.9.9.2</jackson-databind>
         <jackson-core>2.9.9</jackson-core>
         <jackson-xml>2.9.9</jackson-xml>
+        <jackson-datatype-jsr310>2.9.9</jackson-datatype-jsr310>
 
         <jaxb-impl>2.3.1</jaxb-impl>
         <jaxb-core>2.3.0</jaxb-core>
