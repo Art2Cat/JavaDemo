@@ -24,7 +24,6 @@
         <module>performancedemo</module>
         <module>rabbitmqdemo</module>
         <module>redisdemo</module>
-        <module>rmidemo</module>
         <module>webservicedemo</module>
         <module>xstreamtest</module>
     </modules>
@@ -74,6 +73,9 @@
         <jackson-databind>2.9.9.1</jackson-databind>
         <jackson-core>2.9.9</jackson-core>
         <jackson-xml>2.9.9</jackson-xml>
+
+        <jaxb-impl>2.3.1</jaxb-impl>
+        <jaxb-core>2.3.0</jaxb-core>
 
         <!-- junit -->
         <junit.version>4.12</junit.version>

@@ -8,7 +8,6 @@
         <artifactId>javademo</artifactId>
         <groupId>com.art2cat.dev.javademo</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.art2cat.dev</groupId>
     <artifactId>designpattern</artifactId>

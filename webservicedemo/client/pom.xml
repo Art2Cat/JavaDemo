@@ -51,7 +51,7 @@
             </resource>
         </resources>
         <sourceDirectory>src/main/java</sourceDirectory>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
+<!--        <testSourceDirectory>src/test/java</testSourceDirectory>-->
     </build>
     <dependencies>
         <dependency>
@@ -77,12 +77,12 @@
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-core</artifactId>
-            <version>2.3.0</version>
+            <version>${jaxb-core}</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>2.3.0</version>
+            <version>${jaxb-impl}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
